@@ -1,0 +1,90 @@
+/* #fb9337 / #2286e2 */
+
+.loginbox { background: #fff; }
+.loginboxinner { background-color: #32415a; }
+.loginbox .logo h1 { color: #fff; border-bottom: 1px solid #56647d; }
+.loginbox .logo h1 span { color: #fb9337; }
+.loginbox .logo p { color: #eee; }
+
+.loginbox .username { background-color: #eee; }
+.loginbox .usernameinner { border-left: 1px solid #ddd; background: #fff; }
+.loginbox .password { background-color: #eee; }
+.loginbox .passwordinner { border-left: 1px solid #ddd; background: #fff; }
+.loginbox .password input { color: #666; }
+
+.loginbox button { background-color: #fb9337; }
+.loginbox button:hover { background-color: #2288e6; }
+.loginbox .keep { color: #ccc; }
+.loginbox .loginmsg { background: #fffccc; color: #333; }
+.loginf { background: #2e3e59; border-bottom: 1px solid #475875; }
+
+.loginpage .nopassword { color: #fff; }
+.loginpage .nopassword .thumb { background: #fff; }
+.loginpage .nopassword .userlogged a { color: #fb9337; }
+.topheader .left h1.logo a { color: #fb9337; } 
+
+.shortcuts li a:hover { border-color: #fb9337; }
+.topheader .left h1.logo { color: #fb9337; }
+.header { border-bottom-color: #fb9337; }
+.headermenu li.current a { background-image: url(../images/blueline/arrow-active.png); }
+.notitab li.current a { background-color: #fb9337; }
+.notitab { border-bottom-color: #fb9337; }
+.notitab li a:hover { color: #fb9337; }
+.msglist li .thumb:hover { border-color: #fb9337; }
+.msgbutton a:hover { background-color: #fb9337; }
+.actlist li a:hover { color: #fb9337; }
+.userdata ul li a:hover { background-color: #fb9337; }
+.hornav li.current a { color: #fb9337; }
+.contenttitle2, .widgetbox .title { border-bottom-color: #fb9337; }
+.toplist li .desc { color: #fb9337; }
+.ui-state-active a { color: #fb9337; }
+.ui-accordion-header a:hover { color: #fb9337; }
+.entry_content h4 a { color: #fb9337; }
+.vernav2 ul li.current a { color: #fb9337; }
+.vernav2 ul li.current ul li.current a { color: #fb9337; }
+.vernav ul li span.arrow, .vernav2 ul li span.arrow { background-image: url(../images/blueline/menuarrow.png); }
+.iconmenu ul li a { background-image: url(../images/blueline/icons_sprite.png); }
+.vernav2 ul li.current a:hover { background-image: url(../images/blueline/icons_sprite.png); }
+.menucoll2 > ul > li.current > a { background-image: url(../images/blueline/icons_sprite.png); }
+.menucoll2 ul li.current ul span { color: #fb9337; }
+div.tagsinput span.tag { background-color: #fb9337; border-color: #2286e2; }
+form button { background-color: #fb9337; border-color: #2286e2; }
+.vernav ul li.current a { color: #fb9337; }
+.contenttitle { color: #fb9337; }
+.stdtable a.title:hover { color: #fb9337; }
+.stdtable .actions a:hover { color: #fb9337; }
+.quickform .quickformbutton button.update { background-color: #fb9337; border-color: #2286e2; }
+#popup_ok { background-color: #fb9337; border-color: #2286e2; opacity: 0.8; }
+#popup_ok:hover { background-color: #fb9337; border-color: #2286e2; opacity: 1; }
+.wizard .hormenu li a.selected span.h2, .wizard .hormenu li a.done span.h2 { color: #fb9337; }
+.wizard .hormenu li a span.dot span { background-image: url(../images/blueline/steps.png); }
+.actionBar a { background-color: #fb9337; border-color: #2286e2; }
+.wizard .tabbedmenu li a.selected span.h2, .wizard .tabbedmenu li a.selected span,
+.wizard .tabbedmenu li a.done span.h2, .wizard .tabbedmenu li a.done span{ color: #fb9337; }
+.verwizard .verticalmenu a.selected { background-color: #fb9337; }
+.editornav li.current a { color: #fb9337; }
+form input[type="submit"] { background-color: #fb9337; border-color: #2286e2; }
+.filemgr_menu li a.newfilebutton { background-color: #fb9337; border-color: #2286e2; }
+.listfile li.selected a { background: #eaf3fc; border-color: #fb9337; }
+.ui-slider-vertical .ui-slider-range, .ui-slider-horizontal .ui-slider-range { background-color: #fb9337; }
+.pagination li a.current { background-color: #fb9337; border-color: #2286e2; }
+.slide_content h4 a { color: #fb9337; }
+.ui-datepicker-calendar td.ui-datepicker-today a { background-color: #fb9337; }
+.external-event { background-color: #fb9337; }
+.fc-header-title { border-bottom-color: #fb9337; }
+.fc-button-prev:hover, .fc-button-next:hover { color: #fb9337; }
+.fc-header-left span.fc-state-active { color: #fb9337; }
+.fc-event { background-color: #fb9337 !important; }
+.widgetbox .title { border-bottom-color: #fb9337; }
+.contactlist li span.msgcount { background-color: #fb9337; }
+.chatcontent .messagebox button { background-color: #fb9337; border-color: #2286e2; }
+.dataTables_paginate .paginate_active { background-color: #fb9337; border-color: #2286e2; }
+.orangeborderbottom5 { border-bottom: 5px solid #fb9337; }
+.updatecontent .top .user, .commentcontent .top .user { color: #fb9337; }
+.profile_summary li a span { color: #fb9337; }
+.orangeboldlink { color: #fb9337; }
+.recentshots h4 a { color: #fb9337; }
+.userfollow .cn a:hover { color: #fb9337; }
+.blogsummary h3 a:hover { color: #fb9337; }
+.prodlist li a { color: #fb9337; }
+.ps_sidebar .ps_authorinfo a { color: #fb9337; }
