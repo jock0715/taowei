@@ -133,10 +133,7 @@
 							<a href="javascript:;"><span class="glyphicon glyphicon-comment nav_icon" aria-hidden="true"></span> </i>订单管理<span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level collapse">
 								<li>
-									<a href="">| ----- 查看订单</a>
-								</li>
-								<li>
-									<a href="">| ----- 添加订单</a>
+									<a href="/admin/order">| ----- 查看订单</a>
 								</li>
 							</ul>
 							<!-- //nav-second-level -->
