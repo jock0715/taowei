@@ -6,10 +6,10 @@
 							<a href="javascript:;"><span class="glyphicon glyphicon-user nav_icon" aria-hidden="true"></span> </i>管理员<span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level collapse">
 								<li>
-									<a href="#">| ----- 查看管理员</a>
+									<a href="/admin/admin_user">查看管理员</a>
 								</li>
 								<li>
-									<a href="#">| ----- 添加管理员</a>
+									<a href="/admin/admin_user/create">添加管理员</a>
 								</li>
 							</ul>
 							<!-- //nav-second-level -->
@@ -135,10 +135,7 @@
 							<a href="javascript:;"><span class="glyphicon glyphicon-comment nav_icon" aria-hidden="true"></span> </i>订单管理<span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level collapse">
 								<li>
-									<a href="#">查看订单</a>
-								</li>
-								<li>
-									<a href="#">添加订单</a>
+									<a href="/admin/order">查看订单</a>
 								</li>
 							</ul>
 							<!-- //nav-second-level -->

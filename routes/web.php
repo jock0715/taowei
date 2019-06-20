@@ -13,6 +13,24 @@
 
 /*---------------------------------后台开始-------------------------------------*/
 
+// 后台 登录
+Route::get('/admin/login','Admin\Admin_userController@login')->name('admin_login');
+
+// 后台 执行登录
+Route::post('/admin/dologin','Admin\Admin_userController@dologin');
+
+// 后台 执行退出登录
+Route::get('/admin/loginout','Admin\Admin_userController@loginout');
+
+// 后台 执行修改头像
+Route::post('/admin/doeditfile/{id}','Admin\Admin_userController@doeditfile');
+
+// 后台 执行修改密码
+Route::post('/admin/doeditpwd','Admin\Admin_userController@doeditpwd');
+
+// 登录验证
+Route::group(['middleware'=>'login'],function(){
+
 // 后台 首页
 Route::get('/admin/index','Admin\IndexController@index');
 
@@ -54,6 +72,9 @@ Route::resource('/admin/order','Admin\OrderController');
 
 // 后台 友情链接
 Route::resource('/admin/link','Admin\LinkController');
+
+});
+
 
 /*---------------------------------后台结束-------------------------------------*/
 
