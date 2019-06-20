@@ -13,6 +13,7 @@
 
 /*---------------------------------后台开始-------------------------------------*/
 
+
 // 后台 登录
 Route::get('/admin/login','Admin\Admin_userController@login')->name('admin_login');
 
@@ -30,6 +31,7 @@ Route::post('/admin/doeditpwd','Admin\Admin_userController@doeditpwd');
 
 // 登录验证
 Route::group(['middleware'=>'login'],function(){
+
 
 // 后台 首页
 Route::get('/admin/index','Admin\IndexController@index');
@@ -49,6 +51,8 @@ Route::resource('/admin/user','Admin\UserController');
 // 后台 分类
 Route::resource('/admin/cate','Admin\CateController');
 
+// 后台 轮播 状态
+Route::get('/admin/banner/status','Admin\BannerController@status');
 // 后台 轮播
 Route::resource('/admin/banner','Admin\BannerController');
 

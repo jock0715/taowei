@@ -35,26 +35,28 @@
 				}
 				</style>
 				<div class="forms" >
-					<h3 class="title1">轮播管理</h3>
+					<h3 class="title1">权限管理</h3>
 					<div class="form-grids row widget-shadow" data-example-id="basic-forms"  > 
 						<div class="form-title">
-							<h4>轮播添加 :</h4>
+							<h4>权限添加 :</h4>
 						</div>
 						<div class="form-body">
-						  <form action="/admin/banner" method="post" enctype="multipart/form-data">
+						  <form action="/admin/node/{{ $data->id }}" method="post" enctype="multipart/form-data">
 							{{ csrf_field() }}
+							{{ method_field('PUT') }}
 						    <div class="form-group">
-						      <label for="uname">标题</label>
-						      <input type="text" style="width:510px"  class="form-control" value="" name="title" id="uname" placeholder="title">
+						      <label for="uname">权限列表</label>
+							<td></td>
+						      <input type="text" style="width:510px"  class="form-control" value="{{ $data->desc }}" name="desc" id="desc" placeholder="desc">
 						  	</div>
 						    <div class="form-group">
-						      <label for="upass">描述</label><br>
-						      <textarea name="desc"  id="" cols="68" rows="5"></textarea>
+						      <label for="upass">控制器名字</label><br>
+						      <input type="text" style="width:510px"  class="form-control" value="{{ $data->controller }}" name="controller" id="desc" placeholder="controller">
 						  	</div>
 
 						    <div class="form-group">
-						      <label for="exampleInputFile">图片</label>
-						      <input type="file" name="url" id="exampleInputFile">
+						      <label for="exampleInputFile">控制器方法</label>
+						      <input type="text" style="width:510px"  class="form-control" value="{{ $data->method }}" name="method" id="desc" placeholder="method">
 						  </div>
 						   <button type="submit" class="btn btn-default">提交</button>
 						</form>
