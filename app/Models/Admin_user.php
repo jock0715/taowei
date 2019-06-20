@@ -14,4 +14,5 @@ class Admin_user extends Model
     {
     	return $this->hasOne('App\Models\Admin_user_role','aid');
     }
+
 }

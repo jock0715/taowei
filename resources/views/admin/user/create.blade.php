@@ -37,30 +37,23 @@
 							<h4>用户添加 :</h4>
 						</div>
 						<div class="form-body">
-						  <form action="/admin/user/store" method="post" enctype="multipart/form-data">
-							{{ csrf_field() }}
-						    <div class="form-group">
-						      <label for="uname">用户名</label>
-						      <input type="text" class="form-control" value="{{ old('uname') }}" name="uname" id="uname" placeholder="用户名">
-						  	</div>
-						    <div class="form-group">
-						      <label for="upass">密码</label>
-						      <input type="password" class="form-control" name="upass" id="upass" placeholder="密码">
-						  	</div>
-
-						  	<div class="form-group">
-						      <label for="repass">确认密码</label>
-						      <input type="password" class="form-control" name="repass" id="repass" placeholder="确认密码">
-						  	</div>
-
-						    <div class="form-group">
-						      <label for="exampleInputFile">头像</label>
-						      <input type="file" name="profile" id="exampleInputFile">
-						  </div>
-						   <button type="submit" class="btn btn-default">Submit</button>
-						</form>
-						
-						</div>
+							<form action="/admin/user" method="post">
+								{{ csrf_field() }}
+							    <div class="form-group">
+							      <label for="uname">用户名</label>
+							      <input type="text" class="form-control" value="{{ old('uname') }}" name="uname" id="uname" placeholder="用户名" style="width: 510px;">
+							  	</div>
+							    <div class="form-group">
+							      <label for="upwd">密码</label>
+							      <input type="password" class="form-control" name="upwd" id="upwd" placeholder="密码" style="width: 510px;">
+							  	</div>
+							  	<div class="form-group">
+							      <label for="reupwd">确认密码</label>
+							      <input type="password" class="form-control" name="reupwd" id="reupwd" placeholder="确认密码" style="width: 510px;">
+							  	</div>
+							   <button type="submit" class="btn btn-default">Submit</button>
+							</form>
+					    </div>
 					</div>
 					
 					
