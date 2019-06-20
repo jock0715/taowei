@@ -153,7 +153,29 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        //
+        // 通过id获取单条数据
+        $data = Role::find($id);
+        // 查询所有的权限
+        $nodes = DB::table('nodes')
+                     ->get();
+    
+        $list = [];
+        foreach ($nodes as $k => $v) {
+            $temp['id'] = $v->id;
+            $temp['desc'] = $v->desc;
+            $temp['method'] = $v->method;
+            // $temp['controller'] = $v->controller;
+            $list[$v->controller][] = $temp;
+        }
+
+        // 引入页面
+        return view('/admin/role/edit',
+            [
+                'data'=>$data,
+                'list'=>$list,
+                'conall'=>self::conall(),
+            ]);
+
     }
 
     /**
@@ -165,7 +187,40 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // 表单验证
+        $this->validate($request, [
+            'name' => 'required',
+        ],[
+            'name.required' => '职位不能为空',
+        ]);
+
+        // 开启事务
+        DB::beginTransaction();
+        // 接收数据
+        $data = $request->all();
+        $role = Role::find($id);
+        $role->name = $data['name'];
+        $res1 = $role->save();
+        $rid = $id;
+        // 进行删除
+        $res2 = DB::table('roles_nodes')
+                    ->where('rid',$rid)
+                    ->delete();
+        
+        if ($res1!==false && $res2!==false && isset($data['nid']) ) {
+            // 提交事务
+            $nid = $data['nid'];
+            foreach ($nid as $k => $v) {
+                // 进行数据库的添加操作
+                $res = DB::table('roles_nodes')->insert(['nid'=>$v,'rid'=>$rid]);
+            }
+            DB::commit();
+            return redirect('/admin/role')->with('success','修改成功');
+        } else {
+            // 事务回滚
+            DB::rollBack();
+            return back()->with('error','请添加权限');
+        }
     }
 
     /**
@@ -176,6 +231,25 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // 开启事务
+        DB::beginTransaction();
+
+        $rid = $id;
+        $res1 = Role::destroy($id);
+        $res2 = DB::table('roles_nodes')
+                    ->where('rid',$rid)
+                    ->delete();
+        // dd($res);
+        
+
+        if ($res1 && $res2) {
+            // 提交事务
+            DB::commit();
+            return redirect('/admin/role')->with('success','删除成功');
+        } else {
+            // 事务回滚
+            DB::rollBack();
+            return back()->with('error','删除失败');
+        }
     }
 }
