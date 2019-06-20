@@ -94,10 +94,10 @@
 							<a href="javascript:;"><span class="glyphicon glyphicon-usd nav_icon" aria-hidden="true"></span> </i>秒杀管理<span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level collapse">
 								<li>
-									<a href="">| ----- 查看秒杀</a>
+									<a href="/admin/spike">| ----- 查看秒杀商品</a>
 								</li>
 								<li>
-									<a href="">| ----- 添加秒杀</a>
+									<a href="/admin/spike/create">| ----- 添加秒杀商品</a>
 								</li>
 							</ul>
 							<!-- //nav-second-level -->
@@ -107,10 +107,10 @@
 							<a href="javascript:;"><span class="glyphicon glyphicon-gift nav_icon" aria-hidden="true"></span> </i>活动管理<span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level collapse">
 								<li>
-									<a href="">| ----- 查看活动</a>
+									<a href="/admin/doing">| ----- 查看活动商品</a>
 								</li>
 								<li>
-									<a href="">| ----- 添加活动</a>
+									<a href="/admin/doing/create">| ----- 添加活动商品</a>
 								</li>
 							</ul>
 							<!-- //nav-second-level -->

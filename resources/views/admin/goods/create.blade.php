@@ -30,7 +30,55 @@
 				    </div>
 				@endif
 
-			<h3>商品添加</h3>
+				<div class="forms">
+					<h3 class="title1">商品管理</h3>
+					<div class="form-grids row widget-shadow" data-example-id="basic-forms"> 
+						<div class="form-title">
+							<h4>商品添加 :</h4>
+						</div>
+						<div class="form-body">
+						  <form action="/admin/goods" method="post" enctype="multipart/form-data">
+							{{ csrf_field() }}
+						    <div class="form-group">
+						      <label for="name">商品名称</label>
+						      <input type="text" class="form-control" style="width:510px;" value="{{ old('name') }}" name="name" id="name" placeholder="商品名称">
+						  	</div>
+						  	<div class="form-group">
+						      <label for="cid">所属分类</label>
+						      <select name="cid" id="" class="form-control" style="width:510px;">
+									<option value=""> -- 请选择 -- </option>
+
+									@foreach($cates as $k=>$v)
+									<option value="{{ $v->id }}" {{ substr_count($v->path,',') < 2 ? 'disabled' : ''}}>{{ $v->cname }}</option>
+									@endforeach
+
+						      </select>
+						  	</div>
+						  	<div class="form-group">
+						      <label for="desc">商品描述</label>
+						      <input type="text" class="form-control" style="width:510px;" value="{{ old('desc') }}" name="desc" id="desc" placeholder="商品描述">
+						  	</div>
+						  	<div class="form-group">
+						      <label for="money">商品价格</label>
+						      <input type="text" class="form-control" style="width:510px;" value="{{ old('money') }}" name="money" id="money" placeholder="商品价格(保留到小数点后两位)">
+						  	</div>
+						  	<div class="form-group">
+						      <label for="over">商品库存</label>
+						      <input type="text" class="form-control" style="width:510px;" value="{{ old('over') }}" name="over" id="over" placeholder="商品库存">
+						  	</div>
+
+						    <div class="form-group">
+						      <label for="exampleInputFile">商品图片</label>
+						      <input type="file" name="file" id="exampleInputFile">
+						  </div>
+						   <button type="submit" class="btn btn-default">Submit</button>
+						</form>
+						
+						</div>
+					</div>
+					
+					
+				</div>
 			</div>
 
 			<div class="main-page" style="display: none;">
@@ -44,9 +92,6 @@
 		</div>
 		<!-- 内容结束 -->
 
-		<!-- 页脚 开始 -->
-		@include('admin.public.footer')
-        <!-- 页脚 结束 -->
 	</div>
 	<!-- 页脚 静态资源 开始 -->
 	@include('admin.public.footer_static')

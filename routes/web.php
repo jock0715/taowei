@@ -56,12 +56,18 @@ Route::get('/admin/banner/status','Admin\BannerController@status');
 // 后台 轮播
 Route::resource('/admin/banner','Admin\BannerController');
 
+// 后台 商品 状态 切换
+Route::get('/admin/goods/status','Admin\GoodsController@status');
 // 后台 商品
 Route::resource('/admin/goods','Admin\GoodsController');
 
+// 后台 秒杀商品 状态 切换
+Route::get('/admin/spike/status','Admin\SpikeController@status');
 // 后台 秒杀商品
 Route::resource('/admin/spike','Admin\SpikeController');
 
+// 后台 活动商品 状态 切换
+Route::get('/admin/doing/status','Admin\DoingController@status');
 // 后台 活动商品
 Route::resource('/admin/doing','Admin\DoingController');
 
