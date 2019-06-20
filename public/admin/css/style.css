@@ -37,8 +37,8 @@ body a:hover{
 /* ----STICKY HEADER----*/
 .sticky-header{
     position: fixed;
-    top: 0;
-    left:0px;
+    top: -2px;
+    left:-10px;
     width: 100%;
     z-index: 100;
 }
