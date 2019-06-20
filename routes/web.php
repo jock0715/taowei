@@ -89,10 +89,16 @@ Route::resource('/admin/link','Admin\LinkController');
 /*---------------------------------后台结束-------------------------------*/
 
 
+
 /*---------------------------前台开始-------------------------------------*/
 
 // 前台注册
 Route::get('/home/register','Home\LoginController@register');
+
+/*---------------------------------前台开始-------------------------------------*/
+// 前台 首页
+Route::get('/','Home\IndexController@index');
+
 
 // 前台登录
 Route::resource('/home/login','Home\LoginController');
