@@ -14,7 +14,7 @@ class LoginController extends Controller
      */
     public function index()
     {
-        return view('home/login/register');
+        return view('home/login/login');
     }
 
     /**
@@ -84,13 +84,5 @@ class LoginController extends Controller
     }
 
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function register()
-    {
-        return view('home/login/register');
-    }
+
 }

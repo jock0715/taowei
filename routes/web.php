@@ -93,15 +93,18 @@ Route::resource('/admin/link','Admin\LinkController');
 /*---------------------------前台开始-------------------------------------*/
 
 // 前台注册
-Route::get('/home/register','Home\LoginController@register');
+Route::get('/home/register','Home\RegisterController@index');
+// 获取手机号
+Route::get('/home/register/sendPhone','Home\RegisterController@sendPhone');
+// 执行注册
+Route::post('/home/register/store','Home\RegisterController@store');
 
-/*---------------------------------前台开始-------------------------------------*/
 // 前台 首页
 Route::get('/','Home\IndexController@index');
 
 
 // 前台登录
-Route::resource('/home/login','Home\LoginController');
+Route::get('/home/login','Home\LoginController@index');
 
 
 /*---------------------------前台结束-------------------------------------*/

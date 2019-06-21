@@ -1,7 +1,5 @@
-
 <!DOCTYPE html>
 <html>
-
 	<head lang="en">
 		<meta charset="UTF-8">
 		<title>注册</title>
@@ -15,97 +13,145 @@
 		<link href="/home_login/css/dlstyle.css" rel="stylesheet" type="text/css">
 		<script src="/home_login/AmazeUI-2.4.2/assets/js/jquery.min.js"></script>
 		<script src="/home_login/AmazeUI-2.4.2/assets/js/amazeui.min.js"></script>
-
 	</head>
-
 	<body>
-
 		<div class="login-boxtitle">
 			<a href="home/demo.html"><img alt="" src="/home_login/images/logobig.png" /></a>
 		</div>
-
 		<div class="res-banner">
 			<div class="res-main">
 				<div class="login-banner-bg"><span></span><img src="/home_login/images/big.jpg" /></div>
 				<div class="login-box">
-
-						<div class="am-tabs" id="doc-my-tabs">
-							<ul class="am-tabs-nav am-nav am-nav-tabs am-nav-justify">
-								<li class="am-active"><a href="">邮箱注册</a></li>
-								<li><a href="">手机号注册</a></li>
-							</ul>
-
-							<div class="am-tabs-bd">
-								<div class="am-tab-panel am-active">
-									<form method="post">
-										
-							   <div class="user-email">
+					<div class="am-tabs" id="doc-my-tabs">
+						<ul class="am-tabs-nav am-nav am-nav-tabs am-nav-justify">
+							<li class="am-active"><a href="">邮箱注册</a></li>
+							<li><a href="">手机号注册</a></li>
+						</ul>
+						<div class="am-tabs-bd">
+							<div class="am-tab-panel am-active">
+								<form method="post">
+									<div class="user-email">
 										<label for="email"><i class="am-icon-envelope-o"></i></label>
 										<input type="email" name="" id="email" placeholder="请输入邮箱账号">
-                 </div>										
-                 <div class="user-pass">
-								    <label for="password"><i class="am-icon-lock"></i></label>
-								    <input type="password" name="" id="password" placeholder="设置密码">
-                 </div>										
-                 <div class="user-pass">
-								    <label for="passwordRepeat"><i class="am-icon-lock"></i></label>
-								    <input type="password" name="" id="passwordRepeat" placeholder="确认密码">
-                 </div>	
-                 
-                 </form>
-                 
-								 <div class="login-links">
-										<label for="reader-me">
-											<input id="reader-me" type="checkbox"> 点击表示您同意商城《服务协议》
-										</label>
-							  	</div>
-										<div class="am-cf">
-											<input type="submit" name="" value="注册" class="am-btn am-btn-primary am-btn-sm am-fl">
-										</div>
-
+					             </div>										
+					             <div class="user-pass">
+										<label for="password"><i class="am-icon-lock"></i></label>
+										<input type="password" name="" id="password" placeholder="设置密码">
+					             </div>										
+					             <div class="user-pass">
+										<label for="passwordRepeat"><i class="am-icon-lock"></i></label>
+										<input type="password" name="" id="passwordRepeat" placeholder="确认密码">
+					             </div>	
+					             </form>
+							 <div class="login-links">
+								<label for="reader-me">
+									<input id="reader-me" type="checkbox"> 点击表示您同意商城《服务协议》
+								</label>
+						  	</div>
+								<div class="am-cf">
+									<input type="submit" name="" value="注册" class="am-btn am-btn-primary am-btn-sm am-fl">
 								</div>
-
-								<div class="am-tab-panel">
-									<form method="post">
-						                <div class="user-phone">
-											<label for="phone"><i class="am-icon-mobile-phone am-icon-md"></i></label>
-											<input type="tel" name="" id="phone" placeholder="请输入手机号">
-						                </div>																			
-										<div class="verification">
-											<label for="code"><i class="am-icon-code-fork"></i></label>
-											<input type="tel" name="" id="code" placeholder="请输入验证码">
-											<a class="btn" href="javascript:void(0);" onClick="sendMobileCode();" id="sendMobileCode">
-												<span id="dyMobileButton">获取</span></a>
-										</div>
-						                 <div class="user-pass">
-														    <label for="password"><i class="am-icon-lock"></i></label>
-														    <input type="password" name="" id="password" placeholder="设置密码">
-						                 </div>										
-						                 <div class="user-pass">
-														    <label for="passwordRepeat"><i class="am-icon-lock"></i></label>
-														    <input type="password" name="" id="passwordRepeat" placeholder="确认密码">
-						                 </div>	
-									</form>
-								 <div class="login-links">
-										<label for="reader-me">
-											<input id="reader-me" type="checkbox"> 点击表示您同意商城《服务协议》
-										</label>
-							  	</div>
-										<div class="am-cf">
-											<input type="submit" name="" value="注册" class="am-btn am-btn-primary am-btn-sm am-fl">
-										</div>
-								
-									<hr>
-								</div>
-
-								<script>
-									$(function() {
-									    $('#doc-my-tabs').tabs();
-									  })
-								</script>
-
 							</div>
+
+							<div class="am-tab-panel">
+								<form action="/home/register/store" method="post">
+									{{csrf_field()}}
+					                <div class="user-phone">
+										<label for="phone"><i class="am-icon-mobile-phone am-icon-md"></i></label>
+										<input type="text" name="phone" id="phone" placeholder="请输入手机号">
+					                </div>																			
+									<div class="verification">
+										<label for="code"><i class="am-icon-code-fork"></i></label>
+										<input type="text" name="code" id="code" placeholder="请输入验证码">
+										<a class="btn" href="javascript:void(0);" onClick="sendMobileCode(this);" id="sendMobileCode">
+										<span id="dyMobileButton">获取</span></a>
+									</div>
+					                 <div class="user-pass">
+										<label for="password"><i class="am-icon-lock"></i></label>
+										<input type="password" name="upwd" id="password" placeholder="设置密码">
+					                 </div>										
+					                 <div class="user-pass">
+										<label for="passwordRepeat"><i class="am-icon-lock"></i></label>
+										<input type="password" name="reupwd" id="passwordRepeat" placeholder="确认密码">
+					                 </div>	
+									<div class="am-cf">
+										<input type="submit" name="" value="注册" class="am-btn am-btn-primary am-btn-sm am-fl">
+									</div>
+								</form>
+								<div class="login-links">
+									<label for="reader-me">
+										@include('home.public.message')
+									</label>
+								 </div>
+								
+								<hr>
+							</div>
+							<script>
+								$(function() {
+								    $('#doc-my-tabs').tabs();
+								  })
+							</script>
+							<!-- 修改密码模态框 结束 -->
+							<link rel="stylesheet" href="/home_login/layui/css/layui.css">
+							<script src="/home_login/layui/layui.js"></script>
+
+							<script>
+							//一般直接写在一个js文件中
+							  layui.use(['layer', 'form'], function(){
+							    var layer = layui.layer
+							  });
+							</script>
+							<script type="text/javascript">
+								function sendMobileCode(obj){
+
+									// 获取用户验证码
+									let phone = $('#phone').val();
+									// 验证格式
+									let phone_preg = /^[1]{1}[3-9]{1}\d{9}$/;
+									if(!phone_preg.test(phone)) {
+										layer.msg('手机格式不正确');
+										return false;
+									}
+
+									$(obj).attr('disabled',true);
+									$(obj).css('cursor','no-drop');
+									$('#dyMobileButton').css('color','#ccc');
+										if($('#dyMobileButton').html() == '获取'){
+											let i = 60;
+											let time = null;
+											time = setInterval(function(){
+												i--;
+											$('#dyMobileButton').html(''+i+'s');
+											if(i<1){
+												$(obj).attr('disabled',false);
+												$(obj).css('color','#333');
+												$(obj).css('cursor','pointer');
+												$('#dyMobileButton').css('color','#333');
+												$('#dyMobileButton').html('获取');
+												clearInterval(time);
+											}
+										},1000);
+
+									// 发送ajax
+									$.get('/home/register/sendPhone',{phone},function(res){
+											if(res.error_code == 0){
+												layer.msg('验证码发送成功,验证码十分钟内有效!');
+											}else{
+												layer.msg('验证码发送失败!');
+											}
+											// if(res.msg == 'ok'){
+											// 	layer.msg(res.info);
+											// }else{
+											// 	layer.msg('验证码发送失败!');
+											// }
+										},'json');
+									}
+								}
+
+
+							</script>
 						</div>
+					</div>
 				</div>
 			</div>
 			<div class="footer ">
