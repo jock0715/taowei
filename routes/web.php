@@ -32,7 +32,6 @@ Route::post('/admin/doeditpwd','Admin\Admin_userController@doeditpwd');
 // 登录验证
 Route::group(['middleware'=>'login'],function(){
 
-
 // 后台 首页
 Route::get('/admin/index','Admin\IndexController@index');
 
@@ -104,8 +103,13 @@ Route::get('/home/register','Home\RegisterController@index');
 // 获取手机号
 Route::get('/home/register/sendPhone','Home\RegisterController@sendPhone');
 
-// 执行注册
+// 执行手机注册
 Route::post('/home/register/store','Home\RegisterController@store');
+
+// 执行邮箱注册
+Route::post('/home/register/insert','Home\RegisterController@insert');
+// 执行激活
+Route::get('/home/register/status/{id}','Home\RegisterController@status');
 
 //显示登录页面
 Route::get('/home/login','Home\LoginController@index');

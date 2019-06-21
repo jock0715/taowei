@@ -33,28 +33,30 @@
             </ul>
             <div class="am-tabs-bd">
               <div class="am-tab-panel am-active">
-                <form method="post">
+                <form action="/home/register/insert" method="post">
+                  {{ csrf_field() }}
                   <div class="user-email">
                     <label for="email">
                       <i class="am-icon-envelope-o"></i>
                     </label>
-                    <input type="email" name="" id="email" placeholder="请输入邮箱账号"></div>
+                    <input type="email" name="email" id="email" placeholder="请输入邮箱账号" value="{{old('email')}}"></div>
                   <div class="user-pass">
                     <label for="password">
                       <i class="am-icon-lock"></i>
                     </label>
-                    <input type="password" name="" id="password" placeholder="设置密码"></div>
+                    <input type="password" name="upwd" id="password" placeholder="设置密码"></div>
                   <div class="user-pass">
                     <label for="passwordRepeat">
                       <i class="am-icon-lock"></i>
                     </label>
-                    <input type="password" name="" id="passwordRepeat" placeholder="确认密码"></div>
+                    <input type="password" name="reupwd" id="passwordRepeat" placeholder="确认密码"></div>
+                  <div class="am-cf">
+                    <input type="submit" value="注册" class="am-btn am-btn-primary am-btn-sm am-fl">
+                  </div>
                 </form>
                 <div class="login-links">
-                  <label for="reader-me">
-                    <input id="reader-me" type="checkbox">点击表示您同意商城《服务协议》</label></div>
-                <div class="am-cf">
-                  <input type="submit" name="" value="注册" class="am-btn am-btn-primary am-btn-sm am-fl"></div>
+                  <label for="reader-me">@include('home.public.message')</label>
+                </div>
               </div>
               <div class="am-tab-panel">
                 <form action="/home/register/store" method="post">{{csrf_field()}}
@@ -84,7 +86,8 @@
                     <input type="submit" name="" value="注册" class="am-btn am-btn-primary am-btn-sm am-fl"></div>
                 </form>
                 <div class="login-links">
-                  <label for="reader-me">@include('home.public.message')</label></div>
+                  <label for="reader-me">@include('home.public.message')</label>
+                </div>
                 <hr></div>
               <script>$(function() {
                   $('#doc-my-tabs').tabs();
