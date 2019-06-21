@@ -28,16 +28,57 @@ class LoginController extends Controller
      */
     public function dologin(Request $request)
     {
-        $phone = $request->input('phone',0);
-        $uname = $request->input('uname','');
-        $email = $request->input('email','');
+
+        $all = $request->input('all','');
         $upwd = $request->input('upwd','');
+        
+        $user = new User;
+        $user_data = $user
+                        ->where('uname',$all)
+                        ->Orwhere('phone',$all)
+                        ->Orwhere('email',$all)
+                        ->first();
 
         // 实例化model
-        if($uname = $request->input('uname')){
-            $user = new User;
-            $user_data = $user->where('uname',$uname)->first();
+        if(empty($user_data->uname)){
 
+            // 判断用户名
+            if(empty($user_data->uname)){
+                return back()->with('error','用户名或密码错误!');
+            }
+            //判断密码
+            if (!Hash::check($upwd, $user_data->upwd)) {
+               return back()->with('error','用户名或密码错误!!');
+            }
+            $uid = $user_data->id;
+            $userinfo = new UserInfos;
+            $user_info = $userinfo->where('uid',$uid)->first();
+            // 压入session
+            session(['home_login'=>true]);
+            session(['home_user'=>$user_data]);
+            session(['home_info'=>$user_info]);
+
+        }elseif(empty($user_data->phone)){
+            $user_info = new UserInfos;
+            $user_data = $user_info->where('phone',$phone)->first();
+            dd($user_data);
+            // 判断用户名
+            if(empty($user_data->phone)){
+                return back()->with('error','手机号不正确!');
+            }
+            //判断密码
+            if (!Hash::check($upwd, $user_data->upwd)) {
+               return back()->with('error','手机号或密码错误!!');
+            }
+            $uid = $user_data->id;
+            $userinfo = new UserInfos;
+            $user_info = $userinfo->where('uid',$uid)->first();
+            // 压入session
+            session(['home_login'=>true]);
+            session(['home_user'=>$user_data]);
+            session(['home_info'=>$user_info]);
+
+        }elseif(empty($user_data->email)){
             // 判断用户名
             if(empty($user_data->uname)){
                 return back()->with('error','用户名或密码错误!');
@@ -51,30 +92,11 @@ class LoginController extends Controller
             $userinfo = new UserInfos;
             $user_info = $userinfo->where('uid',$uid)->first();
 
-        }elseif($phone = $request->input('phone')){
-            $user_info = new UserInfos;
-            $user_data = $user_info->where('phone',$phone)->first();
-            dd($user_data);
-            // 判断用户名
-            if(empty($user_data->phone)){
-                return back()->with('error','手机号不正确!');
-            }
-
-            //判断密码
-            if (!Hash::check($upwd, $user_data->upwd)) {
-               return back()->with('error','手机号或密码错误!!');
-            }
-            $uid = $user_data->id;
-            $userinfo = new UserInfos;
-            $user_info = $userinfo->where('uid',$uid)->first();
+            // 压入session
+            session(['home_login'=>true]);
+            session(['home_user'=>$user_data]);
+            session(['home_info'=>$user_info]);
         }
-        
-
-        // 压入session
-        session(['home_login'=>false]);
-        session(['home_user'=>$user_data]);
-        session(['home_info'=>$user_info]);
-
     }
 
 

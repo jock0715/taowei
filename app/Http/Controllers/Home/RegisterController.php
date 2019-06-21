@@ -43,6 +43,7 @@ class RegisterController extends Controller
 
         // 验证手机验证码 用户输入
         $phone = $request->input('phone',0);
+        $email = $request->input('email','');
         $code = $request->input('code',0);
 
         // 获取发送到手机的验证码
@@ -75,6 +76,8 @@ class RegisterController extends Controller
         // 实例化User,Model类
         $user = new User;
         $user->uname = 'TaoWei用户'.rand(1234,4321);
+        $user->email = 'TaoWei@'.rand(1234,4321).'com';
+        $user->phone = $data['phone'];
         $user->upwd = Hash::make($data['upwd']);
         $res1 = $user->save();
         if($res1){
@@ -89,19 +92,17 @@ class RegisterController extends Controller
         $userinfos->age = rand(19,29);
         $userinfos->profile = 'xxx';
         $userinfos->addr = '该用户很神秘';
-        $userinfos->email = 'xxx@xx.com';
-        $userinfos->phone = '15217345681';
         $res2 = $userinfos->save();
         if($res1 && $res2){
             // 成功提交事务
             DB::commit();
             // 成功返回用户显示列表路由,并提示信息
-            return redirect('/home/login')->with('success','添加成功');
+            return redirect('/home/login')->with('success','注册成功');
         }else{
             // 失败回滚事务
             DB::rollBack();
             // 失败,回滚当前页面,并提示信息
-            return back()->with('error','添加失败');
+            return back()->with('error','注册失败');
         }
     }
 
@@ -160,7 +161,7 @@ class RegisterController extends Controller
     {
         // 接收手机号
         $phone = $request->input('phone',0);
-        $code = rand(12345,54321);
+        $code = 1234;
 
         // redis 键名
         $k = $phone.'_code';

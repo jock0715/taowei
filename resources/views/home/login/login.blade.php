@@ -24,17 +24,21 @@
           <h3 class="title">登录商城</h3>
           <div class="clear"></div>
           <div class="login-form">
-            <form>
+            <form action="/home/login/dologin" method="post">
+              {{csrf_field()}}
               <div class="user-name">
                 <label for="user">
                   <i class="am-icon-user"></i>
                 </label>
-                <input type="text" name="" id="user" placeholder="邮箱/手机/用户名"></div>
+                <input type="text" name="all" id="user" placeholder="邮箱/手机/用户名"></div>
               <div class="user-pass">
                 <label for="password">
                   <i class="am-icon-lock"></i>
                 </label>
-                <input type="password" name="" id="password" placeholder="请输入密码"></div>
+                <input type="password" name="upwd" id="password" placeholder="请输入密码" value="123456"></div>
+                <div class="am-cf">
+                  <input type="submit" name="" value="登 录" class="am-btn am-btn-primary am-btn-sm">
+                </div>
             </form>
           </div>
           <div class="login-links">
@@ -43,8 +47,7 @@
             <a href="#" class="am-fr">忘记密码</a>
             <a href="register.html" class="zcnext am-fr am-btn-default">注册</a>
             <br /></div>
-          <div class="am-cf">
-            <input type="submit" name="" value="登 录" class="am-btn am-btn-primary am-btn-sm"></div>
+
           <div class="partner">
             <h3>合作账号</h3>
             <div class="am-btn-group">
@@ -65,6 +68,7 @@
               </li>
             </div>
           </div>
+          <div>@include('home/public/message')</div>
         </div>
       </div>
     </div>
