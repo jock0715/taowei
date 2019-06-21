@@ -4,9 +4,8 @@ namespace App\Http\Controllers\Home;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Banner;
 
-class IndexController extends Controller
+class AdvertiController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,15 +14,7 @@ class IndexController extends Controller
      */
     public function index()
     {
-        // 获取轮播数据
-        $banners = new Banner;
-        $banners_data = $banners->get();
-
-        // 引入页面
-        return view('home/index',
-            [
-                'banners_data'=>$banners_data,
-            ]);
+        //
     }
 
     /**
