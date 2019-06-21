@@ -46,7 +46,9 @@
 						  <th>头像</th>
 						  <th>权限</th>
 						  <th>添加时间</th>
+						@if(session('admin_uinfo')->status == 0)
 						  <th>操作</th>
+						@endif
 						</tr>
 					@foreach($admin_data as $v) 
 						<tr class="th">
@@ -61,16 +63,17 @@
 					        @endif
 							</td>
 							<td>{{ $v->created_at }}</td>
-							
+							@if(session('admin_uinfo')->status == 0)
 							<td>
 								<a href="/admin/admin_user/{{ $v->id }}/edit" class="btn btn-info">修改</a>
 					          	<form action="/admin/admin_user/{{ $v->id }}" method="post" style="display: inline-block;">
 						            {{ csrf_field() }}
 						            {{ method_field('DELETE') }}
 						            <input type="submit" name="" value="删除" class="btn btn-danger" onclick="return confirm('确定删除?')">
+						            <input type="hidden" name="old_profile" value="{{ $v->profile }}">
 					          	</form>
 							</td>
-							
+							@endif
 						</tr>
 					@endforeach	
 				</table>

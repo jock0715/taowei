@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Home;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class Shopping_infoController extends Controller
+class OrderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class Shopping_infoController extends Controller
     public function index()
     {
         // 引入页面
-        return view('/home/shopping/index');
-    } 
+        return view('/home/order/index');
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -26,7 +26,7 @@ class Shopping_infoController extends Controller
     public function create()
     {
         // 引入页面
-        return view('/home/shopping/create');
+        return view('/home/order/create');
     }
 
     /**

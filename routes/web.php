@@ -10,7 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
- 
+   
 /*---------------------------------后台开始-------------------------------------*/
 
 
@@ -113,6 +113,7 @@ Route::post('/home/login/dologin','Home\LoginController@dologin');
 // 前台 购物车
 Route::resource('/home/shopping','Home\Shopping_infoController');
 
-
+// 前台 订单
+Route::resource('/home/order','Home\OrderController');
 
 /*---------------------------前台结束-------------------------------------*/
