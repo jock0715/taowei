@@ -16,7 +16,6 @@ class LoginController extends Controller
     {
 
         return view('home/login/login');
-
     }
 
     /**

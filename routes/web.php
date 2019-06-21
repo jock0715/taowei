@@ -10,7 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+ 
 /*---------------------------------后台开始-------------------------------------*/
 
 
@@ -94,17 +94,22 @@ Route::resource('/admin/link','Admin\LinkController');
 
 // 前台注册
 Route::get('/home/register','Home\RegisterController@index');
+
 // 获取手机号
 Route::get('/home/register/sendPhone','Home\RegisterController@sendPhone');
+
 // 执行注册
 Route::post('/home/register/store','Home\RegisterController@store');
 
 // 前台 首页
 Route::get('/','Home\IndexController@index');
 
-
 // 前台登录
 Route::get('/home/login','Home\LoginController@index');
+
+// 前台 购物车
+Route::resource('/home/shopping','Home\Shopping_infoController');
+
 
 
 /*---------------------------前台结束-------------------------------------*/
