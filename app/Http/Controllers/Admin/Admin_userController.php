@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 use App\Models\Admin_user;
 use Hash;
-
+use DB;
 
 class Admin_userController extends Controller
 {
@@ -75,11 +75,12 @@ class Admin_userController extends Controller
     {
         // 表单验证
         $this->validate($request, [
-            'name' => 'required|regex:/^[a-z,A-Z][\w]{5,15}$/',
+            'name' => 'required|unique:admin_users|regex:/^[a-z,A-Z][\w]{5,15}$/',
             'pwd' => 'required|same:repwd|regex:/^[\w]{6,16}$/',
             'repwd' => 'required',
         ],[
-            'name.required'=>'用户名不能为空',    
+            'name.required'=>'用户名不能为空',
+            'name.unique'=>'用户名已存在!',    
             'name.regex'=>'用户名格式不正确,由字母数字组成,5~15',    
             'pwd.regex'=>'密码格式不正确,由字母,下划线,数字组成,6~16',    
             'pwd.required'=>'密码不能为空',    
@@ -166,11 +167,12 @@ class Admin_userController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id,Request $request)
     {
         // 通过该id进行删除操作
         $res = Admin_user::destroy($id);
         if ($res) {
+            Storage::delete($request->input('old_profile',''));
             return redirect('/admin/admin_user')->with('success','删除成功');
         } else {
             return back()->with('error','删除失败');

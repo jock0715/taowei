@@ -7,19 +7,16 @@
 
 		<title>首页</title>
 
+		
 		<link href="/home/AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css" />
 		<link href="/home/AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css" />
-
 		<link href="/home/basic/css/demo.css" rel="stylesheet" type="text/css" />
-
 		<link href="/home/css/hmstyle.css" rel="stylesheet" type="text/css"/>
 		<link href="/home/css/skin.css" rel="stylesheet" type="text/css" />
 		<script src="/home/AmazeUI-2.4.2/assets/js/jquery.min.js"></script>
 		<script src="/home/AmazeUI-2.4.2/assets/js/amazeui.min.js"></script>
-
 		<link href="/home/css/cartstyle.css" rel="stylesheet" type="text/css" />
 		<link href="/home/css/optstyle.css" rel="stylesheet" type="text/css" />
-
 		<script type="text/javascript" src="/home/js/jquery.js"></script>
 
 	</head>
