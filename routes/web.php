@@ -41,7 +41,7 @@ Route::resource('/admin/admin_user','Admin\Admin_userController');
 
 // 后台 职位
 Route::resource('/admin/role','Admin\RoleController');
-
+ 
 // 后台 权限
 Route::resource('/admin/node','Admin\NodeController');
 
@@ -75,12 +75,15 @@ Route::resource('/admin/doing','Admin\DoingController');
 Route::resource('/admin/comment','Admin\CommentController');
 
 // 后台 广告
+Route::get('/admin/adverti/status','Admin\AdvertiController@status');
 Route::resource('/admin/adverti','Admin\AdvertiController');
+
 
 // 后台 订单
 Route::resource('/admin/order','Admin\OrderController');
 
 // 后台 友情链接
+Route::get('/admin/link/status','Admin\LinkController@status');
 Route::resource('/admin/link','Admin\LinkController');
 
 });
@@ -109,6 +112,10 @@ Route::get('/home/login','Home\LoginController@index');
 
 // 前台执行登录功能
 Route::post('/home/login/dologin','Home\LoginController@dologin');
+
+
+/*---------------------------------后台结束-------------------------------------*/
+
 
 // 前台 购物车
 Route::resource('/home/shopping','Home\Shopping_infoController');

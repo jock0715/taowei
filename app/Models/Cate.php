@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Cate extends Model
 {
+
     // 声明操作的数据表
     public $table = 'cates';
 
@@ -16,5 +17,4 @@ class Cate extends Model
     	return $this->hasMany('App\Models\Goods','cid');
     }
 
-    
 }
