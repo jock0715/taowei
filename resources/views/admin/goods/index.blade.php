@@ -23,7 +23,7 @@
 		@include('admin.public.header_userinfo')
 		<!-- 头部 结束 -->
 		<!-- 内容 开始-->
-		<div id="page-wrapper"  style="background:url('/admin/images/litiqs.jpg') no-repeat 100% 100%;">
+		<div id="page-wrapper" style="background:url('/admin/images/litiqs.jpg') no-repeat 100% 100%;">
 			<div class="main-page">
 			<!-- 导入 提示信息 开始 -->
 			@include('admin.public.message')
