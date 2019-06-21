@@ -103,8 +103,10 @@ Route::post('/home/register/store','Home\RegisterController@store');
 Route::get('/','Home\IndexController@index');
 
 
-// 前台登录
+// 前台显示登录
 Route::get('/home/login','Home\LoginController@index');
+// 前台执行登录功能
+Route::post('/home/login/dologin','Home\LoginController@dologin');
 
 
 /*---------------------------前台结束-------------------------------------*/

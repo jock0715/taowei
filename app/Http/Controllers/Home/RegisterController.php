@@ -49,7 +49,7 @@ class RegisterController extends Controller
         $k = $phone.'_code';
         // session值赋对应手机的值
         $phone_code = session($k);
-
+        //dd($code,$phone_code);
         if($code != $phone_code){
             echo "<script>alert('验证码错误!');location.href='/home/register'</script>";
             exit;
@@ -90,7 +90,7 @@ class RegisterController extends Controller
         $userinfos->profile = 'xxx';
         $userinfos->addr = '该用户很神秘';
         $userinfos->email = 'xxx@xx.com';
-        $userinfos->phone = '15217345'.rand(123,321);
+        $userinfos->phone = '15217345681';
         $res2 = $userinfos->save();
         if($res1 && $res2){
             // 成功提交事务
@@ -160,12 +160,12 @@ class RegisterController extends Controller
     {
         // 接收手机号
         $phone = $request->input('phone',0);
-        $code = rand(1234,4321);
+        $code = rand(12345,54321);
 
         // redis 键名
         $k = $phone.'_code';
         session([$k=>$code]); // 这个将验证码存入session
-        // echo json_encode(['msg'=>'ok','info'=>$k]);
+        // echo json_encode(['msg'=>'ok','info'=>$code]);
         //     exit; 
 
         // 短信api接口
