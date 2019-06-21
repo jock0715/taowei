@@ -14,7 +14,8 @@ class Shopping_infoController extends Controller
      */
     public function index()
     {
-        //
+        // 引入页面
+        return view('/home/shopping/index');
     }
 
     /**
@@ -24,7 +25,8 @@ class Shopping_infoController extends Controller
      */
     public function create()
     {
-        //
+        // 引入页面
+        return view('/home/shopping/create');
     }
 
     /**
