@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Home;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class LoginController extends Controller
+class AdvertiController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,7 @@ class LoginController extends Controller
      */
     public function index()
     {
-
-        return view('home/login/login');
-
+        //
     }
 
     /**
@@ -84,7 +82,4 @@ class LoginController extends Controller
     {
         //
     }
-
-
-
 }

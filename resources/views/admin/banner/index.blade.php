@@ -68,6 +68,7 @@
 					          	<form action="/admin/banner/{{ $v->id }}" method="post" style="display: inline-block;">
 						            {{ csrf_field() }}
 						            {{ method_field('DELETE') }}
+						            <input type="hidden" name="url" value="{{ $v->url }}">
 						            <input type="submit" name="" value="删除" class="btn btn-danger" onclick="return confirm('确定删除?')">
 					          	</form>
 							</td>

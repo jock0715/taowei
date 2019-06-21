@@ -182,11 +182,13 @@ class BannerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id,Request $request)
     {
         // 通过该id进行删除操作
         $res = Banner::destroy($id);
+
         if ($res) {
+            Storage::delete($request->input('url',''));
             return redirect('/admin/banner')->with('success','删除成功');
         } else {
             return back()->with('error','删除失败');
