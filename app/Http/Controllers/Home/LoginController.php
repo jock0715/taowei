@@ -33,17 +33,15 @@ class LoginController extends Controller
         $upwd = $request->input('upwd','');
         
         $user = new User;
-        $user_data = $user
-                        ->where('uname',$all)
-                        ->Orwhere('phone',$all)
-                        ->Orwhere('email',$all)
-                        ->first();
-
+        $user_uname = $user->where('uname',$all)->first();
+        $user_phone = $user->where('phone',$all)->first();
+        $user_email = $user->where('email',$all)->first();
+        //dd($user_data->uname);
         // 实例化model
-        if(empty($user_data->uname)){
-
+        if($all == $user_uname->uname){
+            echo 'xxx';exit;
             // 判断用户名
-            if(empty($user_data->uname)){
+            if($all != $user_data->uname){
                 return back()->with('error','用户名或密码错误!');
             }
             //判断密码
@@ -57,8 +55,10 @@ class LoginController extends Controller
             session(['home_login'=>true]);
             session(['home_user'=>$user_data]);
             session(['home_info'=>$user_info]);
+            return redirect('/')->with('success','登录成功');
 
-        }elseif(empty($user_data->phone)){
+        }elseif($all == $user_phone->phone){
+            echo 'xxx';exit;
             $user_info = new UserInfos;
             $user_data = $user_info->where('phone',$phone)->first();
             dd($user_data);
@@ -77,20 +77,23 @@ class LoginController extends Controller
             session(['home_login'=>true]);
             session(['home_user'=>$user_data]);
             session(['home_info'=>$user_info]);
+            return redirect('/')->with('success','登录成功');
 
-        }elseif(empty($user_data->email)){
+        }elseif($all == $user_email->email){
             // 判断用户名
             if(empty($user_data->uname)){
-                return back()->with('error','用户名或密码错误!');
+                return back()->with('error','E-mail或密码错误!');
             }
 
             //判断密码
             if (!Hash::check($upwd, $user_data->upwd)) {
-               return back()->with('error','用户名或密码错误!!');
+               return back()->with('error','E-mail或密码错误!!');
             }
             $uid = $user_data->id;
             $userinfo = new UserInfos;
             $user_info = $userinfo->where('uid',$uid)->first();
+            return redirect('/')->with('success','登录成功');
+
 
             // 压入session
             session(['home_login'=>true]);

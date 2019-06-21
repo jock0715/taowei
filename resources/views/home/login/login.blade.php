@@ -37,7 +37,7 @@
                 </label>
                 <input type="password" name="upwd" id="password" placeholder="请输入密码" value="123456"></div>
                 <div class="am-cf">
-                  <input type="submit" name="" value="登 录" class="am-btn am-btn-primary am-btn-sm">
+                  <input type="submit"  value="登 录" class="am-btn am-btn-primary am-btn-sm">
                 </div>
             </form>
           </div>
