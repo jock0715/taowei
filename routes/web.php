@@ -117,9 +117,9 @@ Route::get('/home/login','Home\LoginController@index');
 // 前台执行登录功能
 Route::post('/home/login/dologin','Home\LoginController@dologin');
 
-
-/*---------------------------------后台结束-------------------------------------*/
-
+// 前台 商品列表页面
+Route::get('/home/list/info/{id}','Home\ListController@info');
+Route::resource('/home/list','Home\ListController');
 
 // 前台 购物车
 Route::resource('/home/shopping','Home\Shopping_infoController');
