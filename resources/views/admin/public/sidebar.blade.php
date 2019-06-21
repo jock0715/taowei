@@ -57,10 +57,10 @@
 							<a href="javascript:;"><span class="glyphicon glyphicon-th-list nav_icon" aria-hidden="true"></span> </i>分类管理<span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level collapse">
 								<li>
-									<a href="#">查看分类</a>
+									<a href="/admin/cate">查看分类</a>
 								</li>
 								<li>
-									<a href="#">添加分类</a>
+									<a href="/admin/cate/create">添加分类</a>
 								</li>
 							</ul>
 							<!-- //nav-second-level -->
@@ -148,10 +148,10 @@
 							<a href="javascript:;"><span class="glyphicon glyphicon-film nav_icon" aria-hidden="true"></span> </i>广告管理<span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level collapse">
 								<li>
-									<a href="#">查看广告</a>
+									<a href="/admin/adverti">查看广告</a>
 								</li>
 								<li>
-									<a href="#">添加广告</a>
+									<a href="/admin/adverti/create">添加广告</a>
 								</li>
 							</ul>
 							<!-- //nav-second-level -->
@@ -161,10 +161,10 @@
 							<a href="javascript:;"><span class="glyphicon glyphicon-paperclip nav_icon" aria-hidden="true"></span> </i>链接管理<span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level collapse">
 								<li>
-									<a href="#">查看链接</a>
+									<a href="/admin/link">查看链接</a>
 								</li>
 								<li>
-									<a href="#">添加链接</a>
+									<a href="/admin/link/create">添加链接</a>
 								</li>
 							</ul>
 							<!-- //nav-second-level -->
