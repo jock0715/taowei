@@ -131,7 +131,7 @@ class Admin_userController extends Controller
     {
         $admins = Admin_user::find($id);
         // 引入页面
-        return view('/admin/admin_user/edit',
+        return view('admin/admin_user/edit',
             [
                 'admins'=>$admins,
             ]);

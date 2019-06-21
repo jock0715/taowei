@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Home;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Banner;
+use App\Models\Spike;
+use DB;
 
 class IndexController extends Controller
 {
@@ -19,10 +21,14 @@ class IndexController extends Controller
         $banners = new Banner;
         $banners_data = $banners->get();
 
+        // 获取四条秒杀商品的数据
+        $spike4_data =DB::table('spikes')->orderBy('id','asc')->limit(4)->get();
+        
         // 引入页面
         return view('home/index',
             [
                 'banners_data'=>$banners_data,
+                'spike4_data'=>$spike4_data,
             ]);
     }
 

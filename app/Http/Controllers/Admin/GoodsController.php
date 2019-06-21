@@ -133,7 +133,7 @@ class GoodsController extends Controller
     /**
      * 商品 状态 切换
      *
-     * @param  int  $id
+     * @param  int
      * @return \Illuminate\Http\Response
      */
     public function status(Request $request)

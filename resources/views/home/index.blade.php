@@ -221,53 +221,23 @@
 							<h4>秒杀商品</h4>
 							<h3>每期活动 优惠享不停 </h3>
 							<span class="more ">
-                              <a href="# ">全部活动<i class="am-icon-angle-right" style="padding-left:10px ;" ></i></a>
+                              <a href="# ">全部秒杀活动<i class="am-icon-angle-right" style="padding-left:10px ;" ></i></a>
                         </span>
 						</div>
 					  <div class="am-g am-g-fixed ">
-						<div class="am-u-sm-3 ">
+
+						@foreach($spike4_data as $k=>$v)
+						<div class="am-u-sm-3 " style="float: left; width: 20%;">
 							<div class="icon-sale one "></div>	
 								<h4>秒杀</h4>							
 							<div class="activityMain ">
-								<img src="/home/images/activity1.jpg "></img>
+								<a href="/home/list/info/{{ $v->id }}"><img src="/uploads/{{ $v->file }}"></img></a>
 							</div>
 							<div class="info ">
-								<h3>春节送礼优选</h3>
+								<h3>{{ $v->name }}</h3>
 							</div>														
 						</div>
-						
-						<div class="am-u-sm-3 ">
-						  <div class="icon-sale two "></div>	
-							<h4>特惠</h4>
-							<div class="activityMain ">
-								<img src="/home/images/activity2.jpg "></img>
-							</div>
-							<div class="info ">
-								<h3>春节送礼优选</h3>								
-							</div>							
-						</div>						
-						
-						<div class="am-u-sm-3 ">
-							<div class="icon-sale three "></div>
-							<h4>团购</h4>
-							<div class="activityMain ">
-								<img src="/home/images/activity3.jpg "></img>
-							</div>
-							<div class="info ">
-								<h3>春节送礼优选</h3>
-							</div>							
-						</div>						
-
-						<div class="am-u-sm-3 last ">
-							<div class="icon-sale "></div>
-							<h4>超值</h4>
-							<div class="activityMain ">
-								<img src="/home/images/activity.jpg "></img>
-							</div>
-							<div class="info ">
-								<h3>春节送礼优选</h3>
-							</div>													
-						</div>
+						@endforeach
 
 					  </div>
                    </div>
