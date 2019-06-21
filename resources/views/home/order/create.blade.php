@@ -1,221 +1,323 @@
+@include('/home/public/header')
 
-		@include('/home/public/header')
-		<link href="/home/css/personal.css" rel="stylesheet" type="text/css">
-		<link href="/home/css/addstyle.css" rel="stylesheet" type="text/css">
-		<style>
-			.nav.white .logoBig img {
-			    width: 11%;
-			}
-		</style>
-		<div class="center">
-			<div class="col-main">
-				<div class="main-wrap">
+			<link href="/home/AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css" />
 
-					<div class="user-address">
-						<!--标题 -->
-						<div class="am-cf am-padding">
-							<div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">地址管理</strong> / <small>Address&nbsp;list</small></div>
+			<link href="/home/basic/css/demo.css" rel="stylesheet" type="text/css" />
+			<link href="/home/css/cartstyle.css" rel="stylesheet" type="text/css" />
+
+			<link href="/home/css/jsstyle.css" rel="stylesheet" type="text/css" />
+
+			<script type="/home/text/javascript" src="js/address.js"></script>
+			<form action="/home/order/success" method="get">
+			<div class="concent">
+				<!--地址 -->
+				<div class="paycont">
+					<div class="address">
+						<h3>确认收货地址 </h3>
+						<div class="control">
+							<div class="tc-btn createAddr theme-login am-btn am-btn-danger">使用新地址</div>
 						</div>
-						<hr/>
-						<ul class="am-avg-sm-1 am-avg-md-3 am-thumbnails">
-
-							<li class="user-addresslist defaultAddr">
-								<span class="new-option-r"><i class="am-icon-check-circle"></i>默认地址</span>
-								<p class="new-tit new-p-re">
-									<span class="new-txt">小叮当</span>
-									<span class="new-txt-rd2">159****1622</span>
-								</p>
-								<div class="new-mu_l2a new-p-re">
-									<p class="new-mu_l2cw">
-										<span class="title">地址：</span>
-										<span class="province">湖北</span>省
-										<span class="city">武汉</span>市
-										<span class="dist">洪山</span>区
-										<span class="street">雄楚大道666号(中南财经政法大学)</span></p>
-								</div>
-								<div class="new-addr-btn">
-									<a href="#"><i class="am-icon-edit"></i>编辑</a>
-									<span class="new-addr-bar">|</span>
-									<a href="javascript:void(0);" onClick="delClick(this);"><i class="am-icon-trash"></i>删除</a>
-								</div>
-							</li>
-
-							<li class="user-addresslist">
-								<span class="new-option-r"><i class="am-icon-check-circle"></i>设为默认</span>
-								<p class="new-tit new-p-re">
-									<span class="new-txt">小叮当</span>
-									<span class="new-txt-rd2">159****1622</span>
-								</p>
-								<div class="new-mu_l2a new-p-re">
-									<p class="new-mu_l2cw">
-										<span class="title">地址：</span>
-										<span class="province">湖北</span>省
-										<span class="city">武汉</span>市
-										<span class="dist">洪山</span>区
-										<span class="street">雄楚大道666号(中南财经政法大学)</span></p>
-								</div>
-								<div class="new-addr-btn">
-									<a href="#"><i class="am-icon-edit"></i>编辑</a>
-									<span class="new-addr-bar">|</span>
-									<a href="javascript:void(0);" onClick="delClick(this);"><i class="am-icon-trash"></i>删除</a>
-								</div>
-							</li>
-							<li class="user-addresslist">
-								<span class="new-option-r"><i class="am-icon-check-circle"></i>设为默认</span>
-								<p class="new-tit new-p-re">
-									<span class="new-txt">小叮当</span>
-									<span class="new-txt-rd2">159****1622</span>
-								</p>
-								<div class="new-mu_l2a new-p-re">
-									<p class="new-mu_l2cw">
-										<span class="title">地址：</span>
-										<span class="province">湖北</span>省
-										<span class="city">武汉</span>市
-										<span class="dist">洪山</span>区
-										<span class="street">雄楚大道666号(中南财经政法大学)</span></p>
-								</div>
-								<div class="new-addr-btn">
-									<a href="#"><i class="am-icon-edit"></i>编辑</a>
-									<span class="new-addr-bar">|</span>
-									<a href="javascript:void(0);" onClick="delClick(this);"><i class="am-icon-trash"></i>删除</a>
-								</div>
-							</li>
-						</ul>
 						<div class="clear"></div>
-						<a class="new-abtn-type" data-am-modal="{target: '#doc-modal-1', closeViaDimmer: 0}">添加新地址</a>
-						<!--例子-->
-						<div class="am-modal am-modal-no-btn" id="doc-modal-1">
+						<ul>
+							<div class="per-border"></div>
+							<li class="user-addresslist defaultAddr">
 
-							<div class="add-dress">
+								<div class="address-left">
+									<div class="user DefaultAddr">
 
-								<!--标题 -->
-								<div class="am-cf am-padding">
-									<div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">新增地址</strong> / <small>Add&nbsp;address</small></div>
+										<span class="buy-address-detail">   
+                   <span class="buy-user">艾迪 </span>
+										<span class="buy-phone">15871145629</span>
+										</span>
+									</div>
+									<div class="default-address DefaultAddr">
+										<span class="buy-line-title buy-line-title-type">收货地址：</span>
+										<span class="buy--address-detail">
+								   <span class="province">湖北</span>省
+										<span class="city">武汉</span>市
+										<span class="dist">洪山</span>区
+										<span class="street">雄楚大道666号(中南财经政法大学)</span>
+										</span>
+
+										</span>
+									</div>
+									<ins class="deftip">默认地址</ins>
 								</div>
-								<hr/>
+								<div class="address-right">
+									<a href="person/address.html">
+										<span class="am-icon-angle-right am-icon-lg"></span></a>
+								</div>
+								<div class="clear"></div>
 
-								<div class="am-u-md-12 am-u-lg-8" style="margin-top: 20px;">
-									<form class="am-form am-form-horizontal">
+								<div class="new-addr-btn">
+									<a href="#" class="hidden">设为默认</a>
+									<span class="new-addr-bar hidden">|</span>
+									<a href="#">编辑</a>
+									<span class="new-addr-bar">|</span>
+									<a href="javascript:void(0);" onclick="delClick(this);">删除</a>
+								</div>
 
-										<div class="am-form-group">
-											<label for="user-name" class="am-form-label">收货人</label>
-											<div class="am-form-content">
-												<input type="text" id="user-name" placeholder="收货人">
-											</div>
-										</div>
+							</li>
+							<div class="per-border"></div>
+							<li class="user-addresslist">
+								<div class="address-left">
+									<div class="user DefaultAddr">
 
-										<div class="am-form-group">
-											<label for="user-phone" class="am-form-label">手机号码</label>
-											<div class="am-form-content">
-												<input id="user-phone" placeholder="手机号必填" type="email">
-											</div>
-										</div>
-										<div class="am-form-group">
-											<label for="user-address" class="am-form-label">所在地</label>
-											<div class="am-form-content address">
-												<select data-am-selected>
-													<option value="a">浙江省</option>
-													<option value="b" selected>湖北省</option>
-												</select>
-												<select data-am-selected>
-													<option value="a">温州市</option>
-													<option value="b" selected>武汉市</option>
-												</select>
-												<select data-am-selected>
-													<option value="a">瑞安区</option>
-													<option value="b" selected>洪山区</option>
-												</select>
-											</div>
-										</div>
+										<span class="buy-address-detail">   
+                   <span class="buy-user">艾迪 </span>
+										<span class="buy-phone">15871145629</span>
+										</span>
+									</div>
+									<div class="default-address DefaultAddr">
+										<span class="buy-line-title buy-line-title-type">收货地址：</span>
+										<span class="buy--address-detail">
+								   <span class="province">湖北</span>省
+										<span class="city">武汉</span>市
+										<span class="dist">武昌</span>区
+										<span class="street">东湖路75号众环大厦2栋9层902</span>
+										</span>
 
-										<div class="am-form-group">
-											<label for="user-intro" class="am-form-label">详细地址</label>
-											<div class="am-form-content">
-												<textarea class="" rows="3" id="user-intro" placeholder="输入详细地址"></textarea>
-												<small>100字以内写出你的详细地址...</small>
-											</div>
-										</div>
+										</span>
+									</div>
+									<ins class="deftip hidden">默认地址</ins>
+								</div>
+								<div class="address-right">
+									<span class="am-icon-angle-right am-icon-lg"></span>
+								</div>
+								<div class="clear"></div>
 
-										<div class="am-form-group">
-											<div class="am-u-sm-9 am-u-sm-push-3">
-												<a class="am-btn am-btn-danger">保存</a>
-												<a href="javascript: void(0)" class="am-close am-btn am-btn-danger" data-am-modal-close>取消</a>
+								<div class="new-addr-btn">
+									<a href="#">设为默认</a>
+									<span class="new-addr-bar">|</span>
+									<a href="#">编辑</a>
+									<span class="new-addr-bar">|</span>
+									<a href="javascript:void(0);"  onclick="delClick(this);">删除</a>
+								</div>
+
+							</li>
+
+						</ul>
+
+						<div class="clear"></div>
+					</div>
+					<!--物流 -->
+					<div class="logistics">
+						<h3>合作物流</h3>
+						<ul class="op_express_delivery_hot">
+							<li data-value="yuantong" class="OP_LOG_BTN  "><i class="c-gap-right" style="background-position:0px -468px"></i>圆通<span></span></li>
+							<li data-value="shentong" class="OP_LOG_BTN  "><i class="c-gap-right" style="background-position:0px -1008px"></i>申通<span></span></li>
+							<li data-value="yunda" class="OP_LOG_BTN  "><i class="c-gap-right" style="background-position:0px -576px"></i>韵达<span></span></li>
+							<li data-value="zhongtong" class="OP_LOG_BTN op_express_delivery_hot_last "><i class="c-gap-right" style="background-position:0px -324px"></i>中通<span></span></li>
+							<li data-value="shunfeng" class="OP_LOG_BTN  op_express_delivery_hot_bottom"><i class="c-gap-right" style="background-position:0px -180px"></i>顺丰<span></span></li>
+						</ul>
+					</div>
+					<div class="clear"></div>
+
+					<!--订单 -->
+					<div class="concent">
+						<div id="payTable">
+							<h3>确认订单信息</h3>
+							<div class="cart-table-th">
+								<div class="wp">
+
+									<div class="th th-item">
+										<div class="td-inner">商品信息</div>
+									</div>
+									<div class="th th-price">
+										<div class="td-inner">单价</div>
+									</div>
+									<div class="th th-amount">
+										<div class="td-inner">数量</div>
+									</div>
+									<div class="th th-sum">
+										<div class="td-inner">金额</div>
+									</div>
+									<div class="th th-oplist">
+										<div class="td-inner">运费</div>
+									</div>
+
+								</div>
+							</div>
+							<div class="clear"></div>
+
+							<tr class="item-list">
+								<div class="bundle  bundle-last">
+
+									<div class="bundle-main">
+										<ul class="item-content clearfix">
+											<div class="pay-phone">
+												<li class="td td-item">
+													<div class="item-pic">
+														<a href="#" class="J_MakePoint">
+															<img src="images/kouhong.jpg_80x80.jpg" class="itempic J_ItemImg"></a>
+													</div>
+													<div class="item-info">
+														<div class="item-basic-info">
+															<a href="#" class="item-title J_MakePoint" data-point="tbcart.8.11">美康粉黛醉美唇膏 持久保湿滋润防水不掉色</a>
+														</div>
+													</div>
+												</li>
+												<li class="td td-info">
+													<div class="item-props">
+														<span class="sku-line">颜色：12#川南玛瑙</span>
+														<span class="sku-line">包装：裸装</span>
+													</div>
+												</li>·
+												<li class="td td-price">
+													<div class="item-price price-promo-promo">
+														<div class="price-content">
+															<em class="J_Price price-now">39.00</em>
+														</div>
+													</div>
+												</li>
 											</div>
+											<li class="td td-amount">
+												<div class="amount-wrapper ">
+													<div class="item-amount ">
+														<span class="phone-title">购买数量</span>
+														<div class="sl">
+															<input class="min am-btn" name="" type="button" value="-" />
+															<input class="text_box" name="" type="text" value="3" style="width:30px;" />
+															<input class="add am-btn" name="" type="button" value="+" />
+														</div>
+													</div>
+												</div>
+											</li>
+											<li class="td td-sum">
+												<div class="td-inner">
+													<em tabindex="0" class="J_ItemSum number">117.00</em>
+												</div>
+											</li>
+											<li class="td td-oplist">
+												<div class="td-inner">
+													<span class="phone-title">配送方式</span>
+													<div class="pay-logis">
+														快递<b class="sys_item_freprice">10</b>元
+													</div>
+												</div>
+											</li>
+
+										</ul>
+										<div class="clear"></div>
+
+									</div>
+							</tr>
+							<div class="clear"></div>
+							</div>
+							<div class="pay-total">
+						<!--留言-->
+							<div class="order-extra">
+								<div class="order-user-info">
+									<div id="holyshit257" class="memo">
+										<h3>买家留言：</h3>
+										<textarea name="" id="" style="font-size:15px" cols="100" rows="5" placeholder="最多输入100个字符"></textarea>
+										<div class="msg hidden J-msg">
+											<p class="error">最多输入500个字符</p>
 										</div>
-									</form>
+									</div>
 								</div>
 
 							</div>
+							
+							</div>
+							<!--含运费小计 -->
+							<div class="buy-point-discharge ">
+								<p class="price g_price ">
+									合计（含运费） <span>¥</span><em class="pay-sum">244.00</em>
+								</p>
+							</div>
 
+							<!--信息 -->
+							<div class="order-go clearfix">
+								<div class="pay-confirm clearfix">
+									<div class="box">
+										<div tabindex="0" id="holyshit267" class="realPay"><em class="t">实付款：</em>
+											<span class="price g_price ">
+                                    <span>¥</span> <em class="style-large-bold-red " id="J_ActualFee">244.00</em>
+											</span>
+										</div>
+									</div>
+
+									<div id="holyshit269" class="submitOrder">
+										<div class="go-btn-wrap">
+											<!-- <a href="/home/order/success" tabindex="0" title="点击此按钮，提交订单">提交订单</a> -->
+											<input type="submit" id="J_Go" style="display: inline-block;"  class="btn-go"  value="提交订单">
+										</div>
+									</div>
+									<div class="clear"></div>
+								</div>
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+				</div>
+				</form>
+			</div>
+			@include('/home/public/footer')
+			<div class="theme-popover-mask"></div>
+			<div class="theme-popover">
+
+				<!--标题 -->
+				<div class="am-cf am-padding">
+					<div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">新增地址</strong> / <small>Add address</small></div>
+				</div>
+				<hr/>
+
+				<div class="am-u-md-12">
+					<form class="am-form am-form-horizontal">
+
+						<div class="am-form-group">
+							<label for="user-name" class="am-form-label">收货人</label>
+							<div class="am-form-content">
+								<input type="text" id="user-name" placeholder="收货人">
+							</div>
 						</div>
 
-					</div>
+						<div class="am-form-group">
+							<label for="user-phone" class="am-form-label">手机号码</label>
+							<div class="am-form-content">
+								<input id="user-phone" placeholder="手机号必填" type="email">
+							</div>
+						</div>
 
-					<script type="text/javascript">
-						$(document).ready(function() {							
-							$(".new-option-r").click(function() {
-								$(this).parent('.user-addresslist').addClass("defaultAddr").siblings().removeClass("defaultAddr");
-							});
-							
-							var $ww = $(window).width();
-							if($ww>640) {
-								$("#doc-modal-1").removeClass("am-modal am-modal-no-btn")
-							}
-							
-						})
-					</script>
+						<div class="am-form-group">
+							<label for="user-phone" class="am-form-label">所在地</label>
+							<div class="am-form-content address">
+								<select data-am-selected>
+									<option value="a">浙江省</option>
+									<option value="b">湖北省</option>
+								</select>
+								<select data-am-selected>
+									<option value="a">温州市</option>
+									<option value="b">武汉市</option>
+								</select>
+								<select data-am-selected>
+									<option value="a">瑞安区</option>
+									<option value="b">洪山区</option>
+								</select>
+							</div>
+						</div>
 
-					<div class="clear"></div>
+						<div class="am-form-group">
+							<label for="user-intro" class="am-form-label">详细地址</label>
+							<div class="am-form-content">
+								<textarea class="" rows="3" id="user-intro" placeholder="输入详细地址"></textarea>
+								<small>100字以内写出你的详细地址...</small>
+							</div>
+						</div>
 
+						<div class="am-form-group theme-poptit">
+							<div class="am-u-sm-9 am-u-sm-push-3">
+								<div class="am-btn am-btn-danger">保存</div>
+								<div class="am-btn am-btn-danger close">取消</div>
+							</div>
+						</div>
+					</form>
 				</div>
-				<!--底部-->
-				@include('/home/public/footer')
+
 			</div>
 
-			<aside class="menu">
-				<ul>
-					<li class="person">
-						<a href="index.html">个人中心</a>
-					</li>
-					<li class="person">
-						<a href="#">个人资料</a>
-						<ul>
-							<li> <a href="information.html">个人信息</a></li>
-							<li> <a href="safety.html">安全设置</a></li>
-							<li class="active"> <a href="address.html">收货地址</a></li>
-						</ul>
-					</li>
-					<li class="person">
-						<a href="#">我的交易</a>
-						<ul>
-							<li><a href="order.html">订单管理</a></li>
-							<li> <a href="change.html">退款售后</a></li>
-						</ul>
-					</li>
-					<li class="person">
-						<a href="#">我的资产</a>
-						<ul>
-							<li> <a href="coupon.html">优惠券 </a></li>
-							<li> <a href="bonus.html">红包</a></li>
-							<li> <a href="bill.html">账单明细</a></li>
-						</ul>
-					</li>
-
-					<li class="person">
-						<a href="#">我的小窝</a>
-						<ul>
-							<li> <a href="collection.html">收藏</a></li>
-							<li> <a href="foot.html">足迹</a></li>
-							<li> <a href="comment.html">评价</a></li>
-							<li> <a href="news.html">消息</a></li>
-						</ul>
-					</li>
-
-				</ul>
-
-			</aside>
-		</div>
-
+			<div class="clear"></div>
 	</body>
 
 </html>
