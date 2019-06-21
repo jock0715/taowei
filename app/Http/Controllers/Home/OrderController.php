@@ -84,4 +84,18 @@ class OrderController extends Controller
     {
         //
     }
+
+    // 提交订单成功
+    public function success () 
+    {
+        // 引入页面
+        return view('/home/order/success');
+    }
+
+    // 查看订单详情
+    public function order_infos ()
+    {
+        // 引入页面
+        return view('/home/order/order_infos');
+    }
 }

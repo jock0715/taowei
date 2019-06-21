@@ -113,7 +113,11 @@ Route::post('/home/login/dologin','Home\LoginController@dologin');
 // 前台 购物车
 Route::resource('/home/shopping','Home\Shopping_infoController');
 
-// 前台 订单
+// 前台 订单 提交成功
+Route::get('/home/order/success','Home\OrderController@success');
+// 前台 订单 详情
+Route::get('/home/order/order_infos','Home\OrderController@order_infos');
+// 前台 订单 添加 查看
 Route::resource('/home/order','Home\OrderController');
 
 /*---------------------------前台结束-------------------------------------*/
