@@ -756,7 +756,7 @@ ul.dropdown-menu {
 }
 .profile_details_drop a.dropdown-toggle {
     display:block;
-	padding: 0.8em 3em 0 2em;
+	padding: 0 3em 0 2em;
 }
 .profile_img span.prfil-img{
 	float:left;
