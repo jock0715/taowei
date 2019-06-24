@@ -35,16 +35,16 @@ class LoginController extends Controller
         $user = new User;
         $user_data = $user->orWhere('uname',$all)->orWhere('phone',$all)->orWhere('email',$all)->first();
 
-        if(!empty($user_data)){
+        if(!empty($user_data) && $user_data->status != 0){
            // 实例化model
             if($all == $user_data->uname){
                 // 判断用户名
                 if(empty($user_data->uname)){
-                    return back()->with('error','用户名或密码错误!');
+                    return back()->with('error','账号或密码错误!');
                 }
                 //判断密码
                 if (!Hash::check($upwd, $user_data->upwd)) {
-                   return back()->with('error','用户名或密码错误!!');
+                   return back()->with('error','账号或密码错误!!');
                 }
                 $uid = $user_data->id;
                 $userinfo = new UserInfos;
@@ -57,11 +57,11 @@ class LoginController extends Controller
             }elseif($all == $user_data->phone){
                 // 判断用户名
                 if(empty($user_data->phone)){
-                    return back()->with('error','邮箱或密码错误!');
+                    return back()->with('error','账号或密码错误!');
                 }
                 //判断密码
                 if (!Hash::check($upwd, $user_data->upwd)) {
-                   return back()->with('error','邮箱或密码错误!!');
+                   return back()->with('error','账号或密码错误!!');
                 }
                 $uid = $user_data->id;
                 $userinfo = new UserInfos;
@@ -74,7 +74,7 @@ class LoginController extends Controller
             }elseif($all == $user_data->email){
                 // 判断用户名
                 if(empty($user_data->email)){
-                    return back()->with('error','手机号或密码错误!');
+                    return back()->with('error','账号或密码错误!');
                 }
                 //判断密码
                 if (!Hash::check($upwd, $user_data->upwd)) {
@@ -90,7 +90,7 @@ class LoginController extends Controller
                 return redirect('/')->with('success','登录成功');
             } 
         }else{
-            return back()->with('error','不存在用户!!');
+            return back()->with('error','用户未完成激活或登录失败!!');
         }
         
     }
@@ -160,6 +160,22 @@ class LoginController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function logout()
+    {
+        // 清空 session值
+        session(['home_login'=>false]);
+        session(['home_data'=>false]);
+        session(['home_info'=>false]);
+
+        return redirect('/home/login')->with('error','欢迎回来!');
     }
 
 
