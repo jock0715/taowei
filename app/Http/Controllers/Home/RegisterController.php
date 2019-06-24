@@ -64,12 +64,14 @@ class RegisterController extends Controller
         $this->validate($request, [
             'upwd' => 'required|regex:/^[\w]{6,18}$/',
             'reupwd' => 'required|same:upwd',
+            'phone'=>'unique:users',
             
         ],[
             'upwd.regex'=>'密码格式为6~18位!',
             'upwd.required'=>'密码不能为空!',
             'reupwd.required'=>'确认密码不能为空!',
             'reupwd.same'=>'两次密码不一致!',
+            'phone.unique'=>'该用户已注册',
         ]);
         // 开启事务
         DB::beginTransaction();
