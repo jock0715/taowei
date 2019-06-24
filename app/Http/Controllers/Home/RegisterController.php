@@ -45,34 +45,45 @@ class RegisterController extends Controller
         // 验证手机验证码 用户输入
         $phone = $request->input('phone',0);
         $code = $request->input('code',0);
+        $upwd = $request->input('upwd',0);
+        $reupwd = $request->input('reupwd',0);
 
         // 获取发送到手机的验证码
         $k = $phone.'_code';
         // session值赋对应手机的值
         $phone_code = session($k);
-        //dd($code,$phone_code);
-        if(empty($code)){
-            echo "<script>alert('请填写验证码!');location.href='/home/register'</script>";
+        $phone_data = User::where('phone',$phone)->first();
+
+        // 验证手机号
+        if(empty($phone)){
+            echo json_encode(['msg'=>'err','info'=>'账号不能为空!']);
             exit;
-        }
-        if($code != $phone_code){
-            echo "<script>alert('验证码错误!');location.href='/home/register'</script>";
+        }elseif(!empty($phone_data)){
+            echo json_encode(['msg'=>'err','info'=>'账号已存在!']);
             exit;
         }
 
-        // 表单验证
-        $this->validate($request, [
-            'upwd' => 'required|regex:/^[\w]{6,18}$/',
-            'reupwd' => 'required|same:upwd',
-            'phone'=>'unique:users',
-            
-        ],[
-            'upwd.regex'=>'密码格式为6~18位!',
-            'upwd.required'=>'密码不能为空!',
-            'reupwd.required'=>'确认密码不能为空!',
-            'reupwd.same'=>'两次密码不一致!',
-            'phone.unique'=>'该用户已注册',
-        ]);
+        // 验证验证码
+        if(empty($code)){
+            echo json_encode(['msg'=>'err','info'=>'验证码不能为空!']);
+            exit;
+        }elseif($code != $phone_code){
+            echo json_encode(['msg'=>'err','info'=>'验证码错误!']);
+            exit;
+        }
+
+        // 验证密码
+        if(empty($upwd) || empty($reupwd)){
+            echo json_encode(['msg'=>'err','info'=>'密码不能为空!']);
+            exit;
+        }elseif($upwd != $reupwd){
+            echo json_encode(['msg'=>'err','info'=>'两次密码不一致!']);
+            exit;
+        }elseif(strlen($upwd)<6){
+            echo json_encode(['msg'=>'err','info'=>'密码长度不能少于6位!']);
+            exit;
+        }
+
         // 开启事务
         DB::beginTransaction();
 
@@ -81,10 +92,10 @@ class RegisterController extends Controller
 
         // 实例化User,Model类
         $user = new User;
-        $user->uname = 'TaoWei用户'.rand(1234,4321);
+        $user->uname = 'TaoWei用户_'.rand(1234,4321);
         $user->email = 'TaoWei@'.rand(1234,4321).'.com';
         $user->phone = $data['phone'];
-        $user->status = 2;
+        $user->status = 1;
         $user->upwd = Hash::make($data['upwd']);
 
         $res1 = $user->save();
@@ -105,7 +116,7 @@ class RegisterController extends Controller
             // 成功提交事务
             DB::commit();
             // 成功返回用户显示列表路由,并提示信息
-            return redirect('/home/login')->with('success','注册成功');
+            echo json_encode(['msg'=>'ok','info'=>'注册成功!']);
         }else{
             // 失败回滚事务
             DB::rollBack();
@@ -122,44 +133,69 @@ class RegisterController extends Controller
      */
     public function insert(Request $request)
     {
-        // 表单验证
-        $this->validate($request, [
-            'email' => 'required|regex:/^[\w]{3,12}@[\w]+\.[\w]+$/',
-            'upwd' => 'required|regex:/^[\w]{6,18}$/',
+        // 开启事务
+        DB::beginTransaction();
 
-        ],[
-            'email.required'=>'邮箱不能为空!',
-            'email.regex'=>'邮箱格式错误,需包含@,com或cn...!',
-            'upwd.regex'=>'密码格式为6~18位!',
-            'upwd.required'=>'密码不能为空!',
-        ]);
+        // 接收数据
         $email = $request->input('email','');
         $upwd = $request->input('upwd','');
         $reupwd = $request->input('reupwd','');
 
+        if(empty($upwd) || empty($reupwd)){
+            echo json_encode(['msg'=>'err','info'=>'密码不能为空!']);
+            exit;
+        }
+
         if($upwd != $reupwd){
-            return back()->with('error','两次密码不一致!');
+            echo json_encode(['msg'=>'err','info'=>'两次密码不一致!']);
             exit;
         }
         $user = new User;
+        $data = $user->where('email',$email)->first();
+        if(!empty($data->email)){
+            echo json_encode(['msg'=>'err','info'=>'账号已存在!']);
+                    exit;
+        }
+
+        $user = new User;
+        $token = str_random(60);
         $user->upwd = Hash::make($reupwd);
         $user->email = $email;
-        $user->status = 2;
-        $user->uname = 'TaoWei用户'.rand(4321,1234);
-        $res = $user->save();
-        // 发送邮件
-        // send(视图,数据)
-        if($res){
-            Mail::send('home.login.mail', ['id' => $user->id], function ($m) use ($email) {
-                // to 发送到的地址, subject 邮件标题,$user是一个变量
-                $s = $m->to($email)->subject('【游民星战提醒您】Your Reminder!');
-                if($s){
-                    echo "<script>alert('注册成功,请尽快完成激活!');location.href='/home/login';</script>";
-                }
-            });
+        $user->status = 0;
+        $user->uname = 'TaoWei用户_'.rand(4321,1234);
+        $user->token = $token;
+        $res1 = $user->save();
+        if($res1){
+            // 执行成功,将user表id赋值给$uid
+            $uid = $user->id;
         }
-        
-
+        // 压入用户id给用户详情的uid
+        $userinfos = new UserInfos;
+        $userinfos->uid = $uid;
+        $userinfos->sex = '保密';
+        $userinfos->age = rand(19,29);
+        $userinfos->profile = 'xxx';
+        $userinfos->addr = '该用户很神秘';
+        $res2 = $userinfos->save();
+        if($res1 && $res2){
+            // 成功提交事务
+            DB::commit(); 
+            if($res1){// send(视图,数据)
+                // 发送邮件
+                Mail::send('home.login.mail', ['id' => $user->id,'token'=>$token], function ($m) use ($email) {
+                    // to 发送到的地址, subject 邮件标题,$user是一个变量
+                    $s = $m->to($email)->subject('【游民星战提醒您】Your Reminder!');
+                    if($s){
+                        echo json_encode(['msg'=>'ok','info'=>'注册成功,请尽快完成激活!']);
+                    }
+                });
+            }else{
+            // 失败回滚事务
+            DB::rollBack();
+            // 失败,回滚当前页面,并提示信息
+            return back()->with('error','注册失败');
+            }
+        }
     }
 
     /**
@@ -168,13 +204,20 @@ class RegisterController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function status($id)
+    public function status($id,$token)
     {
         $user = User::find($id);
+
+        // 验证token
+        if($user->token != $token){
+            echo "<script>alert('链接失效!');location.href='/home/login'</script>";
+            exit;
+        }
         $user->status = 1;
+        $user->token = str_random(60);
         $res = $user->save();
         if($res){
-            echo '激活成功';
+            return view('/home/login/status');
         }else{
             echo '激活失败';
         }
@@ -244,7 +287,7 @@ class RegisterController extends Controller
         //     exit; 
 
         // 短信api接口
-        $url = "http://v.juhe.cn/sms/send";
+        /*$url = "http://v.juhe.cn/sms/send";
         $params = array(
             'key'   => '59e110fc1384fd4d0b46da8c4cbe25ba', //您申请的APPKEY
             'mobile'    => $phone, //接受短信的用户手机号码
@@ -254,7 +297,7 @@ class RegisterController extends Controller
         );
 
         $paramstring = http_build_query($params);
-        $content = self::juheCurl($url, $paramstring);
+        $content = self::juheCurl($url, $paramstring);*/
         // $result = json_decode($content, true); 将json转为数组
         // if ($result) {
         //     var_dump($result);

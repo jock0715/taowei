@@ -12,6 +12,7 @@
     <link href="/home_login/css/dlstyle.css" rel="stylesheet" type="text/css">
     <script src="/home_login/AmazeUI-2.4.2/assets/js/jquery.min.js"></script>
     <script src="/home_login/AmazeUI-2.4.2/assets/js/amazeui.min.js"></script>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
   </head>
   <body>
     <div class="login-boxtitle">
@@ -33,13 +34,13 @@
             </ul>
             <div class="am-tabs-bd">
               <div class="am-tab-panel am-active">
-                <form action="/home/register/insert" method="post">
+                <form id="form1" action="/home/register/insert" method="post">
                   {{ csrf_field() }}
                   <div class="user-email">
                     <label for="email">
                       <i class="am-icon-envelope-o"></i>
                     </label>
-                    <input type="email" name="email" id="email" placeholder="请输入邮箱账号" value="{{old('email')}}"></div>
+                    <input type="email" name="email" id="email"  placeholder="请输入邮箱账号" value="{{old('email')}}"></div>
                   <div class="user-pass">
                     <label for="password">
                       <i class="am-icon-lock"></i>
@@ -54,12 +55,17 @@
                     <input type="submit" value="注册" class="am-btn am-btn-primary am-btn-sm am-fl">
                   </div>
                 </form>
+                  <div class="am-cf">
+                    <a href="/home/login" class="am-btn am-btn-primary am-btn-sm am-fl" style="font-size: 16px;">前往登录</a>
+                  </div>
                 <div class="login-links">
-                  <label for="reader-me">@include('home.public.message')</label>
+                  <label for="reader-me">
+                    @include('home/public/message')
+                  </label>
                 </div>
               </div>
               <div class="am-tab-panel">
-                <form action="/home/register/store" method="post">{{csrf_field()}}
+                <form id="form2" action="/home/register/store" method="post">{{csrf_field()}}
                   <div class="user-phone">
                     <label for="phone">
                       <i class="am-icon-mobile-phone am-icon-md"></i></label>
@@ -85,8 +91,15 @@
                   <div class="am-cf">
                     <input type="submit" name="" value="注册" class="am-btn am-btn-primary am-btn-sm am-fl"></div>
                 </form>
+                <div class="am-cf">
+                    <a href="/home/login" class="am-btn am-btn-primary am-btn-sm am-fl" style="font-size: 16px;">前往登录</a>
+                </div>
                 <div class="login-links">
-                  <label for="reader-me">@include('home.public.message')</label>
+                  <label for="reader-me">
+                    @if(session('error'))
+                      <strong>{{ session('error') }}</strong> 
+                    @endif
+                  </label>
                 </div>
                 <hr></div>
               <script>$(function() {
@@ -99,7 +112,8 @@
                 layui.use(['layer', 'form'],
                 function() {
                   var layer = layui.layer
-                });</script>
+                });
+              </script>
               <script type="text/javascript">function sendMobileCode(obj) {
 
                   // 获取用户验证码
@@ -150,6 +164,66 @@
                     'json');
                   }
                 }</script>
+
+                <script type="text/javascript">
+                    $.ajaxSetup({
+                      headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                      }
+                  });
+
+                  // 手机注册
+                  $('#form2').submit(function(){
+                    // 获取用户邮箱
+                    let phone = $('#form2 input[name=phone]').val();
+                    let upwd = $('#form2 input[name=upwd]').val();
+                    let reupwd = $('#form2 input[name=reupwd]').val();
+                    let code = $('#form2 input[name=code]').val();
+                    $.post('/home/register/store',{phone,upwd,reupwd,code},function(res){
+                      if(res.msg == 'ok'){
+                        layer.msg(res.info);
+                        setTimeout(function(){
+                          //关闭当前页面
+                          window.parent.location.reload();
+                          var index = parent.layer.getFrameIndex(window.name);
+                          parent.layer.close(index);
+                          // 跳转
+                          window.location.href = '/home/login';
+                        },800);
+                      }else{
+                        layer.msg(res.info);
+                      }
+                    },'json');
+                    return false;
+                  });
+
+                // 邮箱注册
+                  $('#form1').submit(function(){
+                    // 获取用户邮箱
+                    let email = $('#email').val();
+                    let upwd = $('#form1 input[name=upwd]').val();
+                    let reupwd = $('#form1 input[name=reupwd]').val();
+
+                  // post  Ajax提交  
+                    $.post('/home/register/insert',{email,upwd,reupwd},function(res){
+                      if(res.msg == 'ok'){
+                        layer.msg(res.info);
+                        setTimeout(function(){
+                          //关闭当前页面
+                          window.parent.location.reload();
+                          var index = parent.layer.getFrameIndex(window.name);
+                          parent.layer.close(index);
+                          // 跳转
+                          window.location.href = '/home/login';
+                        },800);
+                      }else{
+                        layer.msg(res.info);
+                      }
+                    },'json');
+                    return false;
+                  });
+                </script>
+
             </div>
           </div>
         </div>

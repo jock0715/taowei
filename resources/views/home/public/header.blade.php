@@ -25,14 +25,25 @@
 		<div class="hmtop" >
 			<!--顶部导航条 -->
 			<div class="am-container header">
+			@if(!empty(session('home_data')))
 				<ul class="message-l">
 					<div class="topMessage">
 						<div class="menu-hd">
-							<a href="/home/login" target="_top" class="h">亲，请登录</a>
+							<a href="/home/login" target="_top" class="h">欢迎，{{ session('home_data')->uname }}</a>&nbsp;
+							|<a href="/home/login/logout" target="_top" class="h" style="color: red">&nbsp;退出登录</a>
+						</div>
+					</div>
+				</ul>
+			@else
+				<ul class="message-l">
+					<div class="topMessage">
+						<div class="menu-hd">
+							<a href="/home/login" target="_top" class="h">亲，请登录</a>&nbsp;|
 							<a href="/home/register" target="_top">免费注册</a>
 						</div>
 					</div>
 				</ul>
+			@endif
 				<ul class="message-r">
 					<div class="topMessage home">
 						<div class="menu-hd"><a href="/" target="_top" class="h">商城首页</a></div>

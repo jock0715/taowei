@@ -109,13 +109,16 @@ Route::post('/home/register/store','Home\RegisterController@store');
 // 执行邮箱注册
 Route::post('/home/register/insert','Home\RegisterController@insert');
 // 执行激活
-Route::get('/home/register/status/{id}','Home\RegisterController@status');
+Route::get('/home/register/status/{id}/{token}','Home\RegisterController@status');
 
 //显示登录页面
 Route::get('/home/login','Home\LoginController@index');
 
 // 前台执行登录功能
 Route::post('/home/login/dologin','Home\LoginController@dologin');
+
+// 前台执行退出登录功能
+Route::get('/home/login/logout','Home\LoginController@logout');
 
 // 前台 商品列表页面
 Route::get('/home/list/info/{id}','Home\ListController@info');
