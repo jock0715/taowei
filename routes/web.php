@@ -122,6 +122,7 @@ Route::get('/home/list/info/{id}','Home\ListController@info');
 Route::resource('/home/list','Home\ListController');
 
 // 前台 购物车
+Route::post('/home/shopping/add/{id}','Home\Shopping_infoController@add');
 Route::resource('/home/shopping','Home\Shopping_infoController');
 
 // 前台 订单 提交成功

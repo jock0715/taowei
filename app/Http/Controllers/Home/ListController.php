@@ -94,7 +94,7 @@ class ListController extends Controller
     public function info($id)
     {
 
-        dump($id);
+        // dump($id);
         // 通过id获取商品数据
         $spike = Spike::find($id);
 

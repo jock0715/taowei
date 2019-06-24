@@ -26,7 +26,7 @@
 									<div class="user DefaultAddr">
 
 										<span class="buy-address-detail">   
-                   <span class="buy-user">艾迪 </span>
+                    <span class="buy-user">艾迪 </span>
 										<span class="buy-phone">15871145629</span>
 										</span>
 									</div>
