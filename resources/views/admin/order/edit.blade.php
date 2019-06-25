@@ -59,7 +59,9 @@
 							      <label for="money">总价</label>
 							      <input type="text" class="form-control" style="width: 510px" name="money" id="money" value="{{$order_data->money}}">
 							  	</div>
-							  	<select name="status" style="width: 510px;" class="form-control">
+							  	<div class="form-group">
+							  		<label for="phone">状态</label>
+							  		<select name="status" style="width: 510px;" class="form-control">
 						      		<option disabled>----请选择----</option>
 							      	<option  value="0" 
 							      	@if($order_data->status == 0)
@@ -77,6 +79,7 @@
 							      	@endif
 							      	>已签收</option>
 						      	</select>
+							  	</div>
 						      	<br>
 							   <button type="submit" class="btn btn-default">Submit</button>
 							</form>
