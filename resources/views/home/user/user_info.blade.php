@@ -70,7 +70,7 @@
               <div class="filePic">
                 <input type="file" class="inputPic" allowexts="gif,jpeg,jpg,png,bmp"  name="profile">
                 <input type="hidden" name="old_file" value="{{ $data->userinfos->profile }}">
-                <img class="am-circle am-img-thumbnail" src="/uploads/{{ $data->userinfos->profile }}" alt="">
+                <img class="am-circle am-img-thumbnail" src="/uploads/" alt="">
               </div>
                   <input class="am-btn am-btn-danger" type="submit" value="保存" style="display: inline-block; margin: 97px 0px 0px 15px;">
               </form>

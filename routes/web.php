@@ -186,7 +186,7 @@ Route::get('/home/user/user_upwd','Home\UserController@user_upwd');
 // 前台用户安全执行修改密码
 Route::post('/home/user/user_upwds','Home\UserController@user_upwds');
 // 前台用户订单
-Route::get('/home/user/user_order','Home\UserController@user_order');
+// Route::get('/home/user/user_order','Home\UserController@user_order');
 // 前台用户售后
 Route::get('/home/user/user_after','Home\UserController@user_after');
 // 前台用户账单

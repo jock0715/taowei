@@ -36,7 +36,7 @@
 			
 				<ol class="am-breadcrumb am-breadcrumb-slash">
 					<li><a href="/">首页</a></li>
-					<li class="am-active">{{ $spike->spikescate->cname }}</li>
+					<li class="am-active"></li>
 					<li class="am-active">秒杀商品详情</li>
 				</ol>
 				<script type="text/javascript">
@@ -343,10 +343,10 @@
 									<div class="J_Brand">
 
 										<div class="attr-list-hd tm-clear">
-											<h4>产品类型:&nbsp;{{ $spike->spikescate->cname }}</h4></div>
+											<h4>产品类型:&nbsp;</h4></div>
 										<!-- <div class="clear"></div> -->
 										<!-- <ul id="J_AttrUL"> -->
-											<!-- <li title="">产品类型:&nbsp;{{ $spike->spikescate->cname }}</li> -->
+											<!-- <li title="">产品类型:&nbsp;</li> -->
 											<!-- <li title="">原料产地:&nbsp;巴基斯坦</li>
 											<li title="">产地:&nbsp;湖北省武汉市</li>
 											<li title="">配料表:&nbsp;进口松子、食用盐</li>

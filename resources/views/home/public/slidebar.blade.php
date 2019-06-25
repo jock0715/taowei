@@ -7,7 +7,7 @@
 						</a>
 						<div class="ibar_login_box status_login " style="display: none;">
 							<div class="avatar_box ">
-								<a href="#" class="avatar_imgbox "><img src="/uploads/{{ session('home_info')->profile }}"></a>
+								<a href="#" class="avatar_imgbox "><img src="/uploads/"></a>
 								<ul class="user_info ">
 								@if(!empty(session('home_data')))
 									<li>{{ session('home_data')->uname }}</li>

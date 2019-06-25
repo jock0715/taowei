@@ -71,11 +71,17 @@ class OrderController extends Controller
         $data['number'] = date('YmdHis').rand(1000,9999);
         $data['created_at'] = date('Y-m-d H:i:s');
         // dd($data);
+        
         // 对数据库进行添加操作
         $res = DB::table('orders')
                     ->insert($data);
         if ($res) {
             // 提交订单成功 
+            // 清空购物车
+            $uid = $data['uid'];
+            $shopping = DB::table('shopping_infos')
+                        ->where('uid',$uid)
+                        ->delete();
             return view('/home/order/success',['data'=>$data,]);
         } else {
             echo '失败';

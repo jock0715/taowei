@@ -16,16 +16,9 @@ class Shopping_infoController extends Controller
     public function index(Request $request)
     {
 
-        if(!empty(session('home_data'))){
-            // 引入页面
-            return view('/home/shopping/index');
-        }else{
-            return view('/home/login/login');
-        }
-
         if (empty(session('home_data')->id)) {
             // 引入页面
-            echo '请先登录';
+            return view('/home/login/login');
         } else {
             // 通过id获取数据库数据
             $uid = session('home_data')->id;
@@ -52,13 +45,7 @@ class Shopping_infoController extends Controller
                 ]);
         }
 
-        
 
-        /*// 引入页面
-        return view('/home/shopping/index',
-            [
-                'data'=>$data,
-            ]);*/
     } 
 
     /**
@@ -87,18 +74,19 @@ class Shopping_infoController extends Controller
         } else {
             $data->uid = session('home_data')->id;
         }
-
+        // dd($data->uid);
         // 把对象转换成数组格式
         $shopping = [];
         foreach ($data as $k => $v) {
             $shopping[$k]=$v;
         }
         
-        // 对数据库进行添加操作
+        // 对数据库进行查询操作
         $gid_data = DB::table('shopping_infos')
                     ->where('gid',$gid)
+                    ->where('uid',$data->uid)
                     ->first();
-
+                    
         // 判断购物车是否存在同一商品
         if (empty($gid_data)) {
             // 不存在则添加
