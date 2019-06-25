@@ -22,7 +22,6 @@
 				<div class="mt-logo">
 					<!--顶部导航条 -->
 					@include('home/public/userinfo')
-
 						<!--悬浮搜索框-->
 
 						<div class="nav white">
@@ -76,7 +75,7 @@
 										<a href="/home/information.html">
 											<img src="/home/images/getAvatar.do.jpg">
 										</a>
-										<em class="s-name">(小叮当)<span class="vip1"></em>
+										<em class="s-name">{{ session('home_data')->uname }}<span class="vip1"></em>
 										<div class="s-prestige am-btn am-round">
 											</span>会员福利</div>
 									</div>
@@ -85,7 +84,7 @@
 											<a href="/home/news.html"><i class="am-icon-bell-o"></i>消息</a>
 										</div>
 										<div class="m-address">
-											<a href="/home/address.html" class="i-trigger">我的收货地址</a>
+											<a href="/home/user/user_addr" class="i-trigger">我的收货地址</a>
 										</div>
 									</div>
 								</div>
@@ -471,43 +470,7 @@
 			</div>
 
 			<aside class="menu">
-				<ul>
-					<li class="person active">
-						<a href="/home/user/user_index">个人中心</a>
-					</li>
-					<li class="person">
-						<a href="javascript:;">个人资料</a>
-						<ul>
-							<li> <a href="/home/user/user_info">个人信息</a></li>
-							<li> <a href="/home/user/user_security">安全设置</a></li>
-							<li> <a href="/home/user/user_addr">收货地址</a></li>
-						</ul>
-					</li>
-					<li class="person">
-						<a href="javascript:;">我的交易</a>
-						<ul>
-							<li><a href="/home/user/user_orders">订单管理</a></li>
-							<li> <a href="/home/user/user_after">退款售后</a></li>
-						</ul>
-					</li>
-					<li class="person">
-						<a href="javascript:;">我的资产</a>
-						<ul>
-							<li> <a href="/home/user/user_bill">账单明细</a></li>
-						</ul>
-					</li>
-
-					<li class="person">
-						<a href="javascript:;">我的小窝</a>
-						<ul>
-							<li> <a href="/home/user/user_collection">收藏</a></li>
-							<li> <a href="/home/user/user_foot">足迹</a></li>
-							<li> <a href="/home/user/user_reply">评价</a></li>
-							<li> <a href="javascript:;">消息</a></li>
-						</ul>
-					</li>
-
-				</ul>
+				@include('home/public/menu')
 
 			</aside>
 		</div>

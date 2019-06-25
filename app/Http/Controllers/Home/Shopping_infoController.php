@@ -15,14 +15,6 @@ class Shopping_infoController extends Controller
      */
     public function index(Request $request)
     {
-
-        if(!empty(session('home_data'))){
-            // 引入页面
-            return view('/home/shopping/index');
-        }else{
-            return view('/home/login/login');
-        }
-
         if (empty(session('home_data')->id)) {
             // 引入页面
             echo '请先登录';
@@ -32,6 +24,7 @@ class Shopping_infoController extends Controller
             $data = DB::table('shopping_infos')
                     ->where('uid',$uid)
                     ->get();
+            dd($data);
 
             // 获取全部购物车的总价格 跟条数
             $demp = [];

@@ -6,6 +6,7 @@
 							<span class="setting "></span>
 						</a>
 						<div class="ibar_login_box status_login " style="display: none;">
+							@if(!empty(session('home_info')))
 							<div class="avatar_box ">
 								<a href="#" class="avatar_imgbox "><img src="/uploads/{{ session('home_info')->profile }}"></a>
 								<ul class="user_info ">
@@ -26,6 +27,15 @@
 									
 								</ul>
 							</div>
+							@else
+							<div class="avatar_box ">
+							  <a href="#" class="avatar_imgbox ">
+							    <img src="/home/images/getAvatar.do.jpg"></a>
+							  <ul class="user_info ">
+							    <li class="">TaoWei用户_xxx</li>
+							    <li class="">级别&nbsp;:&nbsp; 游客</li></ul>
+							</div>
+							@endif
 							<div class="login_btnbox ">
 								<a href="# " class="login_order ">我的订单</a>
 								<a href="# " class="login_favorite ">我的收藏</a>

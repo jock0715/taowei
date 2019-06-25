@@ -1,5 +1,4 @@
 @include('/home/public/header')
-
 			<div class="banner"> 
                       <!--轮播 -->
 						<div class="am-slider am-slider-default scoll" style="background:url('/admin/images/beijing.png') no-repeat 56% 18%" data-am-flexslider id="demo-slider-0">
@@ -433,13 +432,7 @@
 			window.jQuery || document.write('<script src="basic/js/jquery.min.js "><\/script>');
 		</script>
 		<script type="text/javascript " src="/home/basic/js/quick_links.js "></script>
-
 		</div> 
-
-
-		<!-- 右侧菜单 -->
-		@include('/home/public/right')
-		
 	</body>
 
 </html>
