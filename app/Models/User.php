@@ -16,10 +16,17 @@ class User extends Model
     	return $this->hasOne('App\Models\UserInfos','uid');
     }
 
+    // 配置一对一
+    public function useraddrs()
+    {
+        // users表关联userinfos表中的uid
+        return $this->hasOne('App\Models\UserAddrs','uid');
+    }
+
     // 配置一对多
-    // public function userorder()
-    // {
-    // 	// users表关联userinfos表中的uid
-    // 	return $this->hasOne('App\Models\Order','uid');
-    // }
+    public function userorder()
+    {
+    	// users表关联userinfos表中的uid
+    	return $this->hasMany('App\Models\UserAddrs','uid');
+    }
 }

@@ -138,12 +138,22 @@ Route::resource('/home/order','Home\OrderController');
 Route::get('/home/user/user_index','Home\UserController@user_index');
 // 前台用户信息
 Route::get('/home/user/user_info','Home\UserController@user_info');
+// 前台用户信息执行修改
+Route::post('/home/user/user_infos','Home\UserController@user_infos');
+// 前台用户头像执行修改
+Route::post('/home/user/user_file/{id}','Home\UserController@user_file');
 // 前台用户地址
 Route::get('/home/user/user_addr','Home\UserController@user_addr');
+// 前台用户执行添加地址
+Route::post('/home/user/user_addrs','Home\UserController@user_addrs');
+// 前台用户执行删除地址
+Route::get('/home/user/deladdr','Home\UserController@deladdr');
 // 前台用户安全
 Route::get('/home/user/user_security','Home\UserController@user_security');
-// 前台用户安全
+// 前台用户安全显示修改密码
 Route::get('/home/user/user_upwd','Home\UserController@user_upwd');
+// 前台用户安全执行修改密码
+Route::post('/home/user/user_upwds','Home\UserController@user_upwds');
 // 前台用户订单
 Route::get('/home/user/user_order','Home\UserController@user_order');
 // 前台用户售后

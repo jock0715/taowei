@@ -203,6 +203,11 @@
                     let email = $('#email').val();
                     let upwd = $('#form1 input[name=upwd]').val();
                     let reupwd = $('#form1 input[name=reupwd]').val();
+                    let email_preg = /^[\w]{3,12}@[\w]+\.[\w]+$/;
+                    if(!email_preg.test(email)){
+                      layer.msg('邮箱格式不正确');
+                      return false;
+                    }
 
                   // post  Ajax提交  
                     $.post('/home/register/insert',{email,upwd,reupwd},function(res){

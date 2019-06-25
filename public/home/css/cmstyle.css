@@ -20,7 +20,7 @@
 .info-time{float: right;margin-right: 5px;font-size: 12px;}
 .comment-top{display: none;margin:10px 0px ; overflow: hidden;}
 
-.filePic {width:100px;margin:10px 0px ;}
+.filePic {width:100px;margin:0px -5px ;}
 .filePic img{width:100%;}
 
 @media only screen and (min-width:1025px) 

@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
-  @include('home/public/userindex')
+@include('home/public/userindex')
+<meta name="csrf-token" content="{{ csrf_token() }}">
+<link rel="stylesheet" href="/layui/css/layui.css">
+<script src="/layui/layui.js"></script>
   <body>
     <!--头 -->
     <header>
@@ -51,154 +54,94 @@
     <div class="center">
       <div class="col-main">
         <!-- 内容 -->
-          <div class="main-wrap">
-
+        <div class="main-wrap">
           <div class="user-info">
             <!--标题 -->
             <div class="am-cf am-padding">
-              <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">个人资料</strong> / <small>Personal&nbsp;information</small></div>
+              <div class="am-fl am-cf">
+                <strong class="am-text-danger am-text-lg">个人资料</strong>/
+                <small>Personal&nbsp;information</small></div>
             </div>
             <hr>
-
             <!--头像 -->
             <div class="user-infoPic">
-
+              <form action="/home/user/user_file/{{ $data->userinfos->id }}" method="post" enctype="multipart/form-data">
+                {{ csrf_field() }}
               <div class="filePic">
-                <input type="file" class="inputPic" allowexts="gif,jpeg,jpg,png,bmp" accept="image/*">
-                <img class="am-circle am-img-thumbnail" src="/home/images/getAvatar.do.jpg" alt="">
+                <input type="file" class="inputPic" allowexts="gif,jpeg,jpg,png,bmp"  name="profile">
+                <input type="hidden" name="old_file" value="{{ $data->userinfos->profile }}">
+                <img class="am-circle am-img-thumbnail" src="/uploads/{{ $data->userinfos->profile }}" alt="">
               </div>
-
+                  <input class="am-btn am-btn-danger" type="submit" value="保存" style="display: inline-block; margin: 97px 0px 0px 15px;">
+              </form>
               <p class="am-form-help">头像</p>
-
               <div class="info-m">
-                <div><b>用户名：<i>{{ $data->uname }}</i></b></div>
+                <div>
+                  <b>用户名：
+                    <i>{{ $data->uname }}</i>
+                  </b>
+                </div>
                 <div class="u-level">
                   <span class="rank r2">
-                           <s class="vip1"></s><a class="classes" href="#">
-                             @if($data->status == 1)
-                              普通会员
-                             @else
-                              高级会员
-                             @endif
-                           </a>
-                        </span>
+                    <s class="vip1"></s>等&nbsp;&nbsp;&nbsp;&nbsp;级：
+                    <a class="classes" href="javascript:;">@if($data->status == 1) 普通会员 @else 高级会员 @endif</a></span>
                 </div>
                 <div class="u-safety">
-                  <a href="safety.html">
-                   账户安全
-                  <span class="u-profile"><i class="bc_ee0000" style="width: 60px;" width="0">60分</i></span>
+                  <a href="javascript:;">账户安全
+                    <span class="u-profile">
+                      <i class="bc_ee0000" style="width: 60px;" width="0">60分</i></span>
                   </a>
                 </div>
               </div>
             </div>
-
             <!--个人信息 -->
             <div class="info-main">
-              <form class="am-form am-form-horizontal">
+              <form id="form1" class="am-form am-form-horizontal" method="post">
                 <div class="am-form-group">
                   <label for="user-name2" class="am-form-label">昵称</label>
                   <div class="am-form-content">
-                    <input type="text" id="user-name2" value="{{ $data->userinfos->nick }}">
-                  </div>
+                    <input type="hidden" name="id" value="{{ $data->id }}" >
+                    <input type="text" id="user-name2" value="{{ $data->userinfos->nick }}" name="nick"></div>
                 </div>
-
                 <div class="am-form-group">
                   <label for="user-name" class="am-form-label">姓名</label>
                   <div class="am-form-content">
-                    <input type="text" id="user-name2" value="{{ $data->userinfos->name }}">
-                  </div>
+                    <input type="text" id="user-name2" value="{{ $data->userinfos->name }}" name="name"></div>
                 </div>
-
                 <div class="am-form-group">
                   <label class="am-form-label">性别</label>
-                  <div class="am-form-content sex">
-                    <label class="am-radio-inline">
-                      <input type="radio" name="radio10" value="male" data-am-ucheck="" class="am-ucheck-radio" 
-                        @if($data->userinfos->sex == 'm')
-                          checked
-                        @endif
-                      ><span class="am-ucheck-icons"><i class="am-icon-unchecked"></i><i class="am-icon-checked"></i></span> 男
-                    </label>
-                    <label class="am-radio-inline">
-                      <input type="radio" name="radio10" value="female" data-am-ucheck="" class="am-ucheck-radio"
-                        @if($data->userinfos->sex == 'w')
-                          checked
-                        @endif
-                      ><span class="am-ucheck-icons"><i class="am-icon-unchecked"></i><i class="am-icon-checked"></i></span> 女
-                    </label>
-                    <label class="am-radio-inline">
-                      <input type="radio" name="radio10" value="secret" data-am-ucheck="" class="am-ucheck-radio"
-                        @if($data->userinfos->sex == 'x')
-                          checked
-                        @endif
-                      ><span class="am-ucheck-icons"><i class="am-icon-unchecked"></i><i class="am-icon-checked"></i></span> 保密
-                    </label>
-                  </div>
+                  <select name="sex" style="width: 65px;margin-left: 14px;display: inline-block;">
+                    <option value="n"
+                      @if($data->userinfos->sex == 'm')
+                        selected
+                      @endif>男</option>
+                    <option value="w"
+                      @if($data->userinfos->sex == 'w')
+                        selected
+                      @endif>女</option>
+                    <option value="x"
+                      @if($data->userinfos->sex == 'x')
+                        selected
+                      @endif>保密</option>
+                  </select>
                 </div>
-
                 <div class="am-form-group">
                   <label for="user-birth" class="am-form-label">年龄</label>
-<!--                   <div class="am-form-content birth">
-                    <div class="birth-select">
-                      <select data-am-selected="" style="display: none;">
-                        <option value="a">2015</option>
-                        <option value="b">1987</option>
-                      </select><div class="am-selected am-dropdown " id="am-selected-51g9p" data-am-dropdown="">  <button type="button" class="am-selected-btn am-btn am-dropdown-toggle am-btn-default">    <span class="am-selected-status am-fl">2015</span>    <i class="am-selected-icon am-icon-caret-down"></i>  </button>  <div class="am-selected-content am-dropdown-content">    <h2 class="am-selected-header"><span class="am-icon-chevron-left">返回</span></h2>       <ul class="am-selected-list">                     <li class="am-checked" data-index="0" data-group="0" data-value="a">         <span class="am-selected-text">2015</span>         <i class="am-icon-check"></i></li>                                 <li class="" data-index="1" data-group="0" data-value="b">         <span class="am-selected-text">1987</span>         <i class="am-icon-check"></i></li>            </ul>    <div class="am-selected-hint"></div>  </div></div>
-                      <em>年</em>
-                    </div>
-                    <div class="birth-select2">
-                      <select data-am-selected="" style="display: none;">
-                        <option value="a">12</option>
-                        <option value="b">8</option>
-                      </select><div class="am-selected am-dropdown " id="am-selected-ss4uz" data-am-dropdown="">  <button type="button" class="am-selected-btn am-btn am-dropdown-toggle am-btn-default">    <span class="am-selected-status am-fl">12</span>    <i class="am-selected-icon am-icon-caret-down"></i>  </button>  <div class="am-selected-content am-dropdown-content">    <h2 class="am-selected-header"><span class="am-icon-chevron-left">返回</span></h2>       <ul class="am-selected-list">                     <li class="am-checked" data-index="0" data-group="0" data-value="a">         <span class="am-selected-text">12</span>         <i class="am-icon-check"></i></li>                                 <li class="" data-index="1" data-group="0" data-value="b">         <span class="am-selected-text">8</span>         <i class="am-icon-check"></i></li>            </ul>    <div class="am-selected-hint"></div>  </div></div>
-                      <em>月</em></div>
-                    <div class="birth-select2">
-                      <select data-am-selected="" style="display: none;">
-                        <option value="a">21</option>
-                        <option value="b">23</option>
-                      </select><div class="am-selected am-dropdown " id="am-selected-8t0re" data-am-dropdown="">  <button type="button" class="am-selected-btn am-btn am-dropdown-toggle am-btn-default">    <span class="am-selected-status am-fl">21</span>    <i class="am-selected-icon am-icon-caret-down"></i>  </button>  <div class="am-selected-content am-dropdown-content">    <h2 class="am-selected-header"><span class="am-icon-chevron-left">返回</span></h2>       <ul class="am-selected-list">                     <li class="am-checked" data-index="0" data-group="0" data-value="a">         <span class="am-selected-text">21</span>         <i class="am-icon-check"></i></li>                                 <li class="" data-index="1" data-group="0" data-value="b">         <span class="am-selected-text">23</span>         <i class="am-icon-check"></i></li>            </ul>    <div class="am-selected-hint"></div>  </div></div>
-                      <em>日</em></div>
-                  </div> -->
                   <div class="am-form-content">
-                    <input id="user-phone" value="{{ $data->userinfos->age }}" type="tel">
-                  </div>
+                    <input id="user-phone" value="{{ $data->userinfos->age }}" type="tel" name="age"></div>
                 </div>
                 <div class="am-form-group">
                   <label for="user-phone" class="am-form-label">电话</label>
                   <div class="am-form-content">
-                    <input id="user-phone" value="{{ $data->phone }}" type="tel">
-                  </div>
+                    <input id="user-phone" value="{{ $data->phone }}" type="tel" name="phone"></div>
                 </div>
                 <div class="am-form-group">
                   <label for="user-email" class="am-form-label">电子邮件</label>
                   <div class="am-form-content">
-                    <input id="user-email" value="{{ $data->email }}" type="email">
-                  </div>
-                </div>
-                <div class="am-form-group address">
-                  <label for="user-address" class="am-form-label">收货地址</label>
-                  <div class="am-form-content address">
-                    <a href="address.html">
-                      <p class="new-mu_l2cw">
-                        <span class="province">湖北</span>省
-                        <span class="city">武汉</span>市
-                        <span class="dist">洪山</span>区
-                        <span class="street">雄楚大道666号(中南财经政法大学)</span>
-                        <span class="am-icon-angle-right"></span>
-                      </p>
-                    </a>
-                  </div>
-                </div>
-                <div class="am-form-group safety">
-                  <label for="user-safety" class="am-form-label">账号安全</label>
-                  <div class="am-form-content safety">
-                    <a href="safety.html">
-                      <span class="am-icon-angle-right"></span>
-                    </a>
-                  </div>
+                    <input id="user-email" value="{{ $data->email }}" type="email" name="email"></div>
                 </div>
                 <div class="info-btn">
-                  <div class="am-btn am-btn-danger">保存修改</div>
+                  <input class="am-btn am-btn-danger" type="submit" value="保存修改">
                 </div>
               </form>
             </div>
@@ -226,9 +169,76 @@
           </div>
         </div>
       </div>
-      <aside class="menu">
-        @include('home/public/menu')
-      </aside>
-    </div>
+      <aside class="menu">@include('home/public/menu')</aside></div>
   </body>
 </html>
+
+
+<script>
+//一般直接写在一个js文件中
+  layui.use(['layer', 'form'], function(){
+    var layer = layui.layer
+  });
+</script>
+
+<script type="text/javascript">
+  $.ajaxSetup({
+      headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+  });
+
+  $('#form1').submit(function(){
+    let id = $('#form1 input[name=id]').val();
+    let nick = $('#form1 input[name=nick]').val();
+    let name = $('#form1 input[name=name]').val();
+    let sex = $('#form1 select').val();
+    let age = $('#form1 input[name=age]').val();
+    let phone = $('#form1 input[name=phone]').val();
+    let phone_preg = /^[1]{1}[3-9]{1}\d{9}$/;
+    let email = $('#form1 input[name=email]').val();
+    let email_preg = /^[\w]{3,12}@[\w]+\.[\w]+$/;
+    // 验证昵称
+    if (nick.length < 3 || nick.length > 12 || name.length < 2 || name.length > 16) {
+      layer.msg('昵称或姓名长度不符合');
+      return false;
+    }
+    // 验证年龄
+    if(age < 1 || age > 120){
+      layer.msg('年龄不符合规范');
+      return false;
+    }
+    // 验证年龄
+    if(age < 1 || age > 120){
+      layer.msg('年龄不符合规范');
+      return false;
+    }
+    // 验证手机
+    if (!phone_preg.test(phone)) {
+      layer.msg('手机格式不正确');
+      return false;
+    }
+    // 验证邮箱
+    if(!email_preg.test(email)){
+      layer.msg('邮箱格式不正确!');
+      return false;
+    }
+
+    $.post('/home/user/user_infos',{id,nick,name,sex,age,phone,email},function(res){
+      if(res.msg == 'ok'){
+        layer.msg(res.info);
+        setTimeout(function(){
+          //关闭当前页面
+          window.parent.location.reload();
+          var index = parent.layer.getFrameIndex(window.name);
+          parent.layer.close(index);
+          // 跳转
+          window.location.href = '/home/user/user_info';
+        },800);
+      }else{
+        layer.msg(res.info);
+      }
+    },'json');
+    return false;
+  });
+</script>
