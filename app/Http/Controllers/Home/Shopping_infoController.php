@@ -14,8 +14,12 @@ class Shopping_infoController extends Controller
      */
     public function index()
     {
-        // 引入页面
-        return view('/home/shopping/index');
+        if(!empty(session('home_data'))){
+            // 引入页面
+            return view('/home/shopping/index');
+        }else{
+            return view('/home/login/login');
+        }
     } 
 
     /**

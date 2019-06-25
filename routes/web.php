@@ -134,4 +134,27 @@ Route::get('/home/order/order_infos','Home\OrderController@order_infos');
 // 前台 订单 添加 查看
 Route::resource('/home/order','Home\OrderController');
 
+// 前台用户中心
+Route::get('/home/user/user_index','Home\UserController@user_index');
+// 前台用户信息
+Route::get('/home/user/user_info','Home\UserController@user_info');
+// 前台用户地址
+Route::get('/home/user/user_addr','Home\UserController@user_addr');
+// 前台用户安全
+Route::get('/home/user/user_security','Home\UserController@user_security');
+// 前台用户安全
+Route::get('/home/user/user_upwd','Home\UserController@user_upwd');
+// 前台用户订单
+Route::get('/home/user/user_order','Home\UserController@user_order');
+// 前台用户售后
+Route::get('/home/user/user_after','Home\UserController@user_after');
+// 前台用户账单
+Route::get('/home/user/user_bill','Home\UserController@user_bill');
+// 前台用户收藏
+Route::get('/home/user/user_collection','Home\UserController@user_collection');
+// 前台用户足迹
+Route::get('/home/user/user_foot','Home\UserController@user_foot');
+// 前台用户评论
+Route::get('/home/user/user_reply','Home\UserController@user_reply');
+
 /*---------------------------前台结束-------------------------------------*/

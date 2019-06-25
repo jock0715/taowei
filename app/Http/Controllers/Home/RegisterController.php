@@ -189,12 +189,13 @@ class RegisterController extends Controller
                         echo json_encode(['msg'=>'ok','info'=>'注册成功,请尽快完成激活!']);
                     }
                 });
+            
             }else{
-            // 失败回滚事务
-            DB::rollBack();
-            // 失败,回滚当前页面,并提示信息
-            return back()->with('error','注册失败');
-            }
+                // 失败回滚事务
+                DB::rollBack();
+                // 失败,回滚当前页面,并提示信息
+                return back()->with('error','注册失败');
+                }
         }
     }
 
