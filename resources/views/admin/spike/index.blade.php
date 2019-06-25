@@ -76,7 +76,14 @@
 					            <a href="javascript:;"><kbd style="background-color:green" onclick="guan({{ $v->id }},this)">上架</kbd></a>
 					        @endif
 						</td>
-						<td>
+						<td style="width:236px;">
+							<form action="/admin/spikeinfo/create" method="get" style="display: inline-block;" >
+							{{ csrf_field() }}
+							<input type="hidden" value="{{ $v->id }}" name="id">
+							<input type="hidden" value="{{ $v->name }}" name="name">
+								<input type="submit" value="添加图片" class="btn btn-info" >
+							</form>
+
 							<a href="/admin/spike/{{ $v->id }}/edit" class="btn btn-info">修改</a>
 							<!-- <form action="/admin/spike/{{ $v->id }}" method="post" style="display: inline-block;" >
 							{{ csrf_field() }}
@@ -96,9 +103,10 @@
 				{{ $spikes->appends(['search'=>$search])->links() }}
 			</div>
 			<script type="text/javascript">
+				
 				//删除
 				function del(id,obj){
-		
+					
 					let file = $(obj).attr('file');
 					if(!window.confirm('确定要删除吗?')){
 						return false;

@@ -4,20 +4,17 @@ namespace App\Http\Controllers\Home;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Spike;
 
-class ListController extends Controller
+class DoinglistController extends Controller
 {
     /**
-     * 商品列表页面
+     * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        // 加载页面
-        return view('home/list/index');
-
+        //
     }
 
     /**
@@ -84,22 +81,5 @@ class ListController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    /**
-     * 商品详情页面
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function info($id)
-    {
-
-        dump($id);
-        // 通过id获取商品数据
-        $spike = Spike::find($id);
-
-        // 加载页面
-        return view('home/list/info',['spike'=>$spike]);
-
     }
 }
