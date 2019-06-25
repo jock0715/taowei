@@ -124,15 +124,28 @@ Route::get('/home/login/logout','Home\LoginController@logout');
 Route::get('/home/list/info/{id}','Home\ListController@info');
 Route::resource('/home/list','Home\ListController');
 
-// 前台 购物车
+// 前台 购物车 添加
 Route::post('/home/shopping/add/{id}','Home\Shopping_infoController@add');
+// 前台 购物车 添加数量
+Route::get('/home/shopping/addnum','Home\Shopping_infoController@addnum');
+// 前台 购物车 减少数量
+Route::get('/home/shopping/delnum','Home\Shopping_infoController@delnum');
+// 前台 购物车 删除
+Route::get('/home/shopping/destroy','Home\Shopping_infoController@destroy');
+// 前台 购物车 显示
 Route::resource('/home/shopping','Home\Shopping_infoController');
 
 // 前台 订单 提交成功
 Route::get('/home/order/success','Home\OrderController@success');
 // 前台 订单 详情
 Route::get('/home/order/order_infos','Home\OrderController@order_infos');
-// 前台 订单 添加 查看
+// 前台 立即购买订单 添加
+Route::get('/home/order/create','Home\OrderController@create');
+// 前台 购物车订单 添加 显示
+Route::get('/home/order/add','Home\OrderController@add');
+// 前台 购物车订单 添加 处理
+Route::post('/home/order/doadd','Home\OrderController@doadd');
+// 前台 订单 查看
 Route::resource('/home/order','Home\OrderController');
 
 /*---------------------------前台结束-------------------------------------*/

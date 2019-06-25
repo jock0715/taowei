@@ -17,7 +17,6 @@ class IndexController extends Controller
      */
     public function index()
     {
-        // session(['home_data'=>null]); 
         // 获取轮播数据
         $banners = new Banner;
         $banners_data = $banners->get();

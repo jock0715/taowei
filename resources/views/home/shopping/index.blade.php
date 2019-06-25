@@ -1,8 +1,8 @@
 @include('/home/public/header')
-
+			
 			<!--购物车 -->
 			<div class="concent">
-				<div id="cartTable">
+				<div id="cartTable"> 
 					<div class="cart-table-th">
 						<div class="wp">
 							<div class="th th-chk">
@@ -28,54 +28,54 @@
 						</div>
 					</div>
 					<div class="clear"></div>
-
+					<form action="" method="post">
+					@foreach($data as $v)
 					<tr class="item-list">
 						<div class="bundle  bundle-last ">
 							<div class="bundle-hd">
 								<div class="bd-promos">
-									<div class="bd-has-promo">已享优惠:<span class="bd-has-promo-content">省￥19.50</span>&nbsp;&nbsp;</div>
+									<!-- <div class="bd-has-promo">已享优惠:<span class="bd-has-promo-content">省￥19.50</span>&nbsp;&nbsp;</div>
 									<div class="act-promo">
 										<a href="#" target="_blank">第二支半价，第三支免费<span class="gt">&gt;&gt;</span></a>
-									</div>
+									</div> -->
 									<span class="list-change theme-login">编辑</span>
 								</div>
 							</div>
 							<div class="clear"></div>
 							<div class="bundle-main">
 								<ul class="item-content clearfix">
-									<li class="td td-chk">
+									<!-- <li class="td td-chk">
 										<div class="cart-checkbox ">
 											<input class="check" id="J_CheckBox_170769542747" name="items[]" value="170769542747" type="checkbox">
 											<label for="J_CheckBox_170769542747"></label>
 										</div>
-									</li>
+									</li> -->
 									<li class="td td-item">
-										<div class="item-pic">
-											<a href="#" target="_blank" data-title="美康粉黛醉美东方唇膏口红正品 持久保湿滋润防水不掉色护唇彩妆" class="J_MakePoint" data-point="tbcart.8.12">
-												<img src="images/kouhong.jpg_80x80.jpg" class="itempic J_ItemImg"></a>
+										<div class="item-pic" style="width:130px;height:auto;">
+											<!-- <a href="#" target="_blank" data-title="美康粉黛醉美东方唇膏口红正品 持久保湿滋润防水不掉色护唇彩妆" class="J_MakePoint" data-point="tbcart.8.12"> -->
+												<img src="/uploads/{{ $v->file }}" class="itempic J_ItemImg"></a>
 										</div>
 										<div class="item-info">
 											<div class="item-basic-info">
-												<a href="#" target="_blank" title="美康粉黛醉美唇膏 持久保湿滋润防水不掉色" class="item-title J_MakePoint" data-point="tbcart.8.11">美康粉黛醉美唇膏 持久保湿滋润防水不掉色</a>
+												&nbsp; &nbsp; &nbsp; <a href="javascript:;" title="" class="item-title J_MakePoint" data-point="tbcart.8.11">{{ $v->name }}</a>
 											</div>
 										</div>
 									</li>
 									<li class="td td-info">
 										<div class="item-props item-props-can">
-											<span class="sku-line">颜色：10#蜜橘色</span>
-											<span class="sku-line">包装：两支手袋装（送彩带）</span>
-											<span tabindex="0" class="btn-edit-sku theme-login">修改</span>
+											<span class="sku-line">{{ $v->desc }}</span>
+										<!-- 	<span tabindex="0" class="btn-edit-sku theme-login">修改</span> -->
 											<i class="theme-login am-icon-sort-desc"></i>
 										</div>
 									</li>
 									<li class="td td-price">
 										<div class="item-price price-promo-promo">
 											<div class="price-content">
-												<div class="price-line">
+												<!-- <div class="price-line">
 													<em class="price-original">78.00</em>
-												</div>
+												</div> -->
 												<div class="price-line">
-													<em class="J_Price price-now" tabindex="0">39.00</em>
+													<em class="J_Price price-now" tabindex="0">{{ $v->money }}</em>
 												</div>
 											</div>
 										</div>
@@ -84,35 +84,38 @@
 										<div class="amount-wrapper ">
 											<div class="item-amount ">
 												<div class="sl">
-													<input class="min am-btn" name="" type="button" value="-" />
-													<input class="text_box" name="" type="text" value="3" style="width:30px;" />
-													<input class="add am-btn" name="" type="button" value="+" />
+													<!-- <input class="min am-btn" name="" type="button" value="-" /> -->
+													<a href="/home/shopping/delnum?id={{ $v->id }}" class="min am-btn">-</a>
+													<input class="text_box" name="num" type="text" value="{{ $v->num }}" oninput = "value=value.replace(/[^\d]/g,'')" style="width:30px;" />
+													<a href="/home/shopping/addnum?id={{ $v->id }}" class="add am-btn">+</a>
+													<!-- <input class="add am-btn" name="" type="button" value="+" /> -->
 												</div>
 											</div>
 										</div>
 									</li>
 									<li class="td td-sum">
 										<div class="td-inner">
-											<em tabindex="0" class="J_ItemSum number">117.00</em>
+											<em tabindex="0" class="J_ItemSum number">{{ $v->price }}</em>
 										</div>
 									</li>
 									<li class="td td-op">
 										<div class="td-inner">
-											<a title="移入收藏夹" class="btn-fav" href="#">
-                  移入收藏夹</a>
-											<a href="javascript:;" data-point-url="#" class="delete">
-                  删除</a>
+											<a href="javascript:;" onclick="del({{ $v->id }},this)" data-point-url="#" class="delete">
+                  							删除</a>
 										</div>
 									</li>
+									
 								</ul>
 							</div>
 						</div>
 					</tr>
+					@endforeach
 				</div>
-				<div class="clear"></div>
 
+				<div class="clear"></div>
+		
 				<div class="float-bar-wrapper">
-					<div id="J_SelectAll2" class="select-all J_SelectAll">
+					<!-- <div id="J_SelectAll2" class="select-all J_SelectAll">
 						<div class="cart-checkbox">
 							<input class="check-all check" id="J_SelectAllCbx2" name="select-all" value="true" type="checkbox">
 							<label for="J_SelectAllCbx2"></label>
@@ -122,28 +125,28 @@
 					<div class="operations">
 						<a href="#" hidefocus="true" class="deleteAll">删除</a>
 						<a href="#" hidefocus="true" class="J_BatchFav">移入收藏夹</a>
-					</div>
+					</div> -->
 					<div class="float-bar-right">
-						<div class="amount-sum">
+						<!-- <div class="amount-sum">
 							<span class="txt">已选商品</span>
 							<em id="J_SelectedItemsCount">0</em><span class="txt">件</span>
 							<div class="arrow-box">
 								<span class="selected-items-arrow"></span>
 								<span class="arrow"></span>
 							</div>
-						</div>
+						</div> -->
 						<div class="price-sum">
 							<span class="txt">合计:</span>
-							<strong class="price">¥<em id="J_Total">0.00</em></strong>
+							<strong class="price">¥<em id="J_Total">{{ $number }}</em></strong>
 						</div>
 						<div class="btn-area">
-							<a href="/home/order/create" id="J_Go" class="submit-btn submit-btn-disabled" aria-label="请注意如果没有选择宝贝，将无法结算">
+							<a href="/home/order/add" id="J_Go" class="submit-btn submit-btn-disabled" aria-label="请注意如果没有选择宝贝，将无法结算">
 								<span>结&nbsp;算</span></a>
 						</div>
 					</div>
 
 				</div>
-
+				</form>
 				@include('/home/public/footer')
 
 			</div>
@@ -214,5 +217,24 @@
 			<li><a href="person/index.html"><i class="am-icon-user"></i>我的</a></li>					
 		</div>
 	</body>
-
+	<script>
+	// 删除
+		function del (id,obj) 
+		{
+			// 提示消息
+			if (!window.confirm('是否确定删除！！！')) {
+				return false;
+			}
+			$.get('/home/shopping/destroy',{id:id},function(res){
+				if(res == 'ok') {
+					// 删除节点
+					$(obj).parent().parent().parent().remove();
+					// 自动刷新页面
+        			parent.location.reload(); 
+				} else {
+					alert('删除失败');
+				}
+			},'html');
+		}
+	</script>
 </html>

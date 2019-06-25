@@ -8,7 +8,7 @@
 			<link href="/home/css/jsstyle.css" rel="stylesheet" type="text/css" />
 
 			<script type="/home/text/javascript" src="js/address.js"></script>
-			<form action="/home/order" method="post">
+			<form action="/home/order/doadd" method="post">
 			{{ csrf_field() }}
 			<div class="concent">
 				<!--地址 -->
@@ -30,7 +30,7 @@
 										<input type="hidden" name="uid" value="{{ session('home_data')->id }}">
 										<input type="hidden" name="addr" value="{{ session('home_info')->addr }}">
 										<input type="hidden" name="phone" value="{{ session('home_data')->phone }}">
-										<input type="hidden" name="gid" value="{{ $spike->id }}">
+
                     					<span class="buy-user">{{ session('home_data')->uname }} </span><br>
 										<span class="buy-phone">{{ session('home_data')->phone }}</span>
 										</span>
@@ -38,7 +38,7 @@
 									<div class="default-address DefaultAddr">
 										<span class="buy-line-title buy-line-title-type">收货地址：</span>
 										<!-- <span class="buy--address-detail">
-								   <span class="province">湖北</span>省
+								   		<span class="province">湖北</span>省
 										<span class="city">武汉</span>市
 										<span class="dist">洪山</span>区 -->
 										<span class="street">{{ session('home_info')->addr }}</span>
@@ -109,37 +109,37 @@
 								</div>
 							</div>
 							<div class="clear"></div>
-
+							@foreach($shopping as $k => $v)
 							<tr class="item-list">
+							<input type="hidden" name="gid[]" value="{{ $v->gid}}">
 								<div class="bundle  bundle-last">
-
 									<div class="bundle-main">
 										<ul class="item-content clearfix">
 											<div class="pay-phone">
 												<li class="td td-item">
 													<div class="item-pic" style="width:130px;">
-													<input type="hidden" name="file" value="{{ $spike->file }}">
-														<a href="#" class="J_MakePoint" name="file">
-															<img src="/uploads/{{ $spike->file }}" class="itempic J_ItemImg"></a>
+													<input type="hidden" name="file[]" value="{{ $v->file}}">
+														<a href="#" class="J_MakePoint" name="file[]">
+															<img src="/uploads/{{ $v->file}}" class="itempic J_ItemImg"></a>
 													</div>
 													<div class="item-info">
 														<div class="item-basic-info">
-														<input type="hidden" name="name" value="{{ $spike->name }}">
-															&nbsp; &nbsp; &nbsp; &nbsp; <a href="#" class="item-title J_MakePoint" data-point="tbcart.8.11" name="name">{{ $spike->name }}</a>
+														<input type="hidden" name="name[]" value="{{ $v->name }}">
+															&nbsp; &nbsp; &nbsp; &nbsp; <a href="#" class="item-title J_MakePoint" data-point="tbcart.8.11" >{{ $v->name }}</a>
 														</div>
 													</div>
 												</li>
 												<li class="td td-info">
 													<div class="item-props">
-													<input type="hidden" name="desc" value="{{ $spike->desc }}">
-												&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; <span class="sku-line">{{ $spike->desc }}</span>
+													<input type="hidden" name="desc[]" value="{{ $v->desc }}">
+												&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; <span class="sku-line">{{ $v->desc }}</span>
 													</div>
-												</li>·
+												</li>
 												<li class="td td-price">
 													<div class="item-price price-promo-promo">
 														<div class="price-content">
-														<input type="hidden" name="money" value="{{ $spike->money }}">
-															<em class="J_Price price-now">{{ $spike->money }}</em>
+														<input type="hidden" name="money[]" value="{{ $v->money }}">
+															<em class="J_Price price-now">{{ $v->money }}</em>
 														</div>
 													</div>
 												</li>
@@ -149,17 +149,15 @@
 													<div class="item-amount ">
 														<span class="phone-title">购买数量</span>
 														<div class="sl">
-															<!-- <a href="/home/order/delnum?id={{ $spike->id }}" class="min am-btn">-</a> -->
-															<input class="text_box" name="num" type="text" value="{{ $num }}" oninput = "value=value.replace(/[^\d]/g,'')"  style="width:30px;" />
-															<!-- <a href="/home/order/addnum?id={{ $spike->id }}" class="add am-btn">+</a> -->
+															<input class="text_box" name="num[]" type="text" value="{{ $v->num }}" oninput = "value=value.replace(/[^\d]/g,'')"  style="width:30px;" />
 														</div>
 													</div>
 												</div>
 											</li>
 											<li class="td td-sum">
 												<div class="td-inner">
-												<input type="hidden" name="price" value="{{ $price }}">
-													<em tabindex="0" class="J_ItemSum number">{{ $price }}</em>
+												<input type="hidden" name="price[]" value="{{ $v->price }}">
+													<em tabindex="0" class="J_ItemSum number">{{ $v->price }}</em>
 												</div>
 											</li>
 											<li class="td td-oplist">
@@ -170,12 +168,11 @@
 													</div>
 												</div>
 											</li>
-
 										</ul>
 										<div class="clear"></div>
-
 									</div>
-							</tr>
+								</tr>
+							@endforeach
 							<div class="clear"></div>
 							</div>
 							<div class="pay-total">
@@ -197,7 +194,7 @@
 							<!--含运费小计 -->
 							<div class="buy-point-discharge ">
 								<p class="price g_price ">
-									合计（含运费） <span>¥</span><em class="pay-sum">{{ $price }}</em>
+									合计（含运费） <span>¥</span><em class="pay-sum">{{ $number }}</em>
 								</p>
 							</div>
 
@@ -205,9 +202,10 @@
 							<div class="order-go clearfix">
 								<div class="pay-confirm clearfix">
 									<div class="box">
+									<input type="hidden" name="zmoney" value="{{ $number }}">
 										<div tabindex="0" id="holyshit267" class="realPay"><em class="t">实付款：</em>
 											<span class="price g_price ">
-                                    <span>¥</span> <em class="style-large-bold-red " id="J_ActualFee">{{ $price }}</em>
+                                    <span>¥</span> <em class="style-large-bold-red " id="J_ActualFee">{{ $number }}</em>
 											</span>
 										</div>
 									</div>
