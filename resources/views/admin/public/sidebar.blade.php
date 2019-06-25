@@ -84,6 +84,9 @@
 									<a href="/admin/goods">| ----- 查看商品</a>
 								</li>
 								<li>
+									<a href="/admin/goodsinfo">| ----- 商品详情</a>
+								</li>
+								<li>
 									<a href="/admin/goods/create">| ----- 添加商品</a>
 								</li>
 							</ul>
@@ -97,6 +100,9 @@
 									<a href="/admin/spike">| ----- 查看秒杀商品</a>
 								</li>
 								<li>
+									<a href="/admin/spikeinfo">| ----- 秒杀商品详情</a>
+								</li>
+								<li>
 									<a href="/admin/spike/create">| ----- 添加秒杀商品</a>
 								</li>
 							</ul>
@@ -108,6 +114,9 @@
 							<ul class="nav nav-second-level collapse">
 								<li>
 									<a href="/admin/doing">| ----- 查看活动商品</a>
+								</li>
+								<li>
+									<a href="/admin/doinginfo">| ----- 活动商品详情</a>
 								</li>
 								<li>
 									<a href="/admin/doing/create">| ----- 添加活动商品</a>

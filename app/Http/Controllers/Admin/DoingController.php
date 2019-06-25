@@ -62,6 +62,7 @@ class DoingController extends Controller
         $this->validate($request, [
             'name' => 'required|max:16',
             'desc' => 'required|max:64',
+            'price' => 'required|regex:/^[\d]{1,9}(\.\d{2})$/',
             'money' => 'required|regex:/^[\d]{1,9}(\.\d{2})$/',
             'over' => 'required|regex:/^(\d{0,9})$/',
             'cid' => 'required',
@@ -72,8 +73,10 @@ class DoingController extends Controller
             'name.max'=>'商品名称过长',
             'desc.required'=>'商品描述必填',
             'desc.max'=>'商品描述过长',
-            'money.required'=>'商品价格必填',
-            'money.regex'=>'商品价格格式不对',
+            'money.required'=>'活动价格必填',
+            'money.regex'=>'活动价格格式不对',
+            'price.required'=>'商品原价必填',
+            'price.regex'=>'商品原价格式不对',
             'over.required'=>'商品库存必填',
             'over.regex'=>'商品库存格式不对',
             'cid.required'=>'所属分类必选',
@@ -98,6 +101,7 @@ class DoingController extends Controller
         $doing->cid = $data['cid'];
         $doing->name = $data['name'];
         $doing->desc = $data['desc'];
+        $doing->price = $data['price'];
         $doing->money = $data['money'];
         $doing->over = $data['over'];
         $doing->file = $path;
@@ -261,6 +265,18 @@ class DoingController extends Controller
      */
     public function destroy($id, Request $request)
     {
+        // 通过商品id去删除对应的详情图片
+        $data = DB::table('doing_infos')->where('gid',$id)->get();
+        
+        // 遍历删除图片
+        foreach($data as $k=>$v){
+            // 删除图片
+            Storage::delete($v->file);
+        }
+
+        // 删除数据
+        $res1 = DB::table('doing_infos')->where('gid',$id)->delete();
+
         // 进行删除
         $res = Doing::destroy($id);
 

@@ -261,6 +261,18 @@ class SpikeController extends Controller
      */
     public function destroy($id, Request $request)
     {
+        // 通过商品id去删除对应的详情图片
+        $data = DB::table('spike_infos')->where('gid',$id)->get();
+        
+        // 遍历删除图片
+        foreach($data as $k=>$v){
+            // 删除图片
+            Storage::delete($v->file);
+        }
+
+        // 删除数据
+        $res1 = DB::table('spike_infos')->where('gid',$id)->delete();
+
         // 进行删除
         $res = Spike::destroy($id);
 

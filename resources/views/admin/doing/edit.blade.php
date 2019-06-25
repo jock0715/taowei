@@ -62,8 +62,12 @@
                               <input type="text" class="form-control" style="width:510px;" value="{{ $doing->desc }}" name="desc" id="desc" placeholder="商品描述">
                             </div>
                             <div class="form-group">
-                              <label for="money">商品价格</label>
-                              <input type="text" class="form-control" style="width:510px;" value="{{ $doing->money }}" name="money" id="money" placeholder="商品价格(保留到小数点后两位)">
+                              <label for="price">商品原价</label>
+                              <input type="text" class="form-control" style="width:510px;" value="{{ $doing->price }}" name="price" id="price" placeholder="商品原价(保留到小数点后两位)">
+                            </div>
+                            <div class="form-group">
+                              <label for="money">活动价格</label>
+                              <input type="text" class="form-control" style="width:510px;" value="{{ $doing->money }}" name="money" id="money" placeholder="活动价格(保留到小数点后两位)">
                             </div>
                             <div class="form-group">
                               <label for="over">商品库存</label>

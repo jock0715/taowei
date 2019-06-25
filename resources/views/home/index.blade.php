@@ -180,7 +180,7 @@
 					<!--今日推荐 -->
 
 					<div class="am-g am-g-fixed recommendation" >
-						<div class="clock am-u-sm-3" ">
+						<div class="clock am-u-sm-3" >
 							<img src="/home/images/2016.png "></img>
 							<p>今日<br>推荐</p>
 						</div>
@@ -221,7 +221,7 @@
 							<h4>秒杀商品</h4>
 							<h3>每期活动 优惠享不停 </h3>
 							<span class="more ">
-                              <a href="# ">全部秒杀活动<i class="am-icon-angle-right" style="padding-left:10px ;" ></i></a>
+                              <a href="/home/spikelist">全部秒杀商品<i class="am-icon-angle-right" style="padding-left:10px ;" ></i></a>
                         </span>
 						</div>
 					  <div class="am-g am-g-fixed ">
@@ -231,7 +231,7 @@
 							<div class="icon-sale one "></div>	
 								<h4>秒杀</h4>							
 							<div class="activityMain ">
-								<a href="/home/list/info/{{ $v->id }}"><img src="/uploads/{{ $v->file }}"></img></a>
+								<a href="/home/spikelist/info/{{ $v->id }}"><img src="/uploads/{{ $v->file }}"></img></a>
 							</div>
 							<div class="info ">
 								<h3>{{ $v->name }}</h3>
@@ -417,12 +417,13 @@
 		</div>
 		</div>
 		<!--引导 -->
-		<div class="navCir">
+		<!-- <div class="navCir">
 			<li class="active"><a href="home.html"><i class="am-icon-home "></i>首页</a></li>
 			<li><a href="sort.html"><i class="am-icon-list"></i>分类</a></li>
 			<li><a href="shopcart.html"><i class="am-icon-shopping-basket"></i>购物车</a></li>	
 			<li><a href="person/index.html"><i class="am-icon-user"></i>我的</a></li>					
-		</div>
+
+		</div> -->
 
 
 		<!-- 菜单 -->
@@ -432,6 +433,13 @@
 			window.jQuery || document.write('<script src="basic/js/jquery.min.js "><\/script>');
 		</script>
 		<script type="text/javascript " src="/home/basic/js/quick_links.js "></script>
+
+		</div> 
+
+
+		<!-- 右侧菜单 -->
+		@include('/home/public/right')
+		
 	</body>
 
 </html>
