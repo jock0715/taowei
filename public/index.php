@@ -7,6 +7,9 @@
  * @author   Taylor Otwell <taylor@laravel.com>
  */
 
+// 开启session
+session_start();
+
 define('LARAVEL_START', microtime(true));
 
 /*

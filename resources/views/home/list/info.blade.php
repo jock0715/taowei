@@ -27,6 +27,8 @@
 		<script type="text/javascript" src="/home/js/jquery.imagezoom.min.js"></script>
 		<script type="text/javascript" src="/home/js/jquery.flexslider.js"></script>
 		<script type="text/javascript" src="/home/js/list.js"></script>
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+        @include('home/public/message')
           
 			<div class="listMain">
 
@@ -161,8 +163,8 @@
 											<a href="javascript:;" title="关闭" class="close">×</a>
 										</div>
 										<div class="theme-popbod dform">
-											<form class="theme-signin" name="loginform" action="" method="post">
-
+                    <form action="/home/shopping/add/{{ $spike->id }}" method="post" >
+                        {{ csrf_field() }}
 												<div class="theme-signin-left">
 
 													<!-- <div class="theme-options">
@@ -182,14 +184,14 @@
 															<li class="sku-line">全家福礼包<i></i></li>
 														</ul>
 													</div> -->
+                    
 													<div class="theme-options">
 														<div class="cart-title number">数量</div>
 														<dd>
 															<input id="min" class="am-btn am-btn-default" name="" type="button" value="-" />
-															<input id="text_box" name="" type="text" value="1" style="width:30px;" />
+															<input id="text_box" name="num" type="text" value="1" oninput = "value=value.replace(/[^\d]/g,'')" style="width:30px;" />
 															<input id="add" class="am-btn am-btn-default" name="" type="button" value="+" />
 														</dd>
-
 													</div>
 													<div class="clear"></div>
 
@@ -224,23 +226,36 @@
 							<a><span class="am-icon-heart am-icon-fw">收藏</span></a>
 							
 							</div>
+                            <li>
+                                <div class="clearfix tb-btn tb-btn-buy theme-login">
+                                
+                                    <a href="javascript:;" onclick="abc({{ $spike->id }})">
+                                    立即购买</a>
+
+                                    <!-- <input id="LikBuy" title="点此按钮到下一步确认购买信息" value="立即购买"> -->
+                                </div>
+                            </li>
 							<li>
-								<div class="clearfix tb-btn tb-btn-buy theme-login">
-									<input id="LikBuy" title="点此按钮到下一步确认购买信息" value="立即购买">
+								<div class="clearfix tb-btn tb-btn-basket theme-login" >
+								<!-- <a id="LikBasket" href="">加入购物车</a> -->
+                                <input type="submit" id="LikBasket" value="加入购物车" style="color: white; background-color: red">
 								</div>
 							</li>
-							<li>
-								<div class="clearfix tb-btn tb-btn-basket theme-login">
-								<a id="LikBasket" href="javascript:;" onclick="">加入购物车</a>
-								</div>
-							</li>
+                    </form>
+                            
 						</div>
-
+                        
 					</div>
-
 					<div class="clear"></div>
 
 				</div>
+                
+                <script>
+                    function abc(id){
+                        let num = $('#text_box').val();
+                        location.href='/home/order/create?id='+id+'&num='+num;
+                    }
+                </script> 
 				
 				<!--优惠套装-->
 				<div class="match">
@@ -1192,5 +1207,12 @@
 			</div>
 
 	</body>
-
+	<script>
+		function shopping (id)
+		{
+			$.get('/home/shopping/index',{id:id},function (res) {
+				console.log(res)
+			},'html');
+		}
+	</script>
 </html>
