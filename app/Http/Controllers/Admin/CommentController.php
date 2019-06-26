@@ -4,64 +4,40 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Comment;
+use App\Models\User;
+use App\Models\Order;
 
 class CommentController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * 显示用户评价.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
+        // 实例化 评价表 comments
+        $comment = new Comment;
+        $data = $comment->paginate(5);
+        return view('admin/comment/index',['data'=>$data]);
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
+     * 显示修改评价表.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        //
+        $data = Comment::find($id);
+
+        return view('admin/comment/edit',['data'=>$data]);
     }
 
     /**
-     * Update the specified resource in storage.
+     * 执行更新评论.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -69,17 +45,34 @@ class CommentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // 接收数据
+        $data = $request->all();
+        $comment = Comment::find($id);
+        $comment->content = $data['content']?$data['content']:'该用户未评价!';
+        $comment->comment = $data['comment']?$data['comment']:'0';
+        $res = $comment->save();
+        if($res){
+            return redirect('/admin/comment')->with('success','修改成功 !');
+        }else{
+            return back()->with('error','修改失败 !');
+        }
     }
 
     /**
-     * Remove the specified resource from storage.
+     * 执行评论删除.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        //
+        $comment = Comment::find($id);
+        $res = $comment->delete();
+        if($res){
+            return redirect('/admin/comment')->with('success','删除成功 !');
+        }else{
+            return back()->with('error','删除失败 !');
+        }
+
     }
 }

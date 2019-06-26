@@ -14,34 +14,39 @@ use Hash;
 class UserController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * 显示个人中心主页面.
      *
      * @return \Illuminate\Http\Response
      */
     public function user_index()
     {
+        // 判断用户是否登录
         if(!empty(session('home_data'))){
+            // 是,进入个人页面
             return view('home/user/user_index');
         }else{
+            // 否 前往登录
             return view('home/login/login');
         }
     }
 
     /**
-     * Display a listing of the resource.
+     * 显示个人资料.
      *
      * @return \Illuminate\Http\Response
      */
     public function user_info()
     {
+        // 获取用户id
         $id = session('home_data')->id;
+        // 实例化 用户表 users
         $user = new User;
         $data = $user->where('id',$id)->first();
         return view('home/user/user_info',['data'=>$data]);
     }
 
     /**
-     * Display a listing of the resource.
+     * 执行修改个人资料.
      *
      * @return \Illuminate\Http\Response
      */
@@ -53,7 +58,7 @@ class UserController extends Controller
         // 接收数据
         $data = $request->all();
         $id = $data['id'];
-        // 实例化 用户表
+        // 实例化 用户表 users
         $user = User::find($id);
         $user->phone = $data['phone'];
         $user->email = $data['email'];
@@ -63,7 +68,7 @@ class UserController extends Controller
             $uid = $user->id;
         }
 
-        //实例化 用户信息表
+        //实例化 用户信息表 user_infos
         $userinfos = UserInfos::where('uid',$uid)->first();
         $userinfos->nick = $data['nick'];
         $userinfos->name = $data['name'];
@@ -82,7 +87,7 @@ class UserController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * 执行用户修改头像.
      *
      * @return \Illuminate\Http\Response
      */
@@ -94,19 +99,25 @@ class UserController extends Controller
             // 创建文件并上传
             $file = $request->file('profile')->store(date('Ymd'));
         }else{
+            // 返回原头像
             $file = $request->input('old_file');
         }
+
+        // 实例化 用户信息表 user_infos
         $userinfos = UserInfos::find($id);
         $userinfos->profile = $file;
         $res = $userinfos->save();
+        // 判断是否修改成功
         if($res){
             session('home_info')->profile = $file;
             echo "<script>alert('修改成功!');location.href='/home/user/user_info'</script>";
+        }else{
+            echo "<script>alert('修改失败!');location.href='/home/user/user_info'</script>";
         }
     }
 
     /**
-     * Display a listing of the resource.
+     * 显示用户修改密码页面.
      *
      * @return \Illuminate\Http\Response
      */
@@ -116,15 +127,18 @@ class UserController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * 执行用户修改密码.
      *
      * @return \Illuminate\Http\Response
      */
     public function user_upwds(Request $request)
     {
+        // 获取数据
         $upwd = $request->input('upwd','');
         $reupwd1 = Hash::make($request->input('reupwd1',''));
         $id = $request->input('id','');
+
+        // 实例化 用户表users
         $user = new User;
         $data = $user->where('id',$id)->first();
 
@@ -137,8 +151,9 @@ class UserController extends Controller
         // 更改新密码
         $res = $user->where('id',$id)->update(['upwd'=>$reupwd1]);
 
+        // 判断是否修改成功
         if($res){
-            // 压入session
+            // 消除session
             session(['home_login'=>false]);
             session(['home_data'=>false]);
             session(['home_info'=>false]);
@@ -149,20 +164,23 @@ class UserController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * 显示用户修改地址页面.
      *
      * @return \Illuminate\Http\Response
      */
     public function user_addr()
     {   
+        // 获取用户id
         $id = session('home_data')->id;
+
+        // 实例化 用户地址表user_addrs
         $useraddrs = new UserAddrs;
         $data = $useraddrs->where('uid',$id)->get();
         return view('home/user/user_addr',['data'=>$data]);
     }
 
     /**
-     * Display a listing of the resource.
+     * 执行用户修改地址.
      *
      * @return \Illuminate\Http\Response
      */
@@ -185,14 +203,60 @@ class UserController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * 执行用户修改地址.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function user_editaddr(Request $request,$id)
+    {
+        // 获取数据
+        $data = UserAddrs::find($id);
+
+        return view('home/user/user_editaddr',['data'=>$data]); 
+    }
+
+    /**
+     * 执行用户修改地址.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function user_editaddrs(Request $request)
+    {
+        // 获取数据
+        $data = $request->all();
+        $id = $data['id'];
+        
+        // 实例化地址表 user_addrs
+        $useraddrs = UserAddrs::find($id);
+        $useraddrs->aname = $data['aname'];
+        $useraddrs->aphone = $data['aphone'];
+        $useraddrs->province = $data['province'];
+        $useraddrs->uaddr = $data['uaddr'];
+        $res = $useraddrs->save();
+
+        // 判断是否修改成功
+        if($res){
+            echo json_encode(['msg'=>'ok','info'=>'修改成功 !']);
+        }else{
+            echo json_encode(['msg'=>'err','info'=>'修改失败 !']);
+        }
+        
+    }
+
+    /**
+     * 执行用户删除地址.
      *
      * @return \Illuminate\Http\Response
      */
     public function deladdr(Request $request)
     {
+        // 获取数据
         $id = $request->input('id',0);
+
+        // 实例化 用户地址表 user_addrs
         $useraddrs = UserAddrs::find($id);
+
+        // 判断是否删除成功
         $res = $useraddrs->delete();
         if($res){
             echo json_encode(['msg'=>'ok','info'=>'删除成功 !']);
@@ -203,7 +267,7 @@ class UserController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * 显示用户安全设置.
      *
      * @return \Illuminate\Http\Response
      */
@@ -249,7 +313,14 @@ class UserController extends Controller
      */
     public function user_collection()
     {
-        return view('home/user/user_collection');
+        // 判断用户是否登录
+        if(!empty(session('home_data'))){
+            // 是,进入个人页面
+            return view('home/user/user_collection');
+        }else{
+            // 否 前往登录
+            return view('home/login/login');
+        }
     }
 
     /**
@@ -259,7 +330,14 @@ class UserController extends Controller
      */
     public function user_foot()
     {
-        return view('home/user/user_foot');
+        // 判断用户是否登录
+        if(!empty(session('home_data'))){
+            // 是,进入个人页面
+            return view('home/user/user_foot');
+        }else{
+            // 否 前往登录
+            return view('home/login/login');
+        }
     }
 
     /**
@@ -270,6 +348,16 @@ class UserController extends Controller
     public function user_reply()
     {
         return view('home/user/user_reply');
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function user_replyed()
+    {
+        return view('home/user/user_replyed');
     }
 
     

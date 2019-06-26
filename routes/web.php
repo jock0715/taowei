@@ -177,6 +177,10 @@ Route::post('/home/user/user_file/{id}','Home\UserController@user_file');
 Route::get('/home/user/user_addr','Home\UserController@user_addr');
 // 前台用户执行添加地址
 Route::post('/home/user/user_addrs','Home\UserController@user_addrs');
+// 前台用户显示修改地址
+Route::get('/home/user/user_editaddr/{id}','Home\UserController@user_editaddr');
+// 前台用户执行修改地址
+Route::post('/home/user/user_editaddrs','Home\UserController@user_editaddrs');
 // 前台用户执行删除地址
 Route::get('/home/user/deladdr','Home\UserController@deladdr');
 // 前台用户安全
@@ -197,5 +201,7 @@ Route::get('/home/user/user_collection','Home\UserController@user_collection');
 Route::get('/home/user/user_foot','Home\UserController@user_foot');
 // 前台用户评论
 Route::get('/home/user/user_reply','Home\UserController@user_reply');
+// 前台用户评论
+Route::get('/home/user/user_replyed','Home\UserController@user_replyed');
 
 /*---------------------------前台结束-------------------------------------*/

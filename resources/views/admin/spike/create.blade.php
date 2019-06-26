@@ -45,7 +45,7 @@
 						  	</div>
 						  	<div class="form-group">
 						      <label for="cid">所属分类</label>
-						      <select name="cid" id="" class="form-control" style="width:510px;">
+						      <select name="cid" id="" class="form-control" style="width:510px;margin-left: 10px;">
 									<option value=""> -- 请选择 -- </option>
 
 									@foreach($cates as $k=>$v)

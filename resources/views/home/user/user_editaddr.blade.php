@@ -62,31 +62,6 @@
                 <small>Address&nbsp;list</small></div>
             </div>
             <hr>
-            <ul class="am-avg-sm-1 am-avg-md-3 am-thumbnails">
-            @foreach($data as $k=>$v)
-              <li class="user-addresslist">
-                <span class="new-option-r">
-                  <i class="am-icon-check-circle"></i>设为默认</span>
-                <p class="new-tit new-p-re">
-                  <span class="new-txt">{{ $v->aname }}</span>
-                  <span class="new-txt-rd2">{{ $v->aphone }}</span></p>
-                <div class="new-mu_l2a new-p-re">
-                  <p class="new-mu_l2cw">
-                    <span class="title">地址：</span>
-                    <span class="province">{{ $v->province }}</span>
-                    <span class="street">{{ $v->uaddr }}</span></p>
-                </div>
-              <!-- <form></form> -->
-                <div class="new-addr-btn">
-                  <a href="/home/user/user_editaddr/{{ $v->id }}">
-                    <i class="am-icon-edit"></i>编辑</a>
-                  <span class="new-addr-bar">|</span>
-                  <a href="javascript:;" onclick="delClick({{$v->id}});">
-                    <i class="am-icon-trash"></i>删除</a>
-                </div>
-              </li>
-              @endforeach
-            </ul>
             <div class="clear"></div>
             <a class="new-abtn-type" data-am-modal="{target: '#doc-modal-1', closeViaDimmer: 0}">添加新地址</a>
             <!--例子-->
@@ -95,7 +70,7 @@
                 <!--标题 -->
                 <div class="am-cf am-padding">
                   <div class="am-fl am-cf">
-                    <strong class="am-text-danger am-text-lg">新增地址</strong>/
+                    <strong class="am-text-danger am-text-lg">修改地址</strong>/
                     <small>Add&nbsp;address</small></div>
                 </div>
                 <hr>
@@ -104,29 +79,45 @@
                     <div class="am-form-group">
                       <label for="user-name" class="am-form-label">收货人</label>
                       <div class="am-form-content">
-                        <input type="hidden" name="id" value="{{ session('home_data')->id }}">
-                        <input type="text" id="user-name" name="aname"></div>
+                        <input type="hidden" name="id" value="{{ $data->id }}">
+                        <input type="text" id="user-name" name="aname" value="{{ $data->aname }}"></div>
                     </div>
                     <div class="am-form-group">
                       <label for="user-phone" class="am-form-label">手机号码</label>
                       <div class="am-form-content">
-                        <input id="user-phone" placeholder="手机号必填" type="text"></div>
+                        <input id="user-phone" placeholder="手机号必填" type="text" value="{{ $data->aphone }}"></div>
                     </div>
                     <div class="am-form-group">
                       <label for="user-address" class="am-form-label">所在地</label>
                       <div class="am-form-content">
                         <select name="province" style="display: inline-block;margin-left: 10px;" id="select">
-                          <option value="广东省">广东省</option>
-                          <option value="上海市">上海市</option>
-                          <option value="北京市">北京市</option>
-                          <option value="杭州市">杭州市</option>
+                          <option value="广东省"
+                          @if($data->province == '广东省')
+                            selected
+                          @endif
+                          >广东省</option>
+                          <option value="上海市"
+                          @if($data->province == '上海市')
+                            selected
+                          @endif
+                          >上海市</option>
+                          <option value="北京市"
+                          @if($data->province == '北京市')
+                            selected
+                          @endif
+                          >北京市</option>
+                          <option value="杭州市"
+                          @if($data->province =='杭州市')
+                            selected
+                          @endif
+                          >杭州市</option>
                         </select>
                       </div>
                     </div>
                     <div class="am-form-group">
                       <label for="user-intro" class="am-form-label">详细地址</label>
                       <div class="am-form-content">
-                        <textarea name="uaddr" rows="3" id="user-intro" placeholder="100字以内写出你的详细地址..."></textarea>
+                        <textarea name="uaddr" rows="3" id="user-intro" placeholder="100字以内写出你的详细地址...">{{ $data->uaddr }}</textarea>
                       </div>
                     </div>
                     <div class="am-form-group">
@@ -209,7 +200,7 @@
       layer.msg('地址输入不规范 !');
       return false;
     }
-    $.post('/home/user/user_addrs',{id,aname,aphone,province,uaddr},function(res){
+    $.post('/home/user/user_editaddrs',{id,aname,aphone,province,uaddr},function(res){
       if(res.msg == 'ok'){
         layer.msg(res.info);
         setTimeout(function(){
@@ -227,25 +218,25 @@
     return false;
   });
 
-  function delClick(id){
-    if(!window.confirm('确定删除吗?')){
-      return false;
-    }
-    $.get('/home/user/deladdr',{id},function(res){
-      if(res.msg == 'ok'){
-        layer.msg(res.info);
-        setTimeout(function(){
-          //关闭当前页面
-          window.parent.location.reload();
-          var index = parent.layer.getFrameIndex(window.name);
-          parent.layer.close(index);
-          // 跳转
-          window.location.href = '/home/user/user_addr';
-        },800);
-      }else{
-        layer.msg(res.info);
-      }
-    },'json');
-  }
+  // function delClick(id){
+  //   if(!window.confirm('确定删除吗?')){
+  //     return false;
+  //   }
+  //   $.get('/home/user/deladdr',{id},function(res){
+  //     if(res.msg == 'ok'){
+  //       layer.msg(res.info);
+  //       setTimeout(function(){
+  //         //关闭当前页面
+  //         window.parent.location.reload();
+  //         var index = parent.layer.getFrameIndex(window.name);
+  //         parent.layer.close(index);
+  //         // 跳转
+  //         window.location.href = '/home/user/user_addr';
+  //       },800);
+  //     }else{
+  //       layer.msg(res.info);
+  //     }
+  //   },'json');
+  // }
 
 </script>

@@ -70,7 +70,7 @@
               <div class="filePic">
                 <input type="file" class="inputPic" allowexts="gif,jpeg,jpg,png,bmp"  name="profile">
                 <input type="hidden" name="old_file" value="{{ $data->userinfos->profile }}">
-                <img class="am-circle am-img-thumbnail" src="/uploads/" alt="">
+                <img class="am-circle am-img-thumbnail" src="/uploads/{{ $data->userinfos->profile }}" alt="">
               </div>
                   <input class="am-btn am-btn-danger" type="submit" value="保存" style="display: inline-block; margin: 97px 0px 0px 15px;">
               </form>
@@ -129,6 +129,21 @@
                   <label for="user-birth" class="am-form-label">年龄</label>
                   <div class="am-form-content">
                     <input id="user-phone" value="{{ $data->userinfos->age }}" type="tel" name="age"></div>
+                </div>
+                <div class="am-form-group">
+                  <label class="am-form-label">生日</label>
+                  <select style="width: 60px;float: left;margin-left: 15px;">
+                    <option>1997</option>
+                    <option>1999</option>
+                  </select>
+                  <select style="width: 50px;float: left;">
+                    <option>07</option>
+                    <option>09</option>
+                  </select>
+                  <select style="width: 50px;float: left;">
+                    <option>15</option>
+                    <option>17</option>
+                  </select>
                 </div>
                 <div class="am-form-group">
                   <label for="user-phone" class="am-form-label">电话</label>

@@ -1,9 +1,6 @@
-
 <!DOCTYPE html>
 <html>
-
 @include('home/public/userindex')
-
   <body>
     <!--头 -->
     <header>
@@ -33,14 +30,11 @@
                 <div class="menu-hd"><a href="#" target="_top"><i class="am-icon-heart am-icon-fw"></i><span>收藏夹</span></a></div>
             </ul>
             </div>
-
             <!--悬浮搜索框-->
-
             <div class="nav white">
               <div class="logoBig">
                 <li><img src="/home/images/logobig.png" /></li>
               </div>
-
               <div class="search-bar pr">
                 <a name="index_none_header_sysc" href="#"></a>
                 <form>
@@ -49,7 +43,6 @@
                 </form>
               </div>
             </div>
-
             <div class="clear"></div>
           </div>
         </div>
@@ -75,30 +68,22 @@
     <div class="center">
       <div class="col-main">
         <div class="main-wrap">
-
           <div class="user-comment">
             <!--标题 -->
             <div class="am-cf am-padding">
               <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">评价管理</strong> / <small>Manage&nbsp;Comment</small></div>
             </div>
             <hr/>
-
             <div class="am-tabs am-tabs-d2 am-margin" data-am-tabs>
-
               <ul class="am-avg-sm-2 am-tabs-nav am-nav am-nav-tabs">
                 <li class="am-active"><a href="#tab1">所有评价</a></li>
                 <li><a href="#tab2">有图评价</a></li>
-
               </ul>
-
               <div class="am-tabs-bd">
                 <div class="am-tab-panel am-fade am-in am-active" id="tab1">
-
                   <div class="comment-main">
                     <div class="comment-list">
-                      <ul class="item-list">
-
-                        
+                      <ul class="item-list">              
                         <div class="comment-top">
                           <div class="th th-price">
                             <td class="td-inner">评价</td>
@@ -114,7 +99,6 @@
                             </a>
                           </div>
                         </li>
-
                         <li class="td td-comment">
                           <div class="item-title">
                             <div class="item-opinion">好评</div>
@@ -127,29 +111,21 @@
                           <div class="item-comment">
                             宝贝非常漂亮，超级喜欢！！！ 口红颜色很正呐，还有第两支半价，买三支免单一支的活动，下次还要来买。就是物流太慢了，还要我自己去取快递，店家不考虑换个物流么？
                           </div>
-
                           <div class="item-info">
                             <div>
                               <p class="info-little"><span>颜色：12#玛瑙</span> <span>包装：裸装</span> </p>
                               <p class="info-time">2015-12-24</p>
-
                             </div>
                           </div>
                         </li>
-
                       </ul>
-
                     </div>
                   </div>
-
                 </div>
-                <div class="am-tab-panel am-fade" id="tab2">
-                  
+                <div class="am-tab-panel am-fade" id="tab2">             
                   <div class="comment-main">
                     <div class="comment-list">
-                      <ul class="item-list">
-                        
-                        
+                      <ul class="item-list">                    
                         <div class="comment-top">
                           <div class="th th-price">
                             <td class="td-inner">评价</td>
@@ -165,7 +141,6 @@
                             </a>
                           </div>
                         </li>                     
-                        
                         <li class="td td-comment">
                           <div class="item-title">
                             <div class="item-opinion">好评</div>
@@ -179,27 +154,20 @@
                             宝贝非常漂亮，超级喜欢！！！ 口红颜色很正呐，还有第两支半价，买三支免单一支的活动，下次还要来买。就是物流太慢了，还要我自己去取快递，店家不考虑换个物流么？
                           <div class="filePic"><img src="/home/images/image.jpg" alt=""></div>  
                           </div>
-
                           <div class="item-info">
                             <div>
                               <p class="info-little"><span>颜色：12#玛瑙</span> <span>包装：裸装</span> </p>
                               <p class="info-time">2015-12-24</p>
-
                             </div>
                           </div>
                         </li>
-
                       </ul>
-
                     </div>
                   </div>                  
-                  
                 </div>
               </div>
             </div>
-
           </div>
-
         </div>
         <!--底部-->
         <div class="footer">
@@ -225,13 +193,9 @@
           </div>
         </div>
       </div>
-
       <aside class="menu">
         @include('home/public/menu')
-
       </aside>
     </div>
-
   </body>
-
 </html>
