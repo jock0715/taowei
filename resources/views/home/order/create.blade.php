@@ -8,7 +8,7 @@
 			<link href="/home/css/jsstyle.css" rel="stylesheet" type="text/css" />
 
 			<script type="/home/text/javascript" src="js/address.js"></script>
-			<form action="/home/order" method="post">
+			<form action="/home/order" method="post" enctype="multipart/form-data">
 			{{ csrf_field() }}
 			<div class="concent">
 				<!--地址 -->
@@ -27,6 +27,7 @@
 									<div class="user DefaultAddr">
 
 										<span class="buy-address-detail">
+										@if(!empty(session('home_data')))
 										<input type="hidden" name="uid" value="{{ session('home_data')->id }}">
 										<input type="hidden" name="addr" value="{{ session('home_info')->addr }}">
 										<input type="hidden" name="phone" value="{{ session('home_data')->phone }}">
@@ -34,6 +35,7 @@
                     					<span class="buy-user">{{ session('home_data')->uname }} </span><br>
 										<span class="buy-phone">{{ session('home_data')->phone }}</span>
 										</span>
+										
 									</div>
 									<div class="default-address DefaultAddr">
 										<span class="buy-line-title buy-line-title-type">收货地址：</span>
@@ -45,6 +47,9 @@
 										</span>
 
 										</span>
+										@else
+											"<script>location.href='/home/login';</script>"
+										@endif
 									</div>
 									<ins class="deftip">默认地址</ins>
 								</div>

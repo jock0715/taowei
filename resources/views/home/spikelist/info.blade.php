@@ -255,6 +255,7 @@
                 <script>
                     function abc(id){
                         let num = $('#text_box').val();
+                        
                         location.href='/home/order/create?id='+id+'&num='+num;
                     }
                 </script> 

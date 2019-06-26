@@ -16,7 +16,9 @@
             <a href="javascript:;" style="color: red;">我的交易</a>
             <ul>
               <li>
-                <a href="/home/user/user_order">订单管理</a></li>
+                <a href="/home/order">全部订单</a></li>
+              <li>
+                <a href="/home/order/order_infos">订单状态</a></li>
               <li>
                 <a href="/home/user/user_after">退款售后</a></li>
             </ul>
