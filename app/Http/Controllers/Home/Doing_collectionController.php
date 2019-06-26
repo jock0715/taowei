@@ -14,7 +14,7 @@ class Doing_collectionController extends Controller
      */
     public function index()
     {
-        //
+        // 
     }
 
     /**

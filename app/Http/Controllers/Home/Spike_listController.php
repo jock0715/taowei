@@ -24,7 +24,7 @@ class Spike_listController extends Controller
         $spikes_data = Spike::where('name','like','%'.$search.'%')->paginate(8);
 
         // 加载页面
-        return view('home/spikelist/index', ['spikes_data'=>$spikes_data, 'search'=>$search]);
+        return view('home/spikelist/index', ['spikes_data'=>$spikes_data, 'search'=>$search]); 
 
     }
 

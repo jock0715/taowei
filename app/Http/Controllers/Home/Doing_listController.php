@@ -10,7 +10,7 @@ use App\Models\DoingInfo;
 class Doing_listController extends Controller
 {
     /**
-     * 活动商品列表页面
+     * 活动商品列表页面 
      *
      * @return \Illuminate\Http\Response
      */

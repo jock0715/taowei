@@ -10,7 +10,7 @@ use App\Models\GoodsInfo;
 class Goods_listController extends Controller
 {
     /**
-     * 商品列表页面
+     * 商品列表页面 
      *
      * @return \Illuminate\Http\Response
      */
