@@ -15,8 +15,19 @@ class OrderController extends Controller
      */
     public function index()
     {
+        // 获取数据库数据
+        $uid = session('home_data')->id;
+        // 通过uid获取该用户的所有订单
+        $orders = DB::table('orders')
+                      ->where('uid',$uid)
+                      ->get();
+        
+        // dd($orders);
         // 引入页面
-        return view('/home/order/index'); 
+        return view('/home/order/index',
+            [
+                'orders'=>$orders,
+            ]);  
     }
 
     /**
@@ -60,21 +71,33 @@ class OrderController extends Controller
     public function doadd(Request $request)
     {
         // 获取数据
+        $gids = $request->input('gid');
+        $moneys =$request->input('money');
+        $nums = $request->input('num');
+        $files = $request->input('file');
+        $names = $request->input('name');
+        $descs = $request->input('desc');
         $data['uid'] = $request->input('uid');
-        $data['gid'] = implode(',',$request->input('gid'));
         $data['addr'] = $request->input('addr');
         $data['phone'] = $request->input('phone');
-        $data['money'] = implode(',',$request->input('money'));
-        $data['num'] = implode(',',$request->input('num'));
-        $data['price'] = $request->input('zmoney');
         $data['message'] = $request->input('message');
         $data['number'] = date('YmdHis').rand(1000,9999);
         $data['created_at'] = date('Y-m-d H:i:s');
-        // dd($data);
-        
-        // 对数据库进行添加操作
-        $res = DB::table('orders')
+
+        foreach($gids as $k=>$v){
+            $data['gid'] = $v; 
+            $data['num'] = $nums[$k]; 
+            $data['money'] = $moneys[$k];
+            $data['file'] = $files[$k];
+            $data['name'] = $names[$k];
+            $data['desc'] = $descs[$k];
+            $data['price'] = $data['num'] * $data['money']; 
+            // dump($data);
+            // 对数据库进行添加操作
+            $res = DB::table('orders')
                     ->insert($data);
+        }
+
         if ($res) {
             // 提交订单成功 
             // 清空购物车
@@ -82,10 +105,12 @@ class OrderController extends Controller
             $shopping = DB::table('shopping_infos')
                         ->where('uid',$uid)
                         ->delete();
+
             return view('/home/order/success',['data'=>$data,]);
         } else {
             echo '失败';
         }
+       
     }
 
     /**
@@ -135,10 +160,13 @@ class OrderController extends Controller
         $data['money'] = $request->input('money');
         $data['num'] = $request->input('num');
         $data['price'] = $request->input('price');
+        $data['file'] = $request->input('file');
+        $data['name'] = $request->input('name');
+        $data['desc'] = $request->input('desc');
         $data['message'] = $request->input('message');
         $data['number'] = date('YmdHis').rand(1000,9999);
         $data['created_at'] = date('Y-m-d H:i:s');
-        
+        // dd($data);
         // 对数据库进行添加操作
         $res = DB::table('orders')
                     ->insert($data);

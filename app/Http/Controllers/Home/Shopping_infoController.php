@@ -24,7 +24,7 @@ class Shopping_infoController extends Controller
             $data = DB::table('shopping_infos')
                     ->where('uid',$uid)
                     ->get();
-            dd($data);
+            // dd($data);
 
             // 获取全部购物车的总价格 跟条数
             $demp = [];

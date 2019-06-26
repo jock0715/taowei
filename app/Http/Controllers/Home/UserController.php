@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers\Home;
-
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
@@ -9,6 +8,8 @@ use DB;
 use App\Models\User;
 use App\Models\UserInfos;
 use App\Models\UserAddrs;
+use App\Models\Order;
+use App\Models\Comment;
 use Hash;
 
 class UserController extends Controller
@@ -347,7 +348,10 @@ class UserController extends Controller
      */
     public function user_reply()
     {
-        return view('home/user/user_reply');
+        $uid = session('home_data')->id;
+        $data = Comment::where('uid',$uid)->get(); 
+
+        return view('home/user/user_reply',['data'=>$data]);
     }
 
     /**
@@ -355,9 +359,37 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function user_replyed()
+    public function user_replyed($id)
     {
-        return view('home/user/user_replyed');
+        $data = Order::find($id);
+
+        return view('home/user/user_replyed',['data'=>$data]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function user_replyeds(Request $request)
+    {
+        
+        $data = $request->all();
+
+        $comments = new Comment;
+        $comments->uid = $data['uid'];
+        $comments->gid = $data['gid'];
+        $comments->oid = $data['oid'];
+        $comments->comment = $data['comment'];
+        $comments->content = $data['content'];
+        $res = $comments->save();
+        if($res){
+            echo json_encode(['msg'=>'ok','info'=>'发表评论成功 !']);
+        }else{
+            echo json_encode(['msg'=>'err','info'=>'发表评论失败 !']);
+        }
+
+        
     }
 
     

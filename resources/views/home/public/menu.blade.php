@@ -18,8 +18,7 @@
               <li>
                 <a href="/home/order">全部订单</a></li>
               <li>
-                <a href="/home/order/order_infos">订单状态</a>
-              </li>
+                <a href="/home/order/order_infos">订单状态</a></li>
               <li>
                 <a href="/home/user/user_after">退款售后</a>
               </li>
@@ -41,8 +40,8 @@
                 <a href="/home/user/user_foot">足迹</a></li>
               <li>
                 <a href="/home/user/user_reply">评价</a></li>
-              <li>
-                <a href="/home/user/user_replyed">消息</a></li>
+              <!-- <li>
+                <a href="/home/user/user_replyed">消息</a></li> -->
             </ul>
           </li>
         </ul>

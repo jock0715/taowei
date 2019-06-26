@@ -199,9 +199,10 @@ Route::get('/home/user/user_bill','Home\UserController@user_bill');
 Route::get('/home/user/user_collection','Home\UserController@user_collection');
 // 前台用户足迹
 Route::get('/home/user/user_foot','Home\UserController@user_foot');
-// 前台用户评论
+// 前台用户显示评论
 Route::get('/home/user/user_reply','Home\UserController@user_reply');
-// 前台用户评论
-Route::get('/home/user/user_replyed','Home\UserController@user_replyed');
-
+// 前台用户显示编写评论
+Route::get('/home/user/user_replyed/{id}','Home\UserController@user_replyed');
+// 前台用户执行编写评论
+Route::post('/home/user/user_replyeds','Home\UserController@user_replyeds');
 /*---------------------------前台结束-------------------------------------*/
