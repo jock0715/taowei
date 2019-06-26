@@ -29,4 +29,25 @@ class User extends Model
     	// users表关联userinfos表中的uid
     	return $this->hasMany('App\Models\UserAddrs','uid');
     }
+
+    // 配置一对多 （用户和商品收藏）
+    public function usergoodscollection()
+    {
+        // users表关联goods_collections表中的uid
+        return $this->hasMany('App\Models\GoodsCollection','uid');
+    }
+
+    // 配置一对多 （用户和秒杀商品收藏）
+    public function userspikecollection()
+    {
+        // users表关联spike_collections表中的uid
+        return $this->hasMany('App\Models\SpikeCollection','uid');
+    }
+
+    // 配置一对多 （用户和活动商品收藏）
+    public function userdoingcollection()
+    {
+        // users表关联doing_collections表中的uid
+        return $this->hasMany('App\Models\DoingCollection','uid');
+    }
 }

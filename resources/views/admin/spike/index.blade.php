@@ -40,7 +40,7 @@
 				</form>
 				</div>
 				<!-- 搜索 结束 -->
-			<h5>秒杀商品列表</h5>
+			<!-- <h5>秒杀商品列表</h5> -->
 			<table class="table table-bordered tableaa" >
 				<thead>
 					<tr>

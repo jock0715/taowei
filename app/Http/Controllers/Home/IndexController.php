@@ -35,15 +35,24 @@ class IndexController extends Controller
         $banners = new Banner;
         $banners_data = $banners->get();
 
+        // 获取十条商品的数据
+        $goods10_data =DB::table('goods')->orderBy('id','asc')->limit(10)->get();
+
         // 获取四条秒杀商品的数据
         $spike4_data =DB::table('spikes')->orderBy('id','asc')->limit(4)->get();
         
+
          // 获取广告数据
         
         $advertis_data = DB::table('advertis')->get(); 
 
         //获取友情链接数据
         $links_data = DB::table('links')->get();
+
+
+        // 获取四条活动商品的数据
+        $doing4_data =DB::table('doings')->orderBy('id','asc')->limit(4)->get();
+        
 
         // 引入页面
         return view('home/index',
@@ -53,6 +62,8 @@ class IndexController extends Controller
                 'cate_data'=>$cate_data,
                 'links_data'=>$links_data,
                 'advertis_data'=>$advertis_data,
+                'goods10_data'=>$goods10_data,
+                'doing4_data'=>$doing4_data,
 
             ]);
     }

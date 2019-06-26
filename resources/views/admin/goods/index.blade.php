@@ -28,7 +28,7 @@
 			<!-- 导入 提示信息 开始 -->
 			@include('admin.public.message')
 			<!-- 导入 提示信息 结束 -->
-			<h3 class="title1">用户管理</h3>
+			<h3 class="title1">商品管理</h3>
 				<!-- 搜索 开始 -->
 				<div class="form-body" data-example-id="simple-form-inline">
 				  <form class="form-inline" action="/admin/goods">
@@ -39,7 +39,7 @@
 				</form>
 				</div>
 				<!-- 搜索 结束 -->
-			<h5>商品列表</h5>
+			<!-- <h5>商品列表</h5> -->
 			<table class="table table-bordered tableaa" >
 				<thead>
 					<tr>

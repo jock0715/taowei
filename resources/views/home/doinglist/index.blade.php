@@ -87,7 +87,7 @@
 
 					<div class="search-bar pr">
 						<a name="index_none_header_sysc" href="#"></a>
-						<form action="/home/spikelist">
+						<form action="/home/doinglist">
 							<input id="searchInput" name="search" type="text" placeholder="搜索" autocomplete="off" value="{{ $search }}">
 							<input id="ai-topsearch" class="submit am-btn" value="搜索" index="1" type="submit">
 						</form>
@@ -122,18 +122,18 @@
 						<div class="am-u-sm-12 am-u-md-12">
 							<div class="search-content">
 								<div class="sort">
-									<li class="first"><a href="#" title="综合">综合排序</a></li>
-									<li><a href="/home/spikelist/saleindex" title="销量">销量排序</a></li>
-									<li><a href="/home/spikelist/priceindex" title="价格">价格优先</a></li>
+									<li class="first"><a href="/home/doinglist" title="综合">综合排序</a></li>
+									<li><a href="/home/doinglist/saleindex" title="销量">销量排序</a></li>
+									<li><a href="/home/doinglist/priceindex" title="价格">价格优先</a></li>
 									<!-- <li class="big"><a title="评价" href="#">评价为主</a></li> -->
 								</div>
 								<div class="clear"></div>
 
 								<ul class="am-avg-sm-2 am-avg-md-3 am-avg-lg-4 boxes">
-									@foreach($spikes_data as $k=>$v)
+									@foreach($doings_data as $k=>$v)
 									<li>
 										<div class="i-pic limit">
-											<a href="/home/spikelist/info/{{ $v->id }}">
+											<a href="/home/doinglist/info/{{ $v->id }}">
 											 <img src="/uploads/{{ $v->file }}" />	
 											</a>
 											<p class="title fl">{{ $v->name }}</p>
@@ -169,11 +169,11 @@
 										</p>
 									</div>
 								</li>
-							</div> -->
-							<!-- <div class="clear"></div> -->
+							</div>
+							<div class="clear"></div> -->
 							<!--分页 -->
 							<div class="page_page">
-								{{ $spikes_data->appends(['search'=>$search])->links() }}
+								{{ $doings_data->appends(['search'=>$search])->links() }}
 							</div>
 
 

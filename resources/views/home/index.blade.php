@@ -211,7 +211,7 @@
 					  <div class="am-g am-g-fixed ">
 
 						@foreach($spike4_data as $k=>$v)
-						<div class="am-u-sm-3 " style="float: left; width: 20%;">
+						<div class="am-u-sm-3 ">
 							<div class="icon-sale one "></div>	
 								<h4>秒杀</h4>							
 							<div class="activityMain ">
@@ -224,7 +224,7 @@
 						@endforeach
 
 					  </div>
-                   </div>
+                   	</div>
 					<div class="clear "></div>
 
 					<div class="am-container activity ">
@@ -232,166 +232,69 @@
 							<h4>活动商品</h4>
 							<h3>每期活动 优惠享不停 </h3>
 							<span class="more ">
-                              <a href="# ">全部活动<i class="am-icon-angle-right" style="padding-left:10px ;" ></i></a>
-                        </span>
+                              <a href="/home/doinglist">全部活动商品<i class="am-icon-angle-right" style="padding-left:10px ;" ></i></a>
+                        	</span>
 						</div>
 					  <div class="am-g am-g-fixed ">
+					  	@foreach($doing4_data as $k=>$v)
 						<div class="am-u-sm-3 ">
 							<div class="icon-sale one "></div>	
-								<h4>秒杀1</h4>							
+								<h4>活动</h4>							
 							<div class="activityMain ">
-								<img src="/home/images/activity1.jpg "></img>
+								<a href="/home/doinglist/info/{{ $v->id }}"><img src="/uploads/{{ $v->file }}"></img></a>
 							</div>
 							<div class="info ">
-								<h3>春节送礼优选</h3>
+								<h3>{{ $v->name }}</h3>
 							</div>														
 						</div>
-						
-						<div class="am-u-sm-3 ">
-						  <div class="icon-sale two "></div>	
-							<h4>特惠</h4>
-							<div class="activityMain ">
-								<img src="/home/images/activity2.jpg "></img>
-							</div>
-							<div class="info ">
-								<h3>春节送礼优选</h3>								
-							</div>							
-						</div>						
-						
-						<div class="am-u-sm-3 ">
-							<div class="icon-sale three "></div>
-							<h4>团购</h4>
-							<div class="activityMain ">
-								<img src="/home/images/activity3.jpg "></img>
-							</div>
-							<div class="info ">
-								<h3>春节送礼优选</h3>
-							</div>							
-						</div>						
-
-						<div class="am-u-sm-3 last ">
-							<div class="icon-sale "></div>
-							<h4>超值</h4>
-							<div class="activityMain ">
-								<img src="/home/images/activity.jpg "></img>
-							</div>
-							<div class="info ">
-								<h3>春节送礼优选</h3>
-							</div>													
-						</div>
-
+						@endforeach
 					  </div>
                    </div>
 					<div class="clear "></div>
 
                     <div id="f1">
-					<!--甜点-->
+					<!-- 商品 -->
 					
 					<div class="am-container ">
 						<div class="shopTitle ">
-							<h4>甜品</h4>
-							<h3>每一道甜品都有一个故事</h3>
-						<span class="more ">
-                    		<a href="# ">更多美味<i class="am-icon-angle-right" style="padding-left:10px ;" ></i></a>
-                        </span>
+							<h4>商品</h4>
+							<h3>每一种商品都有一个故事</h3>
+							<span class="more ">
+	                    		<a href="/home/goodslist">更多商品<i class="am-icon-angle-right" style="padding-left:10px ;" ></i></a>
+	                        </span>
 						</div>
 					</div>
 					
 					<div class="am-g am-g-fixed floodFour">
-						<div class="am-u-sm-5 am-u-md-4 text-one list ">
-							<a href="# ">
+						@foreach($goods10_data as $k=>$v)
+						<div class="am-u-sm-7 am-u-md-4 text-two">
 								<div class="outer-con ">
+
 									<div class="title ">
-									开抢啦！
+										【{{ $v->name }}】
 									</div>
 									<div class="sub-title ">
-										零食大礼包
-									</div>									
-								</div>
-                                  <img src="/home/images/act1.png " />								
-							</a>
-							<div class="triangle-topright"></div>						
-						</div>
-						
-							<div class="am-u-sm-7 am-u-md-4 text-two sug">
-								<div class="outer-con ">
-									<div class="title ">
-										雪之恋和风大福
-									</div>									
-									<div class="sub-title ">
-										¥13.8
+										¥ {{ $v->money }}
 									</div>
-									<i class="am-icon-shopping-basket am-icon-md  seprate"></i>
+									<!-- <i class="am-icon-shopping-basket am-icon-md  seprate"></i> -->
 								</div>
-								<a href="# "><img src="/home/images/2.jpg" /></a>
-							</div>
-
-							<div class="am-u-sm-7 am-u-md-4 text-two">
-								<div class="outer-con ">
-									<div class="title ">
-										雪之恋和风大福
-									</div>
-									<div class="sub-title ">
-										¥13.8
-									</div>
-									<i class="am-icon-shopping-basket am-icon-md  seprate"></i>
-								</div>
-								<a href="# "><img src="/home/images/1.jpg" /></a>
-							</div>
-
-
-						<div class="am-u-sm-3 am-u-md-2 text-three big">
-							<div class="outer-con ">
+								<a href="/home/goodslist/info/{{ $v->id }}"><img src="/uploads/{{ $v->file }}"></a>
+						</div>
+						<!-- <div class="am-u-sm-3 am-u-md-2 text-three big">
+							<div class="outer-con " >
 								<div class="title ">
-									小优布丁
+									{{ $v->name }}
 								</div>
 								<div class="sub-title ">
-									¥4.8
+									¥{{ $v->money }}
 								</div>
-								<i class="am-icon-shopping-basket am-icon-md  seprate"></i>
-							</div>
-							<a href="# "><img src="/home/images/5.jpg" /></a>
-						</div>
+								{{ $v->desc }}
 
-						<div class="am-u-sm-3 am-u-md-2 text-three sug">
-							<div class="outer-con ">
-								<div class="title ">
-									小优布丁
-								</div>
-								<div class="sub-title ">
-									¥4.8
-								</div>
-								<i class="am-icon-shopping-basket am-icon-md  seprate"></i>
 							</div>
-							<a href="# "><img src="/home/images/3.jpg" /></a>
-						</div>
-
-						<div class="am-u-sm-3 am-u-md-2 text-three ">
-							<div class="outer-con ">
-								<div class="title ">
-									小优布丁
-								</div>
-								<div class="sub-title ">
-									¥4.8
-								</div>
-								<i class="am-icon-shopping-basket am-icon-md  seprate"></i>
-							</div>
-							<a href="# "><img src="/home/images/4.jpg" /></a>
-						</div>
-
-						<div class="am-u-sm-3 am-u-md-2 text-three last big ">
-							<div class="outer-con ">
-								<div class="title ">
-									小优布丁
-								</div>
-								<div class="sub-title ">
-									¥4.8
-								</div>
-								<i class="am-icon-shopping-basket am-icon-md  seprate"></i>
-							</div>
-							<a href="# "><img src="/home/images/5.jpg" /></a>
-						</div>
-
+							
+							<a href="# "><img src="/uploads/{{ $v->file }}" /></a>
+						</div> -->
+						@endforeach
 					</div>
                  <div class="clear "></div>  
                  </div>

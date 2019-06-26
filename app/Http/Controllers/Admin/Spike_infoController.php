@@ -8,7 +8,7 @@ use DB;
 use Storage;
 use App\Models\SpikeInfo;
 
-class SpikeinfoController extends Controller
+class Spike_infoController extends Controller
 {
     /**
      * 秒杀商品详情页
