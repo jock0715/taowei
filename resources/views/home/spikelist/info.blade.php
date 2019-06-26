@@ -120,8 +120,8 @@
 							<h1>	
 				 				【{{ $spike->name }}】{{ $spike->desc }}
 
-									@if($spike->id == $v->gid)
-									<a href="" style="float: right;"><span class="am-icon-heart am-icon-fw" ></span> 取消收藏</a>
+									@if($gid == 1)
+									<a href="javascript:;" onclick="del({{ $spike->id }})" style="float: right;"><span class="am-icon-heart am-icon-fw" ></span> 取消收藏</a>
 									@else
 					 				<a href="javascript:;" onclick="collection({{ $spike->id }})" style="float: right;"><span class="am-icon-heart am-icon-fw" style="color: red;"></span> 加入收藏</a>
 					 				@endif
@@ -136,8 +136,21 @@
 			                });
 			              </script>
 						<script type="text/javascript">
+							// 加入收藏
 							function collection(id) {
 								$.post('/home/spikecollection', {id:id,'_token':'{{ csrf_token() }}'}, function(res){
+									if(res.msg == 'ok'){
+										layer.msg(res.info);
+									} else {
+										layer.msg(res.info);
+									}
+								},'json');
+							}
+
+							// 取消收藏
+							function del(id) {
+								$.post('/home/spikecollection/'+id,{'_method':'DELETE','_token':'{{ csrf_token() }}'}, function(res){
+
 									if(res.msg == 'ok'){
 										layer.msg(res.info);
 									} else {

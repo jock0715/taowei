@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Home;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\SpikeCollection;
+use DB;
 
 class Spike_collectionController extends Controller
 {
@@ -39,7 +40,7 @@ class Spike_collectionController extends Controller
 
         // 判断是否登录
         if(!session('home_login')){
-            echo json_encode(['msg'=>'err','info'=>'请先登录']);
+            echo json_encode(['msg'=>'err','info'=>'请先登录!']);
             exit;
         }
 
@@ -98,13 +99,29 @@ class Spike_collectionController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * 取消 收藏 秒杀商品
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id,Request $request)
     {
-        //
+        // 接受要取消收藏的商品id
+        $gid = $id;
+        // 找出用户id
+        $uid = session('home_data')->id;
+
+        $data = DB::table('spike_collections')->where('gid',$gid)->where('uid',$uid)->find(1);
+        $id = $data->id;
+        // 进行删除
+        $res = SpikeCollection::destroy($id);
+        // 判断是否取消收藏成功
+        if ($res) {
+            echo json_encode(['msg'=>'err','info'=>'取消成功']);
+            exit;
+        } else {
+            echo json_encode(['msg'=>'err','info'=>'取消失败']);
+            exit;
+        }
     }
 }
