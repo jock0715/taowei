@@ -2,6 +2,8 @@
 
 		<link href="/home/css/personal.css" rel="stylesheet" type="text/css">
 		<link href="/home/css/orstyle.css" rel="stylesheet" type="text/css">
+		<!-- <link rel="stylesheet" href="/layui/css/layui.css">
+		  		<script src="/layui/layui.js"></script> -->
 		<style>
 			.nav.white .logoBig img {
 			    width: 11%;
@@ -10,6 +12,12 @@
 			    margin: -19px 0px -14px 145px;
 			}
 		</style>
+	<!-- 	<script type="text/javascript">//一般直接写在一个js文件中
+	  layui.use(['layer', 'form'],
+	  function() {
+	    var layer = layui.layer
+	  });
+	</script> -->
 		<div class="center">
 			<div class="col-main">
 				<div class="main-wrap">
@@ -34,7 +42,9 @@
 							<div class="am-tabs-bd">
 
 								<div class="am-tab-panel am-fade am-in am-active" id="tab1">
+								
 								@foreach($orders as $k=>$v)
+								@if($v->status == 2)
 									<div class="order-main">
 										<div class="order-list">
 											
@@ -96,8 +106,10 @@
 																</div>
 															</li>
 															<li class="td td-change">
+															<a href="javascript:;" onclick="del({{ $v->id }})">
 																<div class="am-btn am-btn-danger anniu">
 																	删除订单</div>
+															</a>
 															</li>
 														</div>
 													</div>
@@ -106,224 +118,136 @@
 										</div>
 
 									</div>
+									@endif
 								@endforeach
+								
 								</div>
 								
 								<div class="am-tab-panel am-fade" id="tab3">
-									
+								@foreach($orders as $k=>$v)
+								@if($v->status == 0)	
 									<div class="order-main">
 										<div class="order-list">
-											<div class="order-status2">
+											
+											<!--交易成功-->
+											<div class="order-status5">
 												<div class="order-title">
-													<div class="dd-num">订单编号：<a href="javascript:;">1601430</a></div>
-													<span>成交时间：2015-12-20</span>
+													<div class="dd-num">订单编号：<a href="javascript:;">{{ $v->number}}</a></div>
+													<span>成交时间：{{ $v->created_at }}</span>
 													<!--    <em>店铺：小桔灯</em>-->
 												</div>
 												<div class="order-content">
 													<div class="order-left">
 														<ul class="item-list">
 															<li class="td td-item">
-																<div class="item-pic">
+																<div class="item-pic" style="width:130px;margin-top: 2px;margin-left: -10px">
 																	<a href="#" class="J_MakePoint">
-																		<img src="images/kouhong.jpg_80x80.jpg" class="itempic J_ItemImg">
+																		<img src="/uploads/{{ $v->file}}" class="itempic J_ItemImg">
 																	</a>
 																</div>
-																<div class="item-info">
+
+																<div class="item-info" style="padding-left:10px 20px">
 																	<div class="item-basic-info">
 																		<a href="#">
-																			<p>美康粉黛醉美唇膏 持久保湿滋润防水不掉色</p>
-																			<p class="info-little">颜色：12#川南玛瑙
-																				<br/>包装：裸装 </p>
+																			<p>{{ $v->name }}</p>
+																			<p class="info-little"> {{ $v->desc }}</p>
 																		</a>
 																	</div>
 																</div>
 															</li>
 															<li class="td td-price">
 																<div class="item-price">
-																	333.00
+																	{{ $v->price }}
 																</div>
 															</li>
 															<li class="td td-number">
 																<div class="item-number">
-																	<span>×</span>2
+																	<span>×</span>{{ $v->num }}
 																</div>
 															</li>
 															<li class="td td-operation">
 																<div class="item-operation">
-																	<a href="refund.html">退款</a>
+																	
 																</div>
 															</li>
 														</ul>
 
-														<ul class="item-list">
-															<li class="td td-item">
-																<div class="item-pic">
-																	<a href="#" class="J_MakePoint">
-																		<img src="images/62988.jpg_80x80.jpg" class="itempic J_ItemImg">
-																	</a>
-																</div>
-																<div class="item-info">
-																	<div class="item-basic-info">
-																		<a href="#">
-																			<p>礼盒袜子女秋冬 纯棉袜加厚 韩国可爱 </p>
-																			<p class="info-little">颜色分类：李清照
-																				<br/>尺码：均码</p>
-																		</a>
-																	</div>
-																</div>
-															</li>
-															<li class="td td-price">
-																<div class="item-price">
-																	333.00
-																</div>
-															</li>
-															<li class="td td-number">
-																<div class="item-number">
-																	<span>×</span>2
-																</div>
-															</li>
-															<li class="td td-operation">
-																<div class="item-operation">
-																	<a href="refund.html">退款</a>
-																</div>
-															</li>
-														</ul>
-
-														<ul class="item-list">
-															<li class="td td-item">
-																<div class="item-pic">
-																	<a href="#" class="J_MakePoint">
-																		<img src="images/kouhong.jpg_80x80.jpg" class="itempic J_ItemImg">
-																	</a>
-																</div>
-																<div class="item-info">
-																	<div class="item-basic-info">
-																		<a href="#">
-																			<p>美康粉黛醉美唇膏 持久保湿滋润防水不掉色</p>
-																			<p class="info-little">颜色：12#川南玛瑙
-																				<br/>包装：裸装 </p>
-																		</a>
-																	</div>
-																</div>
-															</li>
-															<li class="td td-price">
-																<div class="item-price">
-																	333.00
-																</div>
-															</li>
-															<li class="td td-number">
-																<div class="item-number">
-																	<span>×</span>2
-																</div>
-															</li>
-															<li class="td td-operation">
-																<div class="item-operation">
-																	<a href="refund.html">退款</a>
-																</div>
-															</li>
-														</ul>
 													</div>
 													<div class="order-right">
 														<li class="td td-amount">
 															<div class="item-amount">
-																合计：676.00
-																<p>含运费：<span>10.00</span></p>
+																合计：{{ $v->price }}
+																<p>含运费：<span>{{ $v->fare }}</span></p>
 															</div>
 														</li>
 														<div class="move-right">
 															<li class="td td-status">
 																<div class="item-status">
-																	<p class="Mystatus">买家已付款</p>
-																	<p class="order-info"><a href="orderinfo.html">订单详情</a></p>
+																	<p class="Mystatus">交易进行中</p>
 																</div>
 															</li>
 															<li class="td td-change">
+															<a href="javascript:;" onclick="del({{ $v->id }})">
 																<div class="am-btn am-btn-danger anniu">
-																	提醒发货</div>
+																	删除订单</div>
+															</a>
 															</li>
 														</div>
 													</div>
 												</div>
-											</div>
+											</div>											
 										</div>
+
 									</div>
+								@endif
+								@endforeach
 								</div>
 								<div class="am-tab-panel am-fade" id="tab4">
 								
+									@foreach($orders as $k=>$v)
+								@if($v->status == 1)
 									<div class="order-main">
 										<div class="order-list">
-											<div class="order-status3">
+											
+											<!--交易成功-->
+											<div class="order-status5">
 												<div class="order-title">
-													<div class="dd-num">订单编号：<a href="javascript:;">1601430</a></div>
-													<span>成交时间：2015-12-20</span>
+													<div class="dd-num">订单编号：<a href="javascript:;">{{ $v->number}}</a></div>
+													<span>成交时间：{{ $v->created_at }}</span>
 													<!--    <em>店铺：小桔灯</em>-->
 												</div>
 												<div class="order-content">
 													<div class="order-left">
 														<ul class="item-list">
 															<li class="td td-item">
-																<div class="item-pic">
+																<div class="item-pic" style="width:130px;margin-top: 2px;margin-left: -10px">
 																	<a href="#" class="J_MakePoint">
-																		<img src="images/kouhong.jpg_80x80.jpg" class="itempic J_ItemImg">
+																		<img src="/uploads/{{ $v->file}}" class="itempic J_ItemImg">
 																	</a>
 																</div>
-																<div class="item-info">
-																	<div class="item-basic-info">
-																		<a href="#">
-																			<p>美康粉黛醉美唇膏 持久保湿滋润防水不掉色</p>
-																			<p class="info-little">颜色：12#川南玛瑙
-																				<br/>包装：裸装 </p>
-																		</a>
-																	</div>
-																</div>
-															</li>
-															<li class="td td-price">
-																<div class="item-price">
-																	333.00
-																</div>
-															</li>
-															<li class="td td-number">
-																<div class="item-number">
-																	<span>×</span>2
-																</div>
-															</li>
-															<li class="td td-operation">
-																<div class="item-operation">
-																	<a href="refund.html">退款/退货</a>
-																</div>
-															</li>
-														</ul>
 
-														<ul class="item-list">
-															<li class="td td-item">
-																<div class="item-pic">
-																	<a href="#" class="J_MakePoint">
-																		<img src="images/62988.jpg_80x80.jpg" class="itempic J_ItemImg">
-																	</a>
-																</div>
-																<div class="item-info">
+																<div class="item-info" style="padding-left:10px 20px">
 																	<div class="item-basic-info">
 																		<a href="#">
-																			<p>礼盒袜子女秋冬 纯棉袜加厚 韩国可爱 </p>
-																			<p class="info-little">颜色分类：李清照
-																				<br/>尺码：均码</p>
+																			<p>{{ $v->name }}</p>
+																			<p class="info-little"> {{ $v->desc }}</p>
 																		</a>
 																	</div>
 																</div>
 															</li>
 															<li class="td td-price">
 																<div class="item-price">
-																	333.00
+																	{{ $v->price }}
 																</div>
 															</li>
 															<li class="td td-number">
 																<div class="item-number">
-																	<span>×</span>2
+																	<span>×</span>{{ $v->num }}
 																</div>
 															</li>
 															<li class="td td-operation">
 																<div class="item-operation">
-																	<a href="refund.html">退款/退货</a>
+																	
 																</div>
 															</li>
 														</ul>
@@ -332,75 +256,78 @@
 													<div class="order-right">
 														<li class="td td-amount">
 															<div class="item-amount">
-																合计：676.00
-																<p>含运费：<span>10.00</span></p>
+																合计：{{ $v->price }}
+																<p>含运费：<span>{{ $v->fare }}</span></p>
 															</div>
 														</li>
 														<div class="move-right">
 															<li class="td td-status">
 																<div class="item-status">
-																	<p class="Mystatus">卖家已发货</p>
-																	<p class="order-info">
-																		<a href="">订单详情</a>
-																	</p>
+																	<p class="Mystatus">交易进行中</p>
 																</div>
 															</li>
 															<li class="td td-change">
+															<a href="javascript:;" onclick="del({{ $v->id }})">
 																<div class="am-btn am-btn-danger anniu">
-																	确认收货</div>
+																	删除订单</div>
+															</a>
 															</li>
 														</div>
 													</div>
 												</div>
-											</div>
+											</div>											
 										</div>
+
 									</div>
+									@endif
+								@endforeach
 								</div>
 
 								<div class="am-tab-panel am-fade" id="tab5">
-								
-
+								@foreach($orders as $k=>$v)
+								@if($v->status == 3)
 									<div class="order-main">
 										<div class="order-list">
-											<!--不同状态的订单	-->
-										<div class="order-status4">
+											
+											<!--交易成功-->
+											<div class="order-status5">
 												<div class="order-title">
-													<div class="dd-num">订单编号：<a href="javascript:;">1601430</a></div>
-													<span>成交时间：2015-12-20</span>
-
+													<div class="dd-num">订单编号：<a href="javascript:;">{{ $v->number}}</a></div>
+													<span>成交时间：{{ $v->created_at }}</span>
+													<!--    <em>店铺：小桔灯</em>-->
 												</div>
 												<div class="order-content">
 													<div class="order-left">
 														<ul class="item-list">
 															<li class="td td-item">
-																<div class="item-pic">
+																<div class="item-pic" style="width:130px;margin-top: 2px;margin-left: -10px">
 																	<a href="#" class="J_MakePoint">
-																		<img src="images/kouhong.jpg_80x80.jpg" class="itempic J_ItemImg">
+																		<img src="/uploads/{{ $v->file}}" class="itempic J_ItemImg">
 																	</a>
 																</div>
-																<div class="item-info">
+
+																<div class="item-info" style="padding-left:10px 20px">
 																	<div class="item-basic-info">
 																		<a href="#">
-																			<p>美康粉黛醉美唇膏 持久保湿滋润防水不掉色</p>
-																			<p class="info-little">颜色：12#川南玛瑙
-																				<br/>包装：裸装 </p>
+																			<p>{{ $v->name }}</p>
+																			<p class="info-little"> {{ $v->desc }}</p>
 																		</a>
 																	</div>
 																</div>
 															</li>
 															<li class="td td-price">
 																<div class="item-price">
-																	333.00
+																	{{ $v->price }}
 																</div>
 															</li>
 															<li class="td td-number">
 																<div class="item-number">
-																	<span>×</span>2
+																	<span>×</span>{{ $v->num }}
 																</div>
 															</li>
 															<li class="td td-operation">
 																<div class="item-operation">
-																	<a href="refund.html">退款/退货</a>
+																	
 																</div>
 															</li>
 														</ul>
@@ -409,8 +336,8 @@
 													<div class="order-right">
 														<li class="td td-amount">
 															<div class="item-amount">
-																合计：676.00
-																<p>含运费：<span>10.00</span></p>
+																合计：{{ $v->price }}
+																<p>含运费：<span>{{ $v->fare }}</span></p>
 															</div>
 														</li>
 														<div class="move-right">
@@ -420,17 +347,20 @@
 																</div>
 															</li>
 															<li class="td td-change">
-																<a href="commentlist.html">
-																	<div class="am-btn am-btn-danger anniu">
-																		评价商品</div>
-																</a>
+															<a href="javascript:;" onclick="del({{ $v->id }})">
+																<div class="am-btn am-btn-danger anniu">
+																	删除订单</div>
+															</a>
 															</li>
 														</div>
 													</div>
 												</div>
-											</div>
+											</div>											
 										</div>
+
 									</div>
+									@endif
+								@endforeach
 								</div>
 							</div>
 						</div>
@@ -445,5 +375,44 @@
 		</div>
 
 	</body>
-
+	<script>
+	// 删除订单
+	function del (id) 
+	{
+		// 提示消息
+			if (!window.confirm('是否确定删除！！！')) {
+				return false;
+			}
+		$.get('/home/order/destroy',{id},function(res){
+			
+				if(res == 'ok') {
+					// 自动刷新页面
+        			parent.location.reload(); 
+				} else {
+					alert('删除失败');
+				}
+		},'html');
+	}
+/*	function del(id){
+    if(!window.confirm('确定删除吗?')){
+      return false;
+    }
+    $.get('/home/order/destroy',{id},function(res){
+      if(res.msg == 'ok'){
+        layer.msg(res.info);
+        setTimeout(function(){
+          //关闭当前页面
+          window.parent.location.reload();
+          var index = parent.layer.getFrameIndex(window.name);
+          parent.layer.close(index);
+          // 跳转
+          parent.location.reload();
+        },800);
+      }else{
+        layer.msg(res.info);
+      }
+    },'json');
+  }
+*/
+	</script>
 </html>
