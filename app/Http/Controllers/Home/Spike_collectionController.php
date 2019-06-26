@@ -16,7 +16,7 @@ class Spike_collectionController extends Controller
      */
     public function index()
     {
-        //
+        // 
     }
 
     /**

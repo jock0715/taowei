@@ -4,14 +4,13 @@ namespace App\Http\Controllers\Home;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Spike;
-use App\Models\SpikeInfo;
-use App\Models\User;
+use App\Models\Goods;
+use App\Models\GoodsInfo;
 
-class Spike_listController extends Controller
+class Goods_listController extends Controller
 {
     /**
-     * 秒杀商品列表页面
+     * 商品列表页面 
      *
      * @return \Illuminate\Http\Response
      */
@@ -21,11 +20,10 @@ class Spike_listController extends Controller
         $search = $request->input('search','');
 
         // 查询数据 并且 分页
-        $spikes_data = Spike::where('name','like','%'.$search.'%')->paginate(8);
+        $goods_data = Goods::where('name','like','%'.$search.'%')->paginate(8);
 
         // 加载页面
-        return view('home/spikelist/index', ['spikes_data'=>$spikes_data, 'search'=>$search]); 
-
+        return view('home/goodslist/index', ['goods_data'=>$goods_data, 'search'=>$search]);
     }
 
     /**
@@ -100,50 +98,18 @@ class Spike_listController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function info($id)
-    {   
+    {
+
         // 通过id获取商品数据
-        $spike = Spike::find($id);
-        $spikeinfo = $spike->spikeinfo;
-        $cid = $spike->cid;
-        $cate_spikes = Spike::where('cid',$cid)->orderBy('sale','desc')->get();
-
-        // 判断是否登录
-        if(session('home_login')){
-            // 已登录 获取用户id
-            $uid = session('home_data')->id;
-            // 查找出该用户所有收藏的秒杀商品
-            $user = User::find($uid);
-            $spike_collection = $user->userspikecollection;
-            if(!empty($spike_collection)){
-                // 遍历查找该用户收藏的商品id
-                foreach ($spike_collection as $k => $v){
-                    
-                    // 判断该用户是否已经收藏当前商品
-                    if($spike->id == $v->gid){
-
-                        // 该用户已经收藏当前商品
-                        $gid = 1;
-                        // 结束循环
-                        break;
-                    }else{
-                        // 该用户还没收藏当前商品
-                        $gid = 0;
-                    }
-                }
-            }else{
-                $gid = 0;
-            }
-
-            
-        }else{
-            $gid = 0;
-        }
-
-        
+        $goods = Goods::find($id);
+        $goodsinfo = $goods->goodsinfo;
+        $cid = $goods->cid;
+        $cate_goods = Goods::where('cid',$cid)->orderBy('sale','desc')->get();
         // 加载页面
-        return view('home/spikelist/info',['spike'=>$spike,'spikeinfo'=>$spikeinfo,'cate_spikes'=>$cate_spikes,'gid'=>$gid]);
+        return view('home/goodslist/info',['goods'=>$goods,'goodsinfo'=>$goodsinfo,'cate_goods'=>$cate_goods]);
 
     }
+
 
     /**
      * 商品列表页面（按销售量从大到小排）
@@ -156,10 +122,10 @@ class Spike_listController extends Controller
         $search = $request->input('search','');
 
         // 查询数据 并且 分页
-        $spikes_sale_data = Spike::where('name','like','%'.$search.'%')->orderBy('sale','desc')->paginate(8);
+        $goods_sale_data = Goods::where('name','like','%'.$search.'%')->orderBy('sale','desc')->paginate(8);
 
         // 加载页面
-        return view('home/spikelist/sale_index', ['spikes_sale_data'=>$spikes_sale_data, 'search'=>$search]);
+        return view('home/goodslist/sale_index', ['goods_sale_data'=>$goods_sale_data, 'search'=>$search]);
 
     }
 
@@ -174,10 +140,10 @@ class Spike_listController extends Controller
         $search = $request->input('search','');
 
         // 查询数据 并且 分页
-        $spikes_price_data = Spike::where('name','like','%'.$search.'%')->orderBy('money','asc')->paginate(8);
+        $goods_price_data = Goods::where('name','like','%'.$search.'%')->orderBy('money','asc')->paginate(8);
 
         // 加载页面
-        return view('home/spikelist/price_index', ['spikes_price_data'=>$spikes_price_data, 'search'=>$search]);
+        return view('home/goodslist/price_index', ['goods_price_data'=>$goods_price_data, 'search'=>$search]);
 
     }
 }
