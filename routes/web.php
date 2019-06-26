@@ -95,8 +95,10 @@ Route::resource('/admin/link','Admin\LinkController');
 
 /*---------------------------前台开始-------------------------------------*/
 
+
 // 前台 首页
 Route::get('/','Home\IndexController@index');
+Route::resource('/home/index','Home\IndexController');
 
 // 前台注册
 Route::get('/home/register','Home\RegisterController@index');

@@ -28,34 +28,40 @@
 						</div>					
 		        				
 						<!--侧边导航 -->
-						<div id="nav" class="navfull">
+						<div id="nav" class="navfull"> 
 							<div class="area clearfix">
 								<div class="category-content" id="guide_2">
-									
+									@foreach($cate_data as $k=>$v)
 									<div class="category">
 										<ul class="category-list" id="js_climit_li">
 											<li class="appliance js_toggle relative first">
 												<div class="category-info">
-													<h3 class="category-name b-category-name"><i><img src="/home/images/cake.png"></i><a class="ml-22" title="点心">点心/蛋糕</a></h3>
+													<h3 class="category-name b-category-name"><i><img src="/home/images/cake.png"></i><a class="ml-22" title="{{ $v->cname }}">{{ $v->cname }}</a></h3>
 													<em>&gt;</em></div>
 												<div class="menu-item menu-in top" style="height: 450px">
 													<div class="area-in">
 														<div class="area-bg">
 															<div class="menu-srot">
+															@foreach($v->sub as $kk=>$vv)
 																<div class="sort-side">
 																	<dl class="dl-sort">
-																		<dt><span title="蛋糕">蛋糕</span></dt>
-																		<dd><a title="铜锣烧" href="#"><span>铜锣烧</span></a></dd>
+																		<dt><span title="{{ $vv->cname}}">{{ $vv->cname}}</span></dt>
+																		@foreach($vv->sub as $kkk=>$vvv)
+																		<dd><a title="{{ $vvv->cname }}" href="#"><span>{{ $vvv->cname }}</span></a></dd>
+																		@endforeach
 																	</dl>
-																</div>
+																</div>															
 															</div>
-														</div>
+														@endforeach
+														</div>							
 													</div>
 												</div>
 											<b class="arrow"></b>	
 											</li>
 										</ul>
+									@endforeach
 									</div>
+
 								</div>
 
 							</div>
@@ -112,27 +118,23 @@
 					<div class="marqueen">
 						<span class="marqueen-title">商城头条</span>
 						<div class="demo">
-
 							<ul>
-								<li class="title-first"><a target="_blank" href="#">
-									<img src="/home/images/TJ2.jpg"></img>
-									<span>[特惠]</span>商城爆品1分秒								
-								</a></li>
-								<li class="title-first"><a target="_blank" href="#">
-									<span>[公告]</span>商城与广州市签署战略合作协议
+							
+								
+								<!-- <li class="title-first"><a target="_blank" href="https://{{ $v->url }}">
+									<span class="">{{ $v->title }}</span>
 								     <img src="/home/images/TJ.jpg"></img>
-								     <p>XXXXXXXXXXXXXXXXXX</p>
-							    </a></li>
-							    
+								     
+							    </a>
+							
+							    </li>
+							 		   -->
 						<div class="mod-vip">
 							<div class="m-baseinfo">
-								<a href="person/index.html">
+								<a>
 									<img src="/home/images/getAvatar.do.jpg">
 								</a>
-								<em>
-									Hi,<span class="s-name">小叮当</span>
-									<a href="#"><p>点击更多优惠活动</p></a>									
-								</em>
+								
 							</div>
 							<div class="member-logout">
 								<a class="am-btn-warning btn" href="/home/login">登录</a>
@@ -144,12 +146,7 @@
 								<a href="#"><strong>0</strong>待付款</a>
 								<a href="#"><strong>0</strong>待评价</a>
 							</div>
-							<div class="clear"></div>	
-						</div>																	    
-							    
-								<li><a target="_blank" href="#"><span>[特惠]</span>洋河年末大促，低至两件五折</a></li>
-								<li><a target="_blank" href="#"><span>[公告]</span>华北、华中部分地区配送延迟</a></li>
-								<li><a target="_blank" href="#"><span>[特惠]</span>家电狂欢千亿礼券 买1送1！</a></li>
+							
 								
 							</ul>
                         <div class="advTip"><img src="/home/images/advTip.jpg"/></div>
@@ -180,38 +177,23 @@
 					<!--今日推荐 -->
 
 					<div class="am-g am-g-fixed recommendation" >
-						<div class="clock am-u-sm-3" ">
+						<div class="clock am-u-sm-3">
 							<img src="/home/images/2016.png "></img>
 							<p>今日<br>推荐</p>
 						</div>
+						@foreach($advertis_data as $k=>$v)
+						@if($v->status == 1)
 						<div class="am-u-sm-4 am-u-lg-3 ">
 							<div class="info ">
-								<h3>真的有鱼</h3>
-								<h4>开年福利篇</h4>
+								<h3>{{ $v->title }}</h3>
+								<h4>{{ $v->desc }}</h4>
 							</div>
-							<div class="recommendationMain one">
-								<a href="introduction.html"><img src="/home/images/tj.png "></img></a>
+							<div class="recommendationMain ">
+								<a href="https://{{ $v->url }}"><img src="/uploads/{{ $v->file }}" class="img-thumbnail" style="width:100px; "></img></a>
 							</div>
 						</div>						
-						<div class="am-u-sm-4 am-u-lg-3 ">
-							<div class="info ">
-								<h3>囤货过冬</h3>
-								<h4>让爱早回家</h4>
-							</div>
-							<div class="recommendationMain two">
-								<img src="/home/images/tj1.png "></img>
-							</div>
-						</div>
-						<div class="am-u-sm-4 am-u-lg-3 ">
-							<div class="info ">
-								<h3>浪漫情人节</h3>
-								<h4>甜甜蜜蜜</h4>
-							</div>
-							<div class="recommendationMain three">
-								<img src="/home/images/tj2.png "></img>
-							</div>
-						</div>
-
+						@endif
+						@endforeach		
 					</div>
 					<div class="clear "></div>
 					<!--热门活动 -->
