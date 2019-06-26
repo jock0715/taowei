@@ -4,11 +4,9 @@ namespace App\Http\Controllers\Home;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Banner;
-use App\Models\Spike;
-use DB;
+use App\Models\SpikeCollection;
 
-class IndexController extends Controller
+class Spike_collectionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,27 +15,7 @@ class IndexController extends Controller
      */
     public function index()
     {
-        // 获取轮播数据
-        $banners = new Banner;
-        $banners_data = $banners->get();
-
-        // 获取十条商品的数据
-        $goods10_data =DB::table('goods')->orderBy('id','asc')->limit(10)->get();
-
-        // 获取四条秒杀商品的数据
-        $spike4_data =DB::table('spikes')->orderBy('id','asc')->limit(4)->get();
-        
-        // 获取四条活动商品的数据
-        $doing4_data =DB::table('doings')->orderBy('id','asc')->limit(4)->get();
-        
-        // 引入页面
-        return view('home/index',
-            [
-                'banners_data'=>$banners_data,
-                'spike4_data'=>$spike4_data,
-                'goods10_data'=>$goods10_data,
-                'doing4_data'=>$doing4_data,
-            ]);
+        //
     }
 
     /**
@@ -51,14 +29,38 @@ class IndexController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * 执行 秒杀商品 收藏
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+
+        // 判断是否登录
+        if(!session('home_login')){
+            echo json_encode(['msg'=>'err','info'=>'请先登录']);
+            exit;
+        }
+
+        // 得到新对象
+        $collection = new SpikeCollection();
+
+        // 接受数据
+        $collection->gid = $request->input('id');
+        $collection->uid = session('home_data')->id;
+
+        // 执行添加
+        $res = $collection->save();
+
+        // 判断是否收藏成功
+        if ($res) {
+            echo json_encode(['msg'=>'err','info'=>'收藏成功']);
+            exit;
+        } else {
+            echo json_encode(['msg'=>'err','info'=>'收藏失败']);
+            exit;
+        }
     }
 
     /**

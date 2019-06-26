@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
 
+
 class OrderController extends Controller
 {
     /**
@@ -210,4 +211,6 @@ class OrderController extends Controller
         // 引入页面
         return view('/home/order/order_infos');
     }
+
+
 }

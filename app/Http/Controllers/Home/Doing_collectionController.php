@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Home;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class GoodslistController extends Controller
+class Doing_collectionController extends Controller
 {
     /**
      * Display a listing of the resource.

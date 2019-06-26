@@ -6,12 +6,12 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
 use Storage;
-use App\Models\GoodsInfo;
+use App\Models\DoingInfo;
 
-class GoodsinfoController extends Controller
+class Doing_infoController extends Controller
 {
     /**
-     * 商品详情页
+     * 活动商品 详情 列表页
      *
      * @return \Illuminate\Http\Response
      */
@@ -21,14 +21,14 @@ class GoodsinfoController extends Controller
         $search = $request->input('search','');
 
         // 查询数据 并且 分页
-        $goods_info = GoodsInfo::where('gname','like','%'.$search.'%')->paginate(3);
+        $doings_info = DoingInfo::where('gname','like','%'.$search.'%')->paginate(3);
 
         // 加载页面
-        return view('admin/goods/info_index', ['goods_info'=>$goods_info, 'search'=>$search]);
+        return view('admin/doing/info_index', ['doings_info'=>$doings_info, 'search'=>$search]);
     }
 
     /**
-     * 商品 详情 添加 图片
+     * 活动商品 详情 添加页面
      *
      * @return \Illuminate\Http\Response
      */
@@ -39,10 +39,11 @@ class GoodsinfoController extends Controller
         $name = $request->input('name','');
 
         // 加载页面
-        return view('admin/goods/info_create',['id'=>$id,'name'=>$name]);    }
+        return view('admin/doing/info_create',['id'=>$id,'name'=>$name]);
+    }
 
     /**
-     * 执行 商品详情添加图片
+     * 活动商品 执行 详情 添加
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -69,20 +70,20 @@ class GoodsinfoController extends Controller
         $data = $request->all();
         
         // 声明对象
-        $goodsinfo = new GoodsInfo;
+        $doinginfo = new DoingInfo;
 
         // 重新赋值
-        $goodsinfo->gid = $data['gid'];
-        $goodsinfo->gname = $data['gname'];
-        $goodsinfo->file = $path;
+        $doinginfo->gid = $data['gid'];
+        $doinginfo->gname = $data['gname'];
+        $doinginfo->file = $path;
 
         // 执行添加
-        $res = $goodsinfo->save();
+        $res = $doinginfo->save();
 
         // 判断是否成功
         if ($res) {
             // 添加成功
-            return redirect('admin/goods')->with('success','添加成功! 可在商品详情查看！');
+            return redirect('admin/doing')->with('success','添加成功! 可在活动商品详情查看！');
         } else {
             // 添加失败
             return back()->with('error','添加失败');
@@ -124,7 +125,7 @@ class GoodsinfoController extends Controller
     }
 
     /**
-     * 删除 商品 详情图片
+     * 活动商品 详情 删除
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -132,7 +133,7 @@ class GoodsinfoController extends Controller
     public function destroy($id, Request $request)
     {
         // 进行删除
-        $res = GoodsInfo::destroy($id);
+        $res = DoingInfo::destroy($id);
 
         // 判断是否删除成功
         if($res){

@@ -36,8 +36,8 @@
 			
 				<ol class="am-breadcrumb am-breadcrumb-slash">
 					<li><a href="/">首页</a></li>
-					<li><a href="/home/spikelist">秒杀商品</a></li>
-					<li class="am-active">秒杀商品详情</li>
+					<li><a href="/home/goodslist">商品列表</a></li>
+					<li class="am-active">商品详情</li>
 				</ol>
 				<script type="text/javascript">
 					$(function() {});
@@ -86,15 +86,15 @@
 							</script>
 
 							<div class="tb-booth tb-pic tb-s310">
-								<a href="/uploads/{{ $spike->file }}"><img src="/uploads/{{ $spike->file }}" alt="细节展示放大镜特效" rel="/uploads/{{ $spike->file }}" class="jqzoom" /></a>
+								<a href="/uploads/{{ $goods->file }}"><img src="/uploads/{{ $goods->file }}" alt="细节展示放大镜特效" rel="/uploads/{{ $goods->file }}" class="jqzoom" /></a>
 							</div>
 							<ul class="tb-thumb" id="thumblist">
 								<li class="tb-selected">
 									<div class="tb-pic tb-s40">
-										<a href="#"><img src="/uploads/{{ $spike->file }}" mid="/uploads/{{ $spike->file }}" big="/uploads/{{ $spike->file }}"></a>
+										<a href="#"><img src="/uploads/{{ $goods->file }}" mid="/uploads/{{ $goods->file }}" big="/uploads/{{ $goods->file }}"></a>
 									</div>
 								</li>
-								@foreach($spikeinfo as $k=>$v)
+								@foreach($goodsinfo as $k=>$v)
 								<li>
 									<div class="tb-pic tb-s40">
 										<a href="#"><img src="/uploads/{{ $v->file }}" mid="/uploads/{{ $v->file }}" big="/uploads/{{ $v->file }}" ></a>
@@ -118,40 +118,15 @@
 						<!--名称-->
 						<div class="tb-detail-hd">
 							<h1>	
-				 				【{{ $spike->name }}】{{ $spike->desc }}
-
-									@if($spike->id == $v->gid)
-									<a href="" style="float: right;"><span class="am-icon-heart am-icon-fw" ></span> 取消收藏</a>
-									@else
-					 				<a href="javascript:;" onclick="collection({{ $spike->id }})" style="float: right;"><span class="am-icon-heart am-icon-fw" style="color: red;"></span> 加入收藏</a>
-					 				@endif
+				 				【{{ $goods->name }}】{{ $goods->desc }}
 	          				</h1>
 						</div>
-						<link rel="stylesheet" href="/home_login/layui/css/layui.css">
-			              <script src="/home_login/layui/layui.js"></script>
-			              <script>//一般直接写在一个js文件中
-			                layui.use(['layer', 'form'],
-			                function() {
-			                  var layer = layui.layer
-			                });
-			              </script>
-						<script type="text/javascript">
-							function collection(id) {
-								$.post('/home/spikecollection', {id:id,'_token':'{{ csrf_token() }}'}, function(res){
-									if(res.msg == 'ok'){
-										layer.msg(res.info);
-									} else {
-										layer.msg(res.info);
-									}
-								},'json');
-							}
-						</script>
 						<div class="tb-detail-list">
 							<!--价格-->
 							<div class="tb-detail-price">
 								<li class="price iteminfo_price">
 									<dt>价格</dt>
-									<dd><em>¥</em><b class="sys_item_price">{{ $spike->money }}</b>  </dd>                                 
+									<dd><em>¥</em><b class="sys_item_price">{{ $goods->money }}</b>  </dd>                                 
 								</li>
 								<li class="price iteminfo_mktprice">
 									<!-- <dt>原价</dt> -->
@@ -165,10 +140,10 @@
 							<!--销量-->
 							<ul class="tm-ind-panel">
 								<li class="tm-ind-item tm-ind-sellCount canClick">
-									<div class="tm-indcon"><span class="tm-label">销售量</span><span class="tm-count">{{ $spike->sale }}</span></div>
+									<div class="tm-indcon"><span class="tm-label">销售量</span><span class="tm-count">{{ $goods->sale }}</span></div>
 								</li>
 								<li class="tm-ind-item tm-ind-sumCount canClick">
-									<div class="tm-indcon"><span class="tm-label">库存</span><span class="tm-count">{{ $spike->over }}</span></div>
+									<div class="tm-indcon"><span class="tm-label">库存</span><span class="tm-count">{{ $goods->over }}</span></div>
 								</li>
 								<li class="tm-ind-item tm-ind-reviewCount canClick tm-line3">
 									<div class="tm-indcon"><span class="tm-label">累计评价</span><span class="tm-count">640</span></div>
@@ -190,7 +165,7 @@
 											<a href="javascript:;" title="关闭" class="close">×</a>
 										</div>
 										<div class="theme-popbod dform">
-                    <form action="/home/shopping/add/{{ $spike->id }}" method="post" >
+                    <form action="/home/shopping/add/{{ $goods->id }}" method="post" >
                         {{ csrf_field() }}
 												<div class="theme-signin-left">
 
@@ -222,8 +197,7 @@
 													</div>
 													<div class="clear"></div>
 
-
-													<!-- <div class="btn-op">
+													<div class="btn-op">
 														<div class="btn am-btn am-btn-warning">确认</div>
 														<div class="btn close am-btn am-btn-warning">取消</div>
 													</div>
@@ -236,7 +210,7 @@
 														<span class="J_Price price-now">¥39.00</span>
 														<span id="Stock" class="tb-hidden">库存<span class="stock">1000</span>件</span>
 													</div>
-												</div> -->
+												</div>
 
 											
 										</div>
@@ -249,15 +223,15 @@
 						</div>
 
 						<div class="pay">
-							<!-- <div class="pay-opt">
+							<div class="pay-opt">
 							<a href="home.html"><span class="am-icon-home am-icon-fw">首页</span></a>
 							<a><span class="am-icon-heart am-icon-fw">收藏</span></a>
 							
-							</div> -->
+							</div>
                             <li>
                                 <div class="clearfix tb-btn tb-btn-buy theme-login">
                                 
-                                    <a href="javascript:;" onclick="abc({{ $spike->id }})">
+                                    <a href="javascript:;" onclick="abc({{ $goods->id }})">
                                     立即购买</a>
 
                                     <!-- <input id="LikBuy" title="点此按钮到下一步确认购买信息" value="立即购买"> -->
@@ -323,12 +297,12 @@
 						     	<div class="mt">            
 						            <h2>推荐商品	</h2>        
 					            </div>
-						     	@foreach($cate_spikes as $k=>$v)
+						     	@foreach($cate_goods as $k=>$v)
 							      <li>
 							      	<div class="p-img">                    
-							      		<a  href="/home/spikelist/info/{{ $v->id }}"> <img class="" src="/uploads/{{ $v->file }}"> </a>               
+							      		<a  href="/home/goodslist/info/{{ $v->id }}"> <img class="" src="/uploads/{{ $v->file }}"> </a>               
 							      	</div>
-							      	<div class="p-name"><a href="/home/spikelist/info/{{ $v->id }}">
+							      	<div class="p-name"><a href="/home/goodslist/info/{{ $v->id }}">
 							      		【{{ $v->name }}】{{ $v->desc }}
 							      	</a>
 							      	</div>
@@ -391,7 +365,7 @@
 											<h4>商品细节</h4>
 										</div>
 										<div class="twlistNews">
-										@foreach($spikeinfo as $k=>$v)
+										@foreach($goodsinfo as $k=>$v)
 											<img src="/uploads/{{ $v->file }}" />
 										@endforeach
 										</div>
@@ -517,7 +491,7 @@
 								<div class="am-tab-panel am-fade">
 									<div class="like">
 										<ul class="am-avg-sm-2 am-avg-md-3 am-avg-lg-4 boxes">
-										@foreach($cate_spikes as $k=>$v)
+										@foreach($cate_goods as $k=>$v)
 											<li>
 												<div class="i-pic limit">
 													<img src="/uploads/{{ $v->file }}" />

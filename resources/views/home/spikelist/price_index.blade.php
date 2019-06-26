@@ -87,7 +87,7 @@
 
 					<div class="search-bar pr">
 						<a name="index_none_header_sysc" href="#"></a>
-						<form action="/home/list">
+						<form action="/home/spikelist">
 							<input id="searchInput" name="search" type="text" placeholder="搜索" autocomplete="off" value="{{ $search }}">
 							<input id="ai-topsearch" class="submit am-btn" value="搜索" index="1" type="submit">
 						</form>
@@ -122,9 +122,9 @@
 						<div class="am-u-sm-12 am-u-md-12">
 							<div class="search-content">
 								<div class="sort">
-									<li><a href="/home/list" title="综合">综合排序</a></li>
-									<li><a href="/home/list/saleindex" title="销量">销量排序</a></li>
-									<li class="first"><a href="/home/list/priceindex" title="价格">价格优先</a></li>
+									<li><a href="/home/spikelist" title="综合">综合排序</a></li>
+									<li><a href="/home/spikelist/saleindex" title="销量">销量排序</a></li>
+									<li class="first"><a href="#" title="价格">价格优先</a></li>
 									<!-- <li class="big"><a title="评价" href="#">评价为主</a></li> -->
 								</div>
 								<div class="clear"></div>
@@ -133,7 +133,7 @@
 									@foreach($spikes_price_data as $k=>$v)
 									<li>
 										<div class="i-pic limit">
-											<a href="/home/list/info/{{ $v->id }}">
+											<a href="/home/spikelist/info/{{ $v->id }}">
 											 <img src="/uploads/{{ $v->file }}" />	
 											</a>
 											
@@ -151,7 +151,7 @@
 								</ul>
 								
 							</div>
-							<div class="search-side">
+							<!-- <div class="search-side">
 
 								<div class="side-title">
 									经典搭配
@@ -170,10 +170,8 @@
 										</p>
 									</div>
 								</li>
-								
-
 							</div>
-							<div class="clear"></div>
+							<div class="clear"></div> -->
 							<!--分页 -->
 							<div class="page_page">
 								{{ $spikes_price_data->appends(['search'=>$search])->links() }}

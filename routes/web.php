@@ -60,21 +60,21 @@ Route::get('/admin/goods/status','Admin\GoodsController@status');
 // 后台 商品
 Route::resource('/admin/goods','Admin\GoodsController');
 // 后台 商品详情
-Route::resource('/admin/goodsinfo','Admin\GoodsinfoController');
+Route::resource('/admin/goodsinfo','Admin\Goods_infoController');
 
 // 后台 秒杀商品 状态 切换
 Route::get('/admin/spike/status','Admin\SpikeController@status');
 // 后台 秒杀商品
 Route::resource('/admin/spike','Admin\SpikeController');
 // 后台 秒杀商品详情
-Route::resource('/admin/spikeinfo','Admin\SpikeinfoController');
+Route::resource('/admin/spikeinfo','Admin\Spike_infoController');
 
 // 后台 活动商品 状态 切换
 Route::get('/admin/doing/status','Admin\DoingController@status');
 // 后台 活动商品
 Route::resource('/admin/doing','Admin\DoingController');
 // 后台 活动商品详情
-Route::resource('/admin/doinginfo','Admin\DoinginfoController');
+Route::resource('/admin/doinginfo','Admin\Doing_infoController');
 
 // 后台 评价
 Route::resource('/admin/comment','Admin\CommentController');
@@ -127,18 +127,37 @@ Route::post('/home/login/dologin','Home\LoginController@dologin');
 // 前台执行退出登录功能
 Route::get('/home/login/logout','Home\LoginController@logout');
 
-// 前台 商品列表页面
-Route::get('/home/list/info/{id}','Home\ListController@info');
-Route::resource('/home/list','Home\ListController');
+// 前台 商品详情面
+Route::get('/home/goodslist/info/{id}','Home\Goods_listController@info');
+// 前台 秒杀商品 列表页 按销售量从多到少排序
+Route::get('/home/goodslist/saleindex','Home\Goods_listController@saleindex');
+// 前台 秒杀商品 列表页 按商品价格从低到高排序
+Route::get('/home/goodslist/priceindex','Home\Goods_listController@priceindex');
+// 前台 商品
+Route::resource('/home/goodslist','Home\Goods_listController');
 
 // 前台 秒杀商品 详情页
-Route::get('/home/spikelist/info/{id}','Home\SpikelistController@info');
+Route::get('/home/spikelist/info/{id}','Home\Spike_listController@info');
 // 前台 秒杀商品 列表页 按销售量从多到少排序
-Route::get('/home/spikelist/saleindex','Home\SpikelistController@saleindex');
+Route::get('/home/spikelist/saleindex','Home\Spike_listController@saleindex');
 // 前台 秒杀商品 列表页 按商品价格从低到高排序
-Route::get('/home/spikelist/priceindex','Home\SpikelistController@priceindex');
+Route::get('/home/spikelist/priceindex','Home\Spike_listController@priceindex');
 // 前台 秒杀商品
-Route::resource('/home/spikelist','Home\SpikelistController');
+Route::resource('/home/spikelist','Home\Spike_listController');
+
+// 前台 活动商品 详情页
+Route::get('/home/doinglist/info/{id}','Home\Doing_listController@info');
+// 前台 活动商品 列表页 按销售量从多到少排序
+Route::get('/home/doinglist/saleindex','Home\Doing_listController@saleindex');
+// 前台 活动商品 列表页 按商品价格从低到高排序
+Route::get('/home/doinglist/priceindex','Home\Doing_listController@priceindex');
+// 前台 活动商品
+Route::resource('/home/doinglist','Home\Doing_listController');
+
+
+// 前台 收藏秒杀商品
+Route::resource('/home/spikecollection','Home\Spike_collectionController');
+
 
 
 // 前台 购物车 添加
@@ -151,6 +170,8 @@ Route::get('/home/shopping/delnum','Home\Shopping_infoController@delnum');
 Route::get('/home/shopping/destroy','Home\Shopping_infoController@destroy');
 // 前台 购物车 显示
 Route::resource('/home/shopping','Home\Shopping_infoController');
+
+
 
 // 前台 订单 提交成功
 Route::get('/home/order/success','Home\OrderController@success');

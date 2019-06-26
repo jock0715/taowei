@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Home;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Spike;
-use App\Models\SpikeInfo;
+use App\Models\Goods;
+use App\Models\GoodsInfo;
 
-class SpikelistController extends Controller
+class Goods_listController extends Controller
 {
     /**
      * 商品列表页面
@@ -20,11 +20,10 @@ class SpikelistController extends Controller
         $search = $request->input('search','');
 
         // 查询数据 并且 分页
-        $spikes_data = Spike::where('name','like','%'.$search.'%')->paginate(3);
+        $goods_data = Goods::where('name','like','%'.$search.'%')->paginate(8);
 
         // 加载页面
-        return view('home/spikelist/index', ['spikes_data'=>$spikes_data, 'search'=>$search]);
-
+        return view('home/goodslist/index', ['goods_data'=>$goods_data, 'search'=>$search]);
     }
 
     /**
@@ -99,15 +98,18 @@ class SpikelistController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function info($id)
-    {        // 通过id获取商品数据
-        $spike = Spike::find($id);
-        $spikeinfo = $spike->spikeinfo;
-        $cid = $spike->cid;
-        $cate_spikes = Spike::where('cid',$cid)->orderBy('sale','desc')->get();
+    {
+
+        // 通过id获取商品数据
+        $goods = Goods::find($id);
+        $goodsinfo = $goods->goodsinfo;
+        $cid = $goods->cid;
+        $cate_goods = Goods::where('cid',$cid)->orderBy('sale','desc')->get();
         // 加载页面
-        return view('home/spikelist/info',['spike'=>$spike,'spikeinfo'=>$spikeinfo,'cate_spikes'=>$cate_spikes]);
+        return view('home/goodslist/info',['goods'=>$goods,'goodsinfo'=>$goodsinfo,'cate_goods'=>$cate_goods]);
 
     }
+
 
     /**
      * 商品列表页面（按销售量从大到小排）
@@ -120,10 +122,10 @@ class SpikelistController extends Controller
         $search = $request->input('search','');
 
         // 查询数据 并且 分页
-        $spikes_sale_data = Spike::where('name','like','%'.$search.'%')->orderBy('sale','desc')->paginate(3);
+        $goods_sale_data = Goods::where('name','like','%'.$search.'%')->orderBy('sale','desc')->paginate(8);
 
         // 加载页面
-        return view('home/spikelist/sale_index', ['spikes_sale_data'=>$spikes_sale_data, 'search'=>$search]);
+        return view('home/goodslist/sale_index', ['goods_sale_data'=>$goods_sale_data, 'search'=>$search]);
 
     }
 
@@ -138,10 +140,10 @@ class SpikelistController extends Controller
         $search = $request->input('search','');
 
         // 查询数据 并且 分页
-        $spikes_price_data = Spike::where('name','like','%'.$search.'%')->orderBy('money','asc')->paginate(3);
+        $goods_price_data = Goods::where('name','like','%'.$search.'%')->orderBy('money','asc')->paginate(8);
 
         // 加载页面
-        return view('home/list/price_index', ['spikes_price_data'=>$spikes_price_data, 'search'=>$search]);
+        return view('home/goodslist/price_index', ['goods_price_data'=>$goods_price_data, 'search'=>$search]);
 
     }
 }

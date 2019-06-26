@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Home;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class DoinglistController extends Controller
+class Goods_collectionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -82,23 +82,4 @@ class DoinglistController extends Controller
     {
         //
     }
-
-
-    /**
-     * 商品详情页面
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function info($id)
-    {
-
-        // dump($id);
-        // 通过id获取商品数据
-        $spike = Spike::find($id);
-
-        // 加载页面
-        return view('home/list/info',['spike'=>$spike]);
-
-    }
-
 }
