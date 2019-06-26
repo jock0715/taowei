@@ -55,16 +55,16 @@ class LinkController extends Controller
                 'url.required'=>'链接地址必填'
             ]);
 
-         //接收数据
+        // 接收数据
         $data = $request->all();
 
         // 声明新对象
         $link = new Link;
-
+        // 赋值
         $link->name = $data['name'];
         $link->url = $data['url'];
 
-         //执行 添加到数据库
+        // 执行 添加到数据库
         $res = $link->save();
         if($res){
             return redirect('admin/link')->with('success','添加成功');
@@ -94,7 +94,7 @@ class LinkController extends Controller
     {
 
         $link = Link::find($id);
-        // dump($link);
+        
         //加载修改页面
         return view('admin.link.edit',
             [
@@ -105,24 +105,27 @@ class LinkController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * 处理 友情链接 修改
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request  $request     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        //修改
+        // 通过ID查找要修改的友情链接数据
         $link = Link::find($id);
+        // 接收数据 
         $link->name = $request->input('name','');
         $link->url = $request->input('url','');
+        // 进行修改
         $res1 = $link->save();
 
-        
+        // 判断
         if($res1){
+            // 修改成功
             return redirect('admin/link')->with('success','修改成功');
         }else{
+            // 修改失败
             return back()->with('error','修改失败');
         }
     }
@@ -135,7 +138,6 @@ class LinkController extends Controller
      */
     public function destroy($id)
     {
-        //删除头像
 
         //删除操作
         $res = link::destroy($id);
@@ -145,6 +147,13 @@ class LinkController extends Controller
             return back()->with('error','删除失败');
         }
     }
+
+    /**
+     * 友情链接状态切换
+     *
+     * @param  int 
+     * @return \Illuminate\Http\Response
+     */
      public function status (Request $request)
     {
         // 获取id
@@ -169,10 +178,12 @@ class LinkController extends Controller
         // 进行数据库操作
         $res = DB::update("update links set status = $data where id = $id");
 
-
+        // 判断是否切换成功
         if ($res) {
+            // 切换成功
             echo 'ok';
         } else {
+            // 切换失败
             echo 'no';
         }
 

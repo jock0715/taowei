@@ -58,9 +58,10 @@
 						      <input type="text" class="form-control" name="url" value="{{ $adverti->url }}">
 						  	</div>
 							
-						  <img src="/uploads/{{ $adverti->file }}" style="width:100px;>	
+						  <img src="/uploads/{{ $adverti->file }}" style="width:100px;">	
 
 						  <input type="hidden" name="old_file" value="{{ $adverti->file }}">
+
 						  <div class="form-group">
 						      <label for="file"></label>
 						      <input type="file" name="file" class="form-control">
@@ -92,9 +93,6 @@
 		</div>
 		<!-- 内容结束 -->
 
-		<!-- 页脚 开始 -->
-		@include('admin.public.footer')
-        <!-- 页脚 结束 -->
 	</div>
 	<!-- 页脚 静态资源 开始 -->
 	@include('admin.public.footer_static')

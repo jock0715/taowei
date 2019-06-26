@@ -15,7 +15,7 @@
 		@include('admin.public.header_userinfo')
 		<!-- 头部 结束 -->
 		<!-- 内容 开始-->
-		<div id="page-wrapper">
+		<div id="page-wrapper" style="background:url('/admin/images/litiqs.jpg') no-repeat 100% 100%;">
 			<div class="main-page">
 			<!-- 导入 提示信息 开始 -->
 			@include('admin.public.message')
@@ -31,9 +31,8 @@
 			</form>
 			</div>
 			<!-- 搜索 结束 -->
-			<div class="panel-body widget-shadow">
 				
-				<table class="table">
+				<table class="table table-bordered">
 								<thead>
 									<tr>
 									  <th>ID</th>
@@ -54,7 +53,8 @@
 											<p style="width:150px;">{{ $v->title }}</p>
 										</td>
 										<td>
-											<img src="/uploads/{{ $v->file }}" class="img-thumbnail" style="width:100px; ">
+											<img src="/uploads/{{ $v->file }}" class="img-thumbnail" style="width:60px; ">
+											
 										</td>
 										<td>{{ $v->auth }}</td>
 										<td>
@@ -73,6 +73,7 @@
 										</td>
 										
 										<td>
+											<a href="/admin/adverti/{{ $v->id }}/edit" class="btn btn-info">修改</a>
 											
 											<form action="/admin/adverti/{{ $v->id }}" method="post" style="display: inline-block;">
 												{{ csrf_field() }}
@@ -80,13 +81,15 @@
 												<input type="submit" value="删除" class="btn btn-danger">
 												
 											</form>
-											<a href="/admin/adverti/{{ $v->id }}/edit" class="btn btn-info">修改</a>
+											
 										</td>
 									</tr>
 
 									@endforeach
 								</tbody>
 							</table>
+							<!-- 显示页码 -->
+					{{ $data->appends($params)->links() }}
 				<div class="main-page" style="display:none;">
 					<div class="row calender widget-shadow">
 						<h4 class="title">Calender</h4>
@@ -95,17 +98,13 @@
 						</div>
 					</div>
 					<div class="clearfix"> </div>
-				</div>
 				<div>
-					<!-- 显示页码 -->
-					{{ $data->links() }}
+					
 				</div>
 			</div>
 		</div>
 		<!-- 内容 结束 -->
-		<!-- 页尾 开始 -->
-		@include('admin.public.footer')
-		<!-- 页尾结束 -->
+
 	</div>
 	<!-- 页脚 静态资源 开始 -->
 	@include('admin.public.footer_static')
