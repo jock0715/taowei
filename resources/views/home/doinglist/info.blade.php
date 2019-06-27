@@ -166,12 +166,12 @@
 							<!--价格-->
 							<div class="tb-detail-price">
 								<li class="price iteminfo_price">
-									<dt>价格</dt>
+									<dt>现价</dt>
 									<dd><em>¥</em><b class="sys_item_price">{{ $doing->money }}</b>  </dd>                                 
 								</li>
 								<li class="price iteminfo_mktprice">
-									<!-- <dt>原价</dt> -->
-									<!-- <dd><em>¥</em><b class="sys_item_mktprice">98.00</b></dd>									 -->
+									<dt>原价</dt>
+									<dd><em>¥</em><b class="sys_item_mktprice">{{ $doing->price }}</b></dd>									
 								</li>
 								<div class="clear"></div>
 							</div>
