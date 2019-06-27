@@ -111,47 +111,6 @@
 							</a>
 						</div>
 					</div>
-
-					<!--走马灯 -->
-
-					<div class="marqueen">
-						<span class="marqueen-title">商城头条</span>
-						<div class="demo">
-							<ul>
-							
-								
-								<!-- <li class="title-first"><a target="_blank" href="https://{{ $v->url }}">
-									<span class="">{{ $v->title }}</span>
-								     <img src="/home/images/TJ.jpg"></img>
-								     
-							    </a>
-							
-							    </li>
-							 		   -->
-						<div class="mod-vip">
-							<div class="m-baseinfo">
-								<a>
-									<img src="/home/images/getAvatar.do.jpg">
-								</a>
-								
-							</div>
-							<div class="member-logout">
-								<a class="am-btn-warning btn" href="/home/login">登录</a>
-								<a class="am-btn-warning btn" href="/home/register">注册</a>
-							</div>
-							<div class="member-login">
-								<a href="#"><strong>0</strong>待收货</a>
-								<a href="#"><strong>0</strong>待发货</a>
-								<a href="#"><strong>0</strong>待付款</a>
-								<a href="#"><strong>0</strong>待评价</a>
-							</div>
-							
-								
-							</ul>
-                        <div class="advTip"><img src="/home/images/advTip.jpg"/></div>
-						</div>
-					</div>
-					<div class="clear"></div>
 				</div>
 				<script type="text/javascript">
 					if ($(window).width() < 640) {

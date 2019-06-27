@@ -105,43 +105,17 @@ class Spike_listController extends Controller
         $spike = Spike::find($id);
         $spikeinfo = $spike->spikeinfo;
         $cid = $spike->cid;
-        $cate_spikes = Spike::where('cid',$cid)->orderBy('sale','desc')->get();
+        $cate_spikes = Spike::where('cid',$cid)
+                             ->orderBy('sale','desc')
+                             ->get();
 
-        // 判断是否登录
-        if(session('home_login')){
-            // 已登录 获取用户id
-            $uid = session('home_data')->id;
-            // 查找出该用户所有收藏的秒杀商品
-            $user = User::find($uid);
-            $spike_collection = $user->userspikecollection;
-            if(!empty($spike_collection)){
-                // 遍历查找该用户收藏的商品id
-                foreach ($spike_collection as $k => $v){
-                    
-                    // 判断该用户是否已经收藏当前商品
-                    if($spike->id == $v->gid){
-
-                        // 该用户已经收藏当前商品
-                        $gid = 1;
-                        // 结束循环
-                        break;
-                    }else{
-                        // 该用户还没收藏当前商品
-                        $gid = 0;
-                    }
-                }
-            }else{
-                $gid = 0;
-            }
-
-            
-        }else{
-            $gid = 0;
-        }
-
-        
         // 加载页面
-        return view('home/spikelist/info',['spike'=>$spike,'spikeinfo'=>$spikeinfo,'cate_spikes'=>$cate_spikes,'gid'=>$gid]);
+        return view('home/spikelist/info',
+            [
+                'spike'=>$spike,
+                'spikeinfo'=>$spikeinfo,
+                'cate_spikes'=>$cate_spikes,
+            ]);
 
     }
 

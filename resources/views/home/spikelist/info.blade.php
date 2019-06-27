@@ -120,11 +120,7 @@
 							<h1>	
 				 				【{{ $spike->name }}】{{ $spike->desc }}
 
-									@if($gid == 1)
-									<a href="javascript:;" onclick="del({{ $spike->id }})" style="float: right;"><span class="am-icon-heart am-icon-fw" ></span> 取消收藏</a>
-									@else
-					 				<a href="javascript:;" onclick="collection({{ $spike->id }})" style="float: right;"><span class="am-icon-heart am-icon-fw" style="color: red;"></span> 加入收藏</a>
-					 				@endif
+								
 	          				</h1>
 						</div>
 						<link rel="stylesheet" href="/home_login/layui/css/layui.css">
