@@ -1,6 +1,6 @@
 <?php
 
-/*
+/* 
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
@@ -162,8 +162,12 @@ Route::resource('/home/spikecollection','Home\Spike_collectionController');
 
 
 
-// 前台 购物车 添加
+// 前台 购物车 添加 秒杀商品
 Route::post('/home/shopping/add/{id}','Home\Shopping_infoController@add');
+// 前台 购物车 添加 活动商品
+Route::post('/home/shopping/doingadd/{id}','Home\Shopping_infoController@doingadd');
+// 前台 购物车 添加 商品
+Route::post('/home/shopping/goodsadd/{id}','Home\Shopping_infoController@goodsadd');
 // 前台 购物车 添加数量
 Route::get('/home/shopping/addnum','Home\Shopping_infoController@addnum');
 // 前台 购物车 减少数量
@@ -179,8 +183,12 @@ Route::resource('/home/shopping','Home\Shopping_infoController');
 Route::get('/home/order/success','Home\OrderController@success');
 // 前台 订单 详情
 Route::get('/home/order/order_infos','Home\OrderController@order_infos');
-// 前台 立即购买订单 添加
+// 前台 立即购买订单 秒杀商品
 Route::get('/home/order/create','Home\OrderController@create');
+// 前台 立即购买订单 活动商品
+Route::get('/home/order/docreate','Home\OrderController@docreate');
+// 前台 立即购买订单 商品
+Route::get('/home/order/gocreate','Home\OrderController@gocreate');
 // 前台 购物车订单 添加 显示
 Route::get('/home/order/add','Home\OrderController@add');
 // 前台 购物车订单 添加 处理

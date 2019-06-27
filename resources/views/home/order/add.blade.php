@@ -111,7 +111,9 @@
 							<div class="clear"></div>
 							@foreach($shopping as $k => $v)
 							<tr class="item-list">
-							<input type="hidden" name="gid[]" value="{{ $v->gid}}">
+									<input type="hidden" name="gid[]" value="{{ empty($v->gid)?'':$v->gid }}">
+									<input type="hidden" name="did[]" value="{{ empty($v->did)?'':$v->did }}">
+									<input type="hidden" name="sid[]" value="{{ empty($v->sid)?'':$v->sid }}">
 								<div class="bundle  bundle-last">
 									<div class="bundle-main">
 										<ul class="item-content clearfix">

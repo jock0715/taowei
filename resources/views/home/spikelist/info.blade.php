@@ -1,4 +1,4 @@
-@include('/home/public/header')
+@include('/home/public/header') 
 
 		<style type="text/css">
 			.tb-btn input{
@@ -194,13 +194,14 @@
 									<div class="theme-popover-mask"></div>
 
 									<div class="theme-popover">
-										<div class="theme-span"></div>
+										<div class="theme-span"></div> 
 										<div class="theme-poptit">
 											<a href="javascript:;" title="关闭" class="close">×</a>
 										</div>
 										<div class="theme-popbod dform">
                     <form action="/home/shopping/add/{{ $spike->id }}" method="post" >
                         {{ csrf_field() }}
+                        						<input type="hidden" name="sid" value="{{ $spike->id }}">
 												<div class="theme-signin-left">
 
 													<!-- <div class="theme-options">

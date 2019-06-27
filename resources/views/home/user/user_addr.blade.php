@@ -111,26 +111,7 @@
           <div class="clear"></div>
         </div>
         <!-- 内容 -->
-        <div class="footer">
-          <div class="footer-hd">
-            <p>
-              <a href="/home/#">恒望科技</a>
-              <b>|</b>
-              <a href="/home/#">商城首页</a>
-              <b>|</b>
-              <a href="/home/#">支付宝</a>
-              <b>|</b>
-              <a href="/home/#">物流</a></p>
-          </div>
-          <div class="footer-bd">
-            <p>
-              <a href="/home/#">关于恒望</a>
-              <a href="/home/#">合作伙伴</a>
-              <a href="/home/#">联系我们</a>
-              <a href="/home/#">网站地图</a>
-              <em>© 2015-2025 Hengwang.com 版权所有</em></p>
-          </div>
-        </div>
+        @include('home/public/footer')
       </div>
       <aside class="menu">@include('home/public/menu')</aside></div>
   </body>

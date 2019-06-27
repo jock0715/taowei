@@ -31,7 +31,11 @@
 										<input type="hidden" name="uid" value="{{ session('home_data')->id }}">
 										<input type="hidden" name="addr" value="{{ session('home_info')->addr }}">
 										<input type="hidden" name="phone" value="{{ session('home_data')->phone }}">
-										<input type="hidden" name="gid" value="{{ $spike->id }}">
+
+										<input type="hidden" name="gid" value="{{ empty($goods->id)?'':$goods->id }}">
+										<input type="hidden" name="did" value="{{ empty($doing->id)?'':$doing->id }}">
+										<input type="hidden" name="sid" value="{{ empty($spike->id)?'':$spike->id }}">
+
                     					<span class="buy-user">{{ session('home_data')->uname }} </span><br>
 										<span class="buy-phone">{{ session('home_data')->phone }}</span>
 										</span>
@@ -123,28 +127,90 @@
 											<div class="pay-phone">
 												<li class="td td-item">
 													<div class="item-pic" style="width:130px;">
-													<input type="hidden" name="file" value="{{ $spike->file }}">
+													
+													<input type="hidden" name="file" value="					@if(!empty($spike->file))
+																	{{$spike->file}}
+																@elseif(!empty($doing->file))
+																	{{$doing->file}}
+																@elseif(!empty($goods->file))
+																	{{$goods->file}}
+																@endif">
+
+
 														<a href="#" class="J_MakePoint" name="file">
-															<img src="/uploads/{{ $spike->file }}" class="itempic J_ItemImg"></a>
+															<img src="/uploads/
+																@if(!empty($spike->file))
+																	{{$spike->file}}
+																@elseif(!empty($doing->file))
+																	{{$doing->file}}
+																@elseif(!empty($goods->file))
+																	{{$goods->file}}
+																@endif"></a>
 													</div>
 													<div class="item-info">
 														<div class="item-basic-info">
-														<input type="hidden" name="name" value="{{ $spike->name }}">
-															&nbsp; &nbsp; &nbsp; &nbsp; <a href="#" class="item-title J_MakePoint" data-point="tbcart.8.11" name="name">{{ $spike->name }}</a>
+														<input type="hidden" name="name" value="			@if(!empty($spike->name))
+																	{{$spike->name}}
+																@elseif(!empty($doing->name))
+																	{{$doing->name}}
+																@elseif(!empty($goods->name))
+																	{{$goods->name}}
+																@endif">
+															&nbsp; &nbsp; &nbsp; &nbsp; <a href="#" class="item-title J_MakePoint" data-point="tbcart.8.11" name="name">
+																@if(!empty($spike->name))
+																	{{$spike->name}}
+																@elseif(!empty($doing->name))
+																	{{$doing->name}}
+																@elseif(!empty($goods->name))
+																	{{$goods->name}}
+																@endif
+																</a>
 														</div>
 													</div>
 												</li>
 												<li class="td td-info">
 													<div class="item-props">
-													<input type="hidden" name="desc" value="{{ $spike->desc }}">
-												&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; <span class="sku-line">{{ $spike->desc }}</span>
+													<input type="hidden" name="desc" value="
+														@if(!empty($spike->desc))
+																	{{$spike->desc}}
+														@elseif(!empty($doing->desc))
+															{{$doing->desc}}
+														@elseif(!empty($goods->desc))
+															{{$goods->desc}}
+														@endif
+													">
+												&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; <span class="sku-line">
+																@if(!empty($spike->desc))
+																	{{$spike->desc}}
+																@elseif(!empty($doing->desc))
+																	{{$doing->desc}}
+																@elseif(!empty($goods->desc))
+																	{{$goods->desc}}
+																@endif
+														</span>
 													</div>
 												</li>·
 												<li class="td td-price">
 													<div class="item-price price-promo-promo">
 														<div class="price-content">
-														<input type="hidden" name="money" value="{{ $spike->money }}">
-															<em class="J_Price price-now">{{ $spike->money }}</em>
+														<input type="hidden" name="money" value="
+																@if(!empty($spike->money))
+																	{{$spike->money}}
+																@elseif(!empty($doing->money))
+																	{{$doing->money}}
+																@elseif(!empty($goods->money))
+																	{{$goods->money}}
+																@endif
+														">
+															<em class="J_Price price-now">
+																@if(!empty($spike->money))
+																	{{$spike->money}}
+																@elseif(!empty($doing->money))
+																	{{$doing->money}}
+																@elseif(!empty($goods->money))
+																	{{$goods->money}}
+																@endif
+															</em>
 														</div>
 													</div>
 												</li>
@@ -154,17 +220,29 @@
 													<div class="item-amount ">
 														<span class="phone-title">购买数量</span>
 														<div class="sl">
-															<!-- <a href="/home/order/delnum?id={{ $spike->id }}" class="min am-btn">-</a> -->
-															<input class="text_box" name="num" type="text" value="{{ $num }}" oninput = "value=value.replace(/[^\d]/g,'')"  style="width:30px;" />
-															<!-- <a href="/home/order/addnum?id={{ $spike->id }}" class="add am-btn">+</a> -->
+															<input class="text_box" name="num" type="text" value="@if(!empty($snum)){{$snum}}@elseif(!empty($donum)){{$donum}}@elseif(!empty($gonum)){{$gonum}}@endif
+															" oninput = "value=value.replace(/[^\d]/g,'')"  style="width:30px;" readonly/>
 														</div>
 													</div>
 												</div>
 											</li>
 											<li class="td td-sum">
 												<div class="td-inner">
-												<input type="hidden" name="price" value="{{ $price }}">
-													<em tabindex="0" class="J_ItemSum number">{{ $price }}</em>
+												<input type="hidden" name="price" value="@if(!empty($sprice))
+														{{$sprice}}
+													@elseif(!empty($doprice))
+														{{$doprice}}
+													@elseif(!empty($goprice))
+														{{$goprice}}
+													@endif">
+													<em tabindex="0" class="J_ItemSum number">@if(!empty($sprice))
+														{{$sprice}}
+													@elseif(!empty($doprice))
+														{{$doprice}}
+													@elseif(!empty($goprice))
+														{{$goprice}}
+													@endif
+													</em>
 												</div>
 											</li>
 											<li class="td td-oplist">
@@ -202,7 +280,15 @@
 							<!--含运费小计 -->
 							<div class="buy-point-discharge ">
 								<p class="price g_price ">
-									合计（含运费） <span>¥</span><em class="pay-sum">{{ $price }}</em>
+									合计（含运费） <span>¥</span><em class="pay-sum">
+																@if(!empty($sprice))
+																	{{$sprice}}
+																@elseif(!empty($doprice))
+																	{{$doprice}}
+																@elseif(!empty($goprice))
+																	{{$goprice}}
+																@endif
+																</em>
 								</p>
 							</div>
 
@@ -212,7 +298,15 @@
 									<div class="box">
 										<div tabindex="0" id="holyshit267" class="realPay"><em class="t">实付款：</em>
 											<span class="price g_price ">
-                                    <span>¥</span> <em class="style-large-bold-red " id="J_ActualFee">{{ $price }}</em>
+                                    <span>¥</span> <em class="style-large-bold-red " id="J_ActualFee">
+											@if(!empty($sprice))
+												{{$sprice}}
+											@elseif(!empty($doprice))
+												{{$doprice}}
+											@elseif(!empty($goprice))
+												{{$goprice}}
+											@endif
+                                    	</em>
 											</span>
 										</div>
 									</div>
