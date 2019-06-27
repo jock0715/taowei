@@ -185,6 +185,10 @@ Route::get('/home/order/create','Home\OrderController@create');
 Route::get('/home/order/add','Home\OrderController@add');
 // 前台 购物车订单 添加 处理
 Route::post('/home/order/doadd','Home\OrderController@doadd');
+// 前台 订单 删除
+Route::get('/home/order/destroy','Home\OrderController@destroy');
+// 前台 订单 确认收货
+Route::get('/home/order/receipt','Home\OrderController@receipt');
 // 前台 订单 查看
 Route::resource('/home/order','Home\OrderController');
 

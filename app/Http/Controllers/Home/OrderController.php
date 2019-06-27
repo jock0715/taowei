@@ -14,8 +14,9 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+
         // 获取数据库数据
         $uid = session('home_data')->id;
         // 通过uid获取该用户的所有订单
@@ -23,7 +24,7 @@ class OrderController extends Controller
                       ->where('uid',$uid)
                       ->get();
         
-        // dd($orders);
+        // dd($orders,$status,$tamp);
         // 引入页面
         return view('/home/order/index',
             [
@@ -221,9 +222,21 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        // dd($request->all());
+        $id = $request->input('id',0);
+        // 通过id获取数据
+        $res = DB::table('orders')
+                    ->where('id',$id)
+                    ->delete();
+        if($res){
+            echo 'ok';
+            // echo json_encode(['msg'=>'ok','info'=>'删除成功 !']);
+        }else{
+            echo 'no';
+            // echo json_encode(['msg'=>'err','info'=>'删除失败 !']);
+        }
     }
 
     /*// 提交订单成功
@@ -234,10 +247,45 @@ class OrderController extends Controller
     }*/
 
     // 查看订单详情
-    public function order_infos ()
+    public function order_infos (Request $request)
     {
+        // 通过id获取数据
+        $uid = session('home_data')->id;
+        $data = DB::table('orders')
+                    ->where('uid',$uid)
+                    ->get();
+
         // 引入页面
-        return view('/home/order/order_infos');
+        return view('/home/order/order_infos',
+            [
+                'data'=>$data,
+            ]);
+    }
+
+    // 确认收货
+    public function receipt (Request $request)
+    {
+        // 获取id
+        $id = $request->input('id',0);
+
+        // 通过id对数据库进行修改
+        $status = DB::table('orders')
+                      ->select('status')
+                      ->where('id',$id)
+                      ->first();
+
+        if ($status->status == '1' || $status->status == '0') {
+            $status_data = 2;
+        }
+        // dd($status_data);
+        $res = DB::table('orders')
+                    ->where('id',$id)
+                    ->update(['status'=>$status_data]);
+        if ($res) {
+            echo 'ok';
+        } else {
+            echo 'no';
+        }
     }
 
 
