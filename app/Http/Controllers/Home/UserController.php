@@ -9,6 +9,9 @@ use DB;
 use App\Models\User;
 use App\Models\UserInfos;
 use App\Models\UserAddrs;
+use App\Models\SpikeCollection;
+use App\Models\DoingCollection;
+use App\Models\GoodsCollection;
 use Hash;
 
 class UserController extends Controller
@@ -243,13 +246,40 @@ class UserController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * 用户收藏列表
      *
      * @return \Illuminate\Http\Response
      */
     public function user_collection()
     {
-        return view('home/user/user_collection');
+        // 判断是否登录
+        if(!empty(session('home_data'))){
+            // 接收用户id 
+            $uid = session('home_data')->id;
+
+
+            // 查找该用户收藏的商品
+            $goodscollection = Goodscollection::where('uid',$uid);
+            $goods_collection = $goodscollection->get();
+
+            // 查找该用户收藏的活动商品
+            $doingcollection = Doingcollection::where('uid',$uid);
+            $doing_collection = $doingcollection->get();
+
+            // 查找该用户收藏的秒杀商品
+            $spikecollection = Spikecollection::where('uid',$uid);
+            $spike_collection = $spikecollection->get();
+            
+            return view('home/user/user_collection',
+                [
+                'goods_collection'=>$goods_collection,
+                'doing_collection'=>$doing_collection,
+                'spike_collection'=>$spike_collection
+                ]);
+        }else{
+            return view('home/login/login');
+        }
+        // return view('home/user/user_collection');
     }
 
     /**

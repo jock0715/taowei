@@ -22,13 +22,13 @@ class IndexController extends Controller
         $banners_data = $banners->get();
 
         // 获取十条商品的数据
-        $goods10_data =DB::table('goods')->orderBy('id','asc')->limit(10)->get();
+        $goods10_data =DB::table('goods')->where('status','1')->orderBy('id','asc')->limit(10)->get();
 
         // 获取四条秒杀商品的数据
-        $spike4_data =DB::table('spikes')->orderBy('id','asc')->limit(4)->get();
+        $spike4_data =DB::table('spikes')->where('status','1')->orderBy('id','asc')->limit(4)->get();
         
         // 获取四条活动商品的数据
-        $doing4_data =DB::table('doings')->orderBy('id','asc')->limit(4)->get();
+        $doing4_data =DB::table('doings')->where('status','1')->orderBy('id','asc')->limit(4)->get();
         
         // 引入页面
         return view('home/index',

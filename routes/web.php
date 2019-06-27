@@ -155,8 +155,12 @@ Route::get('/home/doinglist/priceindex','Home\Doing_listController@priceindex');
 Route::resource('/home/doinglist','Home\Doing_listController');
 
 
+// 前台 收藏商品
+Route::resource('/home/goodscollection','Home\Goods_collectionController');
 // 前台 收藏秒杀商品
 Route::resource('/home/spikecollection','Home\Spike_collectionController');
+// 前台 收藏活动商品
+Route::resource('/home/doingcollection','Home\Doing_collectionController');
 
 
 

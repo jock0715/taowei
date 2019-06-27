@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Spike;
 use App\Models\SpikeInfo;
 use App\Models\User;
+use DB;
 
 class Spike_listController extends Controller
 {
@@ -21,7 +22,7 @@ class Spike_listController extends Controller
         $search = $request->input('search','');
 
         // 查询数据 并且 分页
-        $spikes_data = Spike::where('name','like','%'.$search.'%')->paginate(8);
+        $spikes_data = Spike::where('name','like','%'.$search.'%')->where('status','1')->paginate(8);
 
         // 加载页面
         return view('home/spikelist/index', ['spikes_data'=>$spikes_data, 'search'=>$search]); 
@@ -105,43 +106,30 @@ class Spike_listController extends Controller
         $spike = Spike::find($id);
         $spikeinfo = $spike->spikeinfo;
         $cid = $spike->cid;
-        $cate_spikes = Spike::where('cid',$cid)->orderBy('sale','desc')->get();
+        $cate_spikes3 = Spike::where('cid',$cid)->where('status','1')->orderBy('sale','desc')->limit(3)->get();
+        $cate_spikes = Spike::where('cid',$cid)->where('status','1')->orderBy('sale','desc')->get();
 
         // 判断是否登录
         if(session('home_login')){
             // 已登录 获取用户id
             $uid = session('home_data')->id;
-            // 查找出该用户所有收藏的秒杀商品
-            $user = User::find($uid);
-            $spike_collection = $user->userspikecollection;
-            if(!empty($spike_collection)){
-                // 遍历查找该用户收藏的商品id
-                foreach ($spike_collection as $k => $v){
-                    
-                    // 判断该用户是否已经收藏当前商品
-                    if($spike->id == $v->gid){
-
-                        // 该用户已经收藏当前商品
-                        $gid = 1;
-                        // 结束循环
-                        break;
-                    }else{
-                        // 该用户还没收藏当前商品
-                        $gid = 0;
-                    }
-                }
-            }else{
-                $gid = 0;
+            // 商品id
+            $gid = $spike->id;
+            // 验证是否已经收藏该商品
+            $data = DB::table('spike_collections')->where('gid',$gid)->where('uid',$uid)->first();
+            // 收藏返回1 没收藏返回0
+            if(!empty($data)){
+                $collection = 1;
+            } else {
+                $collection = 0;
             }
-
-            
         }else{
-            $gid = 0;
+            // 没登录 返回0
+            $collection = 0;
         }
 
-        $git = 0;
         // 加载页面
-        return view('home/spikelist/info',['spike'=>$spike,'spikeinfo'=>$spikeinfo,'cate_spikes'=>$cate_spikes,'gid'=>$gid]);
+        return view('home/spikelist/info',['spike'=>$spike,'spikeinfo'=>$spikeinfo,'cate_spikes'=>$cate_spikes,'cate_spikes3'=>$cate_spikes3,'collection'=>$collection]);
 
     }
 
@@ -156,7 +144,7 @@ class Spike_listController extends Controller
         $search = $request->input('search','');
 
         // 查询数据 并且 分页
-        $spikes_sale_data = Spike::where('name','like','%'.$search.'%')->orderBy('sale','desc')->paginate(8);
+        $spikes_sale_data = Spike::where('name','like','%'.$search.'%')->where('status','1')->orderBy('sale','desc')->paginate(8);
 
         // 加载页面
         return view('home/spikelist/sale_index', ['spikes_sale_data'=>$spikes_sale_data, 'search'=>$search]);
@@ -174,7 +162,7 @@ class Spike_listController extends Controller
         $search = $request->input('search','');
 
         // 查询数据 并且 分页
-        $spikes_price_data = Spike::where('name','like','%'.$search.'%')->orderBy('money','asc')->paginate(8);
+        $spikes_price_data = Spike::where('name','like','%'.$search.'%')->where('status','1')->orderBy('money','asc')->paginate(8);
 
         // 加载页面
         return view('home/spikelist/price_index', ['spikes_price_data'=>$spikes_price_data, 'search'=>$search]);
