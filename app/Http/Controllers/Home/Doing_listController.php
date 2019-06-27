@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Doing;
 use App\Models\DoingInfo;
+use DB;
 
 class Doing_listController extends Controller
 {
@@ -20,7 +21,7 @@ class Doing_listController extends Controller
         $search = $request->input('search','');
 
         // 查询数据 并且 分页
-        $doings_data = Doing::where('name','like','%'.$search.'%')->paginate(8);
+        $doings_data = Doing::where('name','like','%'.$search.'%')->where('status','1')->paginate(8);
 
         // 加载页面
         return view('home/doinglist/index', ['doings_data'=>$doings_data, 'search'=>$search]);
@@ -106,9 +107,30 @@ class Doing_listController extends Controller
         $doing = Doing::find($id);
         $doinginfo = $doing->doinginfo;
         $cid = $doing->cid;
-        $cate_doings = Doing::where('cid',$cid)->orderBy('sale','desc')->get();
+        $cate_doings3 = Doing::where('cid',$cid)->where('status','1')->orderBy('sale','desc')->limit(3)->get();
+        $cate_doings = Doing::where('cid',$cid)->where('status','1')->orderBy('sale','desc')->get();
+
+        // 判断是否登录
+        if(session('home_login')){
+            // 已登录 获取用户id
+            $uid = session('home_data')->id;
+            // 商品id
+            $gid = $doing->id;
+            // 验证是否已经收藏该商品
+            $data = DB::table('doing_collections')->where('gid',$gid)->where('uid',$uid)->first();
+            // 收藏返回1 没收藏返回0
+            if(!empty($data)){
+                $collection = 1;
+            } else {
+                $collection = 0;
+            }
+        }else{
+            // 没登录 返回0
+            $collection = 0;
+        }
+
         // 加载页面
-        return view('home/doinglist/info',['doing'=>$doing,'doinginfo'=>$doinginfo,'cate_doings'=>$cate_doings]);
+        return view('home/doinglist/info',['doing'=>$doing,'doinginfo'=>$doinginfo,'cate_doings'=>$cate_doings,'cate_doings3'=>$cate_doings3,'collection'=>$collection]);
 
     }
 
@@ -124,7 +146,7 @@ class Doing_listController extends Controller
         $search = $request->input('search','');
 
         // 查询数据 并且 分页
-        $doings_sale_data = Doing::where('name','like','%'.$search.'%')->orderBy('sale','desc')->paginate(8);
+        $doings_sale_data = Doing::where('name','like','%'.$search.'%')->where('status','1')->orderBy('sale','desc')->paginate(8);
 
         // 加载页面
         return view('home/doinglist/sale_index', ['doings_sale_data'=>$doings_sale_data, 'search'=>$search]);
@@ -142,7 +164,7 @@ class Doing_listController extends Controller
         $search = $request->input('search','');
 
         // 查询数据 并且 分页
-        $doings_price_data = Doing::where('name','like','%'.$search.'%')->orderBy('money','asc')->paginate(8);
+        $doings_price_data = Doing::where('name','like','%'.$search.'%')->where('status','1')->orderBy('money','asc')->paginate(8);
 
         // 加载页面
         return view('home/doinglist/price_index', ['doings_price_data'=>$doings_price_data, 'search'=>$search]);

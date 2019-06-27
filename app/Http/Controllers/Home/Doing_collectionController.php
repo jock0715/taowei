@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Home;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\DoingCollection;
+use DB;
 
 class Doing_collectionController extends Controller
 {
@@ -28,14 +30,37 @@ class Doing_collectionController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * 活动商品 加入收藏
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        // 判断是否登录
+        if(!session('home_login')){
+            echo json_encode(['msg'=>'err','info'=>'请先登录!']);
+            exit;
+        }
+
+        // 得到新对象
+        $collection = new DoingCollection();
+
+        // 接受数据
+        $collection->gid = $request->input('id');
+        $collection->uid = session('home_data')->id;
+
+        // 执行添加
+        $res = $collection->save();
+
+        // 判断是否收藏成功
+        if ($res) {
+            echo json_encode(['msg'=>'ok','info'=>'收藏成功']);
+            exit;
+        } else {
+            echo json_encode(['msg'=>'err','info'=>'收藏失败']);
+            exit;
+        }
     }
 
     /**
@@ -73,13 +98,29 @@ class Doing_collectionController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * 取消收藏 活动商品
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id,Request $request)
     {
-        //
+        // 接受要取消收藏的商品id
+        $gid = $id;
+        // 找出用户id
+        $uid = session('home_data')->id;
+
+        $data = DB::table('doing_collections')->where('gid',$gid)->where('uid',$uid)->first();
+        $id = $data->id;
+        // 进行删除
+        $res = DoingCollection::destroy($id);
+        // 判断是否取消收藏成功
+        if ($res) {
+            echo json_encode(['msg'=>'ok','info'=>'取消成功']);
+            exit;
+        } else {
+            echo json_encode(['msg'=>'err','info'=>'取消失败']);
+            exit;
+        }
     }
 }

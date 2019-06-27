@@ -119,8 +119,50 @@
 						<div class="tb-detail-hd">
 							<h1>	
 				 				【{{ $goods->name }}】{{ $goods->desc }}
+				 					
+									<a id="a1" href="javascript:;" onclick="del({{ $goods->id }})" style="float: right; display: {{ $collection == 1 ? 'block' : 'none' }};"><span class="am-icon-heart am-icon-fw"></span> 取消收藏</a>
+									
+					 				<a id="a2" href="javascript:;" onclick="collection({{ $goods->id }})" style="float: right; display: {{ $collection == 1 ? 'none' : 'block' }};"><span class="am-icon-heart am-icon-fw" style="color: red;"></span> 加入收藏</a>
+					 			
 	          				</h1>
 						</div>
+						<link rel="stylesheet" href="/home_login/layui/css/layui.css">
+			              <script src="/home_login/layui/layui.js"></script>
+			              <script>//一般直接写在一个js文件中
+			                layui.use(['layer', 'form'],
+			                function() {
+			                  var layer = layui.layer
+			                });
+			              </script>
+						<script type="text/javascript">
+							// 加入收藏
+							function collection(id) {
+
+								$.post('/home/goodscollection', {id:id,'_token':'{{ csrf_token() }}'}, function(res){
+									if(res.msg == 'ok'){
+										layer.msg(res.info);
+										$('#a2').css('display','none');
+										$('#a1').css('display','block');
+									} else {
+										layer.msg(res.info);
+									}
+								},'json');
+							}
+
+							// 取消收藏
+							function del(id) {
+								
+								$.post('/home/goodscollection/'+id,{'_method':'DELETE','_token':'{{ csrf_token() }}'}, function(res){
+									if(res.msg == 'ok'){
+										layer.msg(res.info);
+										$('#a1').css('display','none');
+										$('#a2').css('display','block');
+									} else {
+										layer.msg(res.info);
+									}
+								},'json');
+							}
+						</script>
 						<div class="tb-detail-list">
 							<!--价格-->
 							<div class="tb-detail-price">
@@ -259,32 +301,6 @@
                     }
                 </script> 
 				
-				<!--优惠套装-->
-				<!-- <div class="match">
-					<div class="match-title">优惠套装</div>
-					<div class="match-comment">
-						<ul class="like_list">
-							<li>
-								<div class="s_picBox">
-									<a class="s_pic" href="#"><img src="/home/images/cp.jpg"></a>
-								</div> <a class="txt" target="_blank" href="#">萨拉米 1+1小鸡腿</a>
-								<div class="info-box"> <span class="info-box-price">¥ 29.90</span> <span class="info-original-price">￥ 199.00</span> </div>
-							</li>
-							<li class="plus_icon"><i>+</i></li>
-							<li>
-								<div class="s_picBox">
-									<a class="s_pic" href="#"><img src="/home/images/cp2.jpg"></a>
-								</div> <a class="txt" target="_blank" href="#">ZEK 原味海苔</a>
-								<div class="info-box"> <span class="info-box-price">¥ 8.90</span> <span class="info-original-price">￥ 299.00</span> </div>
-							</li>
-							<li class="plus_icon"><i>=</i></li>
-							<li class="total_price">
-								<p class="combo_price"><span class="c-title">套餐价:</span><span>￥35.00</span> </p>
-								<p class="save_all">共省:<span>￥463.00</span></p> <a href="#" class="buy_now">立即购买</a> </li>
-							<li class="plus_icon"><i class="am-icon-angle-right"></i></li>
-						</ul>
-					</div>
-				</div> -->
 				<div class="clear"></div>
 				
 							
@@ -297,7 +313,7 @@
 						     	<div class="mt">            
 						            <h2>推荐商品	</h2>        
 					            </div>
-						     	@foreach($cate_goods as $k=>$v)
+						     	@foreach($cate_goods3 as $k=>$v)
 							      <li>
 							      	<div class="p-img">                    
 							      		<a  href="/home/goodslist/info/{{ $v->id }}"> <img class="" src="/uploads/{{ $v->file }}"> </a>               
@@ -495,6 +511,7 @@
 										<ul class="am-avg-sm-2 am-avg-md-3 am-avg-lg-4 boxes">
 										@foreach($cate_goods as $k=>$v)
 											<li>
+											<a  href="/home/goodslist/info/{{ $v->id }}">
 												<div class="i-pic limit">
 													<img src="/uploads/{{ $v->file }}" />
 													<p>【{{ $v->name }}】{{ $v->desc }}</p>
@@ -503,6 +520,7 @@
 														<strong>{{ $v->money }}</strong>
 													</p>
 												</div>
+												</a>
 											</li>
 											@endforeach
 										</ul>

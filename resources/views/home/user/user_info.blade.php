@@ -69,7 +69,7 @@
                 </div>
                 <div class="am-form-group">
                   <label class="am-form-label">性别</label>
-                  <select name="sex" style="width: 65px;margin-left: 14px;display: inline-block;">
+                  <select name="sex" style="width: 65px;margin-left: 57px;display: inline-block;">
                     <option value="n"
                       @if($data->userinfos->sex == 'm')
                         selected
@@ -91,15 +91,15 @@
                 </div>
                 <div class="am-form-group">
                   <label class="am-form-label">生日</label>
-                  <select style="width: 60px;float: left;margin-left: 15px;">
+                  <select style="width: 60px;float: left;margin-left: 57px;">
                     <option>1997</option>
                     <option>1999</option>
                   </select>
-                  <select style="width: 50px;float: left;">
+                  <select style="width: 50px;float: left;margin-left: 10px;">
                     <option>07</option>
                     <option>09</option>
                   </select>
-                  <select style="width: 50px;float: left;">
+                  <select style="width: 50px;float: left;margin-left: 10px;">
                     <option>15</option>
                     <option>17</option>
                   </select>

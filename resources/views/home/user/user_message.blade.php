@@ -98,8 +98,7 @@
             <ul>
               <li>
                 <a href="/home/user/user_collection">收藏</a></li>
-              <li>
-                <a href="/home/user/user_foot">足迹</a></li>
+      
               <li>
                 <a href="/home/user/user_reply">评价</a></li>
               <li>

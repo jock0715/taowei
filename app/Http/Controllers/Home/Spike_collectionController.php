@@ -56,7 +56,7 @@ class Spike_collectionController extends Controller
 
         // 判断是否收藏成功
         if ($res) {
-            echo json_encode(['msg'=>'err','info'=>'收藏成功']);
+            echo json_encode(['msg'=>'ok','info'=>'收藏成功']);
             exit;
         } else {
             echo json_encode(['msg'=>'err','info'=>'收藏失败']);
@@ -111,13 +111,14 @@ class Spike_collectionController extends Controller
         // 找出用户id
         $uid = session('home_data')->id;
 
-        $data = DB::table('spike_collections')->where('gid',$gid)->where('uid',$uid)->find(1);
+        $data = DB::table('spike_collections')->where('gid',$gid)->where('uid',$uid)->first();
         $id = $data->id;
         // 进行删除
         $res = SpikeCollection::destroy($id);
         // 判断是否取消收藏成功
         if ($res) {
-            echo json_encode(['msg'=>'err','info'=>'取消成功']);
+            
+            echo json_encode(['msg'=>'ok','info'=>'取消成功']);
             exit;
         } else {
             echo json_encode(['msg'=>'err','info'=>'取消失败']);

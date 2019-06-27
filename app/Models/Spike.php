@@ -21,4 +21,5 @@ class Spike extends Model
         // 外键：一个表中的主键在另一个表中的冗余就是这外键
         return $this->hasMany('App\Models\SpikeInfo','gid');
     }
+
 }
