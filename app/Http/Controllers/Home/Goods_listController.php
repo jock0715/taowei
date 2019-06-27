@@ -101,7 +101,7 @@ class Goods_listController extends Controller
     public function info($id)
     {
 
-        // 通过id获取商品数据
+        // 通过id获取商品数据 
         $goods = Goods::find($id);
         $goodsinfo = $goods->goodsinfo;
         $cid = $goods->cid;
