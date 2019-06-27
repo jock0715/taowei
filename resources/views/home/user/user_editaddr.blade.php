@@ -1,55 +1,15 @@
-<!DOCTYPE html>
-<html>@include('home/public/userindex')
-  <meta name="csrf-token" content="{{ csrf_token() }}">
-  <link rel="stylesheet" href="/layui/css/layui.css">
-  <script src="/layui/layui.js"></script>
-  <body>
-    <!--头 -->
-    <header>
-      <article>
-        <div class="mt-logo">
-          <!--顶部导航条 -->@include('home/public/userinfo')
-          <!--悬浮搜索框-->
-          <div class="nav white">
-            <div class="logoBig">
-              <li>
-                <img src="/home/images/logobig.png"></li></div>
-            <div class="search-bar pr">
-              <a name="index_none_header_sysc" href="#"></a>
-              <form>
-                <input id="searchInput" name="index_none_header_sysc" type="text" placeholder="搜索" autocomplete="off">
-                <input id="ai-topsearch" class="submit am-btn" value="搜索" index="1" type="submit"></form>
-            </div>
-          </div>
-          <div class="clear"></div>
-        </div>
-      </article>
-    </header>
-    <!--头 -->
-    <div class="nav-table">
-      <div class="long-title">
-        <span class="all-goods">全部分类</span></div>
-      <div class="nav-cont">
-        <ul>
-          <li class="index">
-            <a href="/home/#">首页</a></li>
-          <li class="qc">
-            <a href="/home/#">闪购</a></li>
-          <li class="qc">
-            <a href="/home/#">限时抢</a></li>
-          <li class="qc">
-            <a href="/home/#">团购</a></li>
-          <li class="qc last">
-            <a href="/home/#">大包装</a></li>
-        </ul>
-        <div class="nav-extra">
-          <i class="am-icon-user-secret am-icon-md nav-user"></i>
-          <b>
-          </b>我的福利
-          <i class="am-icon-angle-right" style="padding-left: 10px;"></i></div>
-      </div>
-    </div>
-    <b class="line"></b>
+@include('home/public/header')
+
+    <link href="/home/css/personal.css" rel="stylesheet" type="text/css">
+    <link href="/home/css/addstyle.css" rel="stylesheet" type="text/css">
+    <script src="/home/AmazeUI-2.4.2/assets/js/jquery.min.js" type="text/javascript"></script>
+    <script src="/home/AmazeUI-2.4.2/assets/js/amazeui.js"></script>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <style type="text/css">
+      .nav.white .logoBig img {
+        width: 11%;
+    }
+    </style>
     <div class="center">
       <div class="col-main">
         <!-- 内容 -->
@@ -166,6 +126,9 @@
       <aside class="menu">@include('home/public/menu')</aside></div>
   </body>
 </html>
+<!-- 修改密码模态框 结束 -->
+<link rel="stylesheet" href="/home_login/layui/css/layui.css">
+<script src="/home_login/layui/layui.js"></script>
 <script type="text/javascript">//一般直接写在一个js文件中
   layui.use(['layer', 'form'],
   function() {

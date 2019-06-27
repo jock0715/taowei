@@ -90,6 +90,9 @@
 </html>
 
 
+<!-- 修改密码模态框 结束 -->
+<link rel="stylesheet" href="/home_login/layui/css/layui.css">
+<script src="/home_login/layui/layui.js"></script>
 <script>
 //一般直接写在一个js文件中
   layui.use(['layer', 'form'], function(){

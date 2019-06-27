@@ -1,4 +1,5 @@
 @include('home/public/header')
+
 		<link href="/home/css/personal.css" rel="stylesheet" type="text/css">
 		<link href="/home/css/orstyle.css" rel="stylesheet" type="text/css">
 		<!-- <link rel="stylesheet" href="/layui/css/layui.css">
@@ -50,7 +51,7 @@
 											<!--交易成功-->
 											<div class="order-status5">
 												<div class="order-title">
-													<div class="dd-num">订单编号：<a href="/home/user/user_replyed/{{ $v->id }}">{{ $v->number}}</a></div>
+													<div class="dd-num">订单编号：<a href="javascript:;">{{ $v->number}}</a></div>
 													<span>成交时间：{{ $v->created_at }}</span>
 													<!--    <em>店铺：小桔灯</em>-->
 												</div>
@@ -59,7 +60,7 @@
 														<ul class="item-list">
 															<li class="td td-item">
 																<div class="item-pic" style="width:130px;margin-top: 2px;margin-left: -10px">
-																	<a href="/home/user/user_replyed/{{ $v->id }}" class="J_MakePoint">
+																	<a href="#" class="J_MakePoint">
 																		<img src="/uploads/{{ $v->file}}" class="itempic J_ItemImg">
 																	</a>
 																</div>
@@ -145,49 +146,27 @@
 																	</a>
 																</div>
 
-																<div class="item-info">
-																	<div class="item-basic-info">
-																		<a href="#">
-																			<p>美康粉黛醉美唇膏 持久保湿滋润防水不掉色</p>
-																			<p class="info-little">颜色：12#川南玛瑙
-																				<br/>包装：裸装 </p>
-
 																<div class="item-info" style="padding-left:10px 20px">
 																	<div class="item-basic-info">
 																		<a href="#">
 																			<p>{{ $v->name }}</p>
 																			<p class="info-little"> {{ $v->desc }}</p>
-
 																		</a>
 																	</div>
 																</div>
 															</li>
 															<li class="td td-price">
 																<div class="item-price">
-
-																	333.00
-
 																	{{ $v->price }}
-
 																</div>
 															</li>
 															<li class="td td-number">
 																<div class="item-number">
-
-																	<span>×</span>2
-
 																	<span>×</span>{{ $v->num }}
-
 																</div>
 															</li>
 															<li class="td td-operation">
 																<div class="item-operation">
-
-																	<a href="refund.html">退款</a>
-																</div>
-															</li>
-														</ul>
-
 																	
 																</div>
 															</li>
@@ -246,12 +225,6 @@
 																		<img src="/uploads/{{ $v->file}}" class="itempic J_ItemImg">
 																	</a>
 																</div>
-																<div class="item-info">
-																	<div class="item-basic-info">
-																		<a href="#">
-																			<p>美康粉黛醉美唇膏 持久保湿滋润防水不掉色</p>
-																			<p class="info-little">颜色：12#川南玛瑙
-																				<br/>包装：裸装 </p>
 
 																<div class="item-info" style="padding-left:10px 20px">
 																	<div class="item-basic-info">
@@ -264,35 +237,20 @@
 															</li>
 															<li class="td td-price">
 																<div class="item-price">
-
-																	333.00
-
 																	{{ $v->price }}
-
 																</div>
 															</li>
 															<li class="td td-number">
 																<div class="item-number">
-
-																	<span>×</span>2
-
 																	<span>×</span>{{ $v->num }}
-
 																</div>
 															</li>
 															<li class="td td-operation">
 																<div class="item-operation">
-
-																	<a href="refund.html">退款/退货</a>
-																</div>
-															</li>
-														</ul>
-
 																	
 																</div>
 															</li>
 														</ul>
-
 
 													</div>
 													<div class="order-right">
@@ -373,6 +331,7 @@
 																</div>
 															</li>
 														</ul>
+
 													</div>
 													<div class="order-right">
 														<li class="td td-amount">
