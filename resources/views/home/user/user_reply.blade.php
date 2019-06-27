@@ -17,51 +17,58 @@
           <div class="user-comment">
             <!--标题 -->
             <div class="am-cf am-padding">
-              <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">发表评论</strong> / <small>Make&nbsp;Comments</small></div>
+              <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">商品评论</strong> / <small>Make&nbsp;Comments</small></div>
             </div>
             <hr/>
 
             <div class="comment-main">
-              <div class="comment-list">
+            @foreach($data as $k=>$v)
+              <div class="comment-list" style="height: 150px;">
                 <div class="item-pic">
                   <a href="#" class="J_MakePoint">
-                    <img src="/uploads/" class="itempic">
+                    <img src="/uploads/{{ $v->file }}" class="itempic">
                   </a>
                 </div>
-                <div class="item-title">
+                <div class="item-title" >
                   <div class="item-name">
                     <a href="#">
-                      <p class="item-basic-info">美康粉黛醉美唇膏 持久保湿滋润防水不掉色</p>
+                      <p title="{{$v->commentorders->message}}" class="item-basic-info" style="color: #666">{{$v->commentorders->message}}</p>
                     </a>
                   </div>
                   <div class="item-info">
                     <div class="info-little">
-                      <span>颜色：洛阳牡丹</span>
-                      <span>包装：裸装</span>
+                      颜色：<span style="color: red">{{$v->commentorders->desc}}</span>
                     </div>
                     <div class="item-price">
-                      价格：<strong>19.88元</strong>
+                      价格：<strong style="color: red">{{ $v->commentorders->price }}&nbsp;</strong>元
                     </div>                    
                   </div>
                 </div>
                 <div class="clear"></div>
-                <div class="item-comment">
-                  <textarea placeholder="请写下对宝贝的感受吧，对他人帮助很大哦！"></textarea>
-                </div>
-                <div class="filePic">
-                  <input type="file" class="inputPic" allowexts="gif,jpeg,jpg,png,bmp" accept="image/*" >
-                  <span>晒照片(0/5)</span>
-                  <img src="/home/images/image.jpg" alt="">
+                <div class="item-comment" style="border: 1px solid #999;">
+                  <textarea readonly>{{ $v->content }}</textarea>
                 </div>
                 <div class="item-opinion">
-                  <li><i class="op1"></i>好评</li>
-                  <li><i class="op2"></i>中评</li>
-                  <li><i class="op3"></i>差评</li>
+                  <li><i class="op1 
+                    @if($v->comment == 0)
+                      active
+                    @endif
+                    "></i>好评</li>
+                  <li><i class="op2 
+                    @if($v->comment == 1)
+                      active
+                    @endif
+                    "></i>中评</li>
+                  <li><i class="op3 
+                    @if($v->comment == 2)
+                      active
+                    @endif
+                    "></i>差评</li>
                 </div>
               </div>
-              
+            @endforeach
               <!--多个商品评论-->             
-             
+  
           <script type="text/javascript">
             $(document).ready(function() {
               $(".comment-list .item-opinion li").click(function() {  
@@ -72,18 +79,12 @@
               });
              })
           </script>         
-          
-                        
-              
             </div>
-
           </div>
-
         </div>
         <!--底部-->
         @include('home/public/footer')
       </div>
-
       <aside class="menu">
          @include('home/public/menu')
       </aside>

@@ -139,7 +139,7 @@ class Spike_listController extends Controller
             $gid = 0;
         }
 
-        $git = 0;
+        $gid = 0;
         // 加载页面
         return view('home/spikelist/info',['spike'=>$spike,'spikeinfo'=>$spikeinfo,'cate_spikes'=>$cate_spikes,'gid'=>$gid]);
 

@@ -50,7 +50,7 @@
                 <div class="clear"></div>
                 <form id="form1">
                 <div class="item-comment">
-                  <textarea id="text1" placeholder="请写下对宝贝的感受吧，对他人帮助很大哦！" name="content"></textarea>
+                  <textarea id="text1" placeholder="请写下对宝贝的感受吧，对他人帮助很大哦！" name="content" value=""></textarea>
                   <input type="hidden" name="uid" value="{{ $data->uid }}">
                   <input type="hidden" name="gid" value="{{ $data->gid }}">
                   <input type="hidden" name="oid" value="{{ $data->id }}">
@@ -59,7 +59,7 @@
                   <select id="select1" name="comment" style="width: 60px;height: 25px;margin-left: 535px;">
                     <option value="0">好评</option>
                     <option value="1">中评</option>
-                    <option value="2">查评</option>
+                    <option value="2">差评</option>
                   </select> 
                 </div>     
                 <div class="info-btn">
@@ -67,7 +67,7 @@
                 </div>
                 </form>
               </div>              
-          <script type="text/javascript">
+<!--           <script type="text/javascript">
             $(document).ready(function() {
               $(".comment-list .item-opinion li").click(function() {  
                 $(this).prevAll().children('i').removeClass("active");
@@ -75,7 +75,7 @@
                 $(this).children('i').addClass("active");
               });
              })
-          </script>         
+          </script>  -->        
             </div>
           </div>
         </div>
@@ -107,17 +107,20 @@
       }
   });
 
-    let uid = $('#form1 input[name=uid]').val();
-    let gid = $('#form1 input[name=gid]').val();
-    let oid = $('#form1 input[name=oid]').val();
-    let comment = $('#select1').val();
-    let content = $('#text1').val();
+    
+
     // let phone = $('#form1 input[name=phone]').val();
     // let phone_preg = /^[1]{1}[3-9]{1}\d{9}$/;
     // let email = $('#form1 input[name=email]').val();
     // let email_preg = /^[\w]{3,12}@[\w]+\.[\w]+$/;
 
   $('#form1').submit(function(){
+    
+    let uid = $('#form1 input[name=uid]').val();
+    let gid = $('#form1 input[name=gid]').val();
+    let oid = $('#form1 input[name=oid]').val();
+    let comment = $('#select1').val();
+    let content = $('#text1').val();
 
     $.post('/home/user/user_replyeds',{uid,gid,oid,comment,content},function(res){
       if(res.msg == 'ok'){

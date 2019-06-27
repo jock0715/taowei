@@ -25,4 +25,12 @@ class Comment extends Model
     {
     	return $this->belongsTo('App\Models\Order','oid');
     }
+
+    // 一对多
+    public function commentuinfo()
+    {
+        return $this->belongsTo('App\Models\UserInfos','uid');
+    }
+
+    
 }

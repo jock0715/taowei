@@ -23,7 +23,7 @@
 				<ul class="message-l">
 					<div class="topMessage">
 						<div class="menu-hd">
-							<a href="/home/login" target="_top" class="h">欢迎，{{ session('home_data')->uname }}</a>&nbsp;
+							<a href="/home/user/user_info" target="_top" class="h">欢迎，{{ session('home_data')->uname }}</a>&nbsp;
 							|<a href="/home/login/logout" target="_top" class="h" style="color: red">&nbsp;退出登录</a>
 						</div>
 					</div>

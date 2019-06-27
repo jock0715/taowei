@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Goods;
 use App\Models\GoodsInfo;
+use App\Models\comment;
+use App\Models\Order;
 
 class Goods_listController extends Controller
 {
@@ -105,8 +107,12 @@ class Goods_listController extends Controller
         $goodsinfo = $goods->goodsinfo;
         $cid = $goods->cid;
         $cate_goods = Goods::where('cid',$cid)->orderBy('sale','desc')->get();
-        // 加载页面
-        return view('home/goodslist/info',['goods'=>$goods,'goodsinfo'=>$goodsinfo,'cate_goods'=>$cate_goods]);
+
+        // 查看评价
+        $comment = Comment::where('gid',$id);
+        $comment_data = $comment->paginate(2);
+
+        return view('home/goodslist/info',['goods'=>$goods,'goodsinfo'=>$goodsinfo,'cate_goods'=>$cate_goods,'comment_data'=>$comment_data]);
 
     }
 
