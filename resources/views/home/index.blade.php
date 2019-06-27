@@ -8,7 +8,7 @@
 								<li class=""><a><img src="/uploads/{{ $v->url }}" title="{{ $v->desc }}" /></a></li>
 								@endif
 								@endforeach
-							</ul>
+							</ul> 
 						</div>
 						<div class="clear"></div>	
 			</div>
@@ -227,14 +227,16 @@
 
 						@foreach($spike4_data as $k=>$v)
 						<div class="am-u-sm-3 ">
+							<a href="/home/spikelist/info/{{ $v->id }}">
 							<div class="icon-sale one "></div>	
 								<h4>秒杀</h4>							
 							<div class="activityMain ">
-								<a href="/home/spikelist/info/{{ $v->id }}"><img src="/uploads/{{ $v->file }}"></img></a>
+								<img src="/uploads/{{ $v->file }}"></img>
 							</div>
 							<div class="info ">
 								<h3>{{ $v->name }}</h3>
-							</div>														
+							</div>
+							</a>													
 						</div>
 						@endforeach
 
@@ -253,14 +255,16 @@
 					  <div class="am-g am-g-fixed ">
 					  	@foreach($doing4_data as $k=>$v)
 						<div class="am-u-sm-3 ">
+							<a href="/home/doinglist/info/{{ $v->id }}">
 							<div class="icon-sale one "></div>	
 								<h4>活动</h4>							
 							<div class="activityMain ">
-								<a href="/home/doinglist/info/{{ $v->id }}"><img src="/uploads/{{ $v->file }}"></img></a>
+								<img src="/uploads/{{ $v->file }}"></img>
 							</div>
 							<div class="info ">
 								<h3>{{ $v->name }}</h3>
-							</div>														
+							</div>
+							</a>												
 						</div>
 						@endforeach
 					  </div>
@@ -283,6 +287,7 @@
 					<div class="am-g am-g-fixed floodFour">
 						@foreach($goods10_data as $k=>$v)
 						<div class="am-u-sm-7 am-u-md-4 text-two">
+								<a href="/home/goodslist/info/{{ $v->id }}">
 								<div class="outer-con ">
 
 									<div class="title ">
@@ -293,7 +298,8 @@
 									</div>
 									<!-- <i class="am-icon-shopping-basket am-icon-md  seprate"></i> -->
 								</div>
-								<a href="/home/goodslist/info/{{ $v->id }}"><img src="/uploads/{{ $v->file }}"></a>
+								<img src="/uploads/{{ $v->file }}">
+								</a>
 						</div>
 						<!-- <div class="am-u-sm-3 am-u-md-2 text-three big">
 							<div class="outer-con " >
