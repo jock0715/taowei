@@ -206,8 +206,9 @@
 											<a href="javascript:;" title="关闭" class="close">×</a>
 										</div>
 										<div class="theme-popbod dform">
-                    <form action="/home/shopping/add/{{ $doing->id }}" method="post" >
+                    <form action="/home/shopping/doingadd/{{ $doing->id }}" method="post" >
                         {{ csrf_field() }}
+                       					<input type="hidden" name="did" value="{{ $doing->id }}">
 												<div class="theme-signin-left">
 
 													<!-- <div class="theme-options">
@@ -296,7 +297,7 @@
                 <script>
                     function abc(id){
                         let num = $('#text_box').val();
-                        location.href='/home/order/create?id='+id+'&num='+num;
+                        location.href='/home/order/docreate?id='+id+'&num='+num;
                     }
                 </script> 
 				

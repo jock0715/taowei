@@ -8,7 +8,8 @@
   }
 </style>
 
-<div class="take-delivery">
+<div class="take-delivery" style="margin-top: 105px;
+    margin-left: 495px;    padding-bottom: 200px;">
  <div class="status">
    <p class="h1">您已成功付款</p><br><br>
    <div class="successInfo">

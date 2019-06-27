@@ -106,8 +106,14 @@ class Spike_listController extends Controller
         $spike = Spike::find($id);
         $spikeinfo = $spike->spikeinfo;
         $cid = $spike->cid;
+
         $cate_spikes3 = Spike::where('cid',$cid)->where('status','1')->orderBy('sale','desc')->limit(3)->get();
         $cate_spikes = Spike::where('cid',$cid)->where('status','1')->orderBy('sale','desc')->get();
+
+        $cate_spikes = Spike::where('cid',$cid)
+                             ->orderBy('sale','desc')
+                             ->get();
+
 
         // 判断是否登录
         if(session('home_login')){
@@ -132,6 +138,14 @@ class Spike_listController extends Controller
 
         // 加载页面
         return view('home/spikelist/info',['spike'=>$spike,'spikeinfo'=>$spikeinfo,'cate_spikes'=>$cate_spikes,'cate_spikes3'=>$cate_spikes3,'collection'=>$collection]);
+
+        // 加载页面
+        return view('home/spikelist/info',
+            [
+                'spike'=>$spike,
+                'spikeinfo'=>$spikeinfo,
+                'cate_spikes'=>$cate_spikes,
+            ]);
 
     }
 

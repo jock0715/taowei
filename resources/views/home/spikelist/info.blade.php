@@ -1,4 +1,4 @@
-@include('/home/public/header')
+@include('/home/public/header') 
 
 		<style type="text/css">
 			.tb-btn input{
@@ -120,11 +120,13 @@
 							<h1>	
 				 				【{{ $spike->name }}】{{ $spike->desc }}
 
+
 									
 									<a id="a1" href="javascript:;" onclick="del({{ $spike->id }})" style="float: right; display: {{ $collection == 1 ? 'block' : 'none' }};"><span class="am-icon-heart am-icon-fw" ></span> 取消收藏</a>
 								
 					 				<a id="a2" href="javascript:;" onclick="collection({{ $spike->id }})" style="float: right; display: {{ $collection == 1 ? 'none' : 'block' }};"><span class="am-icon-heart am-icon-fw" style="color: red;"></span> 加入收藏</a>
 					 				
+								
 	          				</h1>
 						</div>
 						<link rel="stylesheet" href="/home_login/layui/css/layui.css">
@@ -202,13 +204,14 @@
 									<div class="theme-popover-mask"></div>
 
 									<div class="theme-popover">
-										<div class="theme-span"></div>
+										<div class="theme-span"></div> 
 										<div class="theme-poptit">
 											<a href="javascript:;" title="关闭" class="close">×</a>
 										</div>
 										<div class="theme-popbod dform">
                     <form action="/home/shopping/add/{{ $spike->id }}" method="post" >
                         {{ csrf_field() }}
+                        						<input type="hidden" name="sid" value="{{ $spike->id }}">
 												<div class="theme-signin-left">
 
 													<!-- <div class="theme-options">

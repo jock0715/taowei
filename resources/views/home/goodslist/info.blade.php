@@ -28,6 +28,14 @@
 		<script type="text/javascript" src="/home/js/jquery.flexslider.js"></script>
 		<script type="text/javascript" src="/home/js/list.js"></script>
         <meta name="csrf-token" content="{{ csrf_token() }}">
+        <link rel="stylesheet" href="/layui/css/layui.css">
+  		<script src="/layui/layui.js"></script>
+  		<script type="text/javascript">//一般直接写在一个js文件中
+		  layui.use(['layer', 'form'],
+		  function() {
+		    var layer = layui.layer
+		  });
+		</script>
         @include('home/public/message')
           
 			<div class="listMain">
@@ -207,8 +215,9 @@
 											<a href="javascript:;" title="关闭" class="close">×</a>
 										</div>
 										<div class="theme-popbod dform">
-                    <form action="/home/shopping/add/{{ $goods->id }}" method="post" >
-                        {{ csrf_field() }}
+                    <form action="/home/shopping/goodsadd/{{ $goods->id }}" method="post" >
+                        {{ csrf_field() }} 
+                        						<input type="hidden" name="gid" value="{{ $goods->id }}">
 												<div class="theme-signin-left">
 
 													<!-- <div class="theme-options">
@@ -297,7 +306,7 @@
                 <script>
                     function abc(id){
                         let num = $('#text_box').val();
-                        location.href='/home/order/create?id='+id+'&num='+num;
+                        location.href='/home/order/gocreate?id='+id+'&num='+num;
                     }
                 </script> 
 				

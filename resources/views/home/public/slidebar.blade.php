@@ -51,7 +51,6 @@
 							<p style="color: white">
 								购物车
 							</p>
-							<p class="cart_num ">0</p>
 						</div>
 					</a>
 
