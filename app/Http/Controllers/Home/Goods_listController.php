@@ -109,13 +109,9 @@ class Goods_listController extends Controller
         $goodsinfo = $goods->goodsinfo;
         $cid = $goods->cid;
 
-        $cate_goods = Goods::where('cid',$cid)->orderBy('sale','desc')->get();
-
         // 查看评价
         $comment = Comment::where('gid',$id);
         $comment_data = $comment->paginate(2);
-
-        return view('home/goodslist/info',['goods'=>$goods,'goodsinfo'=>$goodsinfo,'cate_goods'=>$cate_goods,'comment_data'=>$comment_data]);
 
         $cate_goods3 = Goods::where('cid',$cid)->where('status','1')->orderBy('sale','desc')->limit(3)->get();
         $cate_goods = Goods::where('cid',$cid)->where('status','1')->orderBy('sale','desc')->get();
@@ -140,7 +136,7 @@ class Goods_listController extends Controller
         }
 
         // 加载页面
-        return view('home/goodslist/info',['goods'=>$goods,'goodsinfo'=>$goodsinfo,'cate_goods'=>$cate_goods,'cate_goods3'=>$cate_goods3,'collection'=>$collection]);
+        return view('home/goodslist/info',['goods'=>$goods,'goodsinfo'=>$goodsinfo,'cate_goods'=>$cate_goods,'cate_goods3'=>$cate_goods3,'collection'=>$collection,'comment_data'=>$comment_data]);
 
 
     }
