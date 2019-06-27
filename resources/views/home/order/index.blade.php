@@ -51,7 +51,7 @@
 											<!--交易成功-->
 											<div class="order-status5">
 												<div class="order-title">
-													<div class="dd-num">订单编号：<a href="javascript:;">{{ $v->number}}</a></div>
+													<div class="dd-num">订单编号：<a href="/home/user/user_replyed/{{ $v->id }}">{{ $v->number}}</a></div>
 													<span>成交时间：{{ $v->created_at }}</span>
 													<!--    <em>店铺：小桔灯</em>-->
 												</div>
@@ -60,7 +60,7 @@
 														<ul class="item-list">
 															<li class="td td-item">
 																<div class="item-pic" style="width:130px;margin-top: 2px;margin-left: -10px">
-																	<a href="#" class="J_MakePoint">
+																	<a href="/home/user/user_replyed/{{ $v->id }}" class="J_MakePoint">
 																		<img src="/uploads/{{ $v->file}}" class="itempic J_ItemImg">
 																	</a>
 																</div>
