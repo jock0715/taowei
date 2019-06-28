@@ -28,7 +28,7 @@ class IndexController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {   //获取分类
         $cate_data = self::getPidCateData(0);
         
         // 获取轮播数据
@@ -44,7 +44,7 @@ class IndexController extends Controller
 
          // 获取广告数据
         
-        $advertis_data = DB::table('advertis')->get(); 
+        $advertis_data = DB::table('advertis')->orderBy('id','asc')->limit(3)->get(); 
 
         //获取友情链接数据
         $links_data = DB::table('links')->get();
