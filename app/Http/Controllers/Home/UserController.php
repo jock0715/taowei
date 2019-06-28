@@ -10,6 +10,8 @@ use App\Models\UserInfos;
 use App\Models\UserAddrs;
 use App\Models\Order;
 use App\Models\Comment;
+use App\Models\Comment_doing;
+use App\Models\Comment_spike;
 use App\Models\SpikeCollection;
 use App\Models\DoingCollection;
 use App\Models\GoodsCollection;
@@ -410,39 +412,89 @@ class UserController extends Controller
         // 开启事务
         DB::beginTransaction();
         $data = $request->all();
+        if($data['gid']){
+            $comments = new Comment;
+            $comments->uid = $data['uid'];
+            $comments->gid = $data['gid'];
+            $comments->oid = $data['oid'];
+            $comments->comment = $data['comment'];
+            $comments->content = $data['content']?$data['content']:'该用户未评价,默认好评';
+            $res1 = $comments->save();
+            if($res1){
+                $oid = $comments->oid;
+            }
+            
+            $orders = Order::find($oid);
+            $orders->status = 3;
+            $res2 = $orders->save();
 
-        $comments = new Comment;
-        $comments->uid = $data['uid'];
-        $comments->gid = $data['gid'];
-        $comments->oid = $data['oid'];
-        $comments->comment = $data['comment'];
-        $comments->content = $data['content']?$data['content']:'该用户未评价,默认好评';
-        $res1 = $comments->save();
-        if($res1){
-            $oid = $comments->oid;
+            if($res1 && $res2){
+                // 成功提交事务
+                DB::commit();
+                // 成功返回用户显示列表路由,并提示信息
+                echo json_encode(['msg'=>'ok','info'=>'发表评论成功 !']);
+            }else{
+                // 失败回滚事务
+                DB::rollBack();
+                // 失败,回滚当前页面,并提示信息
+                echo json_encode(['msg'=>'err','info'=>'发表评论失败 !']);
+            }
+        }elseif($data['did']){
+            $comments = new Comment_doing;
+            $comments->uid = $data['uid'];
+            $comments->did = $data['did'];
+            $comments->oid = $data['oid'];
+            $comments->comment = $data['comment'];
+            $comments->content = $data['content']?$data['content']:'该用户未评价,默认好评';
+            $res1 = $comments->save();
+            if($res1){
+                $oid = $comments->oid;
+            }
+            
+            $orders = Order::find($oid);
+            $orders->status = 3;
+            $res2 = $orders->save();
+
+            if($res1 && $res2){
+                // 成功提交事务
+                DB::commit();
+                // 成功返回用户显示列表路由,并提示信息
+                echo json_encode(['msg'=>'ok','info'=>'发表评论成功 !']);
+            }else{
+                // 失败回滚事务
+                DB::rollBack();
+                // 失败,回滚当前页面,并提示信息
+                echo json_encode(['msg'=>'err','info'=>'发表评论失败 !']);
+            }
+        }else{
+            $comments = new Comment_spike;
+            $comments->uid = $data['uid'];
+            $comments->sid = $data['sid'];
+            $comments->oid = $data['oid'];
+            $comments->comment = $data['comment'];
+            $comments->content = $data['content']?$data['content']:'该用户未评价,默认好评';
+            $res1 = $comments->save();
+            if($res1){
+                $oid = $comments->oid;
+            }
+            
+            $orders = Order::find($oid);
+            $orders->status = 3;
+            $res2 = $orders->save();
+
+            if($res1 && $res2){
+                // 成功提交事务
+                DB::commit();
+                // 成功返回用户显示列表路由,并提示信息
+                echo json_encode(['msg'=>'ok','info'=>'发表评论成功 !']);
+            }else{
+                // 失败回滚事务
+                DB::rollBack();
+                // 失败,回滚当前页面,并提示信息
+                echo json_encode(['msg'=>'err','info'=>'发表评论失败 !']);
+            }
         }
         
-        $orders = Order::find($oid);
-        $orders->status = 3;
-        $res2 = $orders->save();
-
-        if($res1 && $res2){
-            // 成功提交事务
-            DB::commit();
-            // 成功返回用户显示列表路由,并提示信息
-            echo json_encode(['msg'=>'ok','info'=>'发表评论成功 !']);
-        }else{
-            // 失败回滚事务
-            DB::rollBack();
-            // 失败,回滚当前页面,并提示信息
-            echo json_encode(['msg'=>'err','info'=>'发表评论失败 !']);
-        }
-
-        // if($res){
-        //     echo json_encode(['msg'=>'ok','info'=>'发表评论成功 !']);
-        // }else{
-        //     echo json_encode(['msg'=>'err','info'=>'发表评论失败 !']);
-        // }
     }
 
     

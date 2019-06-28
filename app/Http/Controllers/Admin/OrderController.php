@@ -20,6 +20,7 @@ class OrderController extends Controller
         $order = new Order;
         $order_data = $order->paginate(5);
         //dd($order_data);
+
         return view('admin/order/index',['order_data'=>$order_data]);
     }
 

@@ -54,6 +54,8 @@
                   <input type="hidden" name="uid" value="{{ $data->uid }}">
                   <input type="hidden" name="gid" value="{{ $data->gid }}">
                   <input type="hidden" name="oid" value="{{ $data->id }}">
+                  <input type="hidden" name="did" value="{{ $data->did }}">
+                  <input type="hidden" name="sid" value="{{ $data->sid }}">
                 </div>
                 <div class="item-opinion">
                   <select id="select1" name="comment" style="width: 60px;height: 25px;margin-left: 535px;">
@@ -119,10 +121,12 @@
     let uid = $('#form1 input[name=uid]').val();
     let gid = $('#form1 input[name=gid]').val();
     let oid = $('#form1 input[name=oid]').val();
+    let did = $('#form1 input[name=did]').val();
+    let sid = $('#form1 input[name=sid]').val();
     let comment = $('#select1').val();
     let content = $('#text1').val();
 
-    $.post('/home/user/user_replyeds',{uid,gid,oid,comment,content},function(res){
+    $.post('/home/user/user_replyeds',{did,sid,uid,gid,oid,comment,content},function(res){
       if(res.msg == 'ok'){
         layer.msg(res.info);
         setTimeout(function(){
