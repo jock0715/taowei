@@ -129,6 +129,10 @@ Route::post('/home/login/dologin','Home\LoginController@dologin');
 // 前台执行退出登录功能
 Route::get('/home/login/logout','Home\LoginController@logout');
 
+//前台 分类商品
+Route::resource('/home/catelist','Home\Cate_listController');
+
+
 // 前台 商品详情面
 Route::get('/home/goodslist/info/{id}','Home\Goods_listController@info');
 // 前台 秒杀商品 列表页 按销售量从多到少排序

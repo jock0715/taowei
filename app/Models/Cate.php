@@ -11,7 +11,7 @@ class Cate extends Model
     public $table = 'cates';
 
     // 配置一对多模型关系
-    public function cate()
+    public function categoods()
     {
     	// 外键：一个表中的主键在另一个表中的就是这外键
     	return $this->hasMany('App\Models\Goods','cid');
