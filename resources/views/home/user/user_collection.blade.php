@@ -188,8 +188,10 @@
           </div>
 
         </div>
-        <!--底部-->
+
+        <!-- 内容 -->
         @include('home/public/footer')
+        <!--底部-->
       </div>
 
       <aside class="menu">

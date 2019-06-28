@@ -24,7 +24,7 @@ class Shopping_infoController extends Controller
             $data = DB::table('shopping_infos')
                     ->where('uid',$uid)
                     ->get();
-            dd($data);
+            // dd($data);
 
             // 获取全部购物车的总价格 跟条数
             $demp = [];
@@ -49,18 +49,158 @@ class Shopping_infoController extends Controller
     } 
 
     /**
-     * 加入购物车
+     * 秒杀商品加入购物车
      *
      * @return \Illuminate\Http\Response
      */
     public function add(Request $request,$id)
     {   
+        if (empty(session('home_data'))) {
+            return view('home/login/login');
+        }
         // 通过id获取商品数据
         $data = DB::table('spikes')
                     ->select('name','desc','file','money')
                     ->where('id',$id)
                     ->first();
 
+        // 获取数据
+        $sid = $id;
+        $data->num = $request->input('num');
+        $data->sid = $sid;
+        $data->price = $data->money*$data->num;
+        $data->created_at = date('Y-m-d H:i:s');
+        
+        // 判断用户是否登录
+        if (empty(session('home_data')->id)) {
+            return back();
+        } else {
+            $data->uid = session('home_data')->id;
+        }
+        
+        // 把对象转换成数组格式
+        $shopping = [];
+        foreach ($data as $k => $v) {
+            $shopping[$k]=$v;
+        }
+
+        
+        // 对数据库进行查询操作
+        $gid_data = DB::table('shopping_infos')
+                    ->where('sid',$sid)
+                    ->where('uid',$data->uid)
+                    ->first();
+         // dd($data,$shopping,$gid_data);           
+        // 判断购物车是否存在同一商品
+        if (empty($gid_data)) {
+            // 不存在则添加
+            $data->num = $request->input('num');
+            $res = DB::table('shopping_infos')->insert($shopping);
+            if ($res) {
+                return back();
+            } else {
+                echo '添加失败';
+            }
+        } else {
+            // 存在则数量增加
+            $data->num = $data->num + $gid_data->num;
+            $price = $gid_data->money * $data->num;
+            // 对数据库进行修改
+            $res = DB::table('shopping_infos')
+                       ->where('sid',$sid)
+                       ->update(['num'=>$data->num ,'price'=>$price]);
+            if ($res) {
+            return back();
+            } else {
+                echo '添加失败';
+            }
+        }
+    }
+
+        /**
+     * 活动商品加入购物车
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function doingadd(Request $request,$id)
+    {   
+        if (empty(session('home_data'))) {
+            return view('home/login/login');
+        }
+        // 通过id获取商品数据
+        $data = DB::table('doings')
+                    ->select('name','desc','file','money')
+                    ->where('id',$id)
+                    ->first();
+        // dd($data);
+        // 获取数据
+        $did = $id;
+        $data->num = $request->input('num');
+        $data->did = $did;
+        $data->price = $data->money*$data->num;
+        $data->created_at = date('Y-m-d H:i:s');
+        // dd($data->num);
+        // 判断用户是否登录
+        if (empty(session('home_data')->id)) {
+            return back();
+        } else {
+            $data->uid = session('home_data')->id;
+        }
+        // dd($data->uid);
+        // 把对象转换成数组格式
+        $shopping = [];
+        foreach ($data as $k => $v) {
+            $shopping[$k]=$v;
+        }
+        
+        // 对数据库进行查询操作
+        $gid_data = DB::table('shopping_infos')
+                    ->where('did',$did)
+                    ->where('uid',$data->uid)
+                    ->first();
+                    
+        // 判断购物车是否存在同一商品
+        if (empty($gid_data)) {
+            // 不存在则添加
+            $data->num = $request->input('num');
+            $res = DB::table('shopping_infos')->insert($shopping);
+            if($res){
+                return back();
+            }else{
+                echo '添加失败';
+            }
+        } else {
+            // 存在则数量增加
+            $data->num = $data->num + $gid_data->num;
+            $price = $gid_data->money * $data->num;
+            // 对数据库进行修改操作
+            $res = DB::table('shopping_infos')
+                       ->where('did',$did)
+                       ->update(['num'=>$data->num ,'price'=>$price]);
+            if ($res) {
+            return back();
+            } else {
+                echo '添加失败';
+            }
+        }
+    }
+
+    /**
+     * 商品加入购物车
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function goodsadd(Request $request,$id)
+    {   
+        if (empty(session('home_data'))) {
+            return view('home/login/login');
+        }
+        // 通过id获取商品数据
+        $data = DB::table('goods')
+                    ->select('name','desc','file','money')
+                    ->where('id',$id)
+                    ->first();
+        // dd($data);
         // 获取数据
         $gid = $id;
         $data->num = $request->input('num');
@@ -101,17 +241,18 @@ class Shopping_infoController extends Controller
             // 存在则数量增加
             $data->num = $data->num + $gid_data->num;
             $price = $gid_data->money * $data->num;
-            // $res = DB::update("update shopping_infos set num = $data->num,price=$price where gid = $gid");
+            
             $res = DB::table('shopping_infos')
                        ->where('gid',$gid)
                        ->update(['num'=>$data->num ,'price'=>$price]);
             if ($res) {
-            return back();
+                return back();
             } else {
                 echo '添加失败';
             }
         }
     }
+
 
     /**
      * 增加数量

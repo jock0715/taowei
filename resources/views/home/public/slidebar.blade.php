@@ -8,7 +8,7 @@
 						<div class="ibar_login_box status_login " style="display: none;">
 							@if(!empty(session('home_info')))
 							<div class="avatar_box ">
-								<a href="#" class="avatar_imgbox "><img src="/uploads/"></a>
+								<a href="#" class="avatar_imgbox "><img src="/uploads/{{ session('home_info')->profile }}"></a>
 								<ul class="user_info ">
 								@if(!empty(session('home_data')))
 									<li>{{ session('home_data')->uname }}</li>
@@ -37,8 +37,8 @@
 							</div>
 							@endif
 							<div class="login_btnbox ">
-								<a href="# " class="login_order ">我的订单</a>
-								<a href="# " class="login_favorite ">我的收藏</a>
+								<a href="/home/order/order_infos" class="login_order ">我的订单</a>
+								<a href="/home/user/user_collection" class="login_favorite ">我的收藏</a>
 							</div>
 							<i class="icon_arrow_white "></i>
 						</div>
@@ -51,12 +51,11 @@
 							<p style="color: white">
 								购物车
 							</p>
-							<p class="cart_num ">0</p>
 						</div>
 					</a>
 
 					<div id="foot " class="item ">
-						<a href="# ">
+						<a href="/home/user/user_foot">
 							<span class="zuji "></span>
 						</a>
 						<div class="mp_tooltip ">
@@ -66,7 +65,7 @@
 					</div>
 
 					<div id="brand " class="item ">
-						<a href="#">
+						<a href="/home/user/user_collection">
 							<span class="wdsc "><img src="/home/images/wdsc.png "></span>
 						</a>
 						<div class="mp_tooltip ">

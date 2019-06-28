@@ -46,7 +46,7 @@
 						    <div class="mws-form-row">
 						    	<label class="mws-form-label">所属分类</label>
 						    	<div class="mws-frm-item"> 
-						    		<select class="form-control" name="pid">
+						    		<select class="form-control" name="pid" style="margin-left: 10px;">
 						    			<option value="0">-- 请选择--</option>
 										@foreach($cates as $k=>$v)
 										<option value="{{ $v->id }}" {{ substr_count($v->path,',') >= 2 ? 'disabled' : '' }} {{ $v->id == $id ? 'selected' : '' }}>{{ $v->cname }}</option>
@@ -77,9 +77,6 @@
 		</div>
 		<!-- 内容结束 -->
 
-		<!-- 页脚 开始 -->
-		@include('admin.public.footer')
-        <!-- 页脚 结束 -->
 	</div>
 	<!-- 页脚 静态资源 开始 -->
 	@include('admin.public.footer_static')

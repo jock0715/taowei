@@ -1,11 +1,12 @@
 		@include('/home/public/header')
-
 		<link href="/home/css/personal.css" rel="stylesheet" type="text/css">
 		<link href="/home/css/orstyle.css" rel="stylesheet" type="text/css">
-
 		<style>
 			.nav.white .logoBig img {
 			    width: 11%;
+			}
+			.td-item .item-info {
+			    margin: -27px 0px 0px 150px;
 			}
 		</style>
 		<div class="center">
@@ -91,99 +92,45 @@
 						</div>
 						<div class="order-infomain">
 
-							<div class="order-top">
-								<div class="th th-item">
-									<td class="td-inner">商品</td>
-								</div>
-								<div class="th th-price">
-									<td class="td-inner">单价</td>
-								</div>
-								<div class="th th-number">
-									<td class="td-inner">数量</td>
-								</div>
-								<div class="th th-operation">
-									<td class="td-inner">商品操作</td>
-								</div>
-								<div class="th th-amount">
-									<td class="td-inner">合计</td>
-								</div>
-								<div class="th th-status">
-									<td class="td-inner">交易状态</td>
-								</div>
-								<div class="th th-change">
-									<td class="td-inner">交易操作</td>
-								</div>
-							</div>
-
 							<div class="order-main">
 
 								<div class="order-status3">
+								@foreach($data as $v)
+								@if($v->status <=1 )
 									<div class="order-title">
-										<div class="dd-num">订单编号：<a href="javascript:;">1601430</a></div>
-										<span>成交时间：2015-12-20</span>
+										<div class="dd-num">订单编号：<a href="javascript:;">{{ $v->number}}</a></div>
+										<span>成交时间：{{ $v->created_at }}</span>
 										<!--    <em>店铺：小桔灯</em>-->
 									</div>
 									<div class="order-content">
+
 										<div class="order-left">
-											<ul class="item-list">
-												<li class="td td-item">
-													<div class="item-pic">
-														<a href="#" class="J_MakePoint">
-															<img src="images/kouhong.jpg_80x80.jpg" class="itempic J_ItemImg">
-														</a>
-													</div>
-													<div class="item-info">
-														<div class="item-basic-info">
-															<a href="#">
-																<p>美康粉黛醉美唇膏 持久保湿滋润防水不掉色</p>
-																<p class="info-little">颜色：12#川南玛瑙
-																	<br/>包装：裸装 </p>
-															</a>
-														</div>
-													</div>
-												</li>
-												<li class="td td-price">
-													<div class="item-price">
-														333.00
-													</div>
-												</li>
-												<li class="td td-number">
-													<div class="item-number">
-														<span>×</span>2
-													</div>
-												</li>
-												<li class="td td-operation">
-													<div class="item-operation">
-														退款/退货
-													</div>
-												</li>
-											</ul>
+
 
 											<ul class="item-list">
 												<li class="td td-item">
-													<div class="item-pic">
+													<div class="item-pic" style="width:130px;margin-top: 2px;margin-left: -10px">
 														<a href="#" class="J_MakePoint">
-															<img src="images/62988.jpg_80x80.jpg" class="itempic J_ItemImg">
+															<img src="/uploads/{{ $v->file }}" class="itempic J_ItemImg">
 														</a>
 													</div>
-													<div class="item-info">
-														<div class="item-basic-info">
-															<a href="#">
-																<p>礼盒袜子女秋冬 纯棉袜加厚 韩国可爱 </p>
-																<p class="info-little">颜色分类：李清照
-																	<br/>尺码：均码</p>
+													<div class="item-info" >
+														<div class="item-basic-info" >
+															<a href="#" >
+																<p>{{ $v->name }}</p>
+																<p class="info-little">{{ $v->desc }}</p>
 															</a>
 														</div>
 													</div>
 												</li>
 												<li class="td td-price">
 													<div class="item-price">
-														333.00
+														{{ $v->money }}
 													</div>
 												</li>
 												<li class="td td-number">
 													<div class="item-number">
-														<span>×</span>2
+														<span>×</span>{{ $v->num }}
 													</div>
 												</li>
 												<li class="td td-operation">
@@ -194,29 +141,33 @@
 											</ul>
 
 										</div>
+
 										<div class="order-right">
 											<li class="td td-amount">
 												<div class="item-amount">
-													合计：676.00
-													<p>含运费：<span>10.00</span></p>
+													合计：{{ $v->price }}
+													<p>含运费：<span>{{ $v->fare }}</span></p>
 												</div>
 											</li>
 											<div class="move-right">
 												<li class="td td-status">
 													<div class="item-status">
 														<p class="Mystatus">卖家已发货</p>
-														<p class="order-info"><a href="logistics.html">查看物流</a></p>
-														<p class="order-info"><a href="#">延长收货</a></p>
+														<!-- <p class="order-info"><a href="logistics.html">查看物流</a></p>
+														<p class="order-info"><a href="#">延长收货</a></p> -->
 													</div>
 												</li>
 												<li class="td td-change">
+												<a href="javascript:;" onclick="receipt({{ $v->id }})">
 													<div class="am-btn am-btn-danger anniu">
 														确认收货</div>
+												</a>
 												</li>
 											</div>
 										</div>
 									</div>
-
+									@endif
+								@endforeach
 								</div>
 							</div>
 						</div>
@@ -227,49 +178,27 @@
 				@include('/home/public/footer')
 			</div>
 			<aside class="menu">
-				<ul>
-					<li class="person">
-						<a href="index.html">个人中心</a>
-					</li>
-					<li class="person">
-						<a href="#">个人资料</a>
-						<ul>
-							<li> <a href="information.html">个人信息</a></li>
-							<li> <a href="safety.html">安全设置</a></li>
-							<li> <a href="address.html">收货地址</a></li>
-						</ul>
-					</li>
-					<li class="person">
-						<a href="#">我的交易</a>
-						<ul>
-							<li class="active"><a href="order.html">订单管理</a></li>
-							<li> <a href="change.html">退款售后</a></li>
-						</ul>
-					</li>
-					<li class="person">
-						<a href="#">我的资产</a>
-						<ul>
-							<li> <a href="coupon.html">优惠券 </a></li>
-							<li> <a href="bonus.html">红包</a></li>
-							<li> <a href="bill.html">账单明细</a></li>
-						</ul>
-					</li>
-
-					<li class="person">
-						<a href="#">我的小窝</a>
-						<ul>
-							<li> <a href="collection.html">收藏</a></li>
-							<li> <a href="foot.html">足迹</a></li>
-							<li> <a href="comment.html">评价</a></li>
-							<li> <a href="news.html">消息</a></li>
-						</ul>
-					</li>
-
-				</ul>
+				@include('home/public/menu')
 
 			</aside>
 		</div>
 
 	</body>
-
+	<script>
+		function receipt (id)
+		{
+			// 提示消息
+			if (!window.confirm('是否确定收货！！！')) {
+				return false;
+			}
+			$.get('/home/order/receipt',{id},function(res) {
+				if(res == 'ok') {
+					// 自动刷新页面
+        			parent.location.reload(); 
+				} else {
+					alert('收货失败');
+				}
+			},'html');
+		}
+	</script>
 </html>

@@ -206,8 +206,9 @@
 											<a href="javascript:;" title="关闭" class="close">×</a>
 										</div>
 										<div class="theme-popbod dform">
-                    <form action="/home/shopping/add/{{ $doing->id }}" method="post" >
+                    <form action="/home/shopping/doingadd/{{ $doing->id }}" method="post" >
                         {{ csrf_field() }}
+                       					<input type="hidden" name="did" value="{{ $doing->id }}">
 												<div class="theme-signin-left">
 
 													<!-- <div class="theme-options">
@@ -296,7 +297,7 @@
                 <script>
                     function abc(id){
                         let num = $('#text_box').val();
-                        location.href='/home/order/create?id='+id+'&num='+num;
+                        location.href='/home/order/docreate?id='+id+'&num='+num;
                     }
                 </script> 
 				
@@ -445,10 +446,11 @@
 									<div class="clear"></div>
 
 									<ul class="am-comments-list am-comments-list-flip">
+										@foreach($comment_data as $k=>$v)
 										<li class="am-comment">
 											<!-- 评论容器 -->
 											<a href="">
-												<img class="am-comment-avatar" src="/home/images/hwbn40x40.jpg" />
+												<img class="am-comment-avatar" src="/uploads/{{ $v->commentdusers->profile }}" />
 												<!-- 评论者头像 -->
 											</a>
 
@@ -458,20 +460,20 @@
 													<!--<h3 class="am-comment-title">评论标题</h3>-->
 													<div class="am-comment-meta">
 														<!-- 评论元数据 -->
-														<a href="#link-to-user" class="am-comment-author">b***1 (匿名)</a>
+														<a href="#link-to-user" class="am-comment-author">{{ $v->commentdusers->uname }}</a>
 														<!-- 评论者 -->
-														评论于
-														<time datetime="">2015年11月02日 17:46</time>
+														评论于：
+														<time datetime="">{{ $v->created_at }}</time>
 													</div>
 												</header>
 
 												<div class="am-comment-bd">
 													<div class="tb-rev-item " data-id="255776406962">
 														<div class="J_TbcRate_ReviewContent tb-tbcr-content ">
-															摸起来丝滑柔软，不厚，没色差，颜色好看！买这个衣服还接到诈骗电话，我很好奇他们是怎么知道我买了这件衣服，并且还知道我的电话的！
+															{{ $v->content }}
 														</div>
 														<div class="tb-r-act-bar">
-															颜色分类：柠檬黄&nbsp;&nbsp;尺码：S
+															服装规格：<span style="color: red">{{ $v->commentdorders->desc }}</span>
 														</div>
 													</div>
 
@@ -479,6 +481,7 @@
 												<!-- 评论内容 -->
 											</div>
 										</li>
+										@endforeach
 										
 
 									</ul>

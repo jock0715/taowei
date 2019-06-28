@@ -1,13 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
 		<title>首页</title>
-
-		
 		<link href="/home/AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css" />
 		<link href="/home/AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css" />
 		<link href="/home/basic/css/demo.css" rel="stylesheet" type="text/css" />
@@ -18,9 +14,7 @@
 		<link href="/home/css/cartstyle.css" rel="stylesheet" type="text/css" />
 		<link href="/home/css/optstyle.css" rel="stylesheet" type="text/css" />
 		<script type="text/javascript" src="/home/js/jquery.js"></script>
-
 	</head>
-
 	<body >
 		<div class="hmtop" >
 			<!--顶部导航条 -->
@@ -29,7 +23,7 @@
 				<ul class="message-l">
 					<div class="topMessage">
 						<div class="menu-hd">
-							<a href="/home/login" target="_top" class="h">欢迎，{{ session('home_data')->uname }}</a>&nbsp;
+							<a href="/home/user/user_info" target="_top" class="h">欢迎，{{ session('home_data')->uname }}</a>&nbsp;
 							|<a href="/home/login/logout" target="_top" class="h" style="color: red">&nbsp;退出登录</a>
 						</div>
 					</div>

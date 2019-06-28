@@ -129,10 +129,7 @@
 							<a href="javascript:;"><span class="glyphicon glyphicon-comment nav_icon" aria-hidden="true"></span> </i>评价管理<span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level collapse">
 								<li>
-									<a href="">| ----- 查看评价</a>
-								</li>
-								<li>
-									<a href="">| ----- 添加评价</a>
+									<a href="/admin/comment">| ----- 查看评价</a>
 								</li>
 							</ul>
 							<!-- //nav-second-level -->

@@ -1,6 +1,6 @@
 <?php
 
-/*
+/* 
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
@@ -100,8 +100,10 @@ Route::resource('/admin/link','Admin\LinkController');
 
 /*---------------------------前台开始-------------------------------------*/
 
+
 // 前台 首页
 Route::get('/','Home\IndexController@index');
+Route::resource('/home/index','Home\IndexController');
 
 // 前台注册
 Route::get('/home/register','Home\RegisterController@index');
@@ -126,6 +128,10 @@ Route::post('/home/login/dologin','Home\LoginController@dologin');
 
 // 前台执行退出登录功能
 Route::get('/home/login/logout','Home\LoginController@logout');
+
+//前台 分类商品
+Route::resource('/home/catelist','Home\Cate_listController');
+
 
 // 前台 商品详情面
 Route::get('/home/goodslist/info/{id}','Home\Goods_listController@info');
@@ -164,8 +170,12 @@ Route::resource('/home/doingcollection','Home\Doing_collectionController');
 
 
 
-// 前台 购物车 添加
+// 前台 购物车 添加 秒杀商品
 Route::post('/home/shopping/add/{id}','Home\Shopping_infoController@add');
+// 前台 购物车 添加 活动商品
+Route::post('/home/shopping/doingadd/{id}','Home\Shopping_infoController@doingadd');
+// 前台 购物车 添加 商品
+Route::post('/home/shopping/goodsadd/{id}','Home\Shopping_infoController@goodsadd');
 // 前台 购物车 添加数量
 Route::get('/home/shopping/addnum','Home\Shopping_infoController@addnum');
 // 前台 购物车 减少数量
@@ -181,12 +191,20 @@ Route::resource('/home/shopping','Home\Shopping_infoController');
 Route::get('/home/order/success','Home\OrderController@success');
 // 前台 订单 详情
 Route::get('/home/order/order_infos','Home\OrderController@order_infos');
-// 前台 立即购买订单 添加
+// 前台 立即购买订单 秒杀商品
 Route::get('/home/order/create','Home\OrderController@create');
+// 前台 立即购买订单 活动商品
+Route::get('/home/order/docreate','Home\OrderController@docreate');
+// 前台 立即购买订单 商品
+Route::get('/home/order/gocreate','Home\OrderController@gocreate');
 // 前台 购物车订单 添加 显示
 Route::get('/home/order/add','Home\OrderController@add');
 // 前台 购物车订单 添加 处理
 Route::post('/home/order/doadd','Home\OrderController@doadd');
+// 前台 订单 删除
+Route::get('/home/order/destroy','Home\OrderController@destroy');
+// 前台 订单 确认收货
+Route::get('/home/order/receipt','Home\OrderController@receipt');
 // 前台 订单 查看
 Route::resource('/home/order','Home\OrderController');
 
@@ -202,6 +220,10 @@ Route::post('/home/user/user_file/{id}','Home\UserController@user_file');
 Route::get('/home/user/user_addr','Home\UserController@user_addr');
 // 前台用户执行添加地址
 Route::post('/home/user/user_addrs','Home\UserController@user_addrs');
+// 前台用户显示修改地址
+Route::get('/home/user/user_editaddr/{id}','Home\UserController@user_editaddr');
+// 前台用户执行修改地址
+Route::post('/home/user/user_editaddrs','Home\UserController@user_editaddrs');
 // 前台用户执行删除地址
 Route::get('/home/user/deladdr','Home\UserController@deladdr');
 // 前台用户安全
@@ -220,7 +242,10 @@ Route::get('/home/user/user_bill','Home\UserController@user_bill');
 Route::get('/home/user/user_collection','Home\UserController@user_collection');
 // 前台用户足迹
 Route::get('/home/user/user_foot','Home\UserController@user_foot');
-// 前台用户评论
+// 前台用户显示评论
 Route::get('/home/user/user_reply','Home\UserController@user_reply');
-
+// 前台用户显示编写评论
+Route::get('/home/user/user_replyed/{id}','Home\UserController@user_replyed');
+// 前台用户执行编写评论
+Route::post('/home/user/user_replyeds','Home\UserController@user_replyeds');
 /*---------------------------前台结束-------------------------------------*/

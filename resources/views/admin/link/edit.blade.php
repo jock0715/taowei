@@ -74,9 +74,6 @@
 		</div>
 		<!-- 内容结束 -->
 
-		<!-- 页脚 开始 -->
-		@include('admin.public.footer')
-        <!-- 页脚 结束 -->
 	</div>
 	<!-- 页脚 静态资源 开始 -->
 	@include('admin.public.footer_static')
