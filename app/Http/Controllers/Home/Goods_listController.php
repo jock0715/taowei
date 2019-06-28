@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Goods;
 use App\Models\GoodsInfo;
-use App\Models\comment;
+use App\Models\Comment;
 use App\Models\Order;
 use DB;
 

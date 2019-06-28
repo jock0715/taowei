@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Doing;
 use App\Models\DoingInfo;
+use App\Models\Comment;
+use App\Models\Comment_doing;
+use App\Models\Comment_spike;
+use App\Models\Order;
 use DB;
 
 class Doing_listController extends Controller
@@ -102,7 +106,7 @@ class Doing_listController extends Controller
     public function info($id)
     {
 
-        // dump($id);
+        //dump($id);
         // 通过id获取商品数据
         $doing = Doing::find($id);
         $doinginfo = $doing->doinginfo;
@@ -110,7 +114,10 @@ class Doing_listController extends Controller
         $cate_doings3 = Doing::where('cid',$cid)->where('status','1')->orderBy('sale','desc')->limit(3)->get();
         $cate_doings = Doing::where('cid',$cid)->where('status','1')->orderBy('sale','desc')->get();
 
-        // 判断是否登录
+        // 查看评价
+        $comment = Comment_doing::where('did',$id);
+        $comment_data = $comment->paginate(5);
+        
         if(session('home_login')){
             // 已登录 获取用户id
             $uid = session('home_data')->id;
@@ -130,7 +137,7 @@ class Doing_listController extends Controller
         }
 
         // 加载页面
-        return view('home/doinglist/info',['doing'=>$doing,'doinginfo'=>$doinginfo,'cate_doings'=>$cate_doings,'cate_doings3'=>$cate_doings3,'collection'=>$collection]);
+        return view('home/doinglist/info',['doing'=>$doing,'doinginfo'=>$doinginfo,'cate_doings'=>$cate_doings,'cate_doings3'=>$cate_doings3,'collection'=>$collection,'comment_data'=>$comment_data]);
 
     }
 

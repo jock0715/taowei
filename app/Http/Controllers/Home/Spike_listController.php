@@ -7,6 +7,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Spike;
 use App\Models\SpikeInfo;
 use App\Models\User;
+use App\Models\Comment_doing;
+use App\Models\Comment_spike;
+use App\Models\Order;
 use DB;
 
 class Spike_listController extends Controller
@@ -114,6 +117,10 @@ class Spike_listController extends Controller
                              ->orderBy('sale','desc')
                              ->get();
 
+        // 查看评价
+        $comment = Comment_spike::where('sid',$id);
+        $comment_data = $comment->paginate(5);
+
 
         // 判断是否登录
         if(session('home_login')){
@@ -137,15 +144,16 @@ class Spike_listController extends Controller
         $gid = 0;
 
         // 加载页面
-        return view('home/spikelist/info',['spike'=>$spike,'spikeinfo'=>$spikeinfo,'cate_spikes'=>$cate_spikes,'cate_spikes3'=>$cate_spikes3,'collection'=>$collection]);
+        return view('home/spikelist/info',['spike'=>$spike,'spikeinfo'=>$spikeinfo,'cate_spikes'=>$cate_spikes,'cate_spikes3'=>$cate_spikes3,'collection'=>$collection,'comment_data'=>$comment_data]);
 
-        // 加载页面
-        return view('home/spikelist/info',
-            [
-                'spike'=>$spike,
-                'spikeinfo'=>$spikeinfo,
-                'cate_spikes'=>$cate_spikes,
-            ]);
+        // // 加载页面
+        // return view('home/spikelist/info',
+        //     [
+        //         'spike'=>$spike,
+        //         'spikeinfo'=>$spikeinfo,
+        //         'cate_spikes'=>$cate_spikes,
+        //         'comment_data'=>$comment_data
+        //     ]);
 
     }
 

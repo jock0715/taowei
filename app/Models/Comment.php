@@ -14,19 +14,19 @@ class Comment extends Model
     	return $this->belongsTo('App\Models\User','uid');
     }
 
-    // 一对多
+    // 关系
     public function commentgoods()
     {
     	return $this->belongsTo('App\Models\Goods','gid');
     }
 
-    // 一对多
+    // 关系
     public function commentorders()
     {
     	return $this->belongsTo('App\Models\Order','oid');
     }
 
-    // 一对多
+    // 关系
     public function commentuinfo()
     {
         return $this->belongsTo('App\Models\UserInfos','uid');
