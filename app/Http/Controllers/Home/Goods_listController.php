@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Home;
+namespace \Http\Controllers\Home;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -13,7 +13,7 @@ class Goods_listController extends Controller
      * 商品列表页面 
      *
      * @return \Illuminate\Http\Response
-     */
+     */ 
     public function index(Request $request)
     {
         // 接受搜索条件
