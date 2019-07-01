@@ -385,9 +385,15 @@ class UserController extends Controller
     public function user_reply()
     {
         $uid = session('home_data')->id;
-        $data = Comment::where('uid',$uid)->get(); 
 
-        return view('home/user/user_reply',['data'=>$data]);
+        // 普通商品评论
+        $data = Comment::where('uid',$uid)->get(); 
+        // 秒杀商品评论
+        $data_doing = Comment_doing::where('uid',$uid)->get();
+        // 活动商品评论
+        $data_spike = Comment_spike::where('uid',$uid)->get();
+
+        return view('home/user/user_reply',['data'=>$data,'data_doing'=>$data_doing,'data_spike'=>$data_spike]);
     }
 
     /**
