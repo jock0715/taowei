@@ -121,8 +121,8 @@
                       </a>
                     </div>
                     <div class="s-info">
-                      <div class="s-title">¥: {{ $v->collectiongoods->money }} &nbsp;<a href="#" title="{{ $v->collectiongoods->desc }}">{{ $v->collectiongoods->name }}</a></div>1
-                      <div class="s-title" title="{{ $v->collectiongoods->desc }}">{{ $v->collectiongoods->desc }}</div>1
+                      <div class="s-title">¥: {{ $v->collectiongoods->money }} &nbsp;<a href="#" title="{{ $v->collectiongoods->desc }}">{{ $v->collectiongoods->name }}</a></div>
+                      <div class="s-title" title="{{ $v->collectiongoods->desc }}">{{ $v->collectiongoods->desc }}</div>
                       <div class="s-extra-box">
                         <span class="s-comment" style="float: left; background-color: #bbb;"><a href="javascript:;" onclick="goodsdel({{$v->collectiongoods->id}},this)">取消收藏</a></span> &nbsp; &nbsp;
                         <span class="s-sales">销售量:{{ $v->collectiongoods->sale }}</span>
