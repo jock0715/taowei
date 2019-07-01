@@ -40,13 +40,13 @@
 							{{ csrf_field() }}
 						    <div class="form-group">
 						      <label for="uname">分类名称</label>
-						      <input type="text" class="form-control" name="cname">
+						      <input type="text" class="form-control" name="cname" style="width:510px;">
 						  	</div>
 						    
 						    <div class="mws-form-row">
 						    	<label class="mws-form-label">所属分类</label>
 						    	<div class="mws-frm-item"> 
-						    		<select class="form-control" name="pid" style="margin-left: 10px;">
+						    		<select class="form-control" name="pid" style="margin-left: 0px;width:510px;">
 						    			<option value="0">-- 请选择--</option>
 										@foreach($cates as $k=>$v)
 										<option value="{{ $v->id }}" {{ substr_count($v->path,',') >= 2 ? 'disabled' : '' }} {{ $v->id == $id ? 'selected' : '' }}>{{ $v->cname }}</option>

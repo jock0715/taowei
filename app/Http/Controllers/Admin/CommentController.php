@@ -15,11 +15,13 @@ class CommentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $search = $request->input('search','');
         // 实例化 评价表 comments
         $comment = new Comment;
         $data = $comment->paginate(5);
+
         return view('admin/comment/index',['data'=>$data]);
     }
 

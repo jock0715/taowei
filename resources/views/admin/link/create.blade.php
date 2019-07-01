@@ -40,12 +40,12 @@
 							{{ csrf_field() }}
 						    <div class="form-group">
 						      <label for="name">链接名称</label>
-						      <input type="text" class="form-control" name="name">
+						      <input type="text" class="form-control" name="name" style="width: 510px;">
 						  	</div>
 
 						  	 <div class="form-group">
 						      <label for="url">链接地址</label>
-						      <input type="text" class="form-control" name="url">
+						      <input type="text" class="form-control" name="url" style="width: 510px;">
 						  	</div>
 						    
 						   <br>

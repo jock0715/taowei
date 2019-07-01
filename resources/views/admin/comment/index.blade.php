@@ -20,10 +20,10 @@
 			<!-- 导入 提示信息 开始 -->
 			@include('admin.public.message')
 			<!-- 导入 提示信息 结束 -->
-			<h3 class="title1">订单管理</h3>
+			<h3 class="title1">评价管理</h3>
 			<!-- 搜索 开始 -->
 			<div class="form-body" data-example-id="simple-form-inline">
-			  <form class="form-inline" action="/admin/user">
+			  <form class="form-inline" action="/admin/comment">
 			    <div class="form-group">
 			      <label for="exampleInputName2">关键字</label>
 			      <input type="text" class="form-control" name="search" value="" id="exampleInputName2" placeholder="用户名"></div>
@@ -32,7 +32,7 @@
 			</div>
 			<!-- 搜索 结束 -->
 			<div class="panel-body widget-shadow">
-				<h4 style="color: deeppink">订单列表</h4>
+				<h4 style="color: deeppink">评价列表</h4>
 				<table class="table table-bordered">
 					<thead>
 						<tr>

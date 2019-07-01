@@ -39,27 +39,27 @@
 							{{ csrf_field() }}
 						    <div class="form-group">
 						      <label for="title">广告标题</label>
-						      <input type="text" class="form-control" name="title">
+						      <input type="text" class="form-control" name="title" style="width: 510px;">
 						  	</div>
 
 						  	<div class="form-group">
 						      <label for="auth">赞助商</label>
-						      <input type="text" class="form-control" name="auth">
+						      <input type="text" class="form-control" name="auth" style="width: 510px;">
 						  	</div>
 
 						  	<div class="form-group">
 						      <label for="desc">广告描述</label>
-						      <input type="text" class="form-control" name="desc">
+						      <input type="text" class="form-control" name="desc" style="width: 510px;">
 						  	</div>
 						    
 						    <div class="form-group">
 						      <label for="url">链接地址</label>
-						      <input type="text" class="form-control" name="url">
+						      <input type="text" class="form-control" name="url" style="width: 510px;">
 						  	</div>
 
 						  <div class="form-group">
 						      <label for="file">图片</label>
-						      <input type="file" name="file" class="form-control">
+						      <input type="file" name="file" class="form-control" style="width: 510px;">
 						  </div>
 
 						   

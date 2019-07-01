@@ -9,6 +9,7 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="Cache-Control" content="no-siteapp" />
     <link rel="stylesheet" href="/home_login/AmazeUI-2.4.2/assets/css/amazeui.css" />
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="/home_login/css/dlstyle.css" rel="stylesheet" type="text/css"></head>
   <body style="background-color: #fff;">
     <div class="login-boxtitle">
@@ -52,19 +53,9 @@
             <h3>合作账号</h3>
             <div class="am-btn-group">
               <li>
-                <a href="#">
-                  <i class="am-icon-qq am-icon-sm"></i>
-                  <span>QQ登录</span></a>
-              </li>
-              <li>
-                <a href="#">
-                  <i class="am-icon-weibo am-icon-sm"></i>
-                  <span>微博登录</span></a>
-              </li>
-              <li>
-                <a href="#">
-                  <i class="am-icon-weixin am-icon-sm"></i>
-                  <span>微信登录</span></a>
+                <a href="/">
+                  <i class="glyphicon glyphicon-gift"></i>
+                  <span>商城首页</span></a>
               </li>
             </div>
           </div>
@@ -72,26 +63,7 @@
         </div>
       </div>
     </div>
-    <div class="footer ">
-      <div class="footer-hd ">
-        <p>
-          <a href="# ">恒望科技</a>
-          <b>|</b>
-          <a href="/">商城首页</a>
-          <b>|</b>
-          <a href="# ">支付宝</a>
-          <b>|</b>
-          <a href="# ">物流</a></p>
-      </div>
-      <div class="footer-bd ">
-        <p>
-          <a href="# ">关于恒望</a>
-          <a href="# ">合作伙伴</a>
-          <a href="# ">联系我们</a>
-          <a href="# ">网站地图</a>
-          <em>© 2015-2025 Hengwang.com 版权所有</em></p>
-      </div>
-    </div>
+    @include('home/public/footer')
   </body>
 
 </html>
