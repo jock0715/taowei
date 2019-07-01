@@ -35,7 +35,7 @@ class UserController extends Controller
             return view('home/user/user_index',['links_data'=>$links_data]);
         }else{
             // 否 前往登录
-            return view('home/login/login');
+            return view('home/login/login',['links_data'=>$links_data]);
         }
     }
 

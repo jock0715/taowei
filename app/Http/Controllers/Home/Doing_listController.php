@@ -21,6 +21,8 @@ class Doing_listController extends Controller
      */
     public function index(Request $request)
     {
+         //获取友情链接数据
+        $links_data = DB::table('links')->where('status', 1)->get();
         // 接受搜索条件
         $search = $request->input('search','');
 
@@ -28,7 +30,7 @@ class Doing_listController extends Controller
         $doings_data = Doing::where('name','like','%'.$search.'%')->where('status','1')->paginate(8);
 
         // 加载页面
-        return view('home/doinglist/index', ['doings_data'=>$doings_data, 'search'=>$search]);
+        return view('home/doinglist/index', ['doings_data'=>$doings_data, 'search'=>$search,'links_data'=>$links_data]);
     }
 
     /**
@@ -106,7 +108,8 @@ class Doing_listController extends Controller
     public function info($id)
     {
 
-        //dump($id);
+         //获取友情链接数据
+        $links_data = DB::table('links')->where('status', 1)->get();
         // 通过id获取商品数据
         $doing = Doing::find($id);
         $doinginfo = $doing->doinginfo;
@@ -137,7 +140,7 @@ class Doing_listController extends Controller
         }
 
         // 加载页面
-        return view('home/doinglist/info',['doing'=>$doing,'doinginfo'=>$doinginfo,'cate_doings'=>$cate_doings,'cate_doings3'=>$cate_doings3,'collection'=>$collection,'comment_data'=>$comment_data]);
+        return view('home/doinglist/info',['doing'=>$doing,'doinginfo'=>$doinginfo,'cate_doings'=>$cate_doings,'cate_doings3'=>$cate_doings3,'collection'=>$collection,'comment_data'=>$comment_data,'links_data'=>$links_data]);
 
     }
 
@@ -149,6 +152,8 @@ class Doing_listController extends Controller
      */
     public function saleindex(Request $request)
     {
+         //获取友情链接数据
+        $links_data = DB::table('links')->where('status', 1)->get();
         // 接受搜索条件
         $search = $request->input('search','');
 
@@ -156,7 +161,7 @@ class Doing_listController extends Controller
         $doings_sale_data = Doing::where('name','like','%'.$search.'%')->where('status','1')->orderBy('sale','desc')->paginate(8);
 
         // 加载页面
-        return view('home/doinglist/sale_index', ['doings_sale_data'=>$doings_sale_data, 'search'=>$search]);
+        return view('home/doinglist/sale_index', ['doings_sale_data'=>$doings_sale_data, 'search'=>$search,'links_data'=>$links_data]);
 
     }
 
@@ -167,6 +172,8 @@ class Doing_listController extends Controller
      */
     public function priceindex(Request $request)
     {
+         //获取友情链接数据
+        $links_data = DB::table('links')->where('status', 1)->get();
         // 接受搜索条件
         $search = $request->input('search','');
 
@@ -174,7 +181,7 @@ class Doing_listController extends Controller
         $doings_price_data = Doing::where('name','like','%'.$search.'%')->where('status','1')->orderBy('money','asc')->paginate(8);
 
         // 加载页面
-        return view('home/doinglist/price_index', ['doings_price_data'=>$doings_price_data, 'search'=>$search]);
+        return view('home/doinglist/price_index', ['doings_price_data'=>$doings_price_data, 'search'=>$search,'links_data'=>$links_data]);
 
     }
 

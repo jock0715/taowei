@@ -22,7 +22,7 @@ class Goods_listController extends Controller
     public function index(Request $request)
     {
           //获取友情链接数据
-        $links_data = DB::table('links')->orderBy('id','asc')->where('status', 1)->get();
+        $links_data = DB::table('links')->where('status', 1)->get();
 
         // 接受搜索条件
         $search = $request->input('search','');
@@ -115,6 +115,8 @@ class Goods_listController extends Controller
      */
     public function info($id)
     {
+        //获取友情链接数据
+        $links_data = DB::table('links')->where('status', 1)->get();
 
         // 通过id获取商品数据 
         $goods = Goods::find($id);
@@ -148,7 +150,7 @@ class Goods_listController extends Controller
         }
 
         // 加载页面
-        return view('home/goodslist/info',['goods'=>$goods,'goodsinfo'=>$goodsinfo,'cate_goods'=>$cate_goods,'cate_goods3'=>$cate_goods3,'collection'=>$collection,'comment_data'=>$comment_data]);
+        return view('home/goodslist/info',['goods'=>$goods,'goodsinfo'=>$goodsinfo,'cate_goods'=>$cate_goods,'cate_goods3'=>$cate_goods3,'collection'=>$collection,'comment_data'=>$comment_data,'links_data'=>$links_data]);
 
 
     }
@@ -162,7 +164,7 @@ class Goods_listController extends Controller
     public function saleindex(Request $request)
     {
         //获取友情链接数据
-        $links_data = DB::table('links')->orderBy('id','asc')->where('status', 1)->get();
+        $links_data = DB::table('links')->where('status', 1)->get();
 
         // 接受搜索条件
         $search = $request->input('search','');
@@ -183,7 +185,7 @@ class Goods_listController extends Controller
     public function priceindex(Request $request) 
     {
         //获取友情链接数据
-        $links_data = DB::table('links')->orderBy('id','asc')->where('status', 1)->get();
+        $links_data = DB::table('links')->where('status', 1)->get();
 
 
         // 接受搜索条件

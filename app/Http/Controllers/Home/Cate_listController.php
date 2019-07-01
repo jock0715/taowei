@@ -17,7 +17,7 @@ class Cate_listController extends Controller
     public function index(Request $request)
     {
         //获取友情链接数据
-        $links_data = DB::table('links')->orderBy('id','asc')->where('status', 1)->get();
+        $links_data = DB::table('links')->where('status', 1)->get();
 
        // 接受搜索条件
          $search = $request->input('search','');

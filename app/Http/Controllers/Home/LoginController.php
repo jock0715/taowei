@@ -17,8 +17,9 @@ class LoginController extends Controller
      */
     public function index()
     {
-
-        return view('home/login/login');
+         //获取友情链接数据
+        $links_data = DB::table('links')->where('status', 1)->get();
+        return view('home/login/login',['links_data'=>$links_data]);
     }
 
     /**
@@ -175,7 +176,7 @@ class LoginController extends Controller
         session(['home_data'=>false]);
         session(['home_info'=>false]);
 
-        return redirect('/home/login')->with('error','欢迎回来!');
+        return redirect('/home/login')->with('success','欢迎回来!');
     }
 
 

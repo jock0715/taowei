@@ -20,7 +20,9 @@ class RegisterController extends Controller
      */
     public function index()
     {
-        return view('home/login/register');
+         //获取友情链接数据
+        $links_data = DB::table('links')->where('status', 1)->get();
+        return view('home/login/register',['links_data'=>$links_data]);
     }
 
     /**

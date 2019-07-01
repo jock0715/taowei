@@ -16,11 +16,11 @@ class Shopping_infoController extends Controller
     public function index(Request $request)
     {
         //获取友情链接数据
-        $links_data = DB::table('links')->orderBy('id','asc')->where('status', 1)->get();
+        $links_data = DB::table('links')->where('status', 1)->get();
 
         if (empty(session('home_data')->id)) {
             // 引入页面
-            return view('/home/login/login');
+            return view('/home/login/login',['links_data'=>$links_data]);
         } else {
             // 通过id获取数据库数据
             $uid = session('home_data')->id;

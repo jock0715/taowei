@@ -21,6 +21,8 @@ class Spike_listController extends Controller
      */
     public function index(Request $request)
     {
+         //获取友情链接数据
+        $links_data = DB::table('links')->where('status', 1)->get();
         // 接受搜索条件
         $search = $request->input('search','');
 
@@ -28,7 +30,7 @@ class Spike_listController extends Controller
         $spikes_data = Spike::where('name','like','%'.$search.'%')->where('status','1')->paginate(8);
 
         // 加载页面
-        return view('home/spikelist/index', ['spikes_data'=>$spikes_data, 'search'=>$search]); 
+        return view('home/spikelist/index', ['spikes_data'=>$spikes_data, 'search'=>$search,'links_data'=>$links_data]); 
 
     }
 
@@ -105,6 +107,8 @@ class Spike_listController extends Controller
      */
     public function info($id)
     {   
+        //获取友情链接数据
+        $links_data = DB::table('links')->where('status', 1)->get();
         // 通过id获取商品数据
         $spike = Spike::find($id);
         $spikeinfo = $spike->spikeinfo;
@@ -144,7 +148,7 @@ class Spike_listController extends Controller
         $gid = 0;
 
         // 加载页面
-        return view('home/spikelist/info',['spike'=>$spike,'spikeinfo'=>$spikeinfo,'cate_spikes'=>$cate_spikes,'cate_spikes3'=>$cate_spikes3,'collection'=>$collection,'comment_data'=>$comment_data]);
+        return view('home/spikelist/info',['spike'=>$spike,'spikeinfo'=>$spikeinfo,'cate_spikes'=>$cate_spikes,'cate_spikes3'=>$cate_spikes3,'collection'=>$collection,'comment_data'=>$comment_data,'links_data'=>$links_data]);
 
         // // 加载页面
         // return view('home/spikelist/info',
@@ -164,6 +168,8 @@ class Spike_listController extends Controller
      */
     public function saleindex(Request $request)
     {
+         //获取友情链接数据
+        $links_data = DB::table('links')->where('status', 1)->get();
         // 接受搜索条件
         $search = $request->input('search','');
 
@@ -171,7 +177,7 @@ class Spike_listController extends Controller
         $spikes_sale_data = Spike::where('name','like','%'.$search.'%')->where('status','1')->orderBy('sale','desc')->paginate(8);
 
         // 加载页面
-        return view('home/spikelist/sale_index', ['spikes_sale_data'=>$spikes_sale_data, 'search'=>$search]);
+        return view('home/spikelist/sale_index', ['spikes_sale_data'=>$spikes_sale_data, 'search'=>$search,'links_data'=>$links_data]);
 
     }
 
@@ -182,6 +188,8 @@ class Spike_listController extends Controller
      */
     public function priceindex(Request $request)
     {
+         //获取友情链接数据
+        $links_data = DB::table('links')->where('status', 1)->get();
         // 接受搜索条件
         $search = $request->input('search','');
 
@@ -189,7 +197,7 @@ class Spike_listController extends Controller
         $spikes_price_data = Spike::where('name','like','%'.$search.'%')->where('status','1')->orderBy('money','asc')->paginate(8);
 
         // 加载页面
-        return view('home/spikelist/price_index', ['spikes_price_data'=>$spikes_price_data, 'search'=>$search]);
+        return view('home/spikelist/price_index', ['spikes_price_data'=>$spikes_price_data, 'search'=>$search,'links_data'=>$links_data]);
 
     }
 }
