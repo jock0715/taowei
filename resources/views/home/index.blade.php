@@ -48,7 +48,7 @@
 																		<dd><a href="/home/catelist?cid={{ $vvv->id }}"  ><span>{{ $vvv->cname }}</span></a></dd>
 																		@endforeach
 																	</dl>
-																</div>															
+																</div>		 													
 															</div>
 														@endforeach
 														</div>							

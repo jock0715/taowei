@@ -10,7 +10,7 @@ use DB;
 use App\Models\Cate;
 
 
-class IndexController extends Controller
+class IndexController extends Controller 
 {
     public static function getPidCateData($pid = 0)
         {
