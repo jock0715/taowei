@@ -2,8 +2,8 @@
 <div class="footer ">
 	<div class="footer-hd ">
 		<p>
-		@foreach($links_data as $v)
-			<a href="https://{{ $v->url }} ">{{ $v->name }}</a>|
+		@foreach($links_data as $k=>$v)
+			<a href="https://{{ $v->url }}">{{ $v->name }}</a>|
 			
 		@endforeach
 		</p>

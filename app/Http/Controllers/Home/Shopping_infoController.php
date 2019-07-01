@@ -15,6 +15,9 @@ class Shopping_infoController extends Controller
      */
     public function index(Request $request)
     {
+        //获取友情链接数据
+        $links_data = DB::table('links')->orderBy('id','asc')->where('status', 1)->get();
+
         if (empty(session('home_data')->id)) {
             // 引入页面
             return view('/home/login/login');
@@ -39,6 +42,7 @@ class Shopping_infoController extends Controller
             // 引入页面
             return view('/home/shopping/index',
                 [
+                    'links_data'=>$links_data,
                     'data'=>$data,
                     'number'=>$number,
                     'count'=>$count,

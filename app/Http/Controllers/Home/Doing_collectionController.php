@@ -37,6 +37,10 @@ class Doing_collectionController extends Controller
      */
     public function store(Request $request)
     {
+         //获取友情链接数据
+        $links_data = DB::table('links')->orderBy('id','asc')->where('status', 1)->get();
+
+        
         // 判断是否登录
         if(!session('home_login')){
             echo json_encode(['msg'=>'err','info'=>'请先登录!']);

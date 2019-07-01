@@ -1,6 +1,6 @@
 <?php
 
-namespace \Http\Controllers\Home;
+namespace App\Http\Controllers\Home;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -20,6 +20,9 @@ class Goods_listController extends Controller
      */ 
     public function index(Request $request)
     {
+          //获取友情链接数据
+        $links_data = DB::table('links')->orderBy('id','asc')->where('status', 1)->get();
+
         // 接受搜索条件
         $search = $request->input('search','');
 
@@ -27,7 +30,7 @@ class Goods_listController extends Controller
         $goods_data = Goods::where('name','like','%'.$search.'%')->where('status','1')->paginate(8);
 
         // 加载页面
-        return view('home/goodslist/index', ['goods_data'=>$goods_data, 'search'=>$search]);
+        return view('home/goodslist/index', ['links_data'=>$links_data,'goods_data'=>$goods_data, 'search'=>$search]);
     }
 
     /**
@@ -149,6 +152,9 @@ class Goods_listController extends Controller
      */
     public function saleindex(Request $request)
     {
+        //获取友情链接数据
+        $links_data = DB::table('links')->orderBy('id','asc')->where('status', 1)->get();
+
         // 接受搜索条件
         $search = $request->input('search','');
 
@@ -156,7 +162,7 @@ class Goods_listController extends Controller
         $goods_sale_data = Goods::where('name','like','%'.$search.'%')->where('status','1')->orderBy('sale','desc')->paginate(8);
 
         // 加载页面
-        return view('home/goodslist/sale_index', ['goods_sale_data'=>$goods_sale_data, 'search'=>$search]);
+        return view('home/goodslist/sale_index', ['links_data'=>$links_data,'goods_sale_data'=>$goods_sale_data, 'search'=>$search]);
 
     }
 
@@ -165,8 +171,12 @@ class Goods_listController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function priceindex(Request $request)
+    public function priceindex(Request $request) 
     {
+        //获取友情链接数据
+        $links_data = DB::table('links')->orderBy('id','asc')->where('status', 1)->get();
+
+
         // 接受搜索条件
         $search = $request->input('search','');
 
@@ -174,7 +184,7 @@ class Goods_listController extends Controller
         $goods_price_data = Goods::where('name','like','%'.$search.'%')->where('status','1')->orderBy('money','asc')->paginate(8);
 
         // 加载页面
-        return view('home/goodslist/price_index', ['goods_price_data'=>$goods_price_data, 'search'=>$search]);
+        return view('home/goodslist/price_index', ['links_data'=>$links_data,'goods_price_data'=>$goods_price_data, 'search'=>$search]);
 
     }
 }
