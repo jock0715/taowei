@@ -31,7 +31,15 @@ class Goods_listController extends Controller
         $goods_data = Goods::where('name','like','%'.$search.'%')->where('status','1')->paginate(8);
 
         // 加载页面
+
         return view('home/goodslist/index', ['links_data'=>$links_data,'goods_data'=>$goods_data, 'search'=>$search]);
+
+        // return view('home/goodslist/index',
+        //             [
+        //                 'goods_data'=>$goods_data,
+        //                 'search'=>$search
+        //             ]);
+
     }
 
     /**

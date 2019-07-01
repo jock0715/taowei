@@ -16,7 +16,7 @@
 					</div>
 					<div class="login_btnbox ">
 						<a href="# " class="login_order ">我的订单</a>
-						<a href="# " class="login_favorite ">我的收藏</a>
+						<a href="/home/user/user_collection" class="login_favorite ">我的收藏</a>
 					</div>
 					<i class="icon_arrow_white "></i>
 				</div>
@@ -32,7 +32,7 @@
 				</div>
 			</a>
 
-			<div id="foot " class="item ">
+			<!-- <div id="foot " class="item ">
 				<a href="# ">
 					<span class="zuji "></span>
 				</a>
@@ -40,10 +40,10 @@
 					我的足迹
 					<i class="icon_arrow_right_black "></i>
 				</div>
-			</div>
+			</div> -->
 
 			<div id="brand " class="item ">
-				<a href="#">
+				<a href="/home/user/user_collection">
 					<span class="wdsc "><img src="/home/images/wdsc.png " /></span>
 				</a>
 				<div class="mp_tooltip ">
