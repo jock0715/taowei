@@ -47,7 +47,7 @@ class IndexController extends Controller
         $advertis_data = DB::table('advertis')->orderBy('id','asc')->limit(3)->get(); 
 
         //获取友情链接数据
-        $links_data = DB::table('links')->get();
+        $links_data = DB::table('links')->where('status', 1)->get();
 
 
         // 获取四条活动商品的数据
