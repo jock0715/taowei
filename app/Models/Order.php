@@ -14,4 +14,11 @@ class Order extends Model
     	// 本表的uid属于user的id
     	return $this->belongsTo('App\Models\User','uid');
     }
+
+    //order属于user
+    public function ordergoods()
+    {
+    	// 本表的uid属于user的id
+    	return $this->belongsTo('App\Models\goods','gid');
+    }
 }

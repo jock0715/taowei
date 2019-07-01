@@ -244,38 +244,13 @@
 								<img src="/uploads/{{ $v->file }}">
 								</a>
 						</div>
-						<!-- <div class="am-u-sm-3 am-u-md-2 text-three big">
-							<div class="outer-con " >
-								<div class="title ">
-									{{ $v->name }}
-								</div>
-								<div class="sub-title ">
-									¥{{ $v->money }}
-								</div>
-								{{ $v->desc }}
-
-							</div>
-							
-							<a href="# "><img src="/uploads/{{ $v->file }}" /></a>
-						</div> -->
 						@endforeach
 					</div>
                  <div class="clear "></div>  
                  </div>
-                 
 				@include('/home/public/footer')
-
 		</div>
 		</div>
-		<!--引导 -->
-		<!-- <div class="navCir">
-			<li class="active"><a href="home.html"><i class="am-icon-home "></i>首页</a></li>
-			<li><a href="sort.html"><i class="am-icon-list"></i>分类</a></li>
-			<li><a href="shopcart.html"><i class="am-icon-shopping-basket"></i>购物车</a></li>	
-			<li><a href="person/index.html"><i class="am-icon-user"></i>我的</a></li>					
-
-		</div> -->
-
 
 		<!-- 菜单 -->
 		@include('home/public/slidebar')

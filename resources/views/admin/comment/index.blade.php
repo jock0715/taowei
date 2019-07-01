@@ -31,8 +31,8 @@
 			</form>
 			</div>
 			<!-- 搜索 结束 -->
-			<div class="panel-body widget-shadow">
-				<h4 style="color: deeppink">评价列表</h4>
+			<!-- <div class="panel-body widget-shadow"> -->
+				<!-- <h4 style="color: deeppink">评价列表</h4> -->
 				<table class="table table-bordered">
 					<thead>
 						<tr>
@@ -77,7 +77,7 @@
 					</tbody>
 				</table>
 				{{ $data->links() }}
-			</div>
+			<!-- </div> -->
 		</div>
 		<!-- 内容 结束 -->
 		<!-- 页尾 开始 -->

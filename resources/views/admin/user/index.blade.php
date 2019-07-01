@@ -60,7 +60,17 @@
 							<td>{{ $v->userinfos->email }}</td>
 							<td>{{ $v->userinfos->phone }}</td>
 							<td>{{ $v->userinfos->addr }}</td>
-							<td>{{ $v->status }}</td>
+							<td>
+								@if($v->status == 0)
+									<kbd>未激活</kbd>
+								@elseif($v->status == 1)
+									<kbd style="background: skyblue">普通用户</kbd>
+								@elseif($v->status == 2)
+									<kbd style="background:deeppink;">普通会员</kbd>
+								@else
+									<kbd style="background: red">高级会员</kbd>
+								@endif
+							</td>
 							<td>{{ $v->created_at }}</td>
 							<td>
 								<a href="/admin/user/{{ $v->id }}/edit" class="btn btn-info">修改</a>

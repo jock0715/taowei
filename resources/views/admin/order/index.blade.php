@@ -23,7 +23,7 @@
 			<h3 class="title1">订单管理</h3>
 			<!-- 搜索 开始 -->
 			<div class="form-body" data-example-id="simple-form-inline">
-			  <form class="form-inline" action="/admin/user">
+			  <form class="form-inline" action="/admin/order">
 			    <div class="form-group">
 			      <label for="exampleInputName2">关键字</label>
 			      <input type="text" class="form-control" name="search" value="" id="exampleInputName2" placeholder="用户名"></div>
@@ -31,8 +31,8 @@
 			</form>
 			</div>
 			<!-- 搜索 结束 -->
-			<div class="panel-body widget-shadow">
-				<h4 style="color: deeppink">订单列表</h4>
+			<!-- <div class="panel-body widget-shadow"> -->
+				<h4 style="color: deeppink"></h4>
 				<table class="table table-bordered">
 					<thead>
 						<tr>
@@ -43,7 +43,7 @@
 						  <th>商品</th>
 						  <th>总价</th>
 						  <th>商品状态</th>
-						  <th>下单时间时间</th>
+						  <th>下单时间</th>
 						  <th>操作</th>
 						</tr>
 					</thead>
@@ -54,7 +54,7 @@
 							<td>{{$v->orderuser->uname}}</td>
 							<td>{{$v->phone}}</td>
 							<td>{{$v->addr}}</td>
-							<td>{{$v->gid}}</td>
+							<td>{{$v->name}}</td>
 							<td>{{$v->money}}</td>
 							<td>						
 						      	@if($v->status == 0)
@@ -94,7 +94,7 @@
 				<div class="clearfix"> </div>
 			</div>
 		<!-- 页尾结束 -->
-	</div>
+	<!-- </div> -->
 	<!-- 页脚 静态资源 开始 -->
 	@include('admin.public.footer_static')
 	<!-- 页脚 静态资源 结束 -->
