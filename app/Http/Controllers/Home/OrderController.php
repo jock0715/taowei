@@ -16,6 +16,9 @@ class OrderController extends Controller
      */
     public function index(Request $request)
     {
+        //获取友情链接数据
+        $links_data = DB::table('links')->orderBy('id','asc')->where('status', 1)->get();
+
         // 获取数据库数据
         $uid = session('home_data')->id;
         // 通过uid获取该用户的所有订单
@@ -27,6 +30,7 @@ class OrderController extends Controller
         // 引入页面
         return view('/home/order/index',
             [
+                'links_data'=>$links_data,
                 'orders'=>$orders,
             ]);  
     }
@@ -188,6 +192,9 @@ class OrderController extends Controller
      */
     public function gocreate(Request $request)
     {
+        //获取友情链接数据
+        $links_data = DB::table('links')->orderBy('id','asc')->where('status', 1)->get();
+
         // dump(session('home_data'),session('home_info'));
         // 获取数据
         $id = $request->input('id');
@@ -205,6 +212,7 @@ class OrderController extends Controller
         // 引入页面
         return view('/home/order/create',
             [
+                'links_data'=>$links_data,
                 'goods'=>$goods,
                 'gonum'=>$gonum,
                 'goprice'=>$goprice,
@@ -219,6 +227,9 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
+        //获取友情链接数据
+        $links_data = DB::table('links')->orderBy('id','asc')->where('status', 1)->get();
+
        
         // 获取数据
         $data['uid'] = $request->input('uid');
@@ -242,7 +253,7 @@ class OrderController extends Controller
                     ->insert($data);
         if ($res) {
             // 提交订单成功 
-            return view('/home/order/success',['data'=>$data,]);
+            return view('/home/order/success',['links_data'=>$links_data,'data'=>$data,]);
         } else {
             echo '失败';
         }
@@ -319,6 +330,9 @@ class OrderController extends Controller
     // 查看订单详情
     public function order_infos (Request $request)
     {
+        //获取友情链接数据
+        $links_data = DB::table('links')->orderBy('id','asc')->where('status', 1)->get();
+
         // 通过id获取数据
         $uid = session('home_data')->id;
         $data = DB::table('orders')
@@ -328,6 +342,7 @@ class OrderController extends Controller
         // 引入页面
         return view('/home/order/order_infos',
             [
+                'links_data'=>$links_data,
                 'data'=>$data,
             ]);
     }

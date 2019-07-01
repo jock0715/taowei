@@ -146,7 +146,7 @@
 						<div class="am-u-sm-4 am-u-lg-3 ">
 							<div class="info ">
 								<h3>{{ $v->title }}</h3>
-								<h4>{{ $v->desc }}</h4>
+								<h4 style="width:150px;">{{ $v->desc }}</h4>
 							</div>
 							<div class="recommendationMain ">
 								<a href="https://{{ $v->url }}"><img src="/uploads/{{ $v->file }}" class="img-thumbnail" style="width:100px; "></img></a>

@@ -16,6 +16,9 @@ class Cate_listController extends Controller
      */
     public function index(Request $request)
     {
+        //获取友情链接数据
+        $links_data = DB::table('links')->orderBy('id','asc')->where('status', 1)->get();
+
        // 接受搜索条件
          $search = $request->input('search','');
         // 接收分类ID
@@ -24,7 +27,7 @@ class Cate_listController extends Controller
         // $goods_data = DB::table('goods')->where('name','like','%'.$search.'%')->paginate(8);
         $goods_data = Goods::where('name','like','%'.$search.'%')->where('cid',$cid)->paginate(8);
 
-        return view('home/catelist/index',['goods_data'=>$goods_data,'search'=>$search]);
+        return view('home/catelist/index',['links_data'=>$links_data,'goods_data'=>$goods_data,'search'=>$search]);
     }
 
     /**

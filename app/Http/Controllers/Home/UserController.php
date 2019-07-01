@@ -26,10 +26,13 @@ class UserController extends Controller
      */
     public function user_index()
     {
+         //获取友情链接数据
+        $links_data = DB::table('links')->orderBy('id','asc')->where('status', 1)->get();
+
         // 判断用户是否登录
         if(!empty(session('home_data'))){
             // 是,进入个人页面
-            return view('home/user/user_index');
+            return view('home/user/user_index',['links_data'=>$links_data]);
         }else{
             // 否 前往登录
             return view('home/login/login');
@@ -43,12 +46,15 @@ class UserController extends Controller
      */
     public function user_info()
     {
+        //获取友情链接数据
+        $links_data = DB::table('links')->orderBy('id','asc')->where('status', 1)->get();
+
         // 获取用户id
         $id = session('home_data')->id;
         // 实例化 用户表 users
         $user = new User;
         $data = $user->where('id',$id)->first();
-        return view('home/user/user_info',['data'=>$data]);
+        return view('home/user/user_info',['links_data'=>$links_data,'data'=>$data]);
     }
 
     /**
@@ -176,13 +182,16 @@ class UserController extends Controller
      */
     public function user_addr()
     {   
+        //获取友情链接数据
+        $links_data = DB::table('links')->orderBy('id','asc')->where('status', 1)->get();
+
         // 获取用户id
         $id = session('home_data')->id;
 
         // 实例化 用户地址表user_addrs
         $useraddrs = new UserAddrs;
         $data = $useraddrs->where('uid',$id)->get();
-        return view('home/user/user_addr',['data'=>$data]);
+        return view('home/user/user_addr',['links_data'=>$links_data,'data'=>$data]);
     }
 
     /**
@@ -279,7 +288,10 @@ class UserController extends Controller
      */
     public function user_security()
     {
-        return view('home/user/user_security');
+         //获取友情链接数据
+        $links_data = DB::table('links')->orderBy('id','asc')->where('status', 1)->get();
+
+        return view('home/user/user_security',['links_data'=>$links_data]);
     }
 
     /**
@@ -299,7 +311,10 @@ class UserController extends Controller
      */
     public function user_after()
     {
-        return view('home/user/user_after');
+         //获取友情链接数据
+        $links_data = DB::table('links')->orderBy('id','asc')->where('status', 1)->get();
+
+        return view('home/user/user_after',['links_data'=>$links_data]);
     }
 
     /**
@@ -309,7 +324,10 @@ class UserController extends Controller
      */
     public function user_bill()
     {
-        return view('home/user/user_bill');
+        //获取友情链接数据
+        $links_data = DB::table('links')->orderBy('id','asc')->where('status', 1)->get();
+
+        return view('home/user/user_bill',['links_data'=>$links_data]);
     }
 
     /**
@@ -328,6 +346,8 @@ class UserController extends Controller
         //     // 否 前往登录
         //     return view('home/login/login');
         // }
+          //获取友情链接数据
+        $links_data = DB::table('links')->orderBy('id','asc')->where('status', 1)->get();
 
         // 判断是否登录
         if(!empty(session('home_data'))){
@@ -349,6 +369,7 @@ class UserController extends Controller
             
             return view('home/user/user_collection',
                 [
+                'links_data'=>$links_data,
                 'goods_collection'=>$goods_collection,
                 'doing_collection'=>$doing_collection,
                 'spike_collection'=>$spike_collection
@@ -367,10 +388,13 @@ class UserController extends Controller
      */
     public function user_foot()
     {
+         //获取友情链接数据
+        $links_data = DB::table('links')->orderBy('id','asc')->where('status', 1)->get();
+
         // 判断用户是否登录
         if(!empty(session('home_data'))){
             // 是,进入个人页面
-            return view('home/user/user_foot');
+            return view('home/user/user_foot',['links_data'=>$links_data]);
         }else{
             // 否 前往登录
             return view('home/login/login');
@@ -384,6 +408,10 @@ class UserController extends Controller
      */
     public function user_reply()
     {
+         //获取友情链接数据
+        $links_data = DB::table('links')->orderBy('id','asc')->where('status', 1)->get();
+
+
         $uid = session('home_data')->id;
 
         // 普通商品评论
@@ -393,7 +421,7 @@ class UserController extends Controller
         // 活动商品评论
         $data_spike = Comment_spike::where('uid',$uid)->get();
 
-        return view('home/user/user_reply',['data'=>$data,'data_doing'=>$data_doing,'data_spike'=>$data_spike]);
+        return view('home/user/user_reply',['links_data'=>$links_data,'data'=>$data,'data_doing'=>$data_doing,'data_spike'=>$data_spike]);
     }
 
     /**
