@@ -33,7 +33,7 @@
 						<div class="am-tabs am-tabs-d2 am-margin" data-am-tabs>
 
 							<ul class="am-avg-sm-5 am-tabs-nav am-nav am-nav-tabs">
-								<li class="am-active"><a href="#tab1">已签收</a></li>
+								<li class="am-active"><a href="#tab1">所有订单</a></li>
 								<li><a href="#tab3">待发货</a></li>
 								<li><a href="#tab4">未评价</a></li>
 								<li><a href="#tab5">已评价</a></li>
@@ -48,7 +48,7 @@
 									<div class="order-main">
 										<div class="order-list">
 											
-											<!--所有订单-->
+											<!--已签收订单-->
 											<div class="order-status5">
 												<div class="order-title">
 													<div class="dd-num">订单编号：<a href="javascript:;">{{ $v->number}}</a></div>

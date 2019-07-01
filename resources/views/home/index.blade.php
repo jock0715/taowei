@@ -14,7 +14,6 @@
 			</div>
 			<div class="shopNav">
 				<div class="slideall">
-					
 					   <div class="long-title"><span class="all-goods">全部分类</span></div>
 					   <div class="nav-cont">
 							<ul>

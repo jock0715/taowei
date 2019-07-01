@@ -63,6 +63,8 @@
 						      		已发货
 						      	@elseif($v->status == 2)
 						      		已签收
+						      	@elseif($v->status == 3)
+						      		待评价
 						      	@endif
 							</td>
 							<td>{{$v->created_at}}</td>
