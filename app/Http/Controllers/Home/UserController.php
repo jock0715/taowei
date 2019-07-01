@@ -170,7 +170,7 @@ class UserController extends Controller
     }
 
     /**
-     * 显示用户修改地址页面.
+     * 显示用户地址页面.
      *
      * @return \Illuminate\Http\Response
      */
@@ -186,7 +186,7 @@ class UserController extends Controller
     }
 
     /**
-     * 执行用户修改地址.
+     * 执行用户添加地址.
      *
      * @return \Illuminate\Http\Response
      */
@@ -209,7 +209,7 @@ class UserController extends Controller
     }
 
     /**
-     * 执行用户修改地址.
+     * 显示用户修改地址页面.
      *
      * @return \Illuminate\Http\Response
      */

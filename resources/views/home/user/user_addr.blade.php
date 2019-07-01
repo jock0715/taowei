@@ -75,7 +75,7 @@
                     <div class="am-form-group">
                       <label for="user-address" class="am-form-label">所在地</label>
                       <div class="am-form-content">
-                        <select name="province" style="display: inline-block;margin-left: 10px;" id="select">
+                        <select name="province" id="select">
                           <option value="广东省">广东省</option>
                           <option value="上海市">上海市</option>
                           <option value="北京市">北京市</option>

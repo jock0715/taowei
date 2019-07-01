@@ -19,10 +19,10 @@ class OrderController extends Controller
     {
         $search =  $request->input('search','');
         $order = new Order;
-        $order_data = $order->paginate(5);
-        //dd($order_data);
+        $order_data = $order->where('name','like','%'.$search.'%')->paginate(5);
+        
 
-        return view('admin/order/index',['order_data'=>$order_data]);
+        return view('admin/order/index',['order_data'=>$order_data,'search'=>$search]);
     }
 
     /**

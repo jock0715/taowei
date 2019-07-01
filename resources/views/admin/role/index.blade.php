@@ -28,7 +28,7 @@
 			<!-- 导入 提示信息 开始 -->
 			@include('admin.public.message')
 			<!-- 导入 提示信息 结束 -->
-			<h3 class="title1">轮播管理</h3>
+			<h3 class="title1">职位管理</h3>
 			<!-- 搜索 开始 -->
 			<div class="form-body" data-example-id="simple-form-inline">
 			  <form class="form-inline" action="/admin/role">

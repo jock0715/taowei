@@ -26,7 +26,7 @@
 			  <form class="form-inline" action="/admin/link">
 			    <div class="form-group">
 			      <label for="exampleInputName2">关键字</label>
-			      <input type="text" class="form-control" name="search" value="" id="exampleInputName2" placeholder="用户名"></div>
+			      <input type="text" class="form-control" name="search" value="" id="exampleInputName2" placeholder="链接"></div>
 			    <button type="submit" class="btn btn-success">搜索</button>
 			</form>
 			</div>

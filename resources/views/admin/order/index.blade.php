@@ -26,7 +26,7 @@
 			  <form class="form-inline" action="/admin/order">
 			    <div class="form-group">
 			      <label for="exampleInputName2">关键字</label>
-			      <input type="text" class="form-control" name="search" value="" id="exampleInputName2" placeholder="用户名"></div>
+			      <input type="text" class="form-control" name="search" value="{{ $search }}" id="exampleInputName2" placeholder="商品"></div>
 			    <button type="submit" class="btn btn-success">搜索</button>
 			</form>
 			</div>
@@ -80,7 +80,7 @@
 					@endforeach
 					</tbody>
 				</table>
-				{{ $order_data->links() }}
+				{{ $order_data->appends('search',$search)->links() }}
 			</div>
 		</div>
 		<!-- 内容 结束 -->

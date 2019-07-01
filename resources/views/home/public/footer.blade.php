@@ -2,10 +2,10 @@
 <div class="footer ">
 	<div class="footer-hd ">
 		<p>
-		@foreach($links_data as $v)
-			<a href="https://{{ $v->url }} ">{{ $v->name }}</a>|
+
+			<a href="https:"></a>|
 			
-		@endforeach
+
 		</p>
 	</div>
 	<div class="footer-bd ">
