@@ -4,8 +4,9 @@
 		<p>
 		@foreach($links_data as $k=>$v)
 			<a href="https://{{ $v->url }}">{{ $v->name }}</a>|	
-		</p>
 		@endforeach
+		</p>
+		
 	</div>
 	<div class="footer-bd ">
 		<p>
