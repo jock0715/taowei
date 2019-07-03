@@ -110,7 +110,8 @@ class SpikeController extends Controller
         // 判断是否成功
         if ($res) {
             // 添加成功
-            return redirect('admin/spike')->with('success','添加成功');
+            // return redirect('admin/spike')->with('success','添加成功');
+            return back()->with('success','添加成功');
         } else {
             // 添加失败
             return back()->with('error','添加失败');
