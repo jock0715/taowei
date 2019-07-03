@@ -15,19 +15,23 @@ class Shopping_infoController extends Controller
      */
     public function index(Request $request)
     {
-        //获取友情链接数据
-        $links_data = DB::table('links')->where('status', 1)->get();
+        // 获取友情链接数据
+        $links_data = DB::table('links')
+                          ->where('status', 1)
+                          ->get();
 
         if (empty(session('home_data')->id)) {
             // 引入页面
-            return view('/home/login/login',['links_data'=>$links_data]);
+            return view('/home/login/login',
+                [
+                    'links_data'=>$links_data
+                ]);
         } else {
             // 通过id获取数据库数据
             $uid = session('home_data')->id;
             $data = DB::table('shopping_infos')
                     ->where('uid',$uid)
                     ->get();
-            // dd($data);
 
             // 获取全部购物车的总价格 跟条数
             $demp = [];
@@ -38,7 +42,7 @@ class Shopping_infoController extends Controller
             }
 
             $number = array_sum($demp);
-            // dd($data,$demp,$a);
+
             // 引入页面
             return view('/home/shopping/index',
                 [
@@ -59,8 +63,17 @@ class Shopping_infoController extends Controller
      */
     public function add(Request $request,$id)
     {   
+        // 获取友情链接数据
+        $links_data = DB::table('links')
+                          ->where('status', 1)
+                          ->get();
+
+        // 判断是否登录
         if (empty(session('home_data'))) {
-            return view('home/login/login');
+            return view('home/login/login',
+                [
+                    'links_data'=>$links_data
+                ]);
         }
         // 通过id获取商品数据
         $data = DB::table('spikes')
@@ -77,8 +90,10 @@ class Shopping_infoController extends Controller
         
         // 判断用户是否登录
         if (empty(session('home_data')->id)) {
+            // 未登录
             return back();
         } else {
+            // 已登录
             $data->uid = session('home_data')->id;
         }
         
@@ -94,15 +109,22 @@ class Shopping_infoController extends Controller
                     ->where('sid',$sid)
                     ->where('uid',$data->uid)
                     ->first();
-         // dd($data,$shopping,$gid_data);           
+                   
         // 判断购物车是否存在同一商品
         if (empty($gid_data)) {
+
             // 不存在则添加
             $data->num = $request->input('num');
+
+            // 执行添加
             $res = DB::table('shopping_infos')->insert($shopping);
+
+            //判断是否添加成功
             if ($res) {
+                // 添加成功
                 return back();
             } else {
+                // 添加失败
                 echo '添加失败';
             }
         } else {
@@ -113,9 +135,12 @@ class Shopping_infoController extends Controller
             $res = DB::table('shopping_infos')
                        ->where('sid',$sid)
                        ->update(['num'=>$data->num ,'price'=>$price]);
+            // 判断是否修改成功
             if ($res) {
-            return back();
+                // 修改成功
+                return back();
             } else {
+                // 修改失败
                 echo '添加失败';
             }
         }
@@ -128,29 +153,41 @@ class Shopping_infoController extends Controller
      */
     public function doingadd(Request $request,$id)
     {   
+        // 获取友情链接数据
+        $links_data = DB::table('links')
+                          ->where('status', 1)
+                          ->get();
+
+        // 判断是否登录
         if (empty(session('home_data'))) {
-            return view('home/login/login');
+            // 未登录 加载登录页面
+            return view('home/login/login',
+                [
+                    'links_data'=>$links_data
+                ]);
         }
         // 通过id获取商品数据
         $data = DB::table('doings')
                     ->select('name','desc','file','money')
                     ->where('id',$id)
                     ->first();
-        // dd($data);
+        
         // 获取数据
         $did = $id;
         $data->num = $request->input('num');
         $data->did = $did;
         $data->price = $data->money*$data->num;
         $data->created_at = date('Y-m-d H:i:s');
-        // dd($data->num);
+        
         // 判断用户是否登录
         if (empty(session('home_data')->id)) {
+            // 未登录
             return back();
         } else {
+            // 已登录 赋值用户id
             $data->uid = session('home_data')->id;
         }
-        // dd($data->uid);
+        
         // 把对象转换成数组格式
         $shopping = [];
         foreach ($data as $k => $v) {
@@ -167,10 +204,16 @@ class Shopping_infoController extends Controller
         if (empty($gid_data)) {
             // 不存在则添加
             $data->num = $request->input('num');
+
+            // 执行添加
             $res = DB::table('shopping_infos')->insert($shopping);
+
+            // 判断是否添加成功
             if($res){
+                // 添加成功
                 return back();
             }else{
+                // 添加失败
                 echo '添加失败';
             }
         } else {
@@ -181,9 +224,12 @@ class Shopping_infoController extends Controller
             $res = DB::table('shopping_infos')
                        ->where('did',$did)
                        ->update(['num'=>$data->num ,'price'=>$price]);
+            // 判断是否修改成功
             if ($res) {
-            return back();
+                // 修改成功
+                return back();
             } else {
+                // 修改失败
                 echo '添加失败';
             }
         }
@@ -196,29 +242,39 @@ class Shopping_infoController extends Controller
      */
     public function goodsadd(Request $request,$id)
     {   
+        // 获取友情链接数据
+        $links_data = DB::table('links')
+                          ->where('status', 1)
+                          ->get();
+
+        // 判断是否登录
         if (empty(session('home_data'))) {
+            // 未登录
             return view('home/login/login');
         }
+
         // 通过id获取商品数据
         $data = DB::table('goods')
                     ->select('name','desc','file','money')
                     ->where('id',$id)
                     ->first();
-        // dd($data);
+        
         // 获取数据
         $gid = $id;
         $data->num = $request->input('num');
         $data->gid = $gid;
         $data->price = $data->money*$data->num;
         $data->created_at = date('Y-m-d H:i:s');
-        // dd($data->num);
+        
         // 判断用户是否登录
         if (empty(session('home_data')->id)) {
+            // 未登录
             return back();
         } else {
+            // 已登录 赋值uid
             $data->uid = session('home_data')->id;
         }
-        // dd($data->uid);
+        
         // 把对象转换成数组格式
         $shopping = [];
         foreach ($data as $k => $v) {
@@ -235,10 +291,16 @@ class Shopping_infoController extends Controller
         if (empty($gid_data)) {
             // 不存在则添加
             $data->num = $request->input('num');
+
+            // 执行添加
             $res = DB::table('shopping_infos')->insert($shopping);
+
+            // 判断是否添加成功
             if ($res) {
+                // 添加成功
                 return back();
             } else {
+                // 添加失败
                 echo '添加失败';
             }
         } else {
@@ -246,12 +308,17 @@ class Shopping_infoController extends Controller
             $data->num = $data->num + $gid_data->num;
             $price = $gid_data->money * $data->num;
             
+            // 执行修改
             $res = DB::table('shopping_infos')
                        ->where('gid',$gid)
                        ->update(['num'=>$data->num ,'price'=>$price]);
+
+            // 判断是否修改成功
             if ($res) {
+                // 修改成功
                 return back();
             } else {
+                // 修改失败
                 echo '添加失败';
             }
         }
@@ -286,14 +353,18 @@ class Shopping_infoController extends Controller
         $price = $datas['money']*$num;
 
         // 对数据库进行修改操作
-        // $res = DB::update("update shopping_infos set num = $num,price=$price where id = $id");
         $res = DB::table('shopping_infos')
                     ->where('id',$id)
                     ->update(['num'=>$num,'price'=>$price]);
+
+        // 判断是否修改成功
         if ($res) {
+            // 修改成功
             return back();
         } else {
-            echo '失败';exit;
+            // 修改失败
+            echo '失败';
+            exit;
         }
     }
 
@@ -306,6 +377,7 @@ class Shopping_infoController extends Controller
     {
         // 接收id
         $id = $request->input('id');
+
         // 通过id获取数据
         $data = DB::table('shopping_infos')
                     ->select('num','money')
@@ -329,64 +401,21 @@ class Shopping_infoController extends Controller
         $price = $datas['money']*$num;
 
         // 对数据库进行修改操作
-        // $res = DB::update("update shopping_infos set num = $num,price=$price where id = $id");
         $res = DB::table('shopping_infos')
                     ->where('id',$id)
                     ->update(['num'=>$num,'price'=>$price]);
-                    
+        
+        // 判断是否修改成功
         if ($res) {
+            // 修改成功
             return back();
         } else {
+            // 修改失败
             echo '失败';exit;
         }
         
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        // 
-        echo $id;
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
 
     /**
      * 删除购物车数据
@@ -403,9 +432,13 @@ class Shopping_infoController extends Controller
         $res = DB::table('shopping_infos')
                     ->where('id',$id)
                     ->delete();
+
+        // 判断是否删除成功
         if ($res) {
+            // 删除成功
             echo 'ok';
         } else {
+            // 删除失败
             echo 'no';
         }
 

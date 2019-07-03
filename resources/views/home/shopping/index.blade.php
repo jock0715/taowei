@@ -51,7 +51,7 @@
 										</div>
 									</li> -->
 									<li class="td td-item">
-										<div class="item-pic" style="width:130px;height:auto;">
+										<div class="item-pic">
 											<!-- <a href="#" target="_blank" data-title="美康粉黛醉美东方唇膏口红正品 持久保湿滋润防水不掉色护唇彩妆" class="J_MakePoint" data-point="tbcart.8.12"> -->
 												<img src="/uploads/{{ $v->file }}" class="itempic J_ItemImg"></a>
 										</div>

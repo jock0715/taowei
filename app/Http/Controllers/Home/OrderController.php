@@ -16,17 +16,21 @@ class OrderController extends Controller
      */
     public function index(Request $request)
     {
-        //获取友情链接数据
-        $links_data = DB::table('links')->orderBy('id','asc')->where('status', 1)->get();
+        // 获取友情链接数据
+        $links_data = DB::table('links')
+                          ->orderBy('id','asc')
+                          ->where('status', 1)
+                          ->get();
 
         // 获取数据库数据
         $uid = session('home_data')->id;
+
         // 通过uid获取该用户的所有订单
         $orders = DB::table('orders')
                       ->where('uid',$uid)
                       ->get();
         
-        // dd($orders,$status,$tamp);
+
         // 引入页面
         return view('/home/order/index',
             [
@@ -42,8 +46,9 @@ class OrderController extends Controller
      */
     public function add()
     {
+        // 获取用户id
+        $uid = session('home_data')->id;
 
-        $uid = session('home_data')->id; 
         // 获取数据库数据
         $shopping = DB::table('shopping_infos')
                     ->where('uid',$uid)
@@ -57,9 +62,9 @@ class OrderController extends Controller
             // $gid [] = $v->gid;
         }
 
+        // 总价格
         $number = array_sum($demp);
-        // $gid = implode(',', $gid);
-        // dd($gid);
+
         // 引入页面
         return view('/home/order/add',
             [
@@ -79,7 +84,6 @@ class OrderController extends Controller
         $gids = $request->input('gid','');
         $sid = $request->input('sid','');
         $did = $request->input('did','');
-        // dd($gids,$sid,$did);
         $moneys =$request->input('money');
         $nums = $request->input('num');
         $files = $request->input('file');
@@ -92,7 +96,9 @@ class OrderController extends Controller
         $data['number'] = date('YmdHis').rand(1000,9999);
         $data['created_at'] = date('Y-m-d H:i:s');
 
+        // 同时添加多条数据 进行遍历获取
         foreach($gids as $k=>$v){
+            // 获取数据
             $data['gid'] = $v; 
             $data['sid'] = $sid[$k]; 
             $data['did'] = $did[$k]; 
@@ -101,12 +107,14 @@ class OrderController extends Controller
             $data['file'] = $files[$k];
             $data['name'] = $names[$k];
             $data['desc'] = $descs[$k];
-            $data['price'] = $data['num'] * $data['money']; 
+            $data['price'] = $data['num'] * $data['money'];
+
             // 对数据库进行添加操作
             $res = DB::table('orders')
                     ->insert($data);
         }
 
+        // 判断是否添加订单成功 
         if ($res) {
             // 提交订单成功 
             // 清空购物车
@@ -115,8 +123,13 @@ class OrderController extends Controller
                         ->where('uid',$uid)
                         ->delete();
 
-            return view('/home/order/success',['data'=>$data,]);
+            return view('/home/order/success',
+                [
+                    'data'=>$data,
+                ]);
+
         } else {
+            // 添加订单失败
             echo '失败';
         }
        
@@ -129,7 +142,12 @@ class OrderController extends Controller
      */
     public function create(Request $request)
     {
-        // dump(session('home_data'),session('home_info'));
+        //获取友情链接数据
+        $links_data = DB::table('links')
+                          ->orderBy('id','asc')
+                          ->where('status', 1)
+                          ->get();
+
         // 获取数据
         $id = $request->input('id');
         $snum = $request->input('num');
@@ -146,6 +164,7 @@ class OrderController extends Controller
         // 引入页面
         return view('/home/order/create',
             [
+                'links_data'=>$links_data,
                 'spike'=>$spike,
                 'snum'=>$snum,
                 'sprice'=>$sprice,
@@ -160,23 +179,29 @@ class OrderController extends Controller
      */
     public function docreate(Request $request)
     {
-        // dump(session('home_data'),session('home_info'));
+        // 获取友情链接数据
+        $links_data = DB::table('links')
+                          ->orderBy('id','asc')
+                          ->where('status', 1)
+                          ->get();
+
         // 获取数据
         $id = $request->input('id');
         $donum = $request->input('num');
-        // dd($donum);
+
         // 通过id获取商品数据
         $doing = DB::table('doings')
                     ->where('id',$id)
                     ->first();
-        // dd($doing->file);
+
         // 总价钱            
         $money = $doing->money;
         $doprice = $donum * $money;
-        // dd($spike,$money,$price);
+
         // 引入页面
         return view('/home/order/create',
             [
+                'links_data'=>$links_data,
                 'doing'=>$doing,
                 'donum'=>$donum,
                 'doprice'=>$doprice,
@@ -192,10 +217,12 @@ class OrderController extends Controller
      */
     public function gocreate(Request $request)
     {
-        //获取友情链接数据
-        $links_data = DB::table('links')->orderBy('id','asc')->where('status', 1)->get();
+        // 获取友情链接数据
+        $links_data = DB::table('links')
+                          ->orderBy('id','asc')
+                          ->where('status', 1)
+                          ->get();
 
-        // dump(session('home_data'),session('home_info'));
         // 获取数据
         $id = $request->input('id');
         $gonum = $request->input('num');
@@ -204,11 +231,11 @@ class OrderController extends Controller
         $goods = DB::table('goods')
                     ->where('id',$id)
                     ->first();
-        // dd($goods->file);
+
         // 总价钱            
         $money = $goods->money;
         $goprice = $gonum * $money;
-        // dd($gonum);
+
         // 引入页面
         return view('/home/order/create',
             [
@@ -227,10 +254,12 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //获取友情链接数据
-        $links_data = DB::table('links')->orderBy('id','asc')->where('status', 1)->get();
-
-       
+        // 获取友情链接数据
+        $links_data = DB::table('links')
+                          ->orderBy('id','asc')
+                          ->where('status', 1)
+                          ->get();
+  
         // 获取数据
         $data['uid'] = $request->input('uid');
         $data['gid'] = $request->input('gid');
@@ -247,94 +276,68 @@ class OrderController extends Controller
         $data['message'] = $request->input('message');
         $data['number'] = date('YmdHis').rand(1000,9999);
         $data['created_at'] = date('Y-m-d H:i:s');
-        // dd($data);
+
         // 对数据库进行添加操作
         $res = DB::table('orders')
-                    ->insert($data);
+                   ->insert($data);
+
         if ($res) {
             // 提交订单成功 
-            return view('/home/order/success',['links_data'=>$links_data,'data'=>$data,]);
+            return view('/home/order/success',
+                [
+                    'links_data'=>$links_data,
+                    'data'=>$data
+                ]);
+
         } else {
+            // 提交订单失败
             echo '失败';
         }
 
     }
 
-
-   
-
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
+     * 删除订单
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy(Request $request)
     {
-        // dd($request->all());
+        // 获取订单id
         $id = $request->input('id',0);
         // 通过id获取数据
         $res = DB::table('orders')
-                    ->where('id',$id)
-                    ->delete();
+                   ->where('id',$id)
+                   ->delete();
+        // 判断是否删除成功
         if($res){
+            // 删除成功
             echo 'ok';
-            // echo json_encode(['msg'=>'ok','info'=>'删除成功 !']);
         }else{
+            // 删除失败
             echo 'no';
-            // echo json_encode(['msg'=>'err','info'=>'删除失败 !']);
         }
     }
 
-    /*// 提交订单成功
-    public function success () 
-    {
-        // 引入页面
-        return view('/home/order/success');
-    }*/
-
-    // 查看订单详情
+    /**
+     * 查看订单详情
+     *
+     * @param  int
+     * @return \Illuminate\Http\Response
+     */
     public function order_infos (Request $request)
     {
-        //获取友情链接数据
-        $links_data = DB::table('links')->orderBy('id','asc')->where('status', 1)->get();
+        // 获取友情链接数据
+        $links_data = DB::table('links')
+                          ->orderBy('id','asc')
+                          ->where('status', 1)
+                          ->get();
 
-        // 通过id获取数据
+        // 获取用户id
         $uid = session('home_data')->id;
+
+        // 通过用户id获取数据
         $data = DB::table('orders')
                     ->where('uid',$uid)
                     ->get();
@@ -347,7 +350,12 @@ class OrderController extends Controller
             ]);
     }
 
-    // 确认收货
+    /**
+     * 确认收货
+     *
+     * @param  int
+     * @return \Illuminate\Http\Response
+     */
     public function receipt (Request $request)
     {
         // 获取id
@@ -358,17 +366,22 @@ class OrderController extends Controller
                       ->select('status')
                       ->where('id',$id)
                       ->first();
-
+        // 判断订单状态
         if ($status->status == '1' || $status->status == '0') {
             $status_data = 2;
         }
-        // dd($status_data);
+        
+        // 执行修改订单状态数据 
         $res = DB::table('orders')
                     ->where('id',$id)
                     ->update(['status'=>$status_data]);
+
+        // 判断是否修改成功
         if ($res) {
+            // 修改成功
             echo 'ok';
         } else {
+            // 修改失败
             echo 'no';
         }
     }

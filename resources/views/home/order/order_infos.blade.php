@@ -109,7 +109,7 @@
 
 											<ul class="item-list">
 												<li class="td td-item">
-													<div class="item-pic" style="width:130px;margin-top: 2px;margin-left: -10px">
+													<div class="item-pic" style="margin-top: 2px;margin-left: -10px">
 														<a href="#" class="J_MakePoint">
 															<img src="/uploads/{{ $v->file }}" class="itempic J_ItemImg">
 														</a>

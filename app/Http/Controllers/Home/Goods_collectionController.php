@@ -9,25 +9,6 @@ use DB;
 
 class Goods_collectionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        // 
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * 商品 加入收藏
@@ -39,6 +20,7 @@ class Goods_collectionController extends Controller
     {
         // 判断是否登录
         if(!session('home_login')){
+            // 未登录
             echo json_encode(['msg'=>'err','info'=>'请先登录!']);
             exit;
         }
@@ -55,50 +37,18 @@ class Goods_collectionController extends Controller
 
         // 判断是否收藏成功
         if ($res) {
+            // 收藏成功
             echo json_encode(['msg'=>'ok','info'=>'收藏成功']);
             exit;
         } else {
+            // 收藏失败
             echo json_encode(['msg'=>'err','info'=>'收藏失败']);
             exit;
         }
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
+     * 取消收藏商品
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -107,18 +57,29 @@ class Goods_collectionController extends Controller
     {
         // 接受要取消收藏的商品id
         $gid = $id;
+        
         // 找出用户id
         $uid = session('home_data')->id;
 
-        $data = DB::table('goods_collections')->where('gid',$gid)->where('uid',$uid)->first();
+        // 找出要取消的收藏
+        $data = DB::table('goods_collections')
+                    ->where('gid',$gid)
+                    ->where('uid',$uid)
+                    ->first();
+
+        // 获取商品收藏表的id
         $id = $data->id;
+
         // 进行删除
         $res = GoodsCollection::destroy($id);
+        
         // 判断是否取消收藏成功
         if ($res) {
+            // 取消收藏成功
             echo json_encode(['msg'=>'ok','info'=>'取消成功']);
             exit;
         } else {
+            // 取消收藏失败
             echo json_encode(['msg'=>'err','info'=>'取消失败']);
             exit;
         }

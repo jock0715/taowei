@@ -70,9 +70,9 @@
               <!--多个商品评论-->             
             @foreach($data_doing as $k=>$v)
               <div class="comment-list" style="height: 150px;">
-                <div class="item-pic">
+                <div class="item-pic" style="width:60px;">
                   <a href="#" class="J_MakePoint">
-                    <img src="/uploads/{{ $v->file }}" class="itempic">
+                    <img src="/home/images/getAvatar.do.jpg"  class="itempic">
                   </a>
                 </div>
                 <div class="item-title" >

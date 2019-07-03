@@ -10,26 +10,6 @@ use DB;
 class Doing_collectionController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        // 
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * 活动商品 加入收藏
      *
      * @param  \Illuminate\Http\Request  $request
@@ -37,12 +17,10 @@ class Doing_collectionController extends Controller
      */
     public function store(Request $request)
     {
-         //获取友情链接数据
-        $links_data = DB::table('links')->orderBy('id','asc')->where('status', 1)->get();
-
         
         // 判断是否登录
         if(!session('home_login')){
+            // 未登录
             echo json_encode(['msg'=>'err','info'=>'请先登录!']);
             exit;
         }
@@ -59,48 +37,17 @@ class Doing_collectionController extends Controller
 
         // 判断是否收藏成功
         if ($res) {
+            // 收藏成功
             echo json_encode(['msg'=>'ok','info'=>'收藏成功']);
             exit;
         } else {
+            // 收藏失败
             echo json_encode(['msg'=>'err','info'=>'收藏失败']);
             exit;
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
+    
     /**
      * 取消收藏 活动商品
      *
@@ -114,15 +61,25 @@ class Doing_collectionController extends Controller
         // 找出用户id
         $uid = session('home_data')->id;
 
-        $data = DB::table('doing_collections')->where('gid',$gid)->where('uid',$uid)->first();
+        // 获取该用户的数据
+        $data = DB::table('doing_collections')
+                    ->where('gid',$gid)
+                    ->where('uid',$uid)
+                    ->first();
+
+        // 获取商品的id
         $id = $data->id;
-        // 进行删除
+
+        // 进行删除（取消收藏）
         $res = DoingCollection::destroy($id);
+
         // 判断是否取消收藏成功
         if ($res) {
+            // 取消收藏成功
             echo json_encode(['msg'=>'ok','info'=>'取消成功']);
             exit;
         } else {
+            // 取消收藏失败
             echo json_encode(['msg'=>'err','info'=>'取消失败']);
             exit;
         }
