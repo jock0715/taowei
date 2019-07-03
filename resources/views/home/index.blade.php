@@ -178,7 +178,7 @@
 					  <div class="am-g am-g-fixed ">
 
 						@foreach($spike4_data as $k=>$v)
-						<div class="am-u-sm-3 ">
+						<div class="am-u-sm-3 " style="margin-top: 10px;">
 							<a href="/home/spikelist/info/{{ $v->id }}">
 							<div class="icon-sale one "></div>	
 								<h4>秒杀</h4>							

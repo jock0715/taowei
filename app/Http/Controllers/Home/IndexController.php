@@ -57,7 +57,7 @@ class IndexController extends Controller
         $spike4_data = DB::table('spikes')
                            ->where('status','1')
                            ->orderBy('id','asc')
-                           ->limit(4)
+                           ->limit(8)
                            ->get();
         
         // 获取广告数据
