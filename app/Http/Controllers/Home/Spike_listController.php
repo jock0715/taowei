@@ -21,84 +21,29 @@ class Spike_listController extends Controller
      */
     public function index(Request $request)
     {
-         //获取友情链接数据
-        $links_data = DB::table('links')->where('status', 1)->get();
+        // 获取友情链接数据
+        $links_data = DB::table('links')
+                          ->where('status', 1)
+                          ->get();
+
         // 接受搜索条件
         $search = $request->input('search','');
 
         // 查询数据 并且 分页
-        $spikes_data = Spike::where('name','like','%'.$search.'%')->where('status','1')->paginate(8);
+        $spikes_data = Spike::where('name','like','%'.$search.'%')
+                              ->where('status','1')
+                              ->paginate(8);
 
         // 加载页面
-        return view('home/spikelist/index', ['spikes_data'=>$spikes_data, 'search'=>$search,'links_data'=>$links_data]); 
+        return view('home/spikelist/index',
+            [
+                'spikes_data'=>$spikes_data,
+                'search'=>$search,
+                'links_data'=>$links_data
+            ]); 
 
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 
     /**
      * 商品详情页面
@@ -107,19 +52,32 @@ class Spike_listController extends Controller
      */
     public function info($id)
     {   
-        //获取友情链接数据
-        $links_data = DB::table('links')->where('status', 1)->get();
+        // 获取友情链接数据
+        $links_data = DB::table('links')
+                          ->where('status', 1)
+                          ->get();
+
         // 通过id获取商品数据
         $spike = Spike::find($id);
+
+        // 获取商品详情图片
         $spikeinfo = $spike->spikeinfo;
+
+        // 获取该商品所在分类的id
         $cid = $spike->cid;
 
-        $cate_spikes3 = Spike::where('cid',$cid)->where('status','1')->orderBy('sale','desc')->limit(3)->get();
-        $cate_spikes = Spike::where('cid',$cid)->where('status','1')->orderBy('sale','desc')->get();
+        // 获取该商品同分类的三条商品数据（以销售量从大到小获取）
+        $cate_spikes3 = Spike::where('cid',$cid)
+                               ->where('status','1')
+                               ->orderBy('sale','desc')
+                               ->limit(3)
+                               ->get();
 
+        // 获取该商品同分类的所有商品数据（以销售量从大到小获取）
         $cate_spikes = Spike::where('cid',$cid)
-                             ->orderBy('sale','desc')
-                             ->get();
+                              ->where('status','1')
+                              ->orderBy('sale','desc')
+                              ->get();
 
         // 查看评价
         $comment = Comment_spike::where('sid',$id);
@@ -130,14 +88,22 @@ class Spike_listController extends Controller
         if(session('home_login')){
             // 已登录 获取用户id
             $uid = session('home_data')->id;
+
             // 商品id
             $gid = $spike->id;
+
             // 验证是否已经收藏该商品
-            $data = DB::table('spike_collections')->where('gid',$gid)->where('uid',$uid)->first();
+            $data = DB::table('spike_collections')
+                        ->where('gid',$gid)
+                        ->where('uid',$uid)
+                        ->first();
+
             // 收藏返回1 没收藏返回0
             if(!empty($data)){
+                // 已收藏
                 $collection = 1;
             } else {
+                // 未收藏
                 $collection = 0;
             }
         }else{
@@ -145,19 +111,17 @@ class Spike_listController extends Controller
             $collection = 0;
         }
 
-        $gid = 0;
-
         // 加载页面
-        return view('home/spikelist/info',['spike'=>$spike,'spikeinfo'=>$spikeinfo,'cate_spikes'=>$cate_spikes,'cate_spikes3'=>$cate_spikes3,'collection'=>$collection,'comment_data'=>$comment_data,'links_data'=>$links_data]);
-
-        // // 加载页面
-        // return view('home/spikelist/info',
-        //     [
-        //         'spike'=>$spike,
-        //         'spikeinfo'=>$spikeinfo,
-        //         'cate_spikes'=>$cate_spikes,
-        //         'comment_data'=>$comment_data
-        //     ]);
+        return view('home/spikelist/info',
+            [
+                'spike'=>$spike,
+                'spikeinfo'=>$spikeinfo,
+                'cate_spikes'=>$cate_spikes,
+                'cate_spikes3'=>$cate_spikes3,
+                'collection'=>$collection,
+                'comment_data'=>$comment_data,
+                'links_data'=>$links_data
+            ]);
 
     }
 
@@ -168,16 +132,27 @@ class Spike_listController extends Controller
      */
     public function saleindex(Request $request)
     {
-         //获取友情链接数据
-        $links_data = DB::table('links')->where('status', 1)->get();
+        // 获取友情链接数据
+        $links_data = DB::table('links')
+                          ->where('status', 1)
+                          ->get();
+
         // 接受搜索条件
         $search = $request->input('search','');
 
         // 查询数据 并且 分页
-        $spikes_sale_data = Spike::where('name','like','%'.$search.'%')->where('status','1')->orderBy('sale','desc')->paginate(8);
+        $spikes_sale_data = Spike::where('name','like','%'.$search.'%')
+                                   ->where('status','1')
+                                   ->orderBy('sale','desc')
+                                   ->paginate(8);
 
         // 加载页面
-        return view('home/spikelist/sale_index', ['spikes_sale_data'=>$spikes_sale_data, 'search'=>$search,'links_data'=>$links_data]);
+        return view('home/spikelist/sale_index',
+            [
+                'spikes_sale_data'=>$spikes_sale_data,
+                'search'=>$search,
+                'links_data'=>$links_data
+            ]);
 
     }
 
@@ -188,16 +163,27 @@ class Spike_listController extends Controller
      */
     public function priceindex(Request $request)
     {
-         //获取友情链接数据
-        $links_data = DB::table('links')->where('status', 1)->get();
+        // 获取友情链接数据
+        $links_data = DB::table('links')
+                          ->where('status', 1)
+                          ->get();
+
         // 接受搜索条件
         $search = $request->input('search','');
 
         // 查询数据 并且 分页
-        $spikes_price_data = Spike::where('name','like','%'.$search.'%')->where('status','1')->orderBy('money','asc')->paginate(8);
+        $spikes_price_data = Spike::where('name','like','%'.$search.'%')
+                                    ->where('status','1')
+                                    ->orderBy('money','asc')
+                                    ->paginate(8);
 
         // 加载页面
-        return view('home/spikelist/price_index', ['spikes_price_data'=>$spikes_price_data, 'search'=>$search,'links_data'=>$links_data]);
+        return view('home/spikelist/price_index',
+            [
+                'spikes_price_data'=>$spikes_price_data,
+                'search'=>$search,
+                'links_data'=>$links_data
+            ]);
 
     }
 }

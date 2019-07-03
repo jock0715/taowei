@@ -12,18 +12,29 @@ use App\Models\Cate;
 
 class IndexController extends Controller 
 {
+    /**
+     * 分类 封装
+     *
+     * @return \Illuminate\Http\Response
+     */
     public static function getPidCateData($pid = 0)
         {
             //获取一级分类
             $data = Cate::where('pid',$pid)->get();
+
+            // 遍历获取该一级分类下的二级分类数据
             foreach($data as $k=>$v){
+
+                // 调用自身获取该二级分类下的三级分类数据
                 $v->sub = self::getPidCateData($v->id);
             }
+            // 返回数据
             return $data;
 
         }
+
     /**
-     * Display a listing of the resource.
+     * 前台 首页
      *
      * @return \Illuminate\Http\Response
      */
@@ -36,22 +47,37 @@ class IndexController extends Controller
         $banners_data = $banners->get();
 
         // 获取十条商品的数据
-        $goods10_data =DB::table('goods')->where('status','1')->orderBy('id','asc')->limit(10)->get();
+        $goods10_data = DB::table('goods')
+                            ->where('status','1')
+                            ->orderBy('id','asc')
+                            ->limit(10)
+                            ->get();
 
         // 获取四条秒杀商品的数据
-        $spike4_data =DB::table('spikes')->where('status','1')->orderBy('id','asc')->limit(4)->get();
+        $spike4_data = DB::table('spikes')
+                           ->where('status','1')
+                           ->orderBy('id','asc')
+                           ->limit(4)
+                           ->get();
         
+        // 获取广告数据
+        $advertis_data = DB::table('advertis')
+                             ->orderBy('id','asc')
+                             ->limit(3)
+                             ->get(); 
 
-         // 获取广告数据
-        
-        $advertis_data = DB::table('advertis')->orderBy('id','asc')->limit(3)->get(); 
-
-        //获取友情链接数据
-        $links_data = DB::table('links')->orderBy('id','asc')->where('status', 1)->get();
-
+        // 获取友情链接数据
+        $links_data = DB::table('links')
+                          ->orderBy('id','asc')
+                          ->where('status', 1)
+                          ->get();
 
         // 获取四条活动商品的数据
-        $doing4_data =DB::table('doings')->where('status','1')->orderBy('id','asc')->limit(4)->get();
+        $doing4_data = DB::table('doings')
+                           ->where('status','1')
+                           ->orderBy('id','asc')
+                           ->limit(4)
+                           ->get();
         
 
         // 引入页面
@@ -68,69 +94,5 @@ class IndexController extends Controller
             ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+    
 }

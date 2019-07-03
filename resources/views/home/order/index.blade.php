@@ -33,22 +33,22 @@
 						<div class="am-tabs am-tabs-d2 am-margin" data-am-tabs>
 
 							<ul class="am-avg-sm-5 am-tabs-nav am-nav am-nav-tabs">
-								<li class="am-active"><a href="#tab1">所有订单</a></li>
-								<li><a href="#tab3">待发货</a></li>
-								<li><a href="#tab4">未评价</a></li>
-								<li><a href="#tab5">已评价</a></li>
+								<li class="am-active"><a href="#tab1">待发货</a></li>
+								<li><a href="#tab3">待签收</a></li>
+								<li><a href="#tab4">已签收</a></li>
+								<li><a href="#tab5">待评价</a></li>
 							</ul>
 
 							<div class="am-tabs-bd">
-
+								<!-- 待发货 -->
 								<div class="am-tab-panel am-fade am-in am-active" id="tab1">
 								
 								@foreach($orders as $k=>$v)
-								
+									@if($v->status == 0)
 									<div class="order-main">
 										<div class="order-list">
 											
-											<!--已签收订单-->
+											<!-- 待发货 -->
 											<div class="order-status5">
 												<div class="order-title">
 													<div class="dd-num">订单编号：<a href="javascript:;">{{ $v->number}}</a></div>
@@ -59,7 +59,7 @@
 													<div class="order-left">
 														<ul class="item-list">
 															<li class="td td-item">
-																<div class="item-pic" style="width:130px;margin-top: 2px;margin-left: -10px">
+																<div class="item-pic" style="margin-top: 2px;margin-left: -10px">
 																	<a href="javascript:;" class="J_MakePoint">
 																		<img src="/uploads/{{ $v->file}}" class="itempic J_ItemImg">
 																	</a>
@@ -118,18 +118,21 @@
 										</div>
 
 									</div>
+									@endif
 									
 								@endforeach
 								
 								</div>
 								
+								<!-- 待签收 -->
 								<div class="am-tab-panel am-fade" id="tab3">
+								
 								@foreach($orders as $k=>$v)
-								@if($v->status == 0)	
+									@if($v->status == 1)
 									<div class="order-main">
 										<div class="order-list">
 											
-											<!--待发货0-->
+											<!--未评价2-->
 											<div class="order-status5">
 												<div class="order-title">
 													<div class="dd-num">订单编号：<a href="javascript:;">{{ $v->number}}</a></div>
@@ -140,15 +143,15 @@
 													<div class="order-left">
 														<ul class="item-list">
 															<li class="td td-item">
-																<div class="item-pic" style="width:130px;margin-top: 2px;margin-left: -10px">
-																	<a href="#" class="J_MakePoint">
+																<div class="item-pic" style="margin-top: 2px;margin-left: -10px">
+																	<a href="javascript:;" class="J_MakePoint">
 																		<img src="/uploads/{{ $v->file}}" class="itempic J_ItemImg">
 																	</a>
 																</div>
 
 																<div class="item-info" style="padding-left:10px 20px">
 																	<div class="item-basic-info">
-																		<a href="#">
+																		<a href="javascript:;">
 																			<p>{{ $v->name }}</p>
 																			<p class="info-little"> {{ $v->desc }}</p>
 																		</a>
@@ -199,20 +202,22 @@
 										</div>
 
 									</div>
-								@endif
+									@endif
 								@endforeach
 								</div>
+								
+								<!-- 已签收 -->
 								<div class="am-tab-panel am-fade" id="tab4">
 								
-									@foreach($orders as $k=>$v)
-								@if($v->status == 2)
+								@foreach($orders as $k=>$v)
+									@if($v->status == 2)
 									<div class="order-main">
 										<div class="order-list">
 											
 											<!--未评价2-->
 											<div class="order-status5">
 												<div class="order-title">
-													<div class="dd-num">订单编号：<a href="/home/user/user_replyed/{{ $v->id }}">{{ $v->number}}</a></div>
+													<div class="dd-num">订单编号：<a href="javascript:;">{{ $v->number}}</a></div>
 													<span>成交时间：{{ $v->created_at }}</span>
 													<!--    <em>店铺：小桔灯</em>-->
 												</div>
@@ -220,8 +225,8 @@
 													<div class="order-left">
 														<ul class="item-list">
 															<li class="td td-item">
-																<div class="item-pic" style="width:130px;margin-top: 2px;margin-left: -10px">
-																	<a href="/home/user/user_replyed/{{ $v->id }}" class="J_MakePoint">
+																<div class="item-pic" style="margin-top: 2px;margin-left: -10px">
+																	<a href="javascript:;" class="J_MakePoint">
 																		<img src="/uploads/{{ $v->file}}" class="itempic J_ItemImg">
 																	</a>
 																</div>
@@ -283,6 +288,7 @@
 								@endforeach
 								</div>
 
+								<!-- 待评价 -->
 								<div class="am-tab-panel am-fade" id="tab5">
 								@foreach($orders as $k=>$v)
 								@if($v->status == 3)
@@ -292,7 +298,7 @@
 											<!--已评价3-->
 											<div class="order-status5">
 												<div class="order-title">
-													<div class="dd-num">订单编号：<a href="javascript:;">{{ $v->number}}</a></div>
+													<div class="dd-num">订单编号：<a href="/home/user/user_replyed/{{ $v->id }}">{{ $v->number}}</a></div>
 													<span>成交时间：{{ $v->created_at }}</span>
 													<!--    <em>店铺：小桔灯</em>-->
 												</div>
@@ -300,8 +306,8 @@
 													<div class="order-left">
 														<ul class="item-list">
 															<li class="td td-item">
-																<div class="item-pic" style="width:130px;margin-top: 2px;margin-left: -10px">
-																	<a href="#" class="J_MakePoint">
+																<div class="item-pic" style="margin-top: 2px;margin-left: -10px">
+																	<a href="/home/user/user_replyed/{{ $v->id }}" class="J_MakePoint">
 																		<img src="/uploads/{{ $v->file}}" class="itempic J_ItemImg">
 																	</a>
 																</div>

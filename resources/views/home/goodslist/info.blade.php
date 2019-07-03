@@ -458,8 +458,8 @@
 										@foreach($comment_data as $k=>$v)
 										<li class="am-comment">
 											<!-- 评论容器 -->
-											<a href="">
-												<img class="am-comment-avatar" src="/uploads/{{ $v->commentuinfo->profile }}" />
+											<a href="javascript:;">
+												<img class="am-comment-avatar" src="/home/images/getAvatar.do.jpg" />
 												<!-- 评论者头像 -->
 											</a>
 

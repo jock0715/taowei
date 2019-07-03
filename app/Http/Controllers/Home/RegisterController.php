@@ -20,20 +20,18 @@ class RegisterController extends Controller
      */
     public function index()
     {
-         //获取友情链接数据
-        $links_data = DB::table('links')->where('status', 1)->get();
-        return view('home/login/register',['links_data'=>$links_data]);
+        // 获取友情链接数据
+        $links_data = DB::table('links')
+                          ->where('status', 1)
+                          ->get();
+
+        // 加载页面
+        return view('home/login/register',
+            [
+                'links_data'=>$links_data
+            ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * 执行手机注册功能.
@@ -159,7 +157,10 @@ class RegisterController extends Controller
                     exit;
         }
 
+        // 实例化User对象
         $user = new User;
+
+        // 赋值
         $token = str_random(60);
         $user->upwd = Hash::make($reupwd);
         $user->email = $email;
@@ -226,53 +227,9 @@ class RegisterController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
+     * 发送 手机验证码 验证
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -324,6 +281,7 @@ class RegisterController extends Controller
         $httpInfo = array();
         $ch = curl_init();
 
+        // 接口
         curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
         curl_setopt($ch, CURLOPT_USERAGENT, 'JuheData');
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 60);
