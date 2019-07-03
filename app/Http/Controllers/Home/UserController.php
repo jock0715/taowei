@@ -346,7 +346,7 @@ class UserController extends Controller
         //     // 否 前往登录
         //     return view('home/login/login');
         // }
-          //获取友情链接数据
+        //获取友情链接数据
         $links_data = DB::table('links')->orderBy('id','asc')->where('status', 1)->get();
 
         // 判断是否登录
@@ -375,7 +375,7 @@ class UserController extends Controller
                 'spike_collection'=>$spike_collection
                 ]);
         }else{
-            return view('home/login/login');
+            return view('home/login/login',['links_data'=>$links_data,]);
         }
         // return view('home/user/user_collection');
 

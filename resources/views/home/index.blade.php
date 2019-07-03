@@ -1,8 +1,17 @@
 @include('/home/public/header')
+<style>
+	.banners{
+		background:url('/admin/images/beijing.png') no-repeat 64% 26%;
+		height: 430px;
+	}
+	.body{
+		background: #f0f3ef;
+	}
+</style>
 			<div class="banner"> 
                       <!--轮播 -->
-						<div class="am-slider am-slider-default scoll" style="background:url('/admin/images/beijing.png') no-repeat 56% 18%" data-am-flexslider id="demo-slider-0">
-							<ul class="am-slides">
+						<div class="am-slider am-slider-default scoll banners"  data-am-flexslider id="demo-slider-0">
+							<ul class="am-slides" style="height: 450px;">
 								@foreach($banners_data as $v)
 								@if($v->status == 1)
 								<li class=""><a><img src="/uploads/{{ $v->url }}" title="{{ $v->desc }}" /></a></li>
@@ -29,10 +38,10 @@
 						<div id="nav" class="navfull"> 
 							<div class="area clearfix">
 								<div class="category-content" id="guide_2">
-									@foreach($cate_data as $k=>$v)
 									<div class="category">
 										<ul class="category-list" id="js_climit_li">
-											<li class="appliance js_toggle relative first">
+									@foreach($cate_data as $k=>$v)
+											<li class="appliance js_toggle relative first" style="height: 48px;">
 												<div class="category-info">
 													<h3 class="category-name b-category-name"><i><img src="/home/images/cake.png"></i><a class="ml-22" title="{{ $v->cname }}">{{ $v->cname }}</a></h3>
 													<em>&gt;</em></div>
@@ -40,24 +49,24 @@
 													<div class="area-in">
 														<div class="area-bg">
 															<div class="menu-srot">
-															@foreach($v->sub as $kk=>$vv)
 																<div class="sort-side">
+															@foreach($v->sub as $kk=>$vv)
 																	<dl class="dl-sort">
 																		<dt><span title="{{ $vv->cname}}">{{ $vv->cname}}</span></dt>
 																		@foreach($vv->sub as $kkk=>$vvv)
 																		<dd><a href="/home/catelist?cid={{ $vvv->id }}"  ><span>{{ $vvv->cname }}</span></a></dd>
 																		@endforeach
 																	</dl>
+															@endforeach
 																</div>		 													
 															</div>
-														@endforeach
 														</div>							
 													</div>
 												</div>
-											<b class="arrow"></b>	
+											<b class="arrow"></b>
+									@endforeach	
 											</li>
 										</ul>
-									@endforeach
 									</div>
 
 								</div>
@@ -235,10 +244,11 @@
 
 									<div class="title ">
 										【{{ $v->name }}】
-									</div>
-									<div class="sub-title ">
 										¥ {{ $v->money }}
 									</div>
+									<!-- <div class="sub-title ">
+										
+									</div> -->
 									<!-- <i class="am-icon-shopping-basket am-icon-md  seprate"></i> -->
 								</div>
 								<img src="/uploads/{{ $v->file }}">

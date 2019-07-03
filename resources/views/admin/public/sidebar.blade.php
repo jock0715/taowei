@@ -2,6 +2,7 @@
             <div class="navbar-collapse">
 				<nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
 					<ul class="nav" id="side-menu">
+						@if(session('admin_uinfo')->status == 0)
 						<li>
 							<a href="javascript:;"><span class="glyphicon glyphicon-user nav_icon" aria-hidden="true"></span> </i>管理员<span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level collapse">
@@ -15,6 +16,7 @@
 							</ul>
 							<!-- //nav-second-level -->
 						</li>
+						
 						<li>
 							<a href="javascript:;"><span class="glyphicon glyphicon-phone nav_icon" aria-hidden="true"></span> </i>用户管理<span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level collapse">
@@ -50,7 +52,7 @@
 							</ul>
 							<!-- //nav-second-level -->
 						</li>
-
+						@endif
 						<li>
 							<a href="javascript:;"><span class="glyphicon glyphicon-th-list nav_icon" aria-hidden="true"></span> </i>分类管理<span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level collapse">
