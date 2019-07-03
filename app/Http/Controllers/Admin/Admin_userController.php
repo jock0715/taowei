@@ -31,7 +31,7 @@ class Admin_userController extends Controller
     }*/
 
     /**
-     * Display a listing of the resource.
+     * 显示管理员页面和执行查询.
      *
      * @return \Illuminate\Http\Response
      */
@@ -46,7 +46,7 @@ class Admin_userController extends Controller
         $admin_data = Admin_user::where('name','like','%'.$search_uname.'%')
                                 ->orderBy('id','asc')
                                 ->paginate(5);
-        //引入页面
+        // 引入页面
         return view('/admin/admin_user/index',
             [
                 'params'=>$request->all(),
@@ -55,18 +55,18 @@ class Admin_userController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * 显示添加管理用户页面.
      *
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        //引入页面
+        // 引入页面
         return view('/admin/admin_user/create');
     }
 
     /**
-     * Store a newly created resource in storage.
+     * 执行添加管理用户功能.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -96,13 +96,14 @@ class Admin_userController extends Controller
             $admin_path = '';
         }
 
-        //接收数据
+        // 接收数据
         $data = $request->all();
         $admin_user = new Admin_user;
         $admin_user->name = $data['name'];
         $admin_user->pwd = Hash::make($data['pwd']);
         $admin_user->profile = $admin_path;
 
+        // 执行SQL添加
         $res = $admin_user->save();
         if ($res) {
             return redirect('/admin/admin_user')->with('success','添加成功');
@@ -112,24 +113,14 @@ class Admin_userController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
+     * 显示管理用户修改页面.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
+        // SQL获取对应id的信息
         $admins = Admin_user::find($id);
         // 引入页面
         return view('admin/admin_user/edit',
@@ -139,7 +130,7 @@ class Admin_userController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * 执行管理用户修改功能.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -162,7 +153,7 @@ class Admin_userController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * 执行删除管理用户功能.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -172,6 +163,7 @@ class Admin_userController extends Controller
         // 通过该id进行删除操作
         $res = Admin_user::destroy($id);
         if ($res) {
+            // 删除旧图片
             Storage::delete($request->input('old_profile',''));
             return redirect('/admin/admin_user')->with('success','删除成功');
         } else {
@@ -216,7 +208,7 @@ class Admin_userController extends Controller
            return back()->with('error','用户名或密码错误!!');
         }
 
-        //压入session值
+        // 压入session值
         session(['admin_login'=>true]);
         session(['admin_uinfo'=>$user_data]);
 
@@ -231,7 +223,7 @@ class Admin_userController extends Controller
      */
     public function loginout()
     {
-        //压入session值
+        // 压入session值
         session(['admin_login'=>false]);
         session(['admin_uinfo'=>false]);
 
@@ -255,14 +247,17 @@ class Admin_userController extends Controller
             Storage::delete($request->input('old_file'));
             $file_path = $request->file('profile')->store(date('Ymd'));
         }else{
+            // 旧图片赋值
             $file_path = $request->input('old_file');
         }
 
         $data['profile'] = $file_path;
 
+        // 实例化模型
         $admin_user = new Admin_user;
         $res = $admin_user->where('id',$id)->update($data);
         if($res){
+            // 压入session的用户头像
             session('admin_uinfo')->profile = $file_path;
             return redirect('admin/index')->with('success','修改头像成功');
         }else{
@@ -296,9 +291,9 @@ class Admin_userController extends Controller
         // 更新代码
         $res = $user_data->where('id',$id)->update(['pwd'=>$repwd1]);
         if($res){
-            # 压入session值,登录
+            // 压入session值,登录
             session(['admin_login'=>false]);
-            # 压入用户信息
+            // 压入用户信息
             session(['userinfo'=>false]);
             echo json_encode(['msg'=>'ok','info'=>'修改密码成功,正在退出...']);
         }else{

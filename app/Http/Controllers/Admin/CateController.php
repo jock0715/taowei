@@ -6,12 +6,20 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Cate;
 use DB;
+
 class CateController extends Controller
 {
+    /**
+     * 遍历分类级别
+     *
+     * @return \Illuminate\Http\Response
+     */
     public static function getCateData($a)
     {
+        // 查询并排序对应分类
         $cates = Cate::select('*',DB::raw("concat(path,',',id) as paths"))->where('cname','like','%'.$a.'%')->orderBy('paths','asc')->paginate(5);
         
+        // 遍历分类
         foreach ($cates as $key => $value) {
             $n = substr_count($value->path,',');
 
@@ -19,20 +27,22 @@ class CateController extends Controller
         }
         return $cates; 
     }
+
     /**
      * 分类管理页面
      *
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request) 
-    {
-        //接收搜索条件
+    { 
+        // 接收搜索条件
         $search = $request->input('search','');
  
-        //显示模板
+        // 显示模板
         return view('admin.cate.index',['cates'=>self::getCateData($search)]);
     
     }
+
     /**
      * 添加页面
      *
@@ -53,7 +63,7 @@ class CateController extends Controller
         // 获取父级ID
         $id = $request->input('id',0);
        
-        //显示模板
+        // 显示模板
         return view('admin.cate.create',['id'=>$id,'cates'=>$cates]);
     }
 
@@ -89,6 +99,7 @@ class CateController extends Controller
         $cate->pid = $pid;
         $cate->path = $path;
         $res1 = $cate->save();
+
         // 判断是否添加成功
         if($res1){
             // 添加成功
@@ -101,17 +112,6 @@ class CateController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * 分类修改页面
      *
      * @param  int  $id
@@ -119,6 +119,7 @@ class CateController extends Controller
      */
     public function edit($id)
     {
+        // 获取对应id的信息
          $cate = cate::find($id);
 
         // 加载修改页面
@@ -137,7 +138,7 @@ class CateController extends Controller
      */
     public function update(Request $request, $id)
     {
-         // 声明对象
+        // 声明对象
         $cate = cate::find($id);
         $cate->cname = $request->input('cname','');
        
@@ -151,16 +152,5 @@ class CateController extends Controller
             // 修改失败
             return back()->with('error','修改失败');
         }
-    }
-
-    /**
-     * 处理删除页面
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-         // 
     }
 }

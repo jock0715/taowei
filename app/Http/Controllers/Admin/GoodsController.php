@@ -112,22 +112,11 @@ class GoodsController extends Controller
         // 判断是否成功
         if ($res) {
             // 添加成功
-            return redirect('admin/goods')->with('success','添加成功');
+            return redirect('admin/goods/create')->with('success','添加成功');
         } else {
             // 添加失败
             return back()->with('error','添加失败');
         }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        // 
     }
 
     /**

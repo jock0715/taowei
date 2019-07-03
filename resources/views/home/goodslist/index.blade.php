@@ -119,7 +119,7 @@
 		</div> -->
 
 		<!--菜单 -->
-		@include('/home/public/right')
+		@include('/home/public/slidebar')
 
 <div class="theme-popover-mask"></div>
 

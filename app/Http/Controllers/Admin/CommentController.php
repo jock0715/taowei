@@ -17,7 +17,9 @@ class CommentController extends Controller
      */
     public function index(Request $request)
     {
+        // 获取搜索的数据
         $search = $request->input('search','');
+
         // 实例化 评价表 comments
         $comment = new Comment;
         $data = $comment->paginate(5);
@@ -33,6 +35,7 @@ class CommentController extends Controller
      */
     public function edit($id)
     {
+        // 获取对应id的信息
         $data = Comment::find($id);
 
         return view('admin/comment/edit',['data'=>$data]);
@@ -52,6 +55,8 @@ class CommentController extends Controller
         $comment = Comment::find($id);
         $comment->content = $data['content']?$data['content']:'该用户未评价!';
         $comment->comment = $data['comment']?$data['comment']:'0';
+
+        // 执行SQL语句修改
         $res = $comment->save();
         if($res){
             return redirect('/admin/comment')->with('success','修改成功 !');
@@ -68,7 +73,10 @@ class CommentController extends Controller
      */
     public function destroy($id)
     {
+        // 获取对应id的信息
         $comment = Comment::find($id);
+
+        // 执行SQL语句删除
         $res = $comment->delete();
         if($res){
             return redirect('/admin/comment')->with('success','删除成功 !');

@@ -122,17 +122,6 @@ class DoingController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * 活动商品 状态 切换
      *
      * @param  int  $id

@@ -30,7 +30,7 @@ class BannerController extends Controller
     }*/
 
     /**
-     * Display a listing of the resource.
+     * 显示轮播图主页面.
      *
      * @return \Illuminate\Http\Response
      */
@@ -42,6 +42,7 @@ class BannerController extends Controller
         // $banners_data = $banners->get();
         $search_uname = $request->input('search_uname','');
 
+        // 执行条件查询,排序并分页
         $banners_data = Banner::where('title','like','%'.$search_uname.'%')
                                 ->orderBy('id','asc')
                                 ->paginate(5);
@@ -54,7 +55,7 @@ class BannerController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * 显示轮播图添加页面.
      *
      * @return \Illuminate\Http\Response
      */
@@ -65,14 +66,13 @@ class BannerController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * 执行轮播图添加功能.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        // dd($request->all());
         // 表单验证
         $this->validate($request, [
             'title' => 'required|max:32',
@@ -96,7 +96,8 @@ class BannerController extends Controller
 
         // 接收数据
         $data = $request->all();
-        // dump($data);
+
+        // 实例化模型并赋值
         $banner = new Banner;
         $banner->title = $data['title'];
         $banner->desc = $data['desc'];
@@ -114,7 +115,7 @@ class BannerController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * 显示修改轮播图页面.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -132,7 +133,7 @@ class BannerController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * 执行修改轮播图功能.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -140,7 +141,6 @@ class BannerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // dd($request->all());
         // 表单验证
         $this->validate($request, [
             'title' => 'required|max:32',
@@ -168,6 +168,7 @@ class BannerController extends Controller
         $banners_data->desc = $request->input('desc');
         $banners_data->url = $url_path;
 
+        // 执行SQL修改语句
         $res = $banners_data->save();
         if ($res) {
             return redirect('/admin/banner')->with('success','修改成功');
@@ -177,7 +178,7 @@ class BannerController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * 执行删除轮播图功能.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -206,7 +207,6 @@ class BannerController extends Controller
                     ->where('id',$id)
                     ->value('status');
 
-
         // 判断status
         if ($data == 0) {
             $data = 1;
@@ -222,6 +222,5 @@ class BannerController extends Controller
         } else {
             echo 'no';
         }
-
     }
 }

@@ -27,8 +27,9 @@ class NodeController extends Controller
         $res1 = $user->save();
         }
     }*/
+
     /**
-     * Display a listing of the resource.
+     * 显示权限功能页面.
      *
      * @return \Illuminate\Http\Response
      */
@@ -53,7 +54,7 @@ class NodeController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * 显示添加权限功能页面.
      *
      * @return \Illuminate\Http\Response
      */
@@ -64,7 +65,7 @@ class NodeController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * 执行添加权限功能.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -162,18 +163,7 @@ class NodeController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
+     * 显示添加权限功能页面.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -191,7 +181,7 @@ class NodeController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * 执行添加权限功能
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -220,6 +210,7 @@ class NodeController extends Controller
         $data['controller'] = ucwords($controllers_data).('Controller');
         $data['method'] = $request->input('method');
         $data['updated_at'] = date('Y-m-d H:i:s');
+
         // 进行数据库修改操作
         $res = DB::table('nodes')
                        ->where('id',$id)
@@ -234,7 +225,7 @@ class NodeController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * 执行删除权限功能.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response

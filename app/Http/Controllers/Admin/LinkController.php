@@ -28,7 +28,7 @@ class LinkController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * 显示友情链接添加页面.
      *
      * @return \Illuminate\Http\Response
      */
@@ -39,7 +39,7 @@ class LinkController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * 执行添加链接功能.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -74,18 +74,7 @@ class LinkController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
+     * 显示友情链接修改页面.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -100,8 +89,6 @@ class LinkController extends Controller
             [
                 'link'=>$link,
             ]);
-
-
     }
 
     /**
@@ -131,7 +118,7 @@ class LinkController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * 删除友情链接.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -164,16 +151,12 @@ class LinkController extends Controller
                     ->where('id',$id)
                     ->value('status');
 
-
-
-
         // 判断status
         if ($data == 0) {
             $data = 1;
         } else {
             $data = 0;
         }  
-
 
         // 进行数据库操作
         $res = DB::update("update links set status = $data where id = $id");
@@ -186,7 +169,5 @@ class LinkController extends Controller
             // 切换失败
             echo 'no';
         }
-
-
     }
 }

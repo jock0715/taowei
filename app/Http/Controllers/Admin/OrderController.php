@@ -11,7 +11,7 @@ use App\Models\Goods;
 class OrderController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * 显示订单页面.
      *
      * @return \Illuminate\Http\Response
      */
@@ -26,39 +26,7 @@ class OrderController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
+     * 显示修改订单页面.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -71,7 +39,7 @@ class OrderController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * 执行修改订单功能.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -107,7 +75,7 @@ class OrderController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * 执行删除订单.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response

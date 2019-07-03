@@ -563,7 +563,7 @@
 				</div>
 			</div>
 			<!--菜单 -->
-			@include('/home/public/right')
+			@include('/home/public/slidebar')
 
 	</body>
 	<script>

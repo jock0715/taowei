@@ -38,7 +38,7 @@ class AdvertiController extends Controller
      */
     public function create()
     {
-        //加载页面
+        // 加载页面
         return view('admin/adverti/create');
     }
 
@@ -69,6 +69,7 @@ class AdvertiController extends Controller
 
          // 检查文件上传
         if($request->hasFile('file')){
+            // 建立问文件对象并执行文件上传
             $file = $request->file('file')->store(date('Ymd'));
         }else{
             return back()->with('error','请选择图片');
@@ -94,18 +95,6 @@ class AdvertiController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-
-    }
-
-    /**
      * 广告修改页面
      *
      * @param  int  $id
@@ -113,6 +102,7 @@ class AdvertiController extends Controller
      */
     public function edit($id)
     {
+        // 获取对应id的信息
         $adverti = adverti::find($id);
      
        // 加载修改页面
@@ -149,10 +139,9 @@ class AdvertiController extends Controller
         if ($request->hasFile('file')) {
             // 删除旧的图片
             Storage::delete($request->input('old_file'));
-            // 存储到哪个文件
+            // 建立文件对象,并执行上传
             $file_path = $request->file('file')->store(date('Ymd'));
         } else {
-
             $file_path = $request->input('old_file');
         }
 
@@ -163,6 +152,7 @@ class AdvertiController extends Controller
         $advertis_data->url = $request->input('url');
         $advertis_data->file = $file_path;
 
+        // 执行修改
         $res = $advertis_data->save();
         if ($res) {
             // 修改成功
@@ -210,16 +200,12 @@ class AdvertiController extends Controller
                     ->where('id',$id)
                     ->value('status');
 
-
-
-
         // 判断status
         if ($data == 0) {
             $data = 1;
         } else {
             $data = 0;
         }  
-
 
         // 进行数据库操作
         $res = DB::update("update advertis set status = $data where id = $id");
@@ -232,8 +218,6 @@ class AdvertiController extends Controller
             // 切换失败
             echo 'no';
         }
-
-
     }
         
 }

@@ -37,7 +37,7 @@ class RoleController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * 显示管理员权限页面.
      *
      * @return \Illuminate\Http\Response
      */
@@ -61,7 +61,7 @@ class RoleController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * 显示添加管理员权限页面.
      *
      * @return \Illuminate\Http\Response
      */
@@ -77,6 +77,7 @@ class RoleController extends Controller
             ]
 
         */
+
         $list = [];
         foreach ($nodes as $k => $v) {
             $temp['id'] = $v->id;
@@ -85,7 +86,6 @@ class RoleController extends Controller
             // $temp['controller'] = $v->controller;
             $list[$v->controller][] = $temp;
         }
-        // dump($list,$temp);
 
         // 引入页面
         return view('/admin/role/create',
@@ -96,7 +96,7 @@ class RoleController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * 执行添加管理员职位功能.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -135,18 +135,7 @@ class RoleController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
+     * 显示修改管理员权限页面.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -179,7 +168,7 @@ class RoleController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * 执行修改管理员权限功能.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -224,7 +213,7 @@ class RoleController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * 执行删除功能.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
