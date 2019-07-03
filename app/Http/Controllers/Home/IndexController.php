@@ -50,7 +50,7 @@ class IndexController extends Controller
         $goods10_data = DB::table('goods')
                             ->where('status','1')
                             ->orderBy('id','asc')
-                            ->limit(10)
+                            ->limit(60)
                             ->get();
 
         // 获取四条秒杀商品的数据
@@ -76,7 +76,7 @@ class IndexController extends Controller
         $doing4_data = DB::table('doings')
                            ->where('status','1')
                            ->orderBy('id','asc')
-                           ->limit(4)
+                           ->limit(8)
                            ->get();
         
 

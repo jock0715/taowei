@@ -32,7 +32,7 @@ class Goods_listController extends Controller
         // 查询数据 并且 分页
         $goods_data = Goods::where('name','like','%'.$search.'%')
                              ->where('status','1')
-                             ->paginate(8);
+                             ->paginate(24);
 
         // 加载页面
 
@@ -145,7 +145,7 @@ class Goods_listController extends Controller
         $goods_sale_data = Goods::where('name','like','%'.$search.'%')
                                   ->where('status','1')
                                   ->orderBy('sale','desc')
-                                  ->paginate(8);
+                                  ->paginate(24);
 
         // 加载页面
         return view('home/goodslist/sale_index',
@@ -177,7 +177,7 @@ class Goods_listController extends Controller
         $goods_price_data = Goods::where('name','like','%'.$search.'%')
                                    ->where('status','1')
                                    ->orderBy('money','asc')
-                                   ->paginate(8);
+                                   ->paginate(24);
 
         // 加载页面
         return view('home/goodslist/price_index',

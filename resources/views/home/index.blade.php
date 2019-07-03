@@ -206,7 +206,7 @@
 						</div>
 					  <div class="am-g am-g-fixed ">
 					  	@foreach($doing4_data as $k=>$v)
-						<div class="am-u-sm-3 ">
+						<div class="am-u-sm-3 " style="margin-top: 10px;">
 							<a href="/home/doinglist/info/{{ $v->id }}">
 							<div class="icon-sale one "></div>	
 								<h4>活动</h4>							
