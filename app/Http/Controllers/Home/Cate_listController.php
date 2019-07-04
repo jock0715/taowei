@@ -38,8 +38,9 @@ class Cate_listController extends Controller
             [
                 'links_data'=>$links_data,
                 'goods_data'=>$goods_data,
-                'search'=>$search]
-            );
+                'search'=>$search,
+                'cid'=>$cid
+            ]);
     }
 
    

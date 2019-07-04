@@ -15,6 +15,7 @@ use App\Models\Comment_spike;
 use App\Models\SpikeCollection;
 use App\Models\DoingCollection;
 use App\Models\GoodsCollection;
+use App\Models\Goods;
 use Hash;
 
 class UserController extends Controller
@@ -32,12 +33,19 @@ class UserController extends Controller
                           ->where('status', 1)
                           ->get();
 
+        // 获取商品同的两条商品数据（以销售量从大到小获取）
+        $goods2_data = Goods::where('status','1')
+                              ->orderBy('sale','desc')
+                              ->limit(2)
+                              ->get();
+
         // 判断用户是否登录
         if(!empty(session('home_data'))){
             // 是,进入个人页面
             return view('home/user/user_index',
                 [
-                    'links_data'=>$links_data
+                    'links_data'=>$links_data,
+                    'goods2_data'=>$goods2_data
                 ]);
         }else{
             // 否 前往登录

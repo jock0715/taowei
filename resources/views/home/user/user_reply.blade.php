@@ -24,23 +24,23 @@
             <div class="comment-main">
             @foreach($data as $k=>$v)
               <div class="comment-list" style="height: 150px;">
-                <div class="item-pic">
-                  <a href="#" class="J_MakePoint">
-                    <img src="/uploads/{{ $v->file }}" class="itempic">
+                <div class="item-pic"  style="width:100px;">
+                  <a href="javascript:;" class="J_MakePoint">
+                    <img src="/uploads/{{ $v->commentorders->file}}" class="itempic">
                   </a>
                 </div>
                 <div class="item-title" >
                   <div class="item-name">
-                    <a href="#">
+                    <a href="javascript:;">
                       <p title="{{$v->commentorders->message}}" class="item-basic-info" style="color: #666">{{$v->commentorders->message}}</p>
                     </a>
                   </div>
                   <div class="item-info">
                     <div class="info-little">
-                      颜色：<span style="color: red">{{$v->commentorders->desc}}</span>
+                      商品名：<span style="color: red">【{{$v->commentorders->name}}】</span>
                     </div>
                     <div class="item-price">
-                      价格：<strong style="color: red">{{ $v->commentorders->price }}&nbsp;</strong>元
+                      ¥：<strong style="color: red">{{ $v->commentorders->price }}&nbsp;</strong>元
                     </div>                    
                   </div>
                 </div>
