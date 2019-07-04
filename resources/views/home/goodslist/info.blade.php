@@ -196,7 +196,7 @@
 									<div class="tm-indcon"><span class="tm-label">库存</span><span class="tm-count">{{ $goods->over }}</span></div>
 								</li>
 								<li class="tm-ind-item tm-ind-reviewCount canClick tm-line3">
-									<div class="tm-indcon"><span class="tm-label">累计评价</span><span class="tm-count">640</span></div>
+									<div class="tm-indcon"><span class="tm-label">累计评价</span><span class="tm-count">{{ count($comment_data) }}</span></div>
 								</li>
 							</ul>
 							<div class="clear"></div>
@@ -482,7 +482,7 @@
 															{{ $v->content }}
 														</div>
 														<div class="tb-r-act-bar">
-															服装规格：<span style="color: red">{{ $v->commentgoods->desc }}</span>
+															商品规格：<span style="color: red">{{ $v->commentgoods->desc }}</span>
 														</div>
 													</div>
 

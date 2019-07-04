@@ -45,7 +45,7 @@
 
 						  	 <div class="form-group">
 						      <label for="url">链接地址</label>
-						      <input type="text" class="form-control" name="url" style="width: 510px;">
+						      <input type="text" class="form-control" name="url" style="width: 510px;" placeholder="www.baidu.com">
 						  	</div>
 						    
 						   <br>

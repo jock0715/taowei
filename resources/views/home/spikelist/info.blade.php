@@ -190,7 +190,7 @@
 									<div class="tm-indcon"><span class="tm-label">库存</span><span class="tm-count">{{ $spike->over }}</span></div>
 								</li>
 								<li class="tm-ind-item tm-ind-reviewCount canClick tm-line3">
-									<div class="tm-indcon"><span class="tm-label">累计评价</span><span class="tm-count">640</span></div>
+									<div class="tm-indcon"><span class="tm-label">累计评价</span><span class="tm-count">{{ count($comment_data) }}</span></div>
 								</li>
 							</ul>
 							<div class="clear"></div>

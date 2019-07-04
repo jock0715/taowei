@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Redis;
 use DB;
 use Storage;
 use App\Models\Doing;
@@ -58,6 +59,11 @@ class DoingController extends Controller
      */
     public function store(Request $request)
     {
+        // 检查redis缓存是否存在,查询键
+        if(Redis::exists('doing4_redis_data')){
+            // 存在便删除
+            Redis::del('doing4_redis_data');
+        }
         // 验证表单
         $this->validate($request, [
             'name' => 'required|max:16',
@@ -129,6 +135,11 @@ class DoingController extends Controller
      */
     public function status(Request $request)
     {
+        // 检查redis缓存是否存在,查询键
+        if(Redis::exists('doing4_redis_data')){
+            // 存在便删除
+            Redis::del('doing4_redis_data');
+        }
         // 接受要切换的活动商品id
         $id = $request->input('id');
 
@@ -189,6 +200,11 @@ class DoingController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // 检查redis缓存是否存在,查询键
+        if(Redis::exists('doing4_redis_data')){
+            // 存在便删除
+            Redis::del('doing4_redis_data');
+        }
         // 验证表单
         $this->validate($request, [
             'name' => 'required|max:16',
@@ -254,6 +270,11 @@ class DoingController extends Controller
      */
     public function destroy($id, Request $request)
     {
+        // 检查redis缓存是否存在,查询键
+        if(Redis::exists('doing4_redis_data')){
+            // 存在便删除
+            Redis::del('doing4_redis_data');
+        }
         // 通过商品id去删除对应的详情图片
         $data = DB::table('doing_infos')->where('gid',$id)->get();
         

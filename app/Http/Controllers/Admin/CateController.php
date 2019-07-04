@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redis;
 use App\Http\Controllers\Controller;
 use App\Models\Cate;
 use DB;
@@ -75,6 +76,11 @@ class CateController extends Controller
      */
     public function store(Request $request)
     {
+        // 检查redis缓存是否存在,查询键
+        if(Redis::exists('cates_redis_data')){
+            // 存在便删除
+            Redis::del('cates_redis_data');
+        }
         // 表单验证
         $this->validate($request, [
                 'cname' => 'required',
@@ -138,6 +144,12 @@ class CateController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // 检查redis缓存是否存在,查询键
+        if(Redis::exists('cates_redis_data')){
+            // 存在便删除
+            Redis::del('cates_redis_data');
+        }
+        
         // 声明对象
         $cate = cate::find($id);
         $cate->cname = $request->input('cname','');

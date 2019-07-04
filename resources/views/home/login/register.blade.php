@@ -17,7 +17,7 @@
   <body>
     <div class="login-boxtitle">
       <a href="home/demo.html">
-        <img alt="" src="/home_login/images/logobig.png" /></a>
+        <img alt="" src="/admin/images/logo.png" /></a>
     </div>
     <div class="res-banner">
       <div class="res-main">

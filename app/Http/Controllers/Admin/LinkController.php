@@ -49,10 +49,12 @@ class LinkController extends Controller
         //表单验证
         $this->validate($request, [
                 'name' => 'required',
-                'url' => 'required',
+                'url' => 'required|max:64|regex:/^[\w]+\.[\w]+\.[\w]+$/',
             ],[
                  'name.required'=>'链接名称必填',
-                'url.required'=>'链接地址必填'
+                'url.required'=>'链接地址必填',
+                'url.max'=>'链接地址过长',
+                'url.regex'=>'链接地址格式不对'
             ]);
 
         // 接收数据

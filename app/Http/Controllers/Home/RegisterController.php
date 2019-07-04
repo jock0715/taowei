@@ -110,7 +110,7 @@ class RegisterController extends Controller
         $userinfos->sex = '保密';
         $userinfos->age = rand(19,29);
         $userinfos->profile = 'xxx';
-        $userinfos->addr = '该用户很神秘';
+        $user->profile = 'getAvatar.do.jpg';
         $res2 = $userinfos->save();
         if($res1 && $res2){
             // 成功提交事务

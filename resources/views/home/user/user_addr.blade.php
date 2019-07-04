@@ -24,8 +24,8 @@
             <hr>
             <ul class="am-avg-sm-1 am-avg-md-3 am-thumbnails">
             @foreach($data as $k=>$v)
-              <li class="user-addresslist">
-                <span class="new-option-r">
+              <li class="user-addresslist @if($v->status == 1) defaultAddr @endif"><!--defaultAddr-->
+                <span class="new-option-r" onclick="defaults({{$v->id}})">
                   <i class="am-icon-check-circle"></i>设为默认</span>
                 <p class="new-tit new-p-re">
                   <span class="new-txt">{{ $v->aname }}</span>
@@ -130,7 +130,7 @@
       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
   });
-
+// 新增地址
   $('#form1').submit(function(){
     let id = $('#form1 input[name=id]').val();
     let aname = $('#user-name').val();
@@ -171,6 +171,7 @@
     return false;
   });
 
+// 删除地址
   function delClick(id){
     if(!window.confirm('确定删除吗?')){
       return false;
@@ -192,4 +193,13 @@
     },'json');
   }
 
+  function defaults(id){
+    $.post('/home/user/defaults',{id},function(res){
+      if(res.msg == 'ok'){
+        layer.msg(res.info);
+      }else{
+        layer.msg(res.info);
+      }
+    },'json');
+  }
 </script>

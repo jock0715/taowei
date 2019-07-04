@@ -176,7 +176,7 @@ class Spike_listController extends Controller
                                     ->where('status','1')
                                     ->orderBy('money','asc')
                                     ->paginate(8);
-
+                                    
         // 加载页面
         return view('home/spikelist/price_index',
             [

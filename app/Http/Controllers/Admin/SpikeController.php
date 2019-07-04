@@ -58,6 +58,11 @@ class SpikeController extends Controller
      */
     public function store(Request $request)
     {
+        // 检查redis缓存是否存在,查询键
+        if(Redis::exists('spike4_redis_data')){
+            // 存在便删除
+            Redis::del('spike4_redis_data');
+        }
         // 验证表单
         $this->validate($request, [
             'name' => 'required|max:16',
@@ -126,6 +131,11 @@ class SpikeController extends Controller
      */
     public function status(Request $request)
     {
+        // 检查redis缓存是否存在,查询键
+        if(Redis::exists('spike4_redis_data')){
+            // 存在便删除
+            Redis::del('spike4_redis_data');
+        }
         // 接受要切换的秒杀商品id
         $id = $request->input('id');
 
@@ -186,6 +196,11 @@ class SpikeController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // 检查redis缓存是否存在,查询键
+        if(Redis::exists('spike4_redis_data')){
+            // 存在便删除
+            Redis::del('spike4_redis_data');
+        }
         // 验证表单
         $this->validate($request, [
             'name' => 'required|max:16',
@@ -251,6 +266,11 @@ class SpikeController extends Controller
      */
     public function destroy($id, Request $request)
     {
+        // 检查redis缓存是否存在,查询键
+        if(Redis::exists('spike4_redis_data')){
+            // 存在便删除
+            Redis::del('spike4_redis_data');
+        }
         // 通过商品id去删除对应的详情图片
         $data = DB::table('spike_infos')->where('gid',$id)->get();
         

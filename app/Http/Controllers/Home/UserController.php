@@ -15,6 +15,7 @@ use App\Models\Comment_spike;
 use App\Models\SpikeCollection;
 use App\Models\DoingCollection;
 use App\Models\GoodsCollection;
+use App\Models\Goods;
 use Hash;
 
 class UserController extends Controller
@@ -32,12 +33,19 @@ class UserController extends Controller
                           ->where('status', 1)
                           ->get();
 
+        // 获取商品同的两条商品数据（以销售量从大到小获取）
+        $goods2_data = Goods::where('status','1')
+                              ->orderBy('sale','desc')
+                              ->limit(2)
+                              ->get();
+
         // 判断用户是否登录
         if(!empty(session('home_data'))){
             // 是,进入个人页面
             return view('home/user/user_index',
                 [
-                    'links_data'=>$links_data
+                    'links_data'=>$links_data,
+                    'goods2_data'=>$goods2_data
                 ]);
         }else{
             // 否 前往登录
@@ -103,8 +111,12 @@ class UserController extends Controller
 
         // 判断是否修改成功
         if($res1){
-            // 执行成功,将user表id赋值给$uid
-            $uid = $user->id;
+          // 实例化 用户信息表 user_infos
+          $user_data = User::find($id);
+          session(['home_data'=>$user_data]);
+
+          // 执行成功,将user表id赋值给$uid
+          $uid = $user->id;
         }
 
         //实例化 用户信息表 user_infos
@@ -181,7 +193,12 @@ class UserController extends Controller
      */
     public function user_upwd()
     {
-        return view('home/user/user_upwd');
+      // 获取友情链接数据
+        $links_data = DB::table('links')
+                          ->orderBy('id','asc')
+                          ->where('status', 1)
+                          ->get();
+        return view('home/user/user_upwd',['links_data'=>$links_data]);
     }
 
     /**
@@ -292,12 +309,18 @@ class UserController extends Controller
      */
     public function user_editaddr(Request $request,$id)
     {
+      // 获取友情链接数据
+        $links_data = DB::table('links')
+                          ->orderBy('id','asc')
+                          ->where('status', 1)
+                          ->get();
         // 获取数据
         $data = UserAddrs::find($id);
 
         return view('home/user/user_editaddr',
             [
-                'data'=>$data
+                'data'=>$data,
+                'links_data'=>$links_data
             ]); 
     }
 
@@ -671,5 +694,23 @@ class UserController extends Controller
         
     }
 
-    
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function defaults(Request $request)
+    {
+      $id = $request->input('id',0);
+      // 实例化 用户地址表 user_addrs
+      $daddr = DB::table('user_addrs');
+      $res1 = $daddr->update(['status'=>0]);
+      $res2 = $daddr->where('id',$id)->update(['status'=>1]);
+
+      if($res2){
+        echo json_encode(['msg'=>'ok','info'=>'已设置为默认地址 !']);
+      }else{
+        echo json_encode(['msg'=>'err','info'=>'设置失败 !']);
+      }
+    }
 }

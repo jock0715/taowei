@@ -54,16 +54,6 @@
 						</div>
 					</a>
 
-					<div id="foot " class="item ">
-						<a href="/home/user/user_foot">
-							<span class="zuji "></span>
-						</a>
-						<div class="mp_tooltip ">
-							我的足迹
-							<i class="icon_arrow_right_black "></i>
-						</div>
-					</div>
-
 					<div id="brand " class="item ">
 						<a href="/home/user/user_collection">
 							<span class="wdsc "><img src="/home/images/wdsc.png "></span>

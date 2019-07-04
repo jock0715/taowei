@@ -43,7 +43,39 @@
 									@foreach($cate_data as $k=>$v)
 											<li class="appliance js_toggle relative first" style="height: 48px;">
 												<div class="category-info">
-													<h3 class="category-name b-category-name"><i><img src="/home/images/cake.png"></i><a class="ml-22" title="{{ $v->cname }}">{{ $v->cname }}</a></h3>
+													<h3 class="category-name b-category-name">
+													<i>
+												@switch($v->id)
+													@case(1)
+														<img src="/home/images/meat.png">
+													@break
+													@case(12)
+														<img src="/home/images/package.png">
+													@break
+													@case(26)
+														<img src="/home/images/chocolate.png">
+													@break
+													@case(38)
+														<img src="/home/images/chocolate.png">
+													@break
+													@case(57)
+														<img src="/home/images/chocolate.png">
+													@break
+													@case(71)
+														<img src="/home/images/nut.png">
+													@break
+													@case(86)
+														<img src="/home/images/bamboo.png">
+													@break
+													@case(108)
+														<img src="/home/images/chocolate.png">
+													@break
+													@case(109)
+														<img src="/home/images/chocolate.png">
+													@break
+												@endswitch
+													</i>
+													<a class="ml-22" title="{{ $v->cname }}">{{ $v->cname }}</a></h3>
 													<em>&gt;</em></div>
 												<div class="menu-item menu-in top" style="height: 450px">
 													<div class="area-in">

@@ -129,7 +129,7 @@ Route::post('/home/login/dologin','Home\LoginController@dologin');
 // 前台执行退出登录功能
 Route::get('/home/login/logout','Home\LoginController@logout');
 
-//前台 分类商品
+//前台 分类 商品 列表
 Route::resource('/home/catelist','Home\Cate_listController');
 
 
@@ -226,6 +226,8 @@ Route::get('/home/user/user_editaddr/{id}','Home\UserController@user_editaddr');
 Route::post('/home/user/user_editaddrs','Home\UserController@user_editaddrs');
 // 前台用户执行删除地址
 Route::get('/home/user/deladdr','Home\UserController@deladdr');
+// 前台用户执行默认地址
+Route::post('/home/user/defaults','Home\UserController@defaults');
 // 前台用户安全
 Route::get('/home/user/user_security','Home\UserController@user_security');
 // 前台用户安全显示修改密码

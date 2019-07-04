@@ -70,7 +70,7 @@
                 <div class="am-form-group">
                   <label class="am-form-label">性别</label>
                   <select name="sex" style="width: 65px;margin-left: 57px;display: inline-block;">
-                    <option value="n"
+                    <option value="m"
                       @if($data->userinfos->sex == 'm')
                         selected
                       @endif>男</option>

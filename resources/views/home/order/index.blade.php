@@ -35,8 +35,8 @@
 							<ul class="am-avg-sm-5 am-tabs-nav am-nav am-nav-tabs">
 								<li class="am-active"><a href="#tab1">待发货</a></li>
 								<li><a href="#tab3">待签收</a></li>
-								<li><a href="#tab4">已签收</a></li>
-								<li><a href="#tab5">待评价</a></li>
+								<li><a href="#tab4">待评价</a></li>
+								<li><a href="#tab5">已评价</a></li>
 							</ul>
 
 							<div class="am-tabs-bd">
@@ -102,14 +102,11 @@
 														<div class="move-right">
 															<li class="td td-status">
 																<div class="item-status">
-																	<p class="Mystatus">交易成功</p>
+																	<p class="Mystatus">交易进行中</p>
 																</div>
 															</li>
 															<li class="td td-change">
-															<a href="javascript:;" onclick="del({{ $v->id }})">
-																<div class="am-btn am-btn-danger anniu">
-																	删除订单</div>
-															</a>
+															
 															</li>
 														</div>
 													</div>
@@ -190,9 +187,9 @@
 																</div>
 															</li>
 															<li class="td td-change">
-															<a href="javascript:;" onclick="del({{ $v->id }})">
+															<a href="javascript:;" onclick="receipt({{ $v->id }})">
 																<div class="am-btn am-btn-danger anniu">
-																	删除订单</div>
+																	确认收货</div>
 															</a>
 															</li>
 														</div>
@@ -204,9 +201,26 @@
 									</div>
 									@endif
 								@endforeach
+								<script>
+									function receipt (id)
+									{
+										// 提示消息
+										if (!window.confirm('是否确定收货！！！')) {
+											return false;
+										}
+										$.get('/home/order/receipt',{id},function(res) {
+											if(res == 'ok') {
+												// 自动刷新页面
+							        			parent.location.reload(); 
+											} else {
+												alert('收货失败');
+											}
+										},'html');
+									}
+								</script>
 								</div>
 								
-								<!-- 已签收 -->
+								<!-- 待评价 -->
 								<div class="am-tab-panel am-fade" id="tab4">
 								
 								@foreach($orders as $k=>$v)
@@ -214,7 +228,7 @@
 									<div class="order-main">
 										<div class="order-list">
 											
-											<!--未评价2-->
+											
 											<div class="order-status5">
 												<div class="order-title">
 													<div class="dd-num">订单编号：<a href="javascript:;">{{ $v->number}}</a></div>
@@ -268,13 +282,13 @@
 														<div class="move-right">
 															<li class="td td-status">
 																<div class="item-status">
-																	<p class="Mystatus">交易进行中</p>
+																	<p class="Mystatus">交易已完成</p>
 																</div>
 															</li>
 															<li class="td td-change">
-															<a href="javascript:;" onclick="del({{ $v->id }})">
+															<a href="/home/user/user_replyed/{{ $v->id }}">
 																<div class="am-btn am-btn-danger anniu">
-																	删除订单</div>
+																	评价</div>
 															</a>
 															</li>
 														</div>
@@ -291,14 +305,14 @@
 								<!-- 待评价 -->
 								<div class="am-tab-panel am-fade" id="tab5">
 								@foreach($orders as $k=>$v)
-								@if($v->status == 3)
+								@if($v->status == 2)
 									<div class="order-main">
 										<div class="order-list">
 											
 											<!--已评价3-->
 											<div class="order-status5">
 												<div class="order-title">
-													<div class="dd-num">订单编号：<a href="/home/user/user_replyed/{{ $v->id }}">{{ $v->number}}</a></div>
+													<div class="dd-num">订单编号：<a href="javascript:;">{{ $v->number}}</a></div>
 													<span>成交时间：{{ $v->created_at }}</span>
 													<!--    <em>店铺：小桔灯</em>-->
 												</div>
@@ -307,7 +321,7 @@
 														<ul class="item-list">
 															<li class="td td-item">
 																<div class="item-pic" style="margin-top: 2px;margin-left: -10px">
-																	<a href="/home/user/user_replyed/{{ $v->id }}" class="J_MakePoint">
+																	<a href="javascript:;" class="J_MakePoint">
 																		<img src="/uploads/{{ $v->file}}" class="itempic J_ItemImg">
 																	</a>
 																</div>
