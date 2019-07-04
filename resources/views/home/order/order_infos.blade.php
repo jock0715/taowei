@@ -120,7 +120,9 @@
 														<div class="item-basic-info" >
 															<a href="#" >
 																<p>{{ $v->name }}</p>
-																<p class="info-little">{{ $v->desc }}</p>
+																<p class="info-little" style="height: 52px;display: block;overflow: hidden;
+																	text-overflow:ellipsis;
+																	white-space: nowrap;" title="{{ $v->desc }}">{{ $v->desc }}</p>
 															</a>
 														</div>
 													</div>

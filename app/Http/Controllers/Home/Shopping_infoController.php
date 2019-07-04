@@ -250,7 +250,7 @@ class Shopping_infoController extends Controller
         // 判断是否登录
         if (empty(session('home_data'))) {
             // 未登录
-            return view('home/login/login');
+            return view('home/login/login',['links_data'=>$links_data]);
         }
 
         // 通过id获取商品数据

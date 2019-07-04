@@ -22,6 +22,8 @@ class OrderController extends Controller
                           ->orderBy('id','asc')
                           ->where('status', 1)
                           ->get();
+        // 获取用户id
+        $uid = session('home_data')->id;
 
         // 通过uid获取该用户的所有订单
         $orders = DB::table('orders')
@@ -44,11 +46,18 @@ class OrderController extends Controller
      */
     public function add()
     {
-      // 获取友情链接数据
+      $uid = session('home_data')->id;
+        // 获取友情链接数据
         $links_data = DB::table('links')
                           ->orderBy('id','asc')
                           ->where('status', 1)
                           ->get();
+
+        // 实例化 用户地址表user_addrs
+        $useraddrs = new UserAddrs;
+        $addr_data = $useraddrs->where('status','1')
+                               ->where('uid',$uid)
+                               ->first();
         // 获取用户id
         $uid = session('home_data')->id;
 
@@ -73,7 +82,8 @@ class OrderController extends Controller
             [
                 'shopping'=>$shopping,
                 'number'=>$number,
-                'links_data'=>$links_data
+                'links_data'=>$links_data,
+                'addr_data'=>$addr_data,
             ]);
     }
 
@@ -152,11 +162,22 @@ class OrderController extends Controller
      */
     public function create(Request $request)
     {
-        //获取友情链接数据
+      // 获取友情链接数据
         $links_data = DB::table('links')
                           ->orderBy('id','asc')
                           ->where('status', 1)
                           ->get();
+        if(!session('home_data')){
+          return view('home/login/login',['links_data'=>$links_data]);
+        }
+        $uid = session('home_data')->id;
+        
+
+        // 实例化 用户地址表user_addrs
+        $useraddrs = new UserAddrs;
+        $addr_data = $useraddrs->where('status','1')
+                               ->where('uid',$uid)
+                               ->first();
 
         // 获取数据
         $id = $request->input('id');
@@ -178,6 +199,7 @@ class OrderController extends Controller
                 'spike'=>$spike,
                 'snum'=>$snum,
                 'sprice'=>$sprice,
+                'addr_data'=>$addr_data,
             ]);
     }
 
@@ -189,11 +211,21 @@ class OrderController extends Controller
      */
     public function docreate(Request $request)
     {
-        // 获取友情链接数据
+      // 获取友情链接数据
         $links_data = DB::table('links')
                           ->orderBy('id','asc')
                           ->where('status', 1)
                           ->get();
+      if(!session('home_data')){
+          return view('home/login/login',['links_data'=>$links_data]);
+        }
+        $uid = session('home_data')->id;
+
+        // 实例化 用户地址表user_addrs
+        $useraddrs = new UserAddrs;
+        $addr_data = $useraddrs->where('status','1')
+                               ->where('uid',$uid)
+                               ->first();
 
         // 获取数据
         $id = $request->input('id');
@@ -215,6 +247,7 @@ class OrderController extends Controller
                 'doing'=>$doing,
                 'donum'=>$donum,
                 'doprice'=>$doprice,
+                'addr_data'=>$addr_data,
             ]);
     }
 
@@ -227,12 +260,22 @@ class OrderController extends Controller
      */
     public function gocreate(Request $request)
     {
-        // 获取友情链接数据
+      // 获取友情链接数据
         $links_data = DB::table('links')
                           ->orderBy('id','asc')
                           ->where('status', 1)
                           ->get();
+      if(!session('home_data')){
+          return view('home/login/login',['links_data'=>$links_data]);
+        }
+        $uid = session('home_data')->id;
 
+        // 实例化 用户地址表user_addrs
+        $useraddrs = new UserAddrs;
+        $addr_data = $useraddrs->where('status','1')
+                               ->where('uid',$uid)
+                               ->first();
+        
         // 获取数据
         $id = $request->input('id');
         $gonum = $request->input('num');
@@ -253,6 +296,7 @@ class OrderController extends Controller
                 'goods'=>$goods,
                 'gonum'=>$gonum,
                 'goprice'=>$goprice,
+                'addr_data'=>$addr_data,
             ]);
     }
 
@@ -269,14 +313,21 @@ class OrderController extends Controller
                           ->orderBy('id','asc')
                           ->where('status', 1)
                           ->get();
+        if (empty($request->input('phone')) || empty($request->input('addr'))) {
+          echo "<script>alert('请填写收货地址')</script>";
+          header("refresh:1;url=/home/user/user_addr");exit;
+        } else {
+          $data['phone'] = $request->input('phone');
+          $data['addr'] = $request->input('addr');
+        }
   
         // 获取数据
         $data['uid'] = $request->input('uid');
         $data['gid'] = $request->input('gid');
         $data['sid'] = $request->input('sid');
         $data['did'] = $request->input('did');
-        $data['addr'] = $request->input('addr');
-        $data['phone'] = $request->input('phone');
+        // $data['addr'] = $request->input('addr');
+        // $data['phone'] = $request->input('phone');
         $data['money'] = $request->input('money');
         $data['num'] = $request->input('num');
         $data['price'] = $request->input('price');

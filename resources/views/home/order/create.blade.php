@@ -29,15 +29,15 @@
 										<span class="buy-address-detail">
 										@if(!empty(session('home_data')))
 										<input type="hidden" name="uid" value="{{ session('home_data')->id }}">
-										<input type="hidden" name="addr" value="{{ session('home_info')->addr }}">
-										<input type="hidden" name="phone" value="{{ session('home_data')->phone }}">
+										<input type="hidden" name="addr" value="{{ $addr_data->uaddr }}">
+										<input type="hidden" name="phone" value="{{ $addr_data->aphone }}">
 
 										<input type="hidden" name="gid" value="{{ empty($goods->id)?'':$goods->id }}">
 										<input type="hidden" name="did" value="{{ empty($doing->id)?'':$doing->id }}">
 										<input type="hidden" name="sid" value="{{ empty($spike->id)?'':$spike->id }}">
 
-                    					<span class="buy-user">{{ session('home_data')->uname }} </span><br>
-										<span class="buy-phone">{{ session('home_data')->phone }}</span>
+                    					<span class="buy-user">{{ $addr_data->aname }} </span><br>
+										<span class="buy-phone">{{ $addr_data->aphone }}</span>
 										</span>
 										
 									</div>
@@ -47,7 +47,7 @@
 								   <span class="province">湖北</span>省
 										<span class="city">武汉</span>市
 										<span class="dist">洪山</span>区 -->
-										<span class="street">{{ session('home_info')->addr }}</span>
+										<span class="street">{{ $addr_data->uaddr }} </span>
 										</span>
 
 										</span>
