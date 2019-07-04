@@ -102,14 +102,11 @@
 														<div class="move-right">
 															<li class="td td-status">
 																<div class="item-status">
-																	<p class="Mystatus">交易成功</p>
+																	<p class="Mystatus">交易进行中</p>
 																</div>
 															</li>
 															<li class="td td-change">
-															<a href="javascript:;" onclick="del({{ $v->id }})">
-																<div class="am-btn am-btn-danger anniu">
-																	删除订单</div>
-															</a>
+															
 															</li>
 														</div>
 													</div>
@@ -285,7 +282,7 @@
 														<div class="move-right">
 															<li class="td td-status">
 																<div class="item-status">
-																	<p class="Mystatus">交易进行中</p>
+																	<p class="Mystatus">交易已完成</p>
 																</div>
 															</li>
 															<li class="td td-change">

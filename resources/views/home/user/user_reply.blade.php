@@ -30,11 +30,7 @@
                   </a>
                 </div>
                 <div class="item-title" >
-                  <div class="item-name">
-                    <a href="javascript:;">
-                      <p title="{{$v->commentorders->message}}" class="item-basic-info" style="color: #666">{{$v->commentorders->message}}</p>
-                    </a>
-                  </div>
+                  
                   <div class="item-info">
                     <div class="info-little">
                       商品名：<span style="color: red">【{{$v->commentorders->name}}】</span>
@@ -76,11 +72,7 @@
                   </a>
                 </div>
                 <div class="item-title" >
-                  <div class="item-name">
-                    <a href="#">
-                      <p title="{{$v->commentdorders->message}}" class="item-basic-info" style="color: #666">{{$v->commentdorders->message}}</p>
-                    </a>
-                  </div>
+                  
                   <div class="item-info">
                     <div class="info-little">
                       颜色：<span style="color: red">{{$v->commentdorders->desc}}</span>
@@ -121,11 +113,7 @@
                   </a>
                 </div>
                 <div class="item-title" >
-                  <div class="item-name">
-                    <a href="#">
-                      <p title="{{$v->commentsorders->message}}" class="item-basic-info" style="color: #666">{{$v->commentsorders->message}}</p>
-                    </a>
-                  </div>
+                  
                   <div class="item-info">
                     <div class="info-little">
                       颜色：<span style="color: red">{{$v->commentsorders->desc}}</span>
