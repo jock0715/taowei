@@ -254,19 +254,26 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
+
         // 获取友情链接数据
         $links_data = DB::table('links')
                           ->orderBy('id','asc')
                           ->where('status', 1)
                           ->get();
-  
+        if (empty($request->input('phone')) || empty($request->input('addr'))) {
+          echo "<script>alert('请填写收货地址')</script>";
+          header("refresh:1;url=/home/user/user_addr");exit;
+        } else {
+          $data['phone'] = $request->input('phone');
+          $data['addr'] = $request->input('addr');
+        }
         // 获取数据
         $data['uid'] = $request->input('uid');
         $data['gid'] = $request->input('gid');
         $data['sid'] = $request->input('sid');
         $data['did'] = $request->input('did');
-        $data['addr'] = $request->input('addr');
-        $data['phone'] = $request->input('phone');
+        // $data['addr'] = $request->input('addr');
+        // $data['phone'] = $request->input('phone');
         $data['money'] = $request->input('money');
         $data['num'] = $request->input('num');
         $data['price'] = $request->input('price');
@@ -282,6 +289,7 @@ class OrderController extends Controller
                    ->insert($data);
 
         if ($res) {
+
             // 提交订单成功 
             return view('/home/order/success',
                 [

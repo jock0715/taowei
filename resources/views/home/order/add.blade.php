@@ -25,14 +25,14 @@
 
 								<div class="address-left">
 									<div class="user DefaultAddr">
-
+										
 										<span class="buy-address-detail">
 										<input type="hidden" name="uid" value="{{ session('home_data')->id }}">
-										<input type="hidden" name="addr" value="{{ session('home_info')->addr }}">
-										<input type="hidden" name="phone" value="{{ session('home_data')->phone }}">
+										<input type="hidden" name="addr" value="{{ $phone->uaddr }}">
+										<input type="hidden" name="phone" value="{{ $phone->aphone }}">
 
-                    					<span class="buy-user">{{ session('home_data')->uname }} </span><br>
-										<span class="buy-phone">{{ session('home_data')->phone }}</span>
+                    					<span class="buy-user">{{ $phone->aname }} </span><br>
+										<span class="buy-phone">{{ $phone->aphone }}</span>
 										</span>
 									</div>
 									<div class="default-address DefaultAddr">
@@ -41,7 +41,7 @@
 								   		<span class="province">湖北</span>省
 										<span class="city">武汉</span>市
 										<span class="dist">洪山</span>区 -->
-										<span class="street">{{ session('home_info')->addr }}</span>
+										<span class="street">{{ $phone->uaddr }}</span>
 										</span>
 
 										</span>
