@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Home;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
+use App\Models\Goods;
+use App\Models\Spike;
+use App\Models\Doing;
 
 
 class OrderController extends Controller
@@ -46,6 +49,11 @@ class OrderController extends Controller
      */
     public function add()
     {
+        // 获取友情链接数据
+        $links_data = DB::table('links')
+                          ->where('status', 1)
+                          ->get();
+
         // 获取用户id
         $uid = session('home_data')->id;
 
@@ -70,6 +78,7 @@ class OrderController extends Controller
             [
                 'shopping'=>$shopping,
                 'number'=>$number,
+                'links_data'=>$links_data
             ]);
     }
 
@@ -112,6 +121,42 @@ class OrderController extends Controller
             // 对数据库进行添加操作
             $res = DB::table('orders')
                     ->insert($data);
+
+            // 判断立即购买的是否是商品
+            if ($data['gid']) {
+                // 是商品 让商品的销售量加一
+                $goods =  Goods::find($data['gid']);
+
+                // 重新赋值
+                $goods->sale = $goods->sale + 1;
+
+                // 进行修改
+                $goods->save();
+            }
+
+            // 判断立即购买的是否是秒杀商品
+            if ($data['sid']) {
+                // 是秒杀商品 让秒杀商品的销售量加一
+                $spike =  Spike::find($data['sid']);
+
+                // 重新赋值
+                $spike->sale = $spike->sale + 1;
+
+                // 进行修改
+                $spike->save();
+            }
+
+            // 判断立即购买的是否是活动商品
+            if ($data['did']) {
+                // 是活动商品 让活动商品的销售量加一
+                $doing =  Doing::find($data['did']);
+
+                // 重新赋值
+                $doing->sale = $doing->sale + 1;
+
+                // 进行修改
+                $doing->save();
+            }
         }
 
         // 判断是否添加订单成功 
@@ -123,9 +168,15 @@ class OrderController extends Controller
                         ->where('uid',$uid)
                         ->delete();
 
+            // 获取友情链接数据
+            $links_data = DB::table('links')
+                              ->where('status', 1)
+                              ->get();
+
             return view('/home/order/success',
                 [
                     'data'=>$data,
+                    'links_data'=>$links_data
                 ]);
 
         } else {
@@ -277,9 +328,47 @@ class OrderController extends Controller
         $data['number'] = date('YmdHis').rand(1000,9999);
         $data['created_at'] = date('Y-m-d H:i:s');
 
+        
+
         // 对数据库进行添加操作
         $res = DB::table('orders')
                    ->insert($data);
+
+        // 判断立即购买的是否是商品
+        if ($data['gid']) {
+            // 是商品 让商品的销售量加一
+            $goods =  Goods::find($data['gid']);
+
+            // 重新赋值
+            $goods->sale = $goods->sale + 1;
+
+            // 进行修改
+            $goods->save();
+        }
+
+        // 判断立即购买的是否是秒杀商品
+        if ($data['sid']) {
+            // 是秒杀商品 让秒杀商品的销售量加一
+            $spike =  Spike::find($data['sid']);
+
+            // 重新赋值
+            $spike->sale = $spike->sale + 1;
+
+            // 进行修改
+            $spike->save();
+        }
+
+        // 判断立即购买的是否是活动商品
+        if ($data['did']) {
+            // 是活动商品 让活动商品的销售量加一
+            $doing =  Doing::find($data['did']);
+
+            // 重新赋值
+            $doing->sale = $doing->sale + 1;
+
+            // 进行修改
+            $doing->save();
+        }
 
         if ($res) {
             // 提交订单成功 
