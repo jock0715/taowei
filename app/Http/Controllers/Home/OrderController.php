@@ -104,6 +104,14 @@ class OrderController extends Controller
                           ->orderBy('id','asc')
                           ->where('status', 1)
                           ->get();
+        if (empty($request->input('phone')) || empty($request->input('addr'))) {
+          echo "<script>alert('请填写收货地址')</script>";
+          header("refresh:1;url=/home/user/user_addr");exit;
+        } else {
+          $data['phone'] = $request->input('phone');
+          $data['addr'] = $request->input('addr');
+        }
+        
         // 获取数据
         $gids = $request->input('gid','');
         $sid = $request->input('sid','');
@@ -114,8 +122,8 @@ class OrderController extends Controller
         $names = $request->input('name');
         $descs = $request->input('desc');
         $data['uid'] = $request->input('uid');
-        $data['addr'] = $request->input('addr');
-        $data['phone'] = $request->input('phone');
+        // $data['addr'] = $request->input('addr');
+        // $data['phone'] = $request->input('phone');
         $data['message'] = $request->input('message');
         $data['number'] = date('YmdHis').rand(1000,9999);
         $data['created_at'] = date('Y-m-d H:i:s');

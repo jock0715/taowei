@@ -25,7 +25,7 @@
 
 								<div class="address-left">
 									<div class="user DefaultAddr">
-
+									@if(!empty($addr_data))
 										<span class="buy-address-detail">
 										<input type="hidden" name="uid" value="{{ session('home_data')->id }}">
 										<input type="hidden" name="addr" value="{{ $addr_data->uaddr }}">
@@ -43,7 +43,7 @@
 										<span class="dist">洪山</span>区 -->
 										<span class="street">{{ $addr_data->uaddr }}</span>
 										</span>
-
+									@endif
 										</span>
 									</div>
 									<ins class="deftip">默认地址</ins>

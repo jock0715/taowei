@@ -21,6 +21,7 @@
 						<div class="clear"></div>
 						<ul>
 							<div class="per-border"></div>
+
 							<li class="user-addresslist defaultAddr">
 
 								<div class="address-left">
@@ -28,9 +29,12 @@
 
 										<span class="buy-address-detail">
 										@if(!empty(session('home_data')))
+										@if(!empty($addr_data))
 										<input type="hidden" name="uid" value="{{ session('home_data')->id }}">
+
 										<input type="hidden" name="addr" value="{{ $addr_data->uaddr }}">
 										<input type="hidden" name="phone" value="{{ $addr_data->aphone }}">
+
 
 										<input type="hidden" name="gid" value="{{ empty($goods->id)?'':$goods->id }}">
 										<input type="hidden" name="did" value="{{ empty($doing->id)?'':$doing->id }}">
@@ -49,7 +53,7 @@
 										<span class="dist">洪山</span>区 -->
 										<span class="street">{{ $addr_data->uaddr }} </span>
 										</span>
-
+									@endif
 										</span>
 										@else
 											"<script>location.href='/home/login';</script>"
@@ -73,7 +77,7 @@
 
 							</li>
 
-							</li>
+							
 
 						</ul>
 
