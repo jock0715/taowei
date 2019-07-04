@@ -44,9 +44,9 @@
 						<div class="am-u-sm-12 am-u-md-12">
 							<div class="search-content">
 								<div class="sort">
-									<li class="first"><a href="#" title="综合">综合排序</a></li>
-									<li><a href="/home/spikelist/saleindex" title="销量">销量排序</a></li>
-									<li><a href="/home/spikelist/priceindex" title="价格">价格优先</a></li>
+									<li class="first"><a href="javascript:;" title="综合">综合排序</a></li>
+									<li><a href="/home/spikelist/saleindex?search={{ $search }}" title="销量">销量排序</a></li>
+									<li><a href="/home/spikelist/priceindex?search={{ $search }}" title="价格">价格优先</a></li>
 									<!-- <li class="big"><a title="评价" href="#">评价为主</a></li> -->
 								</div>
 								<div class="clear"></div>
@@ -57,8 +57,8 @@
 										<div class="i-pic limit">
 											<a href="/home/spikelist/info/{{ $v->id }}">
 											 <img src="/uploads/{{ $v->file }}" />	
-											</a>
-											<p class="title fl">{{ $v->name }}</p>
+											
+											<p class="title fl"><span style="font-size: 16px; font-weight: bold;">【{{ $v->name }}】</span> {{ $v->desc }}</p>
 											<p class="price fl">
 												<b>¥</b>
 												<strong>{{ $v->money }}</strong>
@@ -66,6 +66,7 @@
 											<p class="number fl">
 												销量<span>{{ $v->sale }}</span>
 											</p>
+											</a>
 										</div>
 									</li>
 									@endforeach

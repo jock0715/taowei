@@ -129,7 +129,7 @@ Route::post('/home/login/dologin','Home\LoginController@dologin');
 // 前台执行退出登录功能
 Route::get('/home/login/logout','Home\LoginController@logout');
 
-//前台 分类商品
+//前台 分类 商品 列表
 Route::resource('/home/catelist','Home\Cate_listController');
 
 
