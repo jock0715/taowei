@@ -291,7 +291,7 @@
 								<!-- 待评价 -->
 								<div class="am-tab-panel am-fade" id="tab5">
 								@foreach($orders as $k=>$v)
-								@if($v->status == 3)
+								@if($v->status == 2)
 									<div class="order-main">
 										<div class="order-list">
 											

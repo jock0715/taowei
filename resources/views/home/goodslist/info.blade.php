@@ -482,7 +482,7 @@
 															{{ $v->content }}
 														</div>
 														<div class="tb-r-act-bar">
-															服装规格：<span style="color: red">{{ $v->commentgoods->desc }}</span>
+															商品规格：<span style="color: red">{{ $v->commentgoods->desc }}</span>
 														</div>
 													</div>
 

@@ -179,7 +179,7 @@
 															{{$goods->desc}}
 														@endif
 													">
-												&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; <span class="sku-line">
+												&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; <span class="sku-line" style="width: 300px;display: block;margin-left: 72px;">
 																@if(!empty($spike->desc))
 																	{{$spike->desc}}
 																@elseif(!empty($doing->desc))

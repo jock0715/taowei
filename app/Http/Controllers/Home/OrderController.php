@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Home;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
+use App\Models\UserAddrs;
 
 
 class OrderController extends Controller
@@ -21,9 +22,6 @@ class OrderController extends Controller
                           ->orderBy('id','asc')
                           ->where('status', 1)
                           ->get();
-
-        // 获取数据库数据
-        $uid = session('home_data')->id;
 
         // 通过uid获取该用户的所有订单
         $orders = DB::table('orders')
@@ -46,6 +44,11 @@ class OrderController extends Controller
      */
     public function add()
     {
+      // 获取友情链接数据
+        $links_data = DB::table('links')
+                          ->orderBy('id','asc')
+                          ->where('status', 1)
+                          ->get();
         // 获取用户id
         $uid = session('home_data')->id;
 
@@ -70,6 +73,7 @@ class OrderController extends Controller
             [
                 'shopping'=>$shopping,
                 'number'=>$number,
+                'links_data'=>$links_data
             ]);
     }
 
@@ -80,6 +84,11 @@ class OrderController extends Controller
      */
     public function doadd(Request $request)
     {
+      // 获取友情链接数据
+        $links_data = DB::table('links')
+                          ->orderBy('id','asc')
+                          ->where('status', 1)
+                          ->get();
         // 获取数据
         $gids = $request->input('gid','');
         $sid = $request->input('sid','');
@@ -126,6 +135,7 @@ class OrderController extends Controller
             return view('/home/order/success',
                 [
                     'data'=>$data,
+                    'links_data'=>$links_data
                 ]);
 
         } else {
@@ -337,6 +347,10 @@ class OrderController extends Controller
         // 获取用户id
         $uid = session('home_data')->id;
 
+        // 实例化 用户地址表user_addrs
+        $useraddrs = new UserAddrs;
+        $data_addr = $useraddrs->where('uid',$uid)->where('status','1')->first();
+
         // 通过用户id获取数据
         $data = DB::table('orders')
                     ->where('uid',$uid)
@@ -347,6 +361,7 @@ class OrderController extends Controller
             [
                 'links_data'=>$links_data,
                 'data'=>$data,
+                'data_addr'=>$data_addr,
             ]);
     }
 

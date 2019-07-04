@@ -22,7 +22,7 @@
 										<a href="/home/information.html">
 											<img src="/home/images/getAvatar.do.jpg">
 										</a>
-										<em class="s-name">{{ session('home_data')->uname }}<span class="vip1"></em>
+										<em class="s-name" style="margin-left: 22px;">{{ session('home_data')->uname }}<span class="vip1"></em>
 										<div class="s-prestige am-btn am-round">
 											</span>会员福利</div>
 									</div>

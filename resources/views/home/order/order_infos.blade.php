@@ -51,7 +51,7 @@
 						</div>
 						<div class="order-infoaside">
 							<div class="order-logistics">
-								<a href="logistics.html">
+								<a href="javascript:;">
 									<div class="icon-log">
 										<i><img src="images/receive.png"></i>
 									</div>
@@ -71,24 +71,26 @@
 								</a>
 								<div class="clear"></div>
 							</div>
+							<!-- 111 -->
+
 							<div class="order-addresslist">
 								<div class="order-address">
 									<div class="icon-add">
 									</div>
 									<p class="new-tit new-p-re">
-										<span class="new-txt">小叮当</span>
-										<span class="new-txt-rd2">159****1622</span>
+										<span class="new-txt">{{$data_addr->aname}}</span>
+										<span class="new-txt-rd2">{{$data_addr->aphone}}</span>
 									</p>
 									<div class="new-mu_l2a new-p-re">
 										<p class="new-mu_l2cw">
+											<br>
 											<span class="title">收货地址：</span>
-											<span class="province">湖北</span>省
-											<span class="city">武汉</span>市
-											<span class="dist">洪山</span>区
-											<span class="street">雄楚大道666号(中南财经政法大学)</span></p>
+											<span class="province">{{ $data_addr->province }}</span>
+											<span class="street">{{ $data_addr->uaddr }}</span></p>
 									</div>
 								</div>
 							</div>
+
 						</div>
 						<div class="order-infomain">
 
