@@ -105,13 +105,13 @@ class OrderController extends Controller
                           ->where('status', 1)
                           ->get();
         if (empty($request->input('phone')) || empty($request->input('addr'))) {
-          echo "<script>alert('请填写收货地址')</script>";
-          header("refresh:1;url=/home/user/user_addr");exit;
+          echo "<script>alert('请填写好个人信息和地址并默认');location.href='/home/user/user_info'</script>";
+          exit;
         } else {
           $data['phone'] = $request->input('phone');
           $data['addr'] = $request->input('addr');
         }
-        
+
         // 获取数据
         $gids = $request->input('gid','');
         $sid = $request->input('sid','');
@@ -368,8 +368,8 @@ class OrderController extends Controller
                           ->where('status', 1)
                           ->get();
         if (empty($request->input('phone')) || empty($request->input('addr'))) {
-          echo "<script>alert('请填写收货地址')</script>";
-          header("refresh:1;url=/home/user/user_addr");exit;
+          echo "<script>alert('请填写好个人信息和地址并默认');location.href='/home/user/user_info'</script>";
+          exit;
         } else {
           $data['phone'] = $request->input('phone');
           $data['addr'] = $request->input('addr');
@@ -481,12 +481,15 @@ class OrderController extends Controller
      */
     public function order_infos (Request $request)
     {
-        // 获取友情链接数据
+      // 获取友情链接数据
         $links_data = DB::table('links')
                           ->orderBy('id','asc')
                           ->where('status', 1)
                           ->get();
-
+                          
+      if(empty(session('home_data'))){
+        return view('home/login/login',['links_data'=>$links_data]);
+      }
         // 获取用户id
         $uid = session('home_data')->id;
 
