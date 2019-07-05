@@ -16,7 +16,9 @@
 					<div class="address">
 						<h3>确认收货地址 </h3>
 						<div class="control">
+							<a href="/home/user/user_addr">
 							<div class="tc-btn createAddr theme-login am-btn am-btn-danger">使用新地址</div>
+							</a>
 						</div>
 						<div class="clear"></div>
 						<ul>
@@ -70,9 +72,9 @@
 								<div class="new-addr-btn">
 									<a href="#" class="hidden">设为默认</a>
 									<span class="new-addr-bar hidden">|</span>
-									<a href="#">编辑</a>
-									<span class="new-addr-bar">|</span>
-									<a href="javascript:void(0);" onclick="delClick(this);">删除</a>
+									<a href="/home/user/user_addr">编辑</a>
+									<!--<span class="new-addr-bar">|</span>
+									 <a href="javascript:void(0);" onclick="delClick(this);">删除</a> -->
 								</div>
 
 							</li>
